@@ -59,10 +59,10 @@ body {
   max-width:400px;
 }
   </style>
-<meta property="og:url" content="http://www.google.com" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="MyEU: See what the EU has done for your local area" />
-<meta property="og:description" content="Discover what has been EU funded in your local area." />
+  <meta property="og:url" content="http://www.google.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MyEU: See what the EU has done for your local area" />
+  <meta property="og:description" content="Discover what has been EU funded in your local area." />
 
 </head>
 <body>
@@ -179,14 +179,20 @@ body {
           radius: 200
         });
 
-        var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-            '<div id="bodyContent">'+
-            '<p>{{xxxx}}</p>'+
-            '</div>'+
-            '</div>';
+        var contentString = `
+            <div id="content">
+              <div id="siteNotice"></div>
+              <h3 id="firstHeading" class="firstHeading">The AWRC Emerging Technologies Hub</h3>
+              <div id="bodyContent">
+                <p><strong>Sheffield Hallam University</strong></p>
+                <p>The AWRC’s aim is to connect large and small enterprises with the DoH’s desire to improve health outcomes.</p>
+                <p><strong>EU funding: £905,000.00</strong></p>
+                <p><strong>Project cost: £1,815,000.00</strong></p>
+                <p><strong>Percentage EU funded: 50%</strong></p>
+                <p><img src="../static/img/720_1528970018_171108_n0063.jpg" width="400"></p>
+              </div>
+            </div>
+            `
 
         var infoWindow = new google.maps.InfoWindow({
           content: contentString
@@ -249,7 +255,8 @@ body {
             new google.maps.Marker({
               position: new google.maps.LatLng({{beneficiary.lat}}, {{beneficiary.lng}}),
               title: '{{beneficiary.project}}',
-              map: map
+              map: map,
+              icon: '../static/img/eusmall.png'
             }),
           {% endfor %}
         ];
