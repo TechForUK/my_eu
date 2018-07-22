@@ -1,63 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>My.Eu</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon"
-          type="image/png"
-          href="../static/img/eusmall.png" />
+  <link rel="icon" type="image/png" href="../static/img/eusmall.png" />
 
   <style>
-#map {
-  height: 700px;
-  width: 100%;
-  margin: 30px 0;
-}
+    #map {
+      height: 700px;
+      width: 100%;
+      margin: 30px 0;
+    }
 
-/* tell the container's children to float left: */
-.float-my-children > * {
-    float:left;
-    margin-right:5px;
-}
+    /* tell the container's children to float left: */
 
-.twitter {
-  display: inline-block;
-  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
-  font-size: 18px;
-  line-height: 24px;
-  margin: 10px 5px;
-}
+    .float-my-children>* {
+      float: left;
+      margin-right: 5px;
+    }
 
-.twitter p {
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 20px;
-}
+    .twitter {
+      display: inline-block;
+      font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+      font-size: 18px;
+      line-height: 24px;
+      margin: 10px 5px;
+    }
 
-.twitter a {
-  color: inherit;
-  font-weight: normal;
-  text-decoration: none;
-  outline: 0 none;
-}
+    .twitter p {
+      font-size: 16px;
+      font-weight: normal;
+      line-height: 20px;
+    }
 
-.twitter a:hover,
-.twitter a:focus {
-  text-decoration: underline;
-}
-.footnote{
-  font-size:xx-small;
+    .twitter a {
+      color: inherit;
+      font-weight: normal;
+      text-decoration: none;
+      outline: 0 none;
+    }
 
-}
-body {
-  padding:10px;
-}
-.card {
-  max-width:400px;
-}
+    .twitter a:hover,
+    .twitter a:focus {
+      text-decoration: underline;
+    }
+
+    .footnote {
+      font-size: xx-small;
+
+    }
+
+    body {
+      padding: 10px;
+    }
+
+    .card {
+      max-width: 400px;
+    }
   </style>
   <meta property="og:url" content="http://www.google.com" />
   <meta property="og:type" content="website" />
@@ -65,48 +68,74 @@ body {
   <meta property="og:description" content="Discover what has been EU funded in your local area." />
 
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-        <a class="navbar-brand" href="/"><img src="../static/img/eusmall.png" />My.EU</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">See what the EU has done for you<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/about">About</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+    <a class="navbar-brand" href="/">
+      <img src="../static/img/eusmall.png" />My.EU</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">See what the EU has done for you
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
   <div class="container mt-4">
     <div class="form-group">
-        <h3>Enter your postcode</h3>
-        <input style="font-size:xx-large;height:68px" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="e.g. SW1A 1AA">
-        <small id="emailHelp" class="form-text text-muted">We do not store your data.</small>
+      <h3>Enter your postcode</h3>
+      <input style="font-size:xx-large;height:68px" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="e.g. SW1A 1AA">
+      <small id="emailHelp" class="form-text text-muted">We do not store your data.</small>
     </div>
-    <button id="postsub" type="submit" class="btn btn-lg btn-primary">Find</button>
+    <!-- <button id="postsub" type="submit" class="btn btn-lg btn-primary">Find</button> -->
+    <div class="row">
+        <div class="col-12-xs social-share">
+          Share with your friends:
+          <a class="btn btn-primary" href="https://twitter.com/share" data-size="large" data-text="See the investments the EU have made in your area"
+            data-url="http://myeu.uk">
+            Tweet
+          </a>
+
+
+          <div id="shareBtn" class="btn btn-primary">Share on Facebook</div>
+        </div>
+      </div>
+
+
     <div class="row">
       <div class="col-12-xs" id="map"></div>
     </div>
-    <div class="card text-white bg-dark mb-3" style="width:100%; visibility:hidden">
+    <!-- <div class="card text-white bg-dark mb-3" style="width:100%; visibility:hidden">
       <div class="card-body">
-          <div class="clearfix float-my-children">
-            <img src="profile.jpg" alt="Card image" style="border-radius: 50%;">
-            <div style="margin-left:5px"><h4><b>Ford Motor Company</b></h4>
-            <h6 style="margin-top:-10px" class="text-muted">Auto Manufacturer</h6></div>
-          </div>
-          <p class="card-text ml-2" style="margin-top:10px">Ford makes cars</p>
-          <div class="clearfix float-my-children">
-          <img src="profile.jpg"><div class="twitter"><b>Ford Motor Company</b><br>@ford</div>
+        <div class="clearfix float-my-children">
+          <img src="profile.jpg" alt="Card image" style="border-radius: 50%;">
+          <div style="margin-left:5px">
+            <h4>
+              <b>Ford Motor Company</b>
+            </h4>
+            <h6 style="margin-top:-10px" class="text-muted">Auto Manufacturer</h6>
           </div>
         </div>
-    </div>
-        <!--
+        <p class="card-text ml-2" style="margin-top:10px">Ford makes cars</p>
+        <div class="clearfix float-my-children">
+          <img src="profile.jpg">
+          <div class="twitter">
+            <b>Ford Motor Company</b>
+            <br>@ford</div>
+        </div>
+      </div>
+    </div> -->
+    <!--
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Tweet the company</a>
@@ -122,43 +151,33 @@ body {
     </div>
     <br>
   -->
-    <div class="social-share">
-        Share with your friends:
-        <a class="btn btn-primary"
-    href="https://twitter.com/share"
-    data-size="large"
-    data-text="See the investments the EU have made in your area"
-    data-url="http://myeu.uk"
-  >
-  Tweet
-  </a>
+
+      <script>
+        document.getElementById('shareBtn').onclick = function () {
+          FB.ui({
+            method: 'share',
+            display: 'popup',
+            href: 'http://myeu.uk',
+          }, function (response) { });
+        }
+      </script>
 
 
-  <div id="shareBtn" class="btn btn-primary">Share on Facebook</div>
+      <div class="footnote fixed-bottom my-2 ml-3">GreatBritishHack-Off by Tech4UK and Best for Britain
+        <br>Icons made by
+        <a href="https://www.flaticon.com/authors/icomoon" title="Icomoon">Icomoon</a> from
+        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
+        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+      </div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- <script src="static/js/maps.js"></script> -->
 
-
-  <script>
-  document.getElementById('shareBtn').onclick = function() {
-    FB.ui({
-      method: 'share',
-      display: 'popup',
-      href: 'http://myeu.uk',
-    }, function(response){});
-  }
-  </script>
-
-
-    <div class="footnote fixed-bottom my-2 ml-3">GreatBritishHack-Off by Tech4UK and Best for Britain<br>Icons made by <a href="https://www.flaticon.com/authors/icomoon" title="Icomoon">Icomoon</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-  </div>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-  <!-- <script src="static/js/maps.js"></script> -->
-
-  <script>
-      var mapLat = {{map_lat|tojson}};
-      var mapLng = {{map_lng|tojson}};
-      var mapZoom = {{map_zoom|tojson}};
+    <script>
+      var mapLat = {{ map_lat| tojson}};
+      var mapLng = {{ map_lng| tojson}};
+      var mapZoom = {{ map_zoom| tojson}};
 
       // This example requires the Visualization library. Include the libraries=visualization
       // parameter when you first load the API. For example:
@@ -169,7 +188,7 @@ body {
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: mapZoom,
-          center: {lat: mapLat, lng: mapLng },
+          center: { lat: mapLat, lng: mapLng },
           // mapTypeId: 'satellite'
         });
 
@@ -239,7 +258,7 @@ body {
       function getPoints() {
         return [
           {% for _, beneficiary in beneficiaries.iterrows() %}
-            {location: new google.maps.LatLng({{beneficiary.lat}}, {{beneficiary.lng}}), weight: {{beneficiary.weight}}},
+            { location: new google.maps.LatLng({{beneficiary.lat}}, {{beneficiary.lng}}), weight: {{beneficiary.weight}}},
           {% endfor %}
         ];
       }
@@ -268,21 +287,21 @@ body {
         return markers;
       }
 
-  </script>
-  <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=visualization&callback=initMap">
-  </script>
-  <script>
-      $( "#postsub" ).click(function() {
-          console.log("yup");
-          $('h3').remove();
-          $('#emailHelp').remove();
-          $('#postsub').remove();
-          $.get( "https://api.postcodes.io/postcodes/E161BD", function( data ) {
-              console.log(data);
-              $('.card').css("visibility", "visible");
-          });
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=visualization&callback=initMap">
+    </script>
+    <script>
+      $("#postsub").click(function () {
+        console.log("yup");
+        $('h3').remove();
+        $('#emailHelp').remove();
+        $('#postsub').remove();
+        $.get("https://api.postcodes.io/postcodes/E161BD", function (data) {
+          console.log(data);
+          $('.card').css("visibility", "visible");
+        });
       });
-  </script>
+    </script>
 </body>
+
 </html>
