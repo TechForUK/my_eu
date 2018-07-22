@@ -53,5 +53,9 @@ def map(map_lat=51.531840, map_lng=-0.125091, map_zoom=8):
         beneficiaries=local_beneficiaries
     )
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 
 beneficiaries = get_beneficiaries()
