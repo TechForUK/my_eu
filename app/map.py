@@ -1,9 +1,12 @@
+import os
+
 from flask import Flask
 from flask import render_template
 
 import pandas as pd
 from pandas import DataFrame
 
+API_KEY = os.environ.get('MY_EU_API_KEY', None)
 
 app = Flask(__name__)
 
@@ -42,11 +45,11 @@ def map(map_lat=51.531840, map_lng=-0.125091, map_zoom=8):
     local_beneficiaries = get_local_beneficiaries(map_lat, map_lng, map_zoom)
 
     return render_template(
-        'test-google-maps.html',
+        'index.html',
         map_lat=map_lat,
         map_lng=map_lng,
         map_zoom=map_zoom,
-        api_key='KEY',
+        api_key=API_KEY,
         beneficiaries=local_beneficiaries
     )
 
