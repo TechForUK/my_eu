@@ -84,23 +84,120 @@ summary(cleanTimestamp(bes7Full$starttime))
 ```
 
 ```{r}
-cleanEuropeanness <- function (x) {
-  # TODO
+cleanApproveDisapprove <- function (x) {
+  cleanX <- rep_len(NA, length(x))
+  cleanX[x == 'Strongly disapprove'] <- 0
+  cleanX[x == 'Disapprove'] <- 0.25
+  cleanX[x == 'Neither approve nor disapprove'] <- 0.5
+  cleanX[x == 'Approve'] <- 0.75
+  cleanX[x == 'Strongly approve'] <- 1.0
+  cleanX
+}
+```
+
+```{r}
+cleanTurnout <- function (x) {
+  cleanX <- rep_len(NA, length(x))
+  cleanX[x == 'Very unlikely that I would vote'] <- 0
+  cleanX[x == 'Fairly unlikely'] <- 0.25
+  cleanX[x == 'Neither likely nor unlikely'] <- 0.5
+  cleanX[x == 'Fairly likely'] <- 0.75
+  cleanX[x == 'Very likely that I would vote'] <- 1.0
+  cleanX
+}
+```
+
+```{r}
+cleanRefVote <- function (x) {
+  cleanX <- rep_len(NA, length(x))
+  cleanX[x == 'Stay/remain in the EU'] <- 1.0
+  cleanX[x == 'Leave the EU'] <- 0
+  # Ignoring 'I would/will not vote'
+  cleanX
+}
+```
+
+```{r}
+cleanRefInterest <- function (x) {
+  cleanX <- rep_len(NA, length(x))
+  cleanX[x == 'Not at all interested'] <- 0
+  cleanX[x == 'Not very interested'] <- 0.33
+  cleanX[x == 'Somewhat interested'] <- 0.66
+  cleanX[x == 'Very interested'] <- 1.0
+  cleanX
+}
+```
+
+```{r}
+cleanAgreement <- function (x) {
+  cleanX <- rep_len(NA, length(x))
+  cleanX[x == 'Strongly disagree'] <- 0
+  cleanX[x == 'Disagree'] <- 0.25
+  cleanX[x == 'Neither agree nor disagree'] <- 0.5
+  cleanX[x == 'Agree'] <- 0.75
+  cleanX[x == 'Strongly agree'] <- 1.0
+  cleanX 
+}
+```
+
+```{r}
+cleanCrime <- function (x) {
+  cleanX <- rep_len(NA, length(x))
+  cleanX[x == 'Getting a lot lower'] <- 0
+  cleanX[x == 'Getting a little lower'] <- 0.25
+  cleanX[x == 'Staying about the same'] <- 0.5
+  cleanX[x == 'Getting a little higher'] <- 0.75
+  cleanX[x == 'Getting a lot higher'] <- 1.0
+  cleanX 
+}
+```
+
+```{r}
+cleanTenPoint <- function (x, lo, hi) {
+  cleanX <- rep_len(NA, length(x))
+  cleanX[x == lo] <- 0
+  for (i in 1:9) {
+    cleanX[x == i] <- i/10
+  }
+  cleanX[x == hi] <- 1.0
+  cleanX 
+}
+```
+
+```{r}
+cleanSevenPoint <- function (x, lo, hi) {
+  cleanX <- rep_len(NA, length(x))
+  cleanX[x == lo] <- 0
+  for (i in 2:6) {
+    cleanX[x == i] <- (i - 1)/6
+  }
+  cleanX[x == hi] <- 1.0
+  cleanX 
 }
 ```
 
 
 ```{r}
-# factorLikelyToVote <- function (x) {
-#   factor(x, levels = c(
-#     'Very unlikely that I would vote',
-#     'Fairly unlikely',
-#     'Neither likely nor unlikely',
-#     'Fairly likely',
-#     'Very likely that I would vote',
-#     "Don't know"
-#   ), ordered = TRUE)
-# }
+cleanLessMore <- function (x) {
+  cleanX <- rep_len(NA, length(x))
+  cleanX[x == 'A lot less'] <- 0
+  cleanX[x == 'Somewhat less'] <- 0.25
+  cleanX[x == 'About the same'] <- 0.5
+  cleanX[x == 'Somewhat more'] <- 0.75
+  cleanX[x == 'A lot more'] <- 1.0
+  cleanX  
+}
+```
+
+```{r}
+cleanSatisfaction <- function (x) {
+  cleanX <- rep_len(NA, length(x))
+  cleanX[x == 'Very dissatisfied'] <- 0
+  cleanX[x == 'A little dissatisfied'] <- 1/3
+  cleanX[x == 'Fairly satisfied'] <- 2/3
+  cleanX[x == 'Very satisfied'] <- 1.0
+  cleanX  
+}
 ```
 
 ```{r}
@@ -114,7 +211,6 @@ mergeNUTS <- function (bes) {
 }
 ```
 
-
 ```{r}
 bes7 <- mergeNUTS(subset(
   transform(
@@ -122,7 +218,36 @@ bes7 <- mergeNUTS(subset(
     profile_oslaua = cleanProfileOslaua(profile_oslaua),
     starttime = cleanTimestamp(starttime),
     endtime = cleanTimestamp(endtime),
-    target = gender == 'Female' & (ageGroup == '36-45' | ageGroup == '46-55')
+    target = gender == 'Female' & (ageGroup == '36-45' | ageGroup == '46-55'),
+    approveEUIndex = cleanApproveDisapprove(approveEU),
+    euRefTurnoutIndex = cleanTurnout(euRefTurnout),
+    euRefVoteIndex = cleanRefVote(euRefVote),
+    euRefInterestIndex = cleanRefInterest(euRefInterest),
+    ethno1Index = cleanAgreement(ethno1),
+    ethno2Index = cleanAgreement(ethno2),
+    ethno3Index = cleanAgreement(ethno3),
+    ethno4Index = cleanAgreement(ethno4),
+    ethno5Index = cleanAgreement(ethno5),
+    ethno6Index = cleanAgreement(ethno6),
+    radicalIndex = cleanAgreement(radical),
+    harkBackIndex = cleanAgreement(harkBack),
+    crimeLocalIndex = cleanCrime(crimeLocal),
+    immigSelfIndex = cleanTenPoint(immigSelf, 'Allow many fewer', 'Allow many more'),
+    natSecuritySelfIndex = cleanTenPoint(natSecuritySelf, 'Fight terrorism', 'Protect civil liberties'),
+    natSecuritySpendingIndex =  cleanLessMore(natSecuritySpending),
+    satDemUKIndex = cleanSatisfaction(satDemUK),
+    satDemEUIndex = cleanSatisfaction(satDemEU),
+    leftRightIndex = cleanTenPoint(leftRight, 'Left', 'Right'),
+    al1Index = cleanAgreement(al1),
+    al2Index = cleanAgreement(al2),
+    al3Index = cleanAgreement(al3),
+    al4Index = cleanAgreement(al4),
+    al5Index = cleanAgreement(al5),
+    britishnessIndex = cleanSevenPoint(britishness, 'Not at all British', 'Very strongly British'),
+    europeannessIndex = cleanSevenPoint(europeanness, 'Not at all European', 'Very strongly European'),
+    immigContributeTakeIndex = cleanSevenPoint(immigContributeTake, 'Pay more than they get', 'Get more than they pay'),
+    immigEconIndex = cleanSevenPoint(immigEcon, 'Bad for economy', 'Good for economy'),
+    immigCulturalIndex = cleanSevenPoint(immigCultural, 'Undermines cultural life', 'Enriches cultural life')
   ),
   select = c(
     id, target, gender, ageGroup,
@@ -131,42 +256,106 @@ bes7 <- mergeNUTS(subset(
     profile_household_children, profile_gross_household,
     education, # What is the highest educational or work-related qualification you have?
     workingStatus, # Which of these best describes what you were doing last week?
-    approveEU, # Do you approve or disapprove of the political decisions made by the EU over the past 12 months?
-    euRefTurnout, # Many people don’t vote in elections these days. How likely is it that you will vote in the referendum on Britain’s membership of the European Union on June 23rd?
-    euRefVote, # If you do vote in the referendum on Britain’s membership of the European Union, how do you think you will vote?
-    euRefInterest, # How interested are you in the EU referendum that will be held on June 23rd?
+    approveEUIndex, approveEU,
+    euRefTurnoutIndex, euRefTurnout,
+    euRefVoteIndex, euRefVote,
+    euRefInterestIndex, euRefInterest,
     euRefFinal, # If the UK votes to leave the EU, do you think the decision will be final or might there be a second referendum?
     euMIISmall, # 15 category coding of open-ended MIIEU responses (What matters most to you when deciding how to vote in the EU referendum?)
     EUMIICategory, # 54 category coding of open-ended MIIEU responses
-    euRefExpectation, # How likely do you think it is that the UK will vote to leave the EU?
-    ethno1, # Britain has a lot to learn from other countries in running its affairs
-    ethno2, # I would rather be a citizen of Britain than of any other country in the world
-    ethno3, # There are some things about Britain today that make me ashamed to be British
-    ethno4, # People in Britain are too ready to criticise their country
-    ethno5, # The world would be a better place if people from other countries were more like the British 
-    ethno6, # I am often less proud of Britain than I would like to be
-    radical, # We need to fundamentally change the way society works in Britain
-    harkBack, # We need to fundamentally change the way society works in Britain
-    crimeLocal, # Do you think that the level of crime **in your local area** is getting higher, getting lower or staying about the same?
-    localTurnout, # How likely is it that you will vote in the local elections on May 5th?
-    immigSelf, # Some people think that the UK should allow *many more* immigrants to come to the UK to live and others think that the UK should allow *many fewer* immigrants. Where would you place yourself and the parties on this scale?
-    natSecuritySelf, # Some people feel that, in order to fight terrorism, we have to accept infringements on privacy and civil liberties, others feel that privacy and civil liberties are to be protected at all cost. Where would you place yourself and the political parties on this scale? (0 fight terror - 10 protect liberties)
-    natSecuritySpending, # Do you think the government should spend more on defence, less on defence or about the same?
-    satDemUK, # On the whole, how satisfied or dissatisfied are you with the way that democracy works in: UK
-    satDemEU,
-    leftRight, # In politics people sometimes talk of left and right. Where would you place yourself on the following scale?
-    al1, # Young people today don’t have enough respect for traditional British values
-    al2, # For some crimes, the death penalty is the most appropriate sentence
-    al3, # Schools should teach children to obey authority
-    al4, # Censorship of films and magazines is necessary to uphold moral standards
-    al5, # People who break the law should be given stiffer sentences
-    britishness, # Where would you place yourself on these scales? 1-7
-    europeanness, # Where would you place yourself on these scales? 1-7
-    immigContributeTake, # Do you think people who come to live in Britain from other EU countries get more in benefits and services than they pay in taxes?
-    immigEcon, # Do you think immigration is good or bad for Britain’s economy?
-    immigCultural # And do you think that immigration undermines or enriches Britain’s cultural life?
+    ethno1Index, ethno1,
+    ethno2Index, ethno2,
+    ethno3Index, ethno3,
+    ethno4Index, ethno4,
+    ethno5Index, ethno5,
+    ethno6Index, ethno6,
+    radicalIndex, radical,
+    harkBackIndex, harkBack,
+    crimeLocalIndex, crimeLocal,
+    immigSelfIndex, immigSelf,
+    natSecuritySelfIndex, natSecuritySelf,
+    natSecuritySpendingIndex, natSecuritySpending,
+    satDemUKIndex, satDemUK,
+    satDemEUIndex, satDemEU,
+    leftRightIndex, leftRight,
+    al1Index, al1,
+    al2Index, al2,
+    al3Index, al3,
+    al4Index, al4,
+    al5Index, al5,
+    britishnessIndex, britishness,
+    europeannessIndex, europeanness,
+    immigContributeTakeIndex, immigContributeTake,
+    immigEconIndex, immigEcon,
+    immigCulturalIndex, immigCultural
 )))
 summary(bes7)
+```
+
+```{r}
+bes7Indexes <- c(
+  'approveEUIndex',
+  'euRefTurnoutIndex',
+  'euRefVoteIndex',
+  'euRefInterestIndex',
+  'ethno1Index',
+  'ethno2Index',
+  'ethno3Index',
+  'ethno4Index',
+  'ethno5Index',
+  'ethno6Index',
+  'radicalIndex',
+  'harkBackIndex',
+  'crimeLocalIndex',
+  'immigSelfIndex',
+  'natSecuritySelfIndex',
+  'natSecuritySpendingIndex',
+  'satDemUKIndex',
+  'satDemEUIndex',
+  'leftRightIndex',
+  'al1Index',
+  'al2Index',
+  'al3Index',
+  'al4Index',
+  'al5Index',
+  'britishnessIndex',
+  'europeannessIndex',
+  'immigContributeTakeIndex',
+  'immigEconIndex',
+  'immigCulturalIndex'
+)
+
+bes7IndexDescriptions <- c(
+  'Do you approve or disapprove of the political decisions made by the EU over the past 12 months?',
+  'How likely is it that you will vote in the referendum on Britain’s membership of the European Union on June 23rd?',
+  'If you do vote in the referendum on Britain’s membership of the European Union, how do you think you will vote?',
+  'How interested are you in the EU referendum that will be held on June 23rd?',
+  'Ethnocentrism: Britain has a lot to learn from other countries in running its affairs',
+  'Ethnocentrism: I would rather be a citizen of Britain than of any other country in the world',
+  'Ethnocentrism: There are some things about Britain today that make me ashamed to be British',
+  'Ethnocentrism: People in Britain are too ready to criticise their country',
+  'Ethnocentrism: The world would be a better place if people from other countries were more like the British',
+  'Ethnocentrism: I am often less proud of Britain than I would like to be',
+  'We need to fundamentally change the way society works in Britain',
+  'Things in Britain were better in the past',
+  'Do you think that the level of crime **in your local area** is getting higher, getting lower or staying about the same?',
+  '[Should the UK allow many more / many fewer immigrants?]', # Some people think that the UK should allow *many more* immigrants to come to the UK to live and others think that the UK should allow *many fewer* immigrants. Where would you place yourself and the parties on this scale?
+  '[Should we accept infringements on privacy and civil liberties to fight terror?]', # Some people feel that, in order to fight terrorism, we have to accept infringements on privacy and civil liberties, others feel that privacy and civil liberties are to be protected at all cost. Where would you place yourself and the political parties on this scale? (0 fight terror - 10 protect liberties)',
+  'Do you think the government should spend more on defence, less on defence or about the same?',
+  'On the whole, how satisfied or dissatisfied are you with the way that democracy works in: UK',
+  'On the whole, how satisfied or dissatisfied are you with the way that democracy works in: EU',
+  'In politics people sometimes talk of left and right. Where would you place yourself on the following scale?',
+  'Values: Young people today don’t have enough respect for traditional British values',
+  'Values: For some crimes, the death penalty is the most appropriate sentence',
+  'Values: Schools should teach children to obey authority',
+  'Values: Censorship of films and magazines is necessary to uphold moral standards',
+  'Values: People who break the law should be given stiffer sentences',
+  '[national identity: UK] Where would you place yourself on these scales?',
+  '[national identity: EU] Where would you place yourself on these scales?',
+  'Do you think people who come to live in Britain from other EU countries get more in benefits and services than they pay in taxes?',
+  'Do you think immigration is good or bad for Britain’s economy?',
+  'And do you think that immigration undermines or enriches Britain’s cultural life?'
+)
 ```
 
 
@@ -191,7 +380,6 @@ bes8 <- mergeNUTS(subset(
     euRefFinal, # If the UK votes to leave the EU, do you think the decision will be final or might there be a second referendum?
     euMIISmall, # 15 category coding of open-ended MIIEU responses (What matters most to you when deciding how to vote in the EU referendum?)
     EUMIICategory, # 54 category coding of open-ended MIIEU responses
-    euRefExpectation, # How likely do you think it is that the UK will vote to leave the EU?
     immigSelf, # Some people think that the UK should allow *many more* immigrants to come to the UK to live and others think that the UK should allow *many fewer* immigrants. Where would you place yourself and the parties on this scale?
     satDemUK, # On the whole, how satisfied or dissatisfied are you with the way that democracy works in: UK
     satDemEU,
@@ -216,7 +404,7 @@ summary(bes8)
 ### Save
 
 ```{r}
-save(bes7, file = 'cleaned/bes7.RData')
+save(bes7, bes7Indexes, bes7IndexDescriptions, file = 'cleaned/bes7.RData')
 save(bes8, file = 'cleaned/bes8.RData')
 ```
 
@@ -237,6 +425,7 @@ immigEcon W7-13
 immigCultural W7-13
 controlImmig, euDominance W8
 euKnow W8 - could create a knowledge score
+euRefExpectation W7,W8 - something wrong with import levels in W7
 
 profile_ethnicity - could we use this to get an estimate of diversity in an area?
 countryOfBirth - similar
