@@ -1,0 +1,6 @@
+*.nb.html
+*.swp
+.RData
+.Rhistory
+/bes/*.sav
+/cleaned/*.RData

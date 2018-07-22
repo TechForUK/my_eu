@@ -1,0 +1,173 @@
+---
+title: "British Election Study: BES7"
+output: html_notebook
+---
+
+```{r}
+library(fmsb)
+library(ggplot2)
+library(leaflet)
+library(reshape2)
+```
+
+## Basics
+
+```{r}
+load('cleaned/bes7.RData')
+load('cleaned/nuts2.RData')
+```
+
+```{r}
+xtabs(~ target, bes7)
+```
+
+### Distribution of Respondents
+
+```{r}
+bes7NUTS2 <- local({
+  merge(
+    aggregate(target ~ NUTS218CD, bes7, sum),
+    aggregate(cbind(total=id) ~ NUTS218CD, bes7, length))
+})
+summary(bes7NUTS2)
+```
+
+
+### Total Respondents by NUTS2
+
+```{r}
+local({
+  nuts2WithData <- merge(nuts2, bes7NUTS2)
+  pal <- colorNumeric('Blues', NULL)
+  leaflet(nuts2WithData) %>%
+    addPolygons(
+      stroke = FALSE, smoothFactor = 0.3, fillOpacity = 1,
+      fillColor = ~pal(total),
+      label = ~paste0(NUTS218NM, ": ", formatC(total, big.mark = ","))) %>%
+    addLegend(pal = pal, values = ~total, opacity = 1.0) 
+})
+```
+
+### Target Respondents by NUTS2
+
+```{r}
+local({
+  nuts2WithData <- merge(nuts2, bes7NUTS2)
+  pal <- colorNumeric('Blues', NULL)
+  leaflet(nuts2WithData) %>%
+    addPolygons(
+      stroke = FALSE, smoothFactor = 0.3, fillOpacity = 1,
+      fillColor = ~pal(target),
+      label = ~paste0(NUTS218NM, ": ", formatC(target, big.mark = ","))) %>%
+    addLegend(pal = pal, values = ~target, opacity = 1.0) 
+})
+```
+
+### Target Respondents as Proportion of Total by NUTS2
+
+```{r}
+local({
+  nuts2WithData <- merge(nuts2, bes7NUTS2)
+  pal <- colorNumeric('Blues', NULL)
+  leaflet(nuts2WithData) %>%
+    addPolygons(
+      stroke = FALSE, smoothFactor = 0.3, fillOpacity = 1,
+      fillColor = ~pal(target / total),
+      label = ~paste0(NUTS218NM, ": ", formatC(target / total, big.mark = ","))) %>%
+    addLegend(pal = pal, values = ~target / total, opacity = 1.0) 
+})
+```
+
+## Investigate `euMIISmall`
+
+```{r}
+euMII <- merge(
+  merge(
+    transform(
+      aggregate(target ~ euMIISmall, bes7, sum),
+      target = target / sum(target)),
+    transform(
+      aggregate(cbind(other=!target) ~ euMIISmall, bes7, sum),
+      other = other / sum(other))),
+  transform(
+    aggregate(cbind(overall=id) ~ euMIISmall, bes7, length),
+    overall = overall / sum(overall))
+)
+euMII
+```
+
+```{r}
+ggplot(
+  euMII,
+  aes(x = euMIISmall, y = overall)) +
+  geom_bar(stat = 'identity') +
+  scale_y_continuous(labels = scales::percent) +
+  ggtitle('What matters most to you when deciding how to vote in the EU referendum?') +
+  xlab('What Matters Most') +
+  ylab('Percentage of Respondents') +
+  coord_flip()
+
+```
+
+```{r}
+local({
+  euMIIRadar <- setNames(data.frame(t(euMII[,-1])), euMII[,1])
+  
+  # radarchart needs the max and min in the first two rows
+  euMIIRadar <- rbind(
+    rep(max(euMIIRadar), ncol(euMIIRadar)),
+    rep(0, ncol(euMIIRadar)),
+    euMIIRadar)
+  
+  radarchart(euMIIRadar)
+  legend(
+    'bottomright',
+    legend = rownames(euMIIRadar[-c(1,2),]),
+    pch = 20,
+    col = c('black', 'red', 'green'))
+})
+```
+
+```{r}
+signif.num <- function(x) {
+    symnum(x, corr = FALSE, na = FALSE, legend = FALSE,
+           cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1), 
+           symbols = c("***", "**", "*", ".", " "))
+}
+
+euMIISignificance <- local({
+  result <- do.call(rbind, lapply(levels(bes7$euMIISmall), function (response) {
+    result <- t.test(euMIISmall == response ~ target, bes7)
+    data.frame(
+      response = response,
+      pValue = result$p.value,
+      meanOther = result$estimate[1],
+      meanTarget = result$estimate[2],
+      significance = signif.num(result$p.value),
+      confintLo = result$conf.int[1],
+      confintHi = result$conf.int[2]
+    )
+  }))
+  row.names(result) <- NULL
+  result
+})
+euMIISignificance
+```
+
+```{r}
+ggplot(
+  melt(
+    subset(
+      euMII,
+      euMIISmall %in% subset(euMIISignificance, pValue < 0.05)$response,
+      select = c(euMIISmall, target, other)
+    ), id.vars = 'euMIISmall'),
+  aes(x = euMIISmall, y = value, fill = variable)) +
+  geom_bar(stat = 'identity', position = 'dodge') +
+  scale_y_continuous(labels = scales::percent) +
+  ggtitle('What matters most to you when deciding how to vote in the EU referendum?') +
+  xlab('What Matters Most') +
+  ylab('Percentage of Respondents') +
+  coord_flip()
+```
+
