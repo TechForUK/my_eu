@@ -41,7 +41,7 @@ def get_local_beneficiaries(map_lat: float, map_lng: float, map_zoom: int) -> Da
 
 
 @app.route('/')
-def map(map_lat=51.531840, map_lng=-0.125091, map_zoom=8):
+def map(map_lat=53.5, map_lng=-1.5, map_zoom=8):
     local_beneficiaries = get_local_beneficiaries(map_lat, map_lng, map_zoom)
 
     return render_template(
