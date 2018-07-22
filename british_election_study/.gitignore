@@ -3,4 +3,6 @@
 .RData
 .Rhistory
 /bes/*.sav
+/fig/*.RData
+/fig/*.png
 /cleaned/*.RData
