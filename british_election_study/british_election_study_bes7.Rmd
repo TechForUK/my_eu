@@ -1,0 +1,288 @@
+---
+title: "British Election Study: BES7"
+output: html_notebook
+---
+
+```{r}
+library(fmsb)
+library(ggplot2)
+library(leaflet)
+library(reshape2)
+```
+
+## Basics
+
+```{r}
+load('cleaned/bes7.RData')
+load('cleaned/nuts2.RData')
+```
+
+```{r}
+xtabs(~ target, bes7)
+```
+
+### Distribution of Respondents
+
+```{r}
+bes7NUTS2 <- local({
+  merge(
+    aggregate(target ~ NUTS218CD, bes7, sum),
+    aggregate(cbind(total=id) ~ NUTS218CD, bes7, length))
+})
+summary(bes7NUTS2)
+```
+
+
+### Total Respondents by NUTS2
+
+```{r}
+local({
+  nuts2WithData <- merge(nuts2, bes7NUTS2)
+  pal <- colorNumeric('Blues', NULL)
+  leaflet(nuts2WithData) %>%
+    addPolygons(
+      stroke = FALSE, smoothFactor = 0.3, fillOpacity = 1,
+      fillColor = ~pal(total),
+      label = ~paste0(NUTS218NM, ": ", formatC(total, big.mark = ","))) %>%
+    addLegend(pal = pal, values = ~total, opacity = 1.0) 
+})
+```
+
+### Target Respondents by NUTS2
+
+```{r}
+local({
+  nuts2WithData <- merge(nuts2, bes7NUTS2)
+  pal <- colorNumeric('Blues', NULL)
+  leaflet(nuts2WithData) %>%
+    addPolygons(
+      stroke = FALSE, smoothFactor = 0.3, fillOpacity = 1,
+      fillColor = ~pal(target),
+      label = ~paste0(NUTS218NM, ": ", formatC(target, big.mark = ","))) %>%
+    addLegend(pal = pal, values = ~target, opacity = 1.0) 
+})
+```
+
+### Target Respondents as Proportion of Total by NUTS2
+
+```{r}
+local({
+  nuts2WithData <- merge(nuts2, bes7NUTS2)
+  pal <- colorNumeric('Blues', NULL)
+  leaflet(nuts2WithData) %>%
+    addPolygons(
+      stroke = FALSE, smoothFactor = 0.3, fillOpacity = 1,
+      fillColor = ~pal(target / total),
+      label = ~paste0(NUTS218NM, ": ", formatC(target / total, big.mark = ","))) %>%
+    addLegend(pal = pal, values = ~target / total, opacity = 1.0) 
+})
+```
+
+## Investigate `euMIISmall`
+
+```{r}
+euMII <- merge(
+  merge(
+    transform(
+      aggregate(target ~ euMIISmall, bes7, sum),
+      target = target / sum(target)),
+    transform(
+      aggregate(cbind(other=!target) ~ euMIISmall, bes7, sum),
+      other = other / sum(other))),
+  transform(
+    aggregate(cbind(overall=id) ~ euMIISmall, bes7, length),
+    overall = overall / sum(overall))
+)
+euMII
+```
+
+```{r}
+plt <- ggplot(
+  euMII,
+  aes(x = euMIISmall, y = overall)) +
+  geom_bar(stat = 'identity') +
+  scale_y_continuous(labels = scales::percent) +
+  ggtitle('What matters most to you when deciding how to vote in the EU referendum?') +
+  xlab('What Matters Most') +
+  ylab('Percentage of Respondents') +
+  coord_flip()
+save(plt, file = 'fig/eumii_all.RData')
+plt
+```
+
+```{r}
+local({
+  euMIIRadar <- setNames(data.frame(t(euMII[,-1])), euMII[,1])
+  
+  # radarchart needs the max and min in the first two rows
+  euMIIRadar <- rbind(
+    rep(max(euMIIRadar), ncol(euMIIRadar)),
+    rep(0, ncol(euMIIRadar)),
+    euMIIRadar)
+  
+  radarchart(euMIIRadar)
+  legend(
+    'bottomright',
+    legend = rownames(euMIIRadar[-c(1,2),]),
+    pch = 20,
+    col = c('black', 'red', 'green'))
+})
+```
+
+```{r}
+signif.num <- function(x) {
+    symnum(x, corr = FALSE, na = FALSE, legend = FALSE,
+           cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1), 
+           symbols = c("***", "**", "*", ".", " "))
+}
+```
+
+```{r}
+euMIISignificance <- local({
+  result <- do.call(rbind, lapply(levels(bes7$euMIISmall), function (response) {
+    result <- t.test(euMIISmall == response ~ target, bes7)
+    data.frame(
+      response = response,
+      pValue = result$p.value,
+      meanOther = result$estimate[1],
+      meanTarget = result$estimate[2],
+      significance = signif.num(result$p.value),
+      confintLo = result$conf.int[1],
+      confintHi = result$conf.int[2]
+    )
+  }))
+  row.names(result) <- NULL
+  result
+})
+euMIISignificance
+```
+
+```{r}
+plt <- ggplot(
+  melt(
+    subset(
+      euMII,
+      euMIISmall %in% subset(euMIISignificance, pValue < 0.05)$response,
+      select = c(euMIISmall, target, other)
+    ), id.vars = 'euMIISmall'),
+  aes(x = euMIISmall, y = value, fill = variable)) +
+  geom_bar(stat = 'identity', position = 'dodge') +
+  scale_y_continuous(labels = scales::percent) +
+  ggtitle('What matters most to you when deciding how to vote in the EU referendum?') +
+  xlab('What Matters Most') +
+  ylab('Percentage of Respondents') +
+  coord_flip()
+save(plt, file = 'fig/eumii_target.RData')
+plt
+```
+
+## Investigate Other Variables
+
+```{r}
+bes7IndexMeans <- local({
+  results <- do.call(rbind, lapply(bes7Indexes, function (index) {
+    data.frame(
+      index = index,
+      meanOverall = mean(bes7[, index], na.rm = TRUE)
+    )
+  }))
+  results$description <- bes7IndexDescriptions
+  results
+})
+bes7IndexMeans
+```
+
+```{r}
+bes7Significance <- local({
+  results <- do.call(rbind, lapply(bes7Indexes, function (index) {
+    result <- t.test(bes7[!bes7$target, index], bes7[bes7$target, index])
+    data.frame(
+      index = index,
+      pValue = result$p.value,
+      meanOther = result$estimate[1],
+      meanTarget = result$estimate[2],
+      significance = signif.num(result$p.value),
+      confintLo = result$conf.int[1],
+      confintHi = result$conf.int[2]
+    )
+  }))
+  row.names(results) <- NULL
+  results$description <- bes7IndexDescriptions
+  results
+})
+bes7Significance 
+```
+
+```{r}
+ggplot(
+  bes7IndexMeans,
+  aes(x = description, y = meanOverall)) +
+  geom_bar(stat = 'identity') +
+  scale_y_continuous(labels = scales::percent) +
+  ggtitle('Other Questions') +
+  xlab('Question') +
+  ylab('Index') +
+  coord_flip()
+```
+
+```{r}
+names(bes7Significance)
+```
+
+```{r}
+plt <- ggplot(
+  melt(subset(bes7Significance, pValue < 0.05, select = c(description, meanTarget, meanOther)), id.vars = 'description'),
+  aes(x = description, y = value, fill = variable)) +
+  geom_bar(stat = 'identity', position = 'dodge') +
+  scale_y_continuous(labels = scales::percent) +
+  ggtitle('Other Questions') +
+  xlab('Questions') +
+  ylab('Index') +
+  coord_flip()
+save(plt, file = 'fig/target_significant.RData')
+plt
+```
+
+### Jobs
+
+```{r}
+plt <- ggplot(
+  melt(subset(bes7Significance, index == 'immigEconIndex', select = c(index, meanTarget, meanOther)), id.vars = 'index'),
+  aes(x = index, y = value, fill = variable)) +
+  geom_bar(stat = 'identity', position = 'dodge') +
+  scale_y_continuous(labels = scales::percent) +
+  ggtitle('Do you think immigration is good or bad for Britain’s economy?') +
+  xlab('') +
+  ylab('Goodness')
+save(plt, file = 'fig/immigEconIndex_target.RData')
+plt
+```
+
+### Security
+
+```{r}
+plt <- ggplot(
+  melt(subset(
+    bes7Significance,
+    index %in% c('crimeLocalIndex', 'natSecuritySelfIndex', 'natSecuritySpendingIndex'),
+    select = c(description, meanTarget, meanOther)), id.vars = 'description'),
+  aes(x = description, y = value, fill = variable)) +
+  geom_bar(stat = 'identity', position = 'dodge') +
+  scale_y_continuous(labels = scales::percent) +
+  ggtitle('Questions related to Security') +
+  xlab('Question') +
+  ylab('Less -> More / Fight Terror -> Protect Liberties') +
+  coord_flip()
+save(plt, file = 'fig/security_target.RData')
+plt
+```
+
+
+
+natSecuritySelfIndex
+natSecuritySpendingIndex
+
+  'Do you think that the level of crime **in your local area** is getting higher, getting lower or staying about the same?',
+  '[Should we accept infringements on privacy and civil liberties to fight terror?]', # Some people feel that, in order to fight terrorism, we have to accept infringements on privacy and civil liberties, others feel that privacy and civil liberties are to be protected at all cost. Where would you place yourself and the political parties on this scale? (0 fight terror - 10 protect liberties)',
+  'Do you think the government should spend more on defence, less on defence or about the same?',
+
