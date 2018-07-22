@@ -53,10 +53,32 @@ body {
 }
 .card{
   max-width:400px;
+
+.btn-facebook {
+      background-color: #4267b2;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+  }
 }
   </style>
+<meta property="og:url" content="http://www.google.com" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="MyEU: See what the EU has done for your local area" />
+<meta property="og:description" content="Discover what has been EU funded in your local area." />
+
+
+
+
 </head>
 <body>
+
+
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
         <a class="navbar-brand" href="#">My.EU</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -118,8 +140,20 @@ body {
 >
 Tweet
 </a>
-    </div>
 
+
+<div id="shareBtn" class="btn btn-primary">Share on Facebook</div>
+
+
+<script>
+document.getElementById('shareBtn').onclick = function() {
+  FB.ui({
+    method: 'share',
+    display: 'popup',
+    href: 'http://myeu.uk',
+  }, function(response){});
+}
+</script>
     <div class="footnote fixed-bottom my-2 ml-3">GreatBritishHack-Off by Tech4UK and Best for Britain<br>Icons made by <a href="https://www.flaticon.com/authors/icomoon" title="Icomoon">Icomoon</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
   </div>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
