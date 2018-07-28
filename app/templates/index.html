@@ -93,11 +93,19 @@
 
   <div class="container mt-4">
     <div class="form-group">
-      <h3>Enter your postcode</h3>
-      <input style="font-size:xx-large;height:68px" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="e.g. SW1A 1AA">
-      <small id="emailHelp" class="form-text text-muted">We do not store your data.</small>
-    </div>
-    <!-- <button id="postsub" type="submit" class="btn btn-lg btn-primary">Find</button> -->
+      <h3 id="PostcodeLabel">Enter your postcode:</h3>
+
+      <div class="input-group">
+      <input style="font-size:xx-large;height:68px" class="form-control" id="poscodeInput" aria-labelledby=""="PostcodeLabel" placeholder="e.g. SW1A 1AA">
+
+
+
+       <span class="input-group-btn">
+ <button id="postsub" type="submit" class="btn btn-lg btn-primary" aria-label="Find your location" style="font-size:x-large;height:68px">Go</button>
+   </span>
+</div>
+  <!--    <small id="postcodeHelp" class="form-text text-muted">We do not store your data.</small>-->
+</div>
     <div class="row">
         <div class="col-12-xs social-share">
           Share with your friends:
