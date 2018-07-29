@@ -1,4 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   module: {
@@ -41,6 +43,11 @@ module.exports = {
         use: ['file-loader']
       },
       {
+        type: 'javascript/auto', // workaround for https://github.com/webpack/webpack/issues/6586
+        test: /\.geo\.json$/,
+        use: ['file-loader']
+      },
+      {
         test: /\.html$/,
         use: [
           {
@@ -55,6 +62,7 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html'
-    })
+    }),
+    new webpack.EnvironmentPlugin(['MY_EU_API_KEY'])
   ]
 }
