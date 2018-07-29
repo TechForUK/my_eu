@@ -4,6 +4,7 @@ import loadGoogleMapsApi from './load_google_maps_api'
 import eusmallPath from './images/eusmall.png'
 import farmFundingDataPath from './data/farm_funding_data.geo.json'
 import beneficiariesPath from './data/beneficiaries.geo.json'
+import coordisPath from './data/coordis_data.geo.json'
 
 const WHITE = '#fcfcfc'
 const mapStyles = [
@@ -75,7 +76,8 @@ function setUpMap(googleMaps) {
   }
 
   map.data.setStyle(function(feature) {
-    if (feature.getProperty('beneficiary')) {
+    // Handle point datasets with icons.
+    if (feature.getProperty('beneficiary') || feature.getProperty('acronym')) {
       return { icon: eusmallPath }
     }
     // let color = getTotalColor(feature.getProperty('total'))
@@ -95,6 +97,7 @@ function setUpMap(googleMaps) {
 
   map.data.loadGeoJson(farmFundingDataPath, { idPropertyName: 'name' })
   map.data.loadGeoJson(beneficiariesPath)
+  map.data.loadGeoJson(coordisPath)
 }
 
 export default class Map extends React.Component {
