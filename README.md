@@ -18,3 +18,11 @@ Pop-ups
 Frontend
   - injection of points via templating --- could use JSON?
   - social buttons are not styled correctly (should have the icons)
+
+## Other Sources
+
+Some high level data about EU funding in Wales:
+http://www.arts.wales/137922.file.dld
+
+Report from 2016:
+http://speri.dept.shef.ac.uk/wp-content/uploads/2016/05/Brief24-UK-regions-and-European-structural-and-investment-funds.pdf
