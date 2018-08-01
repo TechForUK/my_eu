@@ -12,27 +12,20 @@ const App = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1>What has the EU done for you?</h1>
-              <form className="form-inline">
-                <div className="form-row align-items-center">
-                  <div className="col-auto">
-                    <label htmlFor="my-eu-post-code">
-                      Enter your postcode:
-                    </label>
-                  </div>
-                  <div className="col-auto">
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="my-eu-post-code"
-                        placeholder="e.g. SW1A 1AA"
-                      />
-                      <div className="input-group-append">
-                        <button type="submit" className="btn btn-primary mb-2">
-                          Submit
-                        </button>
-                      </div>
+              <h1>What has the EU done for your area?</h1>
+              <form>
+                <div className="form-group">
+                  <label htmlFor="my-eu-search-box">
+                    Search by your address or postcode:
+                  </label>
+                  <div className="input-group">
+                    <input
+                      className="form-control"
+                      id="my-eu-search-box"
+                      placeholder="e.g. SW1A 1AA"
+                    />
+                    <div className="input-group-append">
+                      <span className="input-group-text">&#x1f50d;</span>
                     </div>
                   </div>
                 </div>
