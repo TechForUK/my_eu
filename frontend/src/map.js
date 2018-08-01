@@ -36,7 +36,7 @@ const mapStyles = [
 ]
 
 function setUpMap(googleMaps) {
-  const map = new googleMaps.Map(document.getElementById('map'), {
+  const map = new googleMaps.Map(document.getElementById('my-eu-map'), {
     center: {
       lat: 54.5,
       lng: -1.5
@@ -106,6 +106,6 @@ export default class Map extends React.Component {
   }
 
   render() {
-    return <div id="map" style={{ height: 700 }} />
+    return <div id="my-eu-map" />
   }
 }

@@ -1,2 +1,28 @@
-@import "custom";
-@import "~bootstrap/scss/bootstrap";
+@import 'custom';
+@import '~bootstrap/scss/bootstrap';
+
+@media only screen and (min-width: 768px) {
+  html,
+  body {
+    height: 100%;
+  }
+
+  #my-eu-app {
+    min-height: 100%;
+    height: 100%;
+
+    #my-eu-root {
+      height: 100%;
+    }
+
+    #my-eu-map {
+      height: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #my-eu-map {
+    height: 768px;
+  }
+}
