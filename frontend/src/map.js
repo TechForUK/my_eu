@@ -1,3 +1,5 @@
+import * as d3Scale from 'd3-scale'
+import * as d3ScaleChromatic from 'd3-scale-chromatic'
 import React from 'react'
 import loadGoogleMapsApi from './load_google_maps_api'
 
@@ -38,6 +40,52 @@ const mapStyles = [
   }
 ]
 
+function addCapData(googleMaps, map) {
+  function getFeatureValue(feature) {
+    return feature.getProperty('total') / feature.getProperty('count')
+  }
+
+  const layer = new googleMaps.Data({ map })
+  layer.loadGeoJson(
+    farmFundingDataPath,
+    { idPropertyName: 'name' },
+    setUpCapDataLayer
+  )
+
+  function setUpCapDataLayer(features) {
+    const maxFeatureValue = Math.max(...features.map(getFeatureValue))
+    const scale = d3Scale
+      .scaleSequential(d3ScaleChromatic.interpolateBlues)
+      .domain([0, maxFeatureValue])
+
+    layer.setStyle(function(feature) {
+      const opacity = 0.75
+      const color = scale(getFeatureValue(feature))
+      return {
+        fillColor: color,
+        fillOpacity: opacity,
+        strokeWeight: 1,
+        strokeColor: color,
+        strokeOpacity: opacity / 2
+      }
+    })
+
+    layer.addListener('mouseover', function(event) {
+      event.feature.forEachProperty(function(value, property) {
+        console.log(property, ':', value)
+      })
+    })
+  }
+}
+
+function addPointData(googleMaps, map, path) {
+  const layer = new googleMaps.Data({ map })
+  layer.loadGeoJson(path)
+  layer.setStyle(function(feature) {
+    return { icon: eusmallPath }
+  })
+}
+
 function setUpMap(googleMaps) {
   const map = new googleMaps.Map(document.getElementById('my-eu-map'), {
     center: {
@@ -48,66 +96,10 @@ function setUpMap(googleMaps) {
     styles: mapStyles
   })
 
-  function getTotalColor(total) {
-    if (total >= 1e7) return '#08519c'
-    if (total >= 1e6) return '#3182bd'
-    if (total >= 1e6) return '#6baed6'
-    if (total >= 1e4) return '#9ecae1'
-    if (total >= 1e3) return '#c6dbef'
-    if (total >= 1e2) return '#eff3ff'
-    return WHITE
-  }
-
-  function getCountColor(total) {
-    if (total >= 512) return '#08519c'
-    if (total >= 256) return '#3182bd'
-    if (total >= 128) return '#6baed6'
-    if (total >= 64) return '#9ecae1'
-    if (total >= 32) return '#c6dbef'
-    if (total >= 16) return '#eff3ff'
-    return WHITE
-  }
-
-  function getPerCapitaColor(total) {
-    if (total >= 80000) return '#08519c'
-    if (total >= 40000) return '#3182bd'
-    if (total >= 20000) return '#6baed6'
-    if (total >= 1000) return '#9ecae1'
-    if (total >= 5000) return '#c6dbef'
-    if (total >= 2500) return '#eff3ff'
-    return WHITE
-  }
-
-  map.data.setStyle(function(feature) {
-    // Handle point datasets with icons.
-    if (feature.getProperty('beneficiary') || feature.getProperty('acronym')) {
-      return { icon: eusmallPath }
-    }
-    // let color = getTotalColor(feature.getProperty('total'))
-    // let color = getCountColor(feature.getProperty('count'))
-    const color = getPerCapitaColor(
-      feature.getProperty('total') / feature.getProperty('count')
-    )
-    const opacity = 0.75
-    return {
-      fillColor: color,
-      fillOpacity: opacity,
-      strokeWeight: 1,
-      strokeColor: color,
-      strokeOpacity: opacity / 2
-    }
-  })
-
   setUpSearchBox(googleMaps, map)
-
-  map.data.loadGeoJson(farmFundingDataPath, { idPropertyName: 'name' })
-  map.data.loadGeoJson(beneficiariesPath)
-  map.data.loadGeoJson(coordisPath)
-  map.data.addListener('mouseover', function(event) {
-    event.feature.forEachProperty(function(value, property) {
-      console.log(property, ':', value)
-    })
-  })
+  addCapData(googleMaps, map)
+  addPointData(googleMaps, map, beneficiariesPath)
+  addPointData(googleMaps, map, coordisPath)
 }
 
 function setUpSearchBox(googleMaps, map) {
