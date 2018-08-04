@@ -6,6 +6,9 @@ import farmFundingDataPath from './data/farm_funding_data.geo.json'
 import beneficiariesPath from './data/beneficiaries.geo.json'
 import coordisPath from './data/coordis_data.geo.json'
 
+// TODO change styles when zoomed in?
+// https://stackoverflow.com/questions/3121400/google-maps-v3-how-to-change-the-map-style-based-on-zoom-level
+
 const WHITE = '#fcfcfc'
 const mapStyles = [
   {
