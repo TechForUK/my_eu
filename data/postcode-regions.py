@@ -6,6 +6,13 @@
 # Manually fixed typos / inconsistencies in input:
 # - SSwansea -> Swansea
 # - London N -> N-London
+# - added E-London to London
+# - added HS-Outer Hebrides to Scotland
+# - added KA-Kilmarnock to Scotland
+# - added LN-Lincoln to East Midlands
+# - added ZE-Lerwick to Scotland
+# - SS-Southend was listed twice, once in Midlands and once in South East.
+#   I've kept it in South East, because visually it was there.
 #
 
 import csv
@@ -29,7 +36,11 @@ with open('postcode-regions.csv', 'w') as csv_file:
         assert(len(areas) % 2 == 0)
 
         for i in range(len(areas) // 2):
-            csv_writer.writerow([region, areas[2 * i], areas[2 * i + 1]])
+            csv_writer.writerow([
+                region,
+                areas[2 * i].strip(),
+                areas[2 * i + 1].strip()
+            ])
 
         if lines:
             lines.pop(0)

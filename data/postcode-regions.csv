@@ -12,6 +12,9 @@ Scotland,G,Glasgow
 Scotland,PH,Perth
 Scotland,TD,Galashiels
 Scotland,IV,Inverness
+Scotland,HS,Outer Hebrides
+Scotland,KA,Kilmarnock
+Scotland,ZE,Lerwick
 Northern Ireland,BT,Belfast
 North East,DH,Durham
 North East,NE,Newcastle
@@ -50,7 +53,7 @@ East Midlands,PE,Peterborough
 East Midlands,IP,Ipswich
 East Midlands,S,Sheffield
 East Midlands,LE,Leicester
-East Midlands,SS,Southend
+East Midlands,LN,Lincoln
 West Midlands,B,Birmingham
 West Midlands,ST,Stoke on Trent
 West Midlands,CV,Coventry
@@ -94,7 +97,7 @@ South East,SL,Slough
 South East,LU,Luton
 South East,SO,Southampton
 South East,ME,Medway
-South East,SS,Southend 
+South East,SS,Southend
 South East,MK,Milton Keynes
 South East,TN,Tonbridge
 Greater London,BR,Bromley
@@ -116,3 +119,4 @@ Greater London,KT,Kingston
 Greater London,WC,London
 Greater London,N,London
 Greater London,WD,Watford
+Greater London,E,London

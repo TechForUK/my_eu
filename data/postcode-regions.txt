@@ -1,5 +1,5 @@
 SCOTLAND
-AB-AberdeenDD-DundeeKW-KirkwallDG-DumfriesKY-KirkaldyEH-EdinburghML-MotherwellFK-FalkirkPA-PaisleyG-GlasgowPH-PerthTD-GalashielsIV-Inverness
+AB-AberdeenDD-DundeeKW-KirkwallDG-DumfriesKY-KirkaldyEH-EdinburghML-MotherwellFK-FalkirkPA-PaisleyG-GlasgowPH-PerthTD-GalashielsIV-InvernessHS-Outer HebridesKA-KilmarnockZE-Lerwick
 
 NORTHERN IRELAND
 BT-Belfast
@@ -11,7 +11,7 @@ NORTH WEST
 BB-BlackburnL-LiverpoolBD-BradfordLA-LancasterBL-BoltonM-ManchesterCA-CarlisleOL-OldhamCH-ChesterPR-PrestonCW-CreweSK-StockportFY-BlackpoolWA-WarringtonHD-HuddersfieldWN-WiganHX-Halifax
 
 EAST MIDLANDS
-CB-CambridgeLNLincolnCO-ColchesterNG-NottinghamDE-DerbyNR-NorwichDN-DoncasterPE-PeterboroughIP-IpswichS-SheffieldLE-LeicesterSS-Southend
+CB-CambridgeLNLincolnCO-ColchesterNG-NottinghamDE-DerbyNR-NorwichDN-DoncasterPE-PeterboroughIP-IpswichS-SheffieldLE-LeicesterLN-Lincoln
 
 WEST MIDLANDS
 B-BirminghamST-Stoke on TrentCV-CoventryTF-TelfordDY-DudleyWR-WorcesterHR-HerefordWS-WalsallNN-NorthamptonWV-Wolverhampton
@@ -26,4 +26,4 @@ SOUTH EAST
 AL-St. AlbansOX-OxfordBN-BrightonPO-PortsmouthCM-ChelmsfordRG-ReadingCT-CanterburyRH-RedhillGU-GuilfordSG-StevenageHP-HemelSL-SloughLU-LutonSO-SouthamptonME-MedwaySS-Southend MK-Milton KeynesTN-Tonbridge
 
 GREATER LONDON
-BR-BromleyNW-LondonCR-CroydonRM-RomfordDA-DartfordSE-LondonSM-SuttonEC-LondonSW-LondonEN-EnfieldTW-TwickenhamHA-HarrowUB-SouthallIG-IlfordW-LondonKT-KingstonWC-LondonN-LondonWD-Watford
+BR-BromleyNW-LondonCR-CroydonRM-RomfordDA-DartfordSE-LondonSM-SuttonEC-LondonSW-LondonEN-EnfieldTW-TwickenhamHA-HarrowUB-SouthallIG-IlfordW-LondonKT-KingstonWC-LondonN-LondonWD-WatfordE-London
