@@ -1,0 +1,118 @@
+region,area,area_name
+Scotland,AB,Aberdeen
+Scotland,DD,Dundee
+Scotland,KW,Kirkwall
+Scotland,DG,Dumfries
+Scotland,KY,Kirkaldy
+Scotland,EH,Edinburgh
+Scotland,ML,Motherwell
+Scotland,FK,Falkirk
+Scotland,PA,Paisley
+Scotland,G,Glasgow
+Scotland,PH,Perth
+Scotland,TD,Galashiels
+Scotland,IV,Inverness
+Northern Ireland,BT,Belfast
+North East,DH,Durham
+North East,NE,Newcastle
+North East,DL,Darlington
+North East,SR,Sunderland
+North East,HG,Harrogate
+North East,TS,Cleveland
+North East,HU,Hull
+North East,WF,Wakefield
+North East,LS,Leeds
+North East,YO,York
+North West,BB,Blackburn
+North West,L,Liverpool
+North West,BD,Bradford
+North West,LA,Lancaster
+North West,BL,Bolton
+North West,M,Manchester
+North West,CA,Carlisle
+North West,OL,Oldham
+North West,CH,Chester
+North West,PR,Preston
+North West,CW,Crewe
+North West,SK,Stockport
+North West,FY,Blackpool
+North West,WA,Warrington
+North West,HD,Huddersfield
+North West,WN,Wigan
+North West,HX,Halifax
+East Midlands,CB,CambridgeLNLincoln
+East Midlands,CO,Colchester
+East Midlands,NG,Nottingham
+East Midlands,DE,Derby
+East Midlands,NR,Norwich
+East Midlands,DN,Doncaster
+East Midlands,PE,Peterborough
+East Midlands,IP,Ipswich
+East Midlands,S,Sheffield
+East Midlands,LE,Leicester
+East Midlands,SS,Southend
+West Midlands,B,Birmingham
+West Midlands,ST,Stoke on Trent
+West Midlands,CV,Coventry
+West Midlands,TF,Telford
+West Midlands,DY,Dudley
+West Midlands,WR,Worcester
+West Midlands,HR,Hereford
+West Midlands,WS,Walsall
+West Midlands,NN,Northampton
+West Midlands,WV,Wolverhampton
+Wales,CF,Cardiff
+Wales,NP,Newport
+Wales,LD,Llandrindod
+Wales,SA,Swansea
+Wales,LL,Llandudno
+Wales,SY,Shrewsbury
+South West,BA,Bath
+South West,PL,Plymouth
+South West,BH,Bournemouth
+South West,SN,Swindon
+South West,BS,Bristol
+South West,SP,Salisbury
+South West,DT,Dorchester
+South West,TA,Taunton
+South West,EX,Exeter
+South West,TQ,Torquay
+South West,TR,Truro
+South West,GL,Gloucester
+South East,AL,St. Albans
+South East,OX,Oxford
+South East,BN,Brighton
+South East,PO,Portsmouth
+South East,CM,Chelmsford
+South East,RG,Reading
+South East,CT,Canterbury
+South East,RH,Redhill
+South East,GU,Guilford
+South East,SG,Stevenage
+South East,HP,Hemel
+South East,SL,Slough
+South East,LU,Luton
+South East,SO,Southampton
+South East,ME,Medway
+South East,SS,Southend 
+South East,MK,Milton Keynes
+South East,TN,Tonbridge
+Greater London,BR,Bromley
+Greater London,NW,London
+Greater London,CR,Croydon
+Greater London,RM,Romford
+Greater London,DA,Dartford
+Greater London,SE,London
+Greater London,SM,Sutton
+Greater London,EC,London
+Greater London,SW,London
+Greater London,EN,Enfield
+Greater London,TW,Twickenham
+Greater London,HA,Harrow
+Greater London,UB,Southall
+Greater London,IG,Ilford
+Greater London,W,London
+Greater London,KT,Kingston
+Greater London,WC,London
+Greater London,N,London
+Greater London,WD,Watford
