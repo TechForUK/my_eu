@@ -2,7 +2,7 @@ import React from 'react'
 import loadGoogleMapsApi from './load_google_maps_api'
 
 import eusmallPath from './images/eusmall.png'
-import farmFundingDataPath from './data/farm_funding_data.geo.json'
+import farmFundingDataPath from './data/farm_funding_data_by_area.geo.json'
 import beneficiariesPath from './data/beneficiaries.geo.json'
 import coordisPath from './data/coordis_data.geo.json'
 
@@ -103,6 +103,11 @@ function setUpMap(googleMaps) {
   map.data.loadGeoJson(farmFundingDataPath, { idPropertyName: 'name' })
   map.data.loadGeoJson(beneficiariesPath)
   map.data.loadGeoJson(coordisPath)
+  map.data.addListener('mouseover', function(event) {
+    event.feature.forEachProperty(function(value, property) {
+      console.log(property, ':', value)
+    })
+  })
 }
 
 function setUpSearchBox(googleMaps, map) {
