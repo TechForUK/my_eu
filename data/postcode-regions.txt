@@ -1,0 +1,29 @@
+SCOTLAND
+AB-AberdeenDD-DundeeKW-KirkwallDG-DumfriesKY-KirkaldyEH-EdinburghML-MotherwellFK-FalkirkPA-PaisleyG-GlasgowPH-PerthTD-GalashielsIV-InvernessHS-Outer HebridesKA-KilmarnockZE-Lerwick
+
+NORTHERN IRELAND
+BT-Belfast
+
+NORTH EAST
+DH-DurhamNE-NewcastleDL-DarlingtonSR-SunderlandHG-HarrogateTS-ClevelandHU-HullWF-WakefieldLS-LeedsYO-York
+
+NORTH WEST
+BB-BlackburnL-LiverpoolBD-BradfordLA-LancasterBL-BoltonM-ManchesterCA-CarlisleOL-OldhamCH-ChesterPR-PrestonCW-CreweSK-StockportFY-BlackpoolWA-WarringtonHD-HuddersfieldWN-WiganHX-Halifax
+
+EAST MIDLANDS
+CB-CambridgeLNLincolnCO-ColchesterNG-NottinghamDE-DerbyNR-NorwichDN-DoncasterPE-PeterboroughIP-IpswichS-SheffieldLE-LeicesterLN-Lincoln
+
+WEST MIDLANDS
+B-BirminghamST-Stoke on TrentCV-CoventryTF-TelfordDY-DudleyWR-WorcesterHR-HerefordWS-WalsallNN-NorthamptonWV-Wolverhampton
+
+WALES
+CF-CardiffNP-NewportLD-LlandrindodSA-SwanseaLL-LlandudnoSY-Shrewsbury
+
+SOUTH WEST
+BA-BathPL-PlymouthBH-BournemouthSN-SwindonBS-BristolSP-SalisburyDT-DorchesterTA-TauntonEX-ExeterTQ-TorquayTR-TruroGL-Gloucester
+
+SOUTH EAST
+AL-St. AlbansOX-OxfordBN-BrightonPO-PortsmouthCM-ChelmsfordRG-ReadingCT-CanterburyRH-RedhillGU-GuilfordSG-StevenageHP-HemelSL-SloughLU-LutonSO-SouthamptonME-MedwaySS-Southend MK-Milton KeynesTN-Tonbridge
+
+GREATER LONDON
+BR-BromleyNW-LondonCR-CroydonRM-RomfordDA-DartfordSE-LondonSM-SuttonEC-LondonSW-LondonEN-EnfieldTW-TwickenhamHA-HarrowUB-SouthallIG-IlfordW-LondonKT-KingstonWC-LondonN-LondonWD-WatfordE-London

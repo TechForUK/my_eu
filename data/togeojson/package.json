@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "prettier": "prettier-standard *.js",
-    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true,
@@ -17,6 +16,7 @@
   "dependencies": {
     "@mapbox/togeojson": "^0.16.0",
     "csv-parse": "^2.5.0",
+    "mapshaper": "^0.4.89",
     "xmldom": "^0.1.27"
   }
 }
