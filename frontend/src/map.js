@@ -4,7 +4,7 @@ import React from 'react'
 import loadGoogleMapsApi from './load_google_maps_api'
 
 import eusmallPath from './images/eusmall.png'
-import farmFundingDataPath from './data/farm_funding_data_by_area.geo.json'
+import capPath from './data/cap_by_area.geo.json'
 import beneficiariesPath from './data/beneficiaries.geo.json'
 import coordisPath from './data/coordis_data.geo.json'
 
@@ -46,11 +46,7 @@ function addCapData(googleMaps, map) {
   }
 
   const layer = new googleMaps.Data({ map })
-  layer.loadGeoJson(
-    farmFundingDataPath,
-    { idPropertyName: 'name' },
-    setUpCapDataLayer
-  )
+  layer.loadGeoJson(capPath, { idPropertyName: 'name' }, setUpCapDataLayer)
 
   function setUpCapDataLayer(features) {
     const maxFeatureValue = Math.max(...features.map(getFeatureValue))
