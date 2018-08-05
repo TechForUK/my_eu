@@ -4,7 +4,6 @@
 
 - data cleanup: points outside UK
 - about page needs updating with licenses
-- about page needs image fixing
 - anywhere to source images for the popups?
 - prettier pop-ups
   - different pop-ups for different data sources?

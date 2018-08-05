@@ -51,7 +51,8 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name]-[hash].[ext]',
-              outputPath: 'assets/'
+              outputPath: 'assets',
+              publicPath: '/assets'
             }
           }
         ]
@@ -64,7 +65,8 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[hash]-[name].[ext]',
-              outputPath: 'assets/data'
+              outputPath: 'assets/data',
+              publicPath: '/assets/data'
             }
           }
         ]
