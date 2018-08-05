@@ -4,12 +4,15 @@
 
 - data cleanup: points outside UK
 - about page needs updating with licenses
+- about page needs image fixing
 - anywhere to source images for the popups?
 - prettier pop-ups
   - different pop-ups for different data sources?
 - idea: zoom in when a region is clicked
 - idea: see what it looks like with marker clustering
 - social media buttons
+- add more wales data
+- add creative europe data
 
 ## Other Sources
 
