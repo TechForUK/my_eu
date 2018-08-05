@@ -1,5 +1,11 @@
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
+
+const devMode = process.env.NODE_ENV != 'production'
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
@@ -17,7 +23,7 @@ module.exports = {
         use: [
           {
             // Adds CSS to the DOM by injecting a `<style>` tag
-            loader: 'style-loader'
+            loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader
           },
           {
             // Interprets `@import` and `url()` like `import/require()` and will resolve them
@@ -40,12 +46,32 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader']
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name]-[hash].[ext]',
+              outputPath: 'assets/'
+            }
+          }
+        ]
       },
       {
         type: 'javascript/auto', // workaround for https://github.com/webpack/webpack/issues/6586
         test: /\.geo\.json$/,
-        use: ['file-loader']
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[hash]-[name].[ext]',
+              outputPath: 'assets/data'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.pug$/,
+        use: 'pug-loader'
       },
       {
         test: /\.html$/,
@@ -60,9 +86,30 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/index.html',
-      filename: './index.html'
+      template: './src/templates/index.pug'
     }),
-    new webpack.EnvironmentPlugin(['MY_EU_API_KEY'])
-  ]
+    new HtmlWebPackPlugin({
+      template: './src/templates/about/index.pug',
+      filename: 'about/index.html'
+    }),
+    new webpack.EnvironmentPlugin(['MY_EU_API_KEY']),
+    new MiniCssExtractPlugin({
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+    }),
+    new CompressionWebpackPlugin()
+  ],
+  optimization: {
+    minimizer: [
+      new UglifyJsWebpackPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true
+      }),
+      new OptimizeCSSAssetsWebpackPlugin({})
+    ]
+  },
+  output: {
+    filename: devMode ? '[name].[hash].js' : '[name].[contenthash].js'
+  }
 }

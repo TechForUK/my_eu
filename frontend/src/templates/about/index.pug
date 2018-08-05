@@ -1,0 +1,25 @@
+extends ../layout.pug
+
+block content
+  nav(class='navbar navbar-expand-lg navbar-light bg-light')
+    a(class='navbar-brand', href='/')
+      img(src=require('../../images/eusmall.png'))
+      | &nbsp;My.EU
+    ul(class='navbar-nav')
+      li(class='nav-item')
+        a(class='nav-link' href='/') Back to the Map
+      li(class='nav-item')
+        a(class='nav-link active' href='/about') About
+
+  div(class='container')
+    h1 About MyEU
+
+    p We were really interested in the impacts the EU had in our local community. Looking at the data we were amazed, and we wanted to let people know the impact the EU had on their community.
+
+    h2 Data and Methodology
+
+    p The map uses a dataset from the Ministry of Housing, Communities and Local Government, showing #[a(href='https://www.gov.uk/government/publications/european-structural-and-investment-funds-useful-resources') European Strucutral and Investment Funds (ESIF) 2014-2020]. ESIF includes money from the European Social Fund (ESF), European Regional Development Fund (ERDF) and European Agricultural Fund for Rural Development (EAFRD).
+
+    h2 What action can I take?
+
+    p If you're interested in taking action off the back of this dataset, one thing you can do is email your MP to tell them your feelings. Emailing your MP can really help. Have a look at #[a(href='https://www.writetothem.com/') Write to them] for your MP's details.

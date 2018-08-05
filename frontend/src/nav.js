@@ -14,17 +14,13 @@ const Nav = () => {
         />
         &nbsp;My.EU
       </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <a className="nav-link" href="/about">
+            About
+          </a>
+        </li>
+      </ul>
     </nav>
   )
 }

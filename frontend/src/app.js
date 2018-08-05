@@ -42,4 +42,5 @@ const App = () => {
 }
 export default App
 
-ReactDOM.render(<App />, document.getElementById('my-eu-app'))
+const container = document.getElementById('my-eu-app')
+if (container) ReactDOM.render(<App />, container)
