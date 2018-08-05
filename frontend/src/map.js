@@ -99,7 +99,7 @@ const GenericInfo = ({ feature }) => {
   feature.forEachProperty(function(value, property) {
     body.push(
       <tr>
-        <td>{property}</td>
+        <th>{property}</th>
         <td>{value}</td>
       </tr>
     )
@@ -107,12 +107,6 @@ const GenericInfo = ({ feature }) => {
 
   return (
     <table>
-      <thead>
-        <tr>
-          <th>Property</th>
-          <th>Value</th>
-        </tr>
-      </thead>
       <tbody>{body}</tbody>
     </table>
   )
