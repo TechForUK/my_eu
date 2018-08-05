@@ -42,7 +42,13 @@ const mapStyles = [
   }
 ]
 
-function addCapData(googleMaps, map) {
+function getGeometryLatLngBounds(googleMaps, geometry) {
+  const bounds = new googleMaps.LatLngBounds()
+  geometry.forEachLatLng(latLng => bounds.extend(latLng))
+  return bounds
+}
+
+function addCapData(googleMaps, map, infoWindow) {
   function getFeatureValue(feature) {
     return feature.getProperty('total') / feature.getProperty('count')
   }
@@ -68,9 +74,21 @@ function addCapData(googleMaps, map) {
       }
     })
 
-    layer.addListener('mouseover', function(event) {
+    layer.addListener('click', function(event) {
       event.feature.forEachProperty(function(value, property) {
-        // console.log(property, ':', value)
+        const feature = event.feature
+        const bounds = getGeometryLatLngBounds(
+          googleMaps,
+          feature.getGeometry()
+        )
+
+        const container = infoWindow.getContent()
+        ReactDOM.unmountComponentAtNode(container)
+        ReactDOM.render(<GenericInfo feature={feature} />, container)
+
+        infoWindow.setPosition(bounds.getCenter())
+        infoWindow.open(map)
+        map.fitBounds(bounds)
       })
     })
   }
@@ -132,7 +150,7 @@ function setUpMap(googleMaps) {
   })
 
   setUpSearchBox(googleMaps, map)
-  addCapData(googleMaps, map)
+  addCapData(googleMaps, map, infoWindow)
   addPointData(googleMaps, map, beneficiariesPath, infoWindow)
   addPointData(googleMaps, map, coordisPath, infoWindow)
   addPointData(googleMaps, map, scotlandPath, infoWindow)
