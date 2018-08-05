@@ -92,7 +92,10 @@ module.exports = {
       template: './src/templates/about/index.pug',
       filename: 'about/index.html'
     }),
-    new webpack.EnvironmentPlugin(['MY_EU_API_KEY']),
+    new webpack.EnvironmentPlugin([
+      'DEVELOPMENT_MY_EU_API_KEY',
+      'PRODUCTION_MY_EU_API_KEY'
+    ]),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
