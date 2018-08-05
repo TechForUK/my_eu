@@ -1,12 +1,14 @@
 import * as d3Scale from 'd3-scale'
 import * as d3ScaleChromatic from 'd3-scale-chromatic'
 import React from 'react'
+import ReactDOM from 'react-dom'
 import loadGoogleMapsApi from './load_google_maps_api'
 
 import eusmallPath from './images/eusmall.png'
 import capPath from './data/cap_by_area.geo.json'
 import beneficiariesPath from './data/beneficiaries.geo.json'
 import coordisPath from './data/coordis_data.geo.json'
+import scotlandPath from './data/scotland_data.geo.json'
 
 // TODO change styles when zoomed in?
 // https://stackoverflow.com/questions/3121400/google-maps-v3-how-to-change-the-map-style-based-on-zoom-level
@@ -68,17 +70,50 @@ function addCapData(googleMaps, map) {
 
     layer.addListener('mouseover', function(event) {
       event.feature.forEachProperty(function(value, property) {
-        console.log(property, ':', value)
+        // console.log(property, ':', value)
       })
     })
   }
 }
 
-function addPointData(googleMaps, map, path) {
+const GenericInfo = ({ feature }) => {
+  const body = []
+  feature.forEachProperty(function(value, property) {
+    body.push(
+      <tr>
+        <td>{property}</td>
+        <td>{value}</td>
+      </tr>
+    )
+  })
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>{body}</tbody>
+    </table>
+  )
+}
+
+function addPointData(googleMaps, map, path, infoWindow) {
   const layer = new googleMaps.Data({ map })
   layer.loadGeoJson(path)
   layer.setStyle(function(feature) {
     return { icon: eusmallPath }
+  })
+  layer.addListener('click', function(event) {
+    const feature = event.feature
+    infoWindow.setPosition(feature.getGeometry().get())
+    infoWindow.open(map)
+
+    const container = infoWindow.getContent()
+    ReactDOM.unmountComponentAtNode(container)
+    ReactDOM.render(<GenericInfo feature={feature} />, container)
   })
 }
 
@@ -92,10 +127,15 @@ function setUpMap(googleMaps) {
     styles: mapStyles
   })
 
+  const infoWindow = new google.maps.InfoWindow({
+    content: document.createElement('div')
+  })
+
   setUpSearchBox(googleMaps, map)
   addCapData(googleMaps, map)
-  addPointData(googleMaps, map, beneficiariesPath)
-  addPointData(googleMaps, map, coordisPath)
+  addPointData(googleMaps, map, beneficiariesPath, infoWindow)
+  addPointData(googleMaps, map, coordisPath, infoWindow)
+  addPointData(googleMaps, map, scotlandPath, infoWindow)
 }
 
 function setUpSearchBox(googleMaps, map) {
