@@ -1,4 +1,3 @@
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
@@ -101,8 +100,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
-    }),
-    new CompressionWebpackPlugin()
+    })
   ],
   optimization: {
     minimizer: [

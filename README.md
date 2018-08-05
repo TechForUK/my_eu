@@ -13,6 +13,13 @@
 - add more wales data
 - add creative europe data
 
+## Deployment
+
+```
+npm run build
+gsutil rsync -c -R dist gs://www.myeu.uk
+```
+
 ## Other Sources
 
 Some high level data about EU funding in Wales:
