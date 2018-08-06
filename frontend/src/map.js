@@ -11,6 +11,7 @@ import coordisPath from './data/coordis_data.geo.json'
 import scotlandPath from './data/scotland_data.geo.json'
 import walesPath from './data/wales_data.geo.json'
 import walesEduPath from './data/wales_edu_data.geo.json'
+import niPath from './data/ni_data.geo.json'
 
 // TODO change styles when zoomed in?
 // https://stackoverflow.com/questions/3121400/google-maps-v3-how-to-change-the-map-style-based-on-zoom-level
@@ -152,6 +153,8 @@ function setUpMap(googleMaps) {
   addPointData(googleMaps, map, scotlandPath, infoWindow)
   addPointData(googleMaps, map, walesPath, infoWindow)
   addPointData(googleMaps, map, walesEduPath, infoWindow)
+  addPointData(googleMaps, map, niPath, infoWindow)
+
 }
 
 function setUpSearchBox(googleMaps, map) {
