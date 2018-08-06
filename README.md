@@ -2,7 +2,7 @@
 
 ## TODO
 
-- data cleanup: points outside UK
+
 - about page needs updating with licenses
 - anywhere to source images for the popups?
 - prettier pop-ups
@@ -10,7 +10,6 @@
 - idea: zoom in when a region is clicked
 - idea: see what it looks like with marker clustering
 - social media buttons
-- add more wales data
 - add creative europe data
 
 ## Deployment
