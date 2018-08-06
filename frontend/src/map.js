@@ -1,5 +1,6 @@
 import * as d3Scale from 'd3-scale'
 import * as d3ScaleChromatic from 'd3-scale-chromatic'
+import $ from 'jquery'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import loadGoogleMapsApi from './load_google_maps_api'
@@ -51,6 +52,23 @@ function getGeometryLatLngBounds(googleMaps, geometry) {
   return bounds
 }
 
+function updateInfoWindowContent(map, infoWindow, component) {
+  // Clean up previous window, if any.
+  const container = infoWindow.getContent()
+  ReactDOM.unmountComponentAtNode(container)
+  infoWindow.close()
+
+  // Set maximum width for mobile-friendliness.
+  // Process is based on https://developers.google.com/maps/documentation/javascript/reference/3/info-window#InfoWindowOptions.maxWidth
+  const INFO_WINDOW_PADDING = 60 // determined empirically
+  ReactDOM.render(component, container)
+  infoWindow.setOptions({
+    maxWidth: $(map.getDiv()).width() - INFO_WINDOW_PADDING
+  })
+  infoWindow.setContent(container)
+  infoWindow.open(map)
+}
+
 function addCapData(googleMaps, map, infoWindow) {
   function getFeatureValue(feature) {
     return feature.getProperty('total') / feature.getProperty('count')
@@ -85,12 +103,12 @@ function addCapData(googleMaps, map, infoWindow) {
           feature.getGeometry()
         )
 
-        const container = infoWindow.getContent()
-        ReactDOM.unmountComponentAtNode(container)
-        ReactDOM.render(<GenericInfo feature={feature} />, container)
-
         infoWindow.setPosition(bounds.getCenter())
-        infoWindow.open(map)
+        updateInfoWindowContent(
+          map,
+          infoWindow,
+          <GenericInfo feature={feature} />
+        )
         map.fitBounds(bounds)
       })
     })
@@ -124,11 +142,7 @@ function addPointData(googleMaps, map, path, infoWindow) {
   layer.addListener('click', function(event) {
     const feature = event.feature
     infoWindow.setPosition(feature.getGeometry().get())
-    infoWindow.open(map)
-
-    const container = infoWindow.getContent()
-    ReactDOM.unmountComponentAtNode(container)
-    ReactDOM.render(<GenericInfo feature={feature} />, container)
+    updateInfoWindowContent(map, infoWindow, <GenericInfo feature={feature} />)
   })
 }
 
