@@ -9,6 +9,7 @@
   - different pop-ups for different data sources?
 - idea: zoom in when a region is clicked
 - idea: see what it looks like with marker clustering
+  - also https://github.com/googlemaps/js-rich-marker ?
 - social media buttons
 - add creative europe data
 

@@ -135,11 +135,13 @@ function addPointData(googleMaps, map, path, infoWindow) {
 function setUpMap(googleMaps) {
   const map = new googleMaps.Map(document.getElementById('my-eu-map'), {
     center: {
-      lat: 54.5,
-      lng: -1.5
+      lat: 54.595,
+      lng: -2.888
     },
     zoom: 6,
-    styles: mapStyles
+    styles: mapStyles,
+    mapTypeControl: false,
+    streetViewControl: false
   })
 
   const infoWindow = new google.maps.InfoWindow({
