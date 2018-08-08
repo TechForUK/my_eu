@@ -135,10 +135,10 @@ const CapInfo = ({ feature }) => {
       <p>
         The European Agricultural Gurantee Fund finances direct payments to
         farmers and regulations for agricultural markets. The European
-        Agricultural Fund for Rural Development finances rural development
-        programmes that help to improve the competitiveness of farm, forest and
-        agri-food businesses, protect the natural environment, support rural
-        economies and improve quality of life in rural areas.{' '}
+        Agricultural Fund for Rural Development finances programmes to make
+        farm, forest and agri-food businesses more competitive, protect the
+        environment, support rural economies and improve quality of life in
+        rural areas.{' '}
         <a href="/about" target="_blank">
           Find out more.
         </a>
