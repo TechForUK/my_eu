@@ -197,11 +197,10 @@ const BeneficiaryInfo = ({ feature }) => {
   const euInvestment = feature.getProperty('eu_investment')
   const projectCost = feature.getProperty('project_cost')
   const displayEuInvestment = formatRoundPounds(euInvestment)
-  const displayProjectCost = formatRoundPounds(projectCost)
   const displayPercentage = formatRoundPercentage(euInvestment / projectCost)
 
   let lead
-  if (euInvestment >= projectCost) {
+  if (!projectCost || euInvestment >= projectCost) {
     // Note: Some are overfunded.
     lead = (
       <p className="lead">
@@ -225,7 +224,55 @@ const BeneficiaryInfo = ({ feature }) => {
       <p>
         The EU supported this project through its European Structural and
         Investment Funds, which are the EU's main funding programmes for
-        supporting growth and jobs across the EU.{' '}
+        supporting growth and jobs in the UK and across the EU.{' '}
+        <a href="/about" target="_blank">
+          Find out more.
+        </a>
+      </p>
+    </div>
+  )
+}
+
+// TODO: This should be spelled cordis, not coordis.
+// NB: More data are available in many cases, e.g. detailed project
+// descriptions and sometimes links.
+const CoordisInfo = ({ feature }) => {
+  let title = feature.getProperty('title')
+  const coordinator = feature.getProperty('coordinator')
+  const acronym = feature.getProperty('acronym')
+  const ecMaxContribution = feature.getProperty('ecMaxContribution')
+  const totalCost = feature.getProperty('totalCost')
+
+  // Some have no title, some have the acronym in the title.
+  if (!title) title = `Project "${acronym}"`
+
+  const displayEcMaxContribution = formatRoundPounds(ecMaxContribution)
+  const displayPercentage = formatRoundPercentage(ecMaxContribution / totalCost)
+
+  let lead
+  if (!totalCost || ecMaxContribution >= totalCost) {
+    lead = (
+      <p className="lead">
+        The EU provided {coordinator} with {displayEcMaxContribution} to fund
+        the '{acronym}' research project.
+      </p>
+    )
+  } else {
+    lead = (
+      <p className="lead">
+        The EU provided {coordinator} with {displayEcMaxContribution} to fund{' '}
+        {displayPercentage} of the '{acronym}' research project.
+      </p>
+    )
+  }
+
+  return (
+    <div className="my-eu-info-window">
+      <h2>{title}</h2>
+      {lead}
+      <p>
+        The European Research Council funds research that saves lives and drives
+        innovation in the UK and across the EU.{' '}
         <a href="/about" target="_blank">
           Find out more.
         </a>
@@ -258,7 +305,7 @@ function makePointInfoWindow(feature) {
     return <BeneficiaryInfo feature={feature} />
   } else if (feature.getProperty('ecMaxContribution')) {
     // coordisPath ecMaxContribution
-    return <GenericInfo feature={feature} />
+    return <CoordisInfo feature={feature} />
   } else if (feature.getProperty('EU funds awarded')) {
     // walesPath, walesEduPath
     return <GenericInfo feature={feature} />
