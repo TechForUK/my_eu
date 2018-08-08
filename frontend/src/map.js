@@ -69,6 +69,14 @@ function updateInfoWindowContent(map, infoWindow, component) {
   infoWindow.open(map)
 }
 
+function formatRoundPercentage(fraction) {
+  return fraction.toLocaleString('en-GB', {
+    style: 'percent',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  })
+}
+
 function formatRoundPounds(pounds) {
   return pounds.toLocaleString('en-GB', {
     style: 'currency',
@@ -181,6 +189,51 @@ function addCapData(googleMaps, map, infoWindow) {
   }
 }
 
+// NB: These are ESIF. There are more data we can pull in here, e.g. project
+// descriptions.
+const BeneficiaryInfo = ({ feature }) => {
+  const beneficiary = feature.getProperty('beneficiary')
+  const project = feature.getProperty('project')
+  const euInvestment = feature.getProperty('eu_investment')
+  const projectCost = feature.getProperty('project_cost')
+  const displayEuInvestment = formatRoundPounds(euInvestment)
+  const displayProjectCost = formatRoundPounds(projectCost)
+  const displayPercentage = formatRoundPercentage(euInvestment / projectCost)
+
+  let lead
+  if (euInvestment >= projectCost) {
+    // Note: Some are overfunded.
+    lead = (
+      <p className="lead">
+        The EU provided {beneficiary} with {displayEuInvestment} to fund this
+        project.
+      </p>
+    )
+  } else {
+    lead = (
+      <p className="lead">
+        The EU provided {beneficiary} with {displayEuInvestment} to fund{' '}
+        {displayPercentage} of this project.
+      </p>
+    )
+  }
+
+  return (
+    <div className="my-eu-info-window">
+      <h2>{project}</h2>
+      {lead}
+      <p>
+        The EU supported this project through its European Structural and
+        Investment Funds, which are the EU's main funding programmes for
+        supporting growth and jobs across the EU.{' '}
+        <a href="/about" target="_blank">
+          Find out more.
+        </a>
+      </p>
+    </div>
+  )
+}
+
 const GenericInfo = ({ feature }) => {
   const body = []
   feature.forEachProperty(function(value, property) {
@@ -199,6 +252,23 @@ const GenericInfo = ({ feature }) => {
   )
 }
 
+function makePointInfoWindow(feature) {
+  if (feature.getProperty('beneficiary')) {
+    // beneficiariesPath
+    return <BeneficiaryInfo feature={feature} />
+  } else if (feature.getProperty('ecMaxContribution')) {
+    // coordisPath ecMaxContribution
+    return <GenericInfo feature={feature} />
+  } else if (feature.getProperty('EU funds awarded')) {
+    // walesPath, walesEduPath
+    return <GenericInfo feature={feature} />
+  } else if (feature.getProperty('Total Eligible Project Cost')) {
+    // niData
+    return <GenericInfo feature={feature} />
+  }
+  return <GenericInfo feature={feature} />
+}
+
 function addPointData(googleMaps, map, path, infoWindow) {
   const layer = new googleMaps.Data({ map })
   layer.loadGeoJson(path)
@@ -208,7 +278,7 @@ function addPointData(googleMaps, map, path, infoWindow) {
   layer.addListener('click', function(event) {
     const feature = event.feature
     infoWindow.setPosition(feature.getGeometry().get())
-    updateInfoWindowContent(map, infoWindow, <GenericInfo feature={feature} />)
+    updateInfoWindowContent(map, infoWindow, makePointInfoWindow(feature))
   })
 }
 
@@ -236,7 +306,6 @@ function setUpMap(googleMaps) {
   addPointData(googleMaps, map, walesPath, infoWindow)
   addPointData(googleMaps, map, walesEduPath, infoWindow)
   addPointData(googleMaps, map, niPath, infoWindow)
-
 }
 
 function setUpSearchBox(googleMaps, map) {
