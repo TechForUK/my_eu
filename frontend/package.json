@@ -6,6 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "dev": "webpack-serve",
+    "prettier": "prettier --single-quote --no-semi --write src/**.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true,

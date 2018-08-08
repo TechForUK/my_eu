@@ -31,7 +31,18 @@ npm install
 npm run dev
 ```
 
-This will start the application using the `webpack-serve` development server on `http://localhost:8080`. Changes to the application's source files will in most cases automatically reload the page.
+This will start the application using the `webpack-serve` development server on `http://localhost:8080`. Changes to the application's source files in `frontend/src` will in most cases automatically reload the page.
+
+### Code Style
+
+There is an [editorconfig](https://editorconfig.org/) in the root that defines encoding, tabs vs spaces, etc.. Please use it. The best way to do this is to get an editorconfig plugin for your editor.
+
+The [prettier](https://github.com/prettier/prettier) code formatter is set up to format the `frontend` code consistently. Please use it. The best way to do it is to get a plugin for your editor, but you can also run
+```
+cd frontend
+npm run prettier
+```
+to format all the code.
 
 ## TODO
 
