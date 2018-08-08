@@ -8,7 +8,8 @@ import loadGoogleMapsApi from './load_google_maps_api'
 import eusmallPath from './images/eusmall.png'
 import capPath from './data/cap_by_area.geo.json'
 import beneficiariesPath from './data/beneficiaries.geo.json'
-import coordisPath from './data/coordis_data.geo.json'
+// TODO: this should be spelled CORDIS rather than COORDIS
+import cordisPath from './data/coordis_data.geo.json'
 import scotlandPath from './data/scotland_data.geo.json'
 import walesPath from './data/wales_data.geo.json'
 import walesEduPath from './data/wales_edu_data.geo.json'
@@ -233,10 +234,9 @@ const BeneficiaryInfo = ({ feature }) => {
   )
 }
 
-// TODO: This should be spelled cordis, not coordis.
 // NB: More data are available in many cases, e.g. detailed project
 // descriptions and sometimes links.
-const CoordisInfo = ({ feature }) => {
+const CordisInfo = ({ feature }) => {
   let title = feature.getProperty('title')
   const coordinator = feature.getProperty('coordinator')
   const acronym = feature.getProperty('acronym')
@@ -301,11 +301,9 @@ const GenericInfo = ({ feature }) => {
 
 function makePointInfoWindow(feature) {
   if (feature.getProperty('beneficiary')) {
-    // beneficiariesPath
     return <BeneficiaryInfo feature={feature} />
   } else if (feature.getProperty('ecMaxContribution')) {
-    // coordisPath ecMaxContribution
-    return <CoordisInfo feature={feature} />
+    return <CordisInfo feature={feature} />
   } else if (feature.getProperty('EU funds awarded')) {
     // walesPath, walesEduPath
     return <GenericInfo feature={feature} />
@@ -348,7 +346,7 @@ function setUpMap(googleMaps) {
   setUpSearchBox(googleMaps, map)
   addCapData(googleMaps, map, infoWindow)
   addPointData(googleMaps, map, beneficiariesPath, infoWindow)
-  addPointData(googleMaps, map, coordisPath, infoWindow)
+  addPointData(googleMaps, map, cordisPath, infoWindow)
   addPointData(googleMaps, map, scotlandPath, infoWindow)
   addPointData(googleMaps, map, walesPath, infoWindow)
   addPointData(googleMaps, map, walesEduPath, infoWindow)
