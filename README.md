@@ -12,17 +12,16 @@ The application uses Google Maps, so you will need to create a Google Cloud Plat
 
 1. [Go to the API list](https://console.cloud.google.com/google/maps-apis/api-list) and ensure that both the Google Maps JavaScript API and the Places API are enabled.
 
-2. [Go to the Credentials list](https://console.cloud.google.com/apis/credentials) and generate a key for development.
+2. [Go to the Credentials list](https://console.cloud.google.com/apis/credentials) and generate an API key for development.
 
 ### Environment
 
-For development, you need to have the
+For development, you need to put your development Google Maps API key in an environment variable:
 ```
-DEVELOPMENT_MY_EU_API_KEY=...
+DEVELOPMENT_MY_EU_API_KEY=YourKeyHere
 ```
-environment variable set to your development Google Maps API key.
 
-To deploy to production, you need a `PRODUCTION_MY_EU_API_KEY` variable set similarly; see notes on deployment below.
+(To deploy to production, you need a `PRODUCTION_MY_EU_API_KEY` variable set to a production API key; see notes on deployment below.)
 
 ### Running the Application
 
@@ -39,16 +38,19 @@ This will start the application using the `webpack-serve` development server on 
 - about page needs updating with licenses
 - anywhere to source images for the popups?
 - prettier pop-ups
-  - different pop-ups for different data sources?
+  - there are now different pop-ups for different data sources - add pop-ups for more data sources
 - idea: zoom in when a region is clicked
 - idea: see what it looks like with marker clustering
   - also https://github.com/googlemaps/js-rich-marker ?
 - social media buttons
+  - tweet the 'lead' paragraphs in the pop-ups?
+- fix bug with enter key handling in the search box (see comments in `setUpSearchBox`)
+- refactor map.js --- it is getting quite large now
 - add creative europe data
 
 ## Deployment
 
-To deploy:
+The static website is deployed to Google Cloud Storage behind CloudFlare for SSL. To deploy:
 
 1. You need to be granted write access to the Google Cloud Storage bucket that hosts the website.
 
