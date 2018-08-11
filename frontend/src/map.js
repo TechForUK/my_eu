@@ -8,8 +8,7 @@ import loadGoogleMapsApi from './load_google_maps_api'
 import eusmallPath from './images/eusmall.png'
 import capPath from './data/cap_by_area.geo.json'
 import beneficiariesPath from './data/beneficiaries.geo.json'
-// TODO: this should be spelled CORDIS rather than COORDIS
-import cordisPath from './data/coordis_data.geo.json'
+import cordisPath from './data/cordis_data.geo.json'
 import scotlandPath from './data/scotland_data.geo.json'
 import walesPath from './data/wales_data.geo.json'
 import walesEduPath from './data/wales_edu_data.geo.json'
@@ -355,7 +354,6 @@ function setUpMap(googleMaps) {
   addPointData(googleMaps, map, niPath, infoWindow)
   addPointData(googleMaps, map, creativePath, infoWindow)
   addPointData(googleMaps, map, fts2016Path, infoWindow)
-
 }
 
 function setUpSearchBox(googleMaps, map) {
