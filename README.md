@@ -1,6 +1,12 @@
 # My.EU
 
-## Development
+## Data Processing
+
+### Requirements
+
+To avoid committing the output of IPython notebooks, which can be very large and make diffs hard to read, please install [nbstripout](https://github.com/kynan/nbstripout) as a git filter.
+
+## App Development
 
 The latest application is in the `frontend` directory. It is a static website built with webpack.
 
