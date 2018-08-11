@@ -4,7 +4,16 @@
 
 ### Requirements
 
+We recommend using Python 3 with anaconda.
+
 To avoid committing the output of IPython notebooks, which can be very large and make diffs hard to read, please install [nbstripout](https://github.com/kynan/nbstripout) as a git filter.
+
+There is a `Makefile` in the `data` directory that handles running the IPython notebooks and updating the appropriate output files.
+
+```
+cd data
+make
+```
 
 ## App Development
 

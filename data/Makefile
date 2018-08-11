@@ -1,3 +1,24 @@
-postcode-area-boundaries-simplified.geo.json : postcode-area-boundaries.geo.json
-	cd togeojson &&\
-	node_modules/.bin/mapshaper -i ../$< -simplify 0.45 -o ../$@
+all: outputs
+
+# Each module may add to these variables.
+OUTPUTS :=
+CLEAN := $(wildcard **/*.ipynb.html)
+
+# Include the description for each module.
+MODULES := postcodes cap
+include $(patsubst %,%/module.mk,$(MODULES))
+
+# Run a jupyter notebook.
+%.ipynb.html: %.ipynb
+	jupyter nbconvert --execute --output=$(notdir $<).html $<
+
+.PHONY: outputs
+outputs: $(OUTPUTS)
+
+.PHONY:	clean
+clean:
+	rm -f $(CLEAN)
+
+.PHONY:	clobber
+clobber: clean
+	rm -f $(OUTPUTS)
