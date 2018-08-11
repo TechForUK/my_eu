@@ -392,7 +392,7 @@ function makePointInfoWindow(feature) {
   if (feature.getProperty('beneficiary')) {
     return <BeneficiaryInfo feature={feature} />
   } else if (feature.getProperty('ecMaxContribution')) {
-    return <CordisInfo feature={feature} />
+    return <GenericInfo feature={feature} />
   } else if (feature.getProperty('EU funds awarded')) {
     // walesPath, walesEduPath
     return <GenericInfo feature={feature} />
