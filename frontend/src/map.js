@@ -15,6 +15,7 @@ import walesEduPath from './data/wales_edu_data.geo.json'
 import niPath from './data/ni_data.geo.json'
 import creativePath from './data/creative_data.geo.json'
 import fts2016Path from './data/fts2016_data.geo.json'
+import fts2017Path from './data/fts2017_data.geo.json'
 
 // TODO change styles when zoomed in?
 // https://stackoverflow.com/questions/3121400/google-maps-v3-how-to-change-the-map-style-based-on-zoom-level
@@ -83,6 +84,15 @@ function formatRoundPounds(pounds) {
   return pounds.toLocaleString('en-GB', {
     style: 'currency',
     currency: 'GBP',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  })
+}
+
+function formatRoundEuros(euros) {
+  return euros.toLocaleString('en-GB', {
+    style: 'currency',
+    currency: 'EUR',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
   })
@@ -281,6 +291,51 @@ const CordisInfo = ({ feature }) => {
     </div>
   )
 }
+//creative europe
+const CreativeInfo = ({ feature }) => {
+  let title = feature.getProperty('Project Title')
+  const coordinator = feature.getProperty("Coordinator's name")
+  const partner = feature.getProperty('Partner_name')
+  const euGrant = feature.getProperty("EU Grant award in euros (This amount represents the grant awarded after the selection stage and is indicative. Please note that any changes made during or after the project's lifetime will not be reflected here.)")
+  const website = feature.getProperty('Partner_website')
+
+
+  const displayEuGrant= formatRoundEuros(euGrant)
+
+  let lead
+  if (feature.getProperty('Partner_website')){
+    lead = (
+      <p className="lead">
+        {partner} was part of the {title} project, coordinated by {coordinator}. The EU provided {displayEuGrant} for this project as a whole.
+        You can see more info about the project at their website here: {website}
+
+      </p>
+
+    )
+  } else {
+    lead = (
+      <p className="lead">
+        {partner} was part of the {title} project, coordinated by {coordinator}. The EU provided {displayEuGrant} for this project as a whole.
+
+      </p>
+    )
+  }
+
+  return (
+    <div className="my-eu-info-window">
+      <h2>{title}</h2>
+      {lead}
+      <p>
+        This grant as part of Creative Europe, which is a €1.46 billion European Union programme for the cultural and creative sectors for the years 2014-2020..{' '}
+        <a href="/about" target="_blank">
+          Find out more.
+        </a>
+      </p>
+    </div>
+  )
+}
+
+//end creative europe
 
 const GenericInfo = ({ feature }) => {
   const body = []
@@ -311,6 +366,9 @@ function makePointInfoWindow(feature) {
   } else if (feature.getProperty('Total Eligible Project Cost')) {
     // niData
     return <GenericInfo feature={feature} />
+  } else if (feature.getProperty("EU Grant award in euros (This amount represents the grant awarded after the selection stage and is indicative. Please note that any changes made during or after the project's lifetime will not be reflected here.)")){
+    //creative europe data
+        return <CreativeInfo feature={feature} />
   }
   return <GenericInfo feature={feature} />
 }
@@ -353,6 +411,7 @@ function setUpMap(googleMaps) {
   addPointData(googleMaps, map, walesEduPath, infoWindow)
   addPointData(googleMaps, map, niPath, infoWindow)
   addPointData(googleMaps, map, creativePath, infoWindow)
+  addPointData(googleMaps, map, fts2016Path, infoWindow)
   addPointData(googleMaps, map, fts2016Path, infoWindow)
 }
 
