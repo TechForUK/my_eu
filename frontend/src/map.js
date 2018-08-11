@@ -323,7 +323,7 @@ const CreativeInfo = ({ feature }) => {
 
   return (
     <div className="my-eu-info-window">
-      <h2>{title}</h2>
+      <h2>{partner}</h2>
       {lead}
       <p>
         This grant as part of Creative Europe, which is a €1.46 billion European Union programme for the cultural and creative sectors for the years 2014-2020..{' '}
@@ -335,7 +335,40 @@ const CreativeInfo = ({ feature }) => {
   )
 }
 
-//end creative europe
+//start fts
+const FTSInfo = ({ feature }) => {
+  let budgetLine = feature.getProperty('budget_line_name_and_number')
+  const benificiary = feature.getProperty('name_of_beneficiary')
+  const amount = feature.getProperty('Amount')
+  const year = feature.getProperty('Year')
+
+
+  const displayEuGrant= formatRoundEuros(amount)
+
+  let lead
+
+    lead = (
+      <p className="lead">
+        In {year}, the EU provided {benificiary} {displayEuGrant} as part of the {budgetLine} programme.
+      </p>
+
+    )
+
+
+  return (
+    <div className="my-eu-info-window">
+      <h2>{benificiary}</h2>
+      {lead}
+      <p>
+        This grant was from the EU budget centrally administered by the Commission{' '}
+        <a href="/about" target="_blank">
+          Find out more.
+        </a>
+      </p>
+    </div>
+  )
+}
+//end fts
 
 const GenericInfo = ({ feature }) => {
   const body = []
@@ -369,6 +402,9 @@ function makePointInfoWindow(feature) {
   } else if (feature.getProperty("EU Grant award in euros (This amount represents the grant awarded after the selection stage and is indicative. Please note that any changes made during or after the project's lifetime will not be reflected here.)")){
     //creative europe data
         return <CreativeInfo feature={feature} />
+  } else if (feature.getProperty('budget_line_name_and_number')){
+    //creative europe data
+        return <FTSInfo feature={feature} />
   }
   return <GenericInfo feature={feature} />
 }
