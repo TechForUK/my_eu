@@ -4,6 +4,7 @@ import $ from 'jquery'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import loadGoogleMapsApi from './load_google_maps_api'
+import twttr from './social/twitter'
 
 import eusmallPath from './images/eusmall.png'
 import capPath from './data/cap_by_area.geo.json'
@@ -70,6 +71,7 @@ function updateInfoWindowContent(map, infoWindow, component) {
   })
   infoWindow.setContent(container)
   infoWindow.open(map)
+  twttr.widgets.load(container)
 }
 
 function formatRoundPercentage(fraction) {
@@ -210,6 +212,9 @@ const BeneficiaryInfo = ({ feature }) => {
   const projectCost = feature.getProperty('project_cost')
   const displayEuInvestment = formatRoundPounds(euInvestment)
   const displayPercentage = formatRoundPercentage(euInvestment / projectCost)
+  const tweet = `The EU provided ${beneficiary} with ${displayEuInvestment} to fund ${project}.`
+
+  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`
 
   let lead
   if (!projectCost || euInvestment >= projectCost) {
@@ -240,6 +245,9 @@ const BeneficiaryInfo = ({ feature }) => {
         <a href="/about" target="_blank">
           Find out more.
         </a>
+      </p>
+      <p>
+        <a className="twitter-share-button" href={twitterLink}>Tweet</a>
       </p>
     </div>
   )
