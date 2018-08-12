@@ -1,0 +1,36 @@
+{
+  "name": "my_eu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "eslint data/utilities/*.js frontend/src/**.js",
+    "prettier": "prettier --write data/utilities/*.js frontend/src/**.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GreatBritishHackOff/my_eu.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GreatBritishHackOff/my_eu/issues"
+  },
+  "homepage": "https://www.myeu.uk",
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-react": "^7.10.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "prettier": "^1.14.2"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  }
+}

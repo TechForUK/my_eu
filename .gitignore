@@ -106,6 +106,9 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# node
+node_modules
+
 .DS_Store
 .Rproj.user
 ~$*.xlsx
