@@ -1,6 +1,23 @@
 @import 'custom';
 @import '~bootstrap/scss/bootstrap';
 
+.my-eu-info-window {
+  margin-top: 5px;
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .lead {
+    font-size: 1.0rem;
+    line-height: 1.4rem;
+  }
+
+  p {
+    margin-bottom: 0.75rem;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   html,
   body {
