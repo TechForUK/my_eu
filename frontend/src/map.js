@@ -1,8 +1,11 @@
+/* global google alert */
+
 import * as d3Scale from 'd3-scale'
 import * as d3ScaleChromatic from 'd3-scale-chromatic'
 import $ from 'jquery'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 import loadGoogleMapsApi from './load_google_maps_api'
 import twttr from './social/twitter'
 
@@ -161,6 +164,10 @@ const CapInfo = ({ feature }) => {
   )
 }
 
+CapInfo.propTypes = {
+  feature: PropTypes.object
+}
+
 function addCapData(googleMaps, map, infoWindow) {
   function getFeatureValue(feature) {
     return feature.getProperty('total') / feature.getProperty('count')
@@ -242,7 +249,7 @@ const BeneficiaryInfo = ({ feature }) => {
       {lead}
       <p>
         The EU supported this project through its European Structural and
-        Investment Funds, which are the EU's main funding programmes for
+        Investment Funds, which are the EU&apos;s main funding programmes for
         supporting growth and jobs in the UK and across the EU.{' '}
         <a href="/about" target="_blank">
           Find out more.
@@ -255,6 +262,10 @@ const BeneficiaryInfo = ({ feature }) => {
       </p>
     </div>
   )
+}
+
+BeneficiaryInfo.propTypes = {
+  feature: PropTypes.object
 }
 
 // NB: More data are available in many cases, e.g. detailed project
@@ -277,14 +288,18 @@ const CordisInfo = ({ feature }) => {
     lead = (
       <p className="lead">
         The EU provided {coordinator} with {displayEcMaxContribution} to fund
-        the '{acronym}' research project.
+        the &quot;
+        {acronym}
+        &quot; research project.
       </p>
     )
   } else {
     lead = (
       <p className="lead">
         The EU provided {coordinator} with {displayEcMaxContribution} to fund{' '}
-        {displayPercentage} of the '{acronym}' research project.
+        {displayPercentage} of the &quot;
+        {acronym}
+        &quot; research project.
       </p>
     )
   }
@@ -303,7 +318,12 @@ const CordisInfo = ({ feature }) => {
     </div>
   )
 }
-//creative europe
+
+CordisInfo.propTypes = {
+  feature: PropTypes.object
+}
+
+// creative europe
 const CreativeInfo = ({ feature }) => {
   let title = feature.getProperty('Project Title')
   const coordinator = feature.getProperty("Coordinator's name")
@@ -349,7 +369,11 @@ const CreativeInfo = ({ feature }) => {
   )
 }
 
-//start fts
+CreativeInfo.propTypes = {
+  feature: PropTypes.object
+}
+
+// start fts
 const FTSInfo = ({ feature }) => {
   let budgetLine = feature.getProperty('budget_line_name_and_number')
   const benificiary = feature.getProperty('name_of_beneficiary')
@@ -381,7 +405,11 @@ const FTSInfo = ({ feature }) => {
     </div>
   )
 }
-//end fts
+
+FTSInfo.propTypes = {
+  feature: PropTypes.object
+}
+// end fts
 
 const GenericInfo = ({ feature }) => {
   const body = []
@@ -401,6 +429,10 @@ const GenericInfo = ({ feature }) => {
   )
 }
 
+GenericInfo.propTypes = {
+  feature: PropTypes.object
+}
+
 function makePointInfoWindow(feature) {
   if (feature.getProperty('beneficiary')) {
     return <BeneficiaryInfo feature={feature} />
@@ -417,10 +449,10 @@ function makePointInfoWindow(feature) {
       "EU Grant award in euros (This amount represents the grant awarded after the selection stage and is indicative. Please note that any changes made during or after the project's lifetime will not be reflected here.)"
     )
   ) {
-    //creative europe data
+    // creative europe data
     return <CreativeInfo feature={feature} />
   } else if (feature.getProperty('budget_line_name_and_number')) {
-    //creative europe data
+    // creative europe data
     return <FTSInfo feature={feature} />
   }
   return <GenericInfo feature={feature} />

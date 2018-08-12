@@ -3,4 +3,4 @@ import './scss/index.scss'
 
 import './social/twitter'
 
-import App from './app'
+import './app'
