@@ -16,7 +16,12 @@ const App = () => {
               <form>
                 <div className="form-group">
                   <label htmlFor="my-eu-search-box">
-                    The EU invests around <a href="https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/articles/theukcontributiontotheeubudget/2017-10-31">£5 billion</a> a year in the UK. Search by your address or postcode to see some of the investments near you::
+                    The EU invests around{' '}
+                    <a href="https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/articles/theukcontributiontotheeubudget/2017-10-31">
+                      £5 billion
+                    </a>{' '}
+                    a year in the UK. Search by your address or postcode to see
+                    some of the investments near you:
                   </label>
                   <div className="input-group">
                     <input

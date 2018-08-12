@@ -214,7 +214,9 @@ const BeneficiaryInfo = ({ feature }) => {
   const displayPercentage = formatRoundPercentage(euInvestment / projectCost)
   const tweet = `The EU provided ${beneficiary} with ${displayEuInvestment} to fund ${project}.`
 
-  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`
+  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    tweet
+  )}`
 
   let lead
   if (!projectCost || euInvestment >= projectCost) {
@@ -247,7 +249,9 @@ const BeneficiaryInfo = ({ feature }) => {
         </a>
       </p>
       <p>
-        <a className="twitter-share-button" href={twitterLink}>Tweet</a>
+        <a className="twitter-share-button" href={twitterLink}>
+          Tweet
+        </a>
       </p>
     </div>
   )
@@ -304,27 +308,27 @@ const CreativeInfo = ({ feature }) => {
   let title = feature.getProperty('Project Title')
   const coordinator = feature.getProperty("Coordinator's name")
   const partner = feature.getProperty('Partner_name')
-  const euGrant = feature.getProperty("EU Grant award in euros (This amount represents the grant awarded after the selection stage and is indicative. Please note that any changes made during or after the project's lifetime will not be reflected here.)")
+  const euGrant = feature.getProperty(
+    "EU Grant award in euros (This amount represents the grant awarded after the selection stage and is indicative. Please note that any changes made during or after the project's lifetime will not be reflected here.)"
+  )
   const website = feature.getProperty('Partner_website')
 
-
-  const displayEuGrant= formatRoundEuros(euGrant)
+  const displayEuGrant = formatRoundEuros(euGrant)
 
   let lead
-  if (feature.getProperty('Partner_website')){
+  if (feature.getProperty('Partner_website')) {
     lead = (
       <p className="lead">
-        {partner} was part of the {title} project, coordinated by {coordinator}. The EU provided {displayEuGrant} for this project as a whole.
-        You can see more info about the project at their website here: {website}
-
+        {partner} was part of the {title} project, coordinated by {coordinator}.
+        The EU provided {displayEuGrant} for this project as a whole. You can
+        see more info about the project at their website here: {website}
       </p>
-
     )
   } else {
     lead = (
       <p className="lead">
-        {partner} was part of the {title} project, coordinated by {coordinator}. The EU provided {displayEuGrant} for this project as a whole.
-
+        {partner} was part of the {title} project, coordinated by {coordinator}.
+        The EU provided {displayEuGrant} for this project as a whole.
       </p>
     )
   }
@@ -334,7 +338,9 @@ const CreativeInfo = ({ feature }) => {
       <h2>{partner}</h2>
       {lead}
       <p>
-        This grant as part of Creative Europe, which is a €1.46 billion European Union programme for the cultural and creative sectors for the years 2014-2020..{' '}
+        This grant as part of Creative Europe, which is a €1.46 billion European
+        Union programme for the cultural and creative sectors for the years
+        2014-2020..{' '}
         <a href="/about" target="_blank">
           Find out more.
         </a>
@@ -350,25 +356,24 @@ const FTSInfo = ({ feature }) => {
   const amount = feature.getProperty('Amount')
   const year = feature.getProperty('Year')
 
-
-  const displayEuGrant= formatRoundEuros(amount)
+  const displayEuGrant = formatRoundEuros(amount)
 
   let lead
 
-    lead = (
-      <p className="lead">
-        In {year}, the EU provided {benificiary} {displayEuGrant} as part of the {budgetLine} programme.
-      </p>
-
-    )
-
+  lead = (
+    <p className="lead">
+      In {year}, the EU provided {benificiary} {displayEuGrant} as part of the{' '}
+      {budgetLine} programme.
+    </p>
+  )
 
   return (
     <div className="my-eu-info-window">
       <h2>{benificiary}</h2>
       {lead}
       <p>
-        This grant was from the EU budget centrally administered by the Commission{' '}
+        This grant was from the EU budget centrally administered by the
+        Commission{' '}
         <a href="/about" target="_blank">
           Find out more.
         </a>
@@ -407,12 +412,16 @@ function makePointInfoWindow(feature) {
   } else if (feature.getProperty('Total Eligible Project Cost')) {
     // niData
     return <GenericInfo feature={feature} />
-  } else if (feature.getProperty("EU Grant award in euros (This amount represents the grant awarded after the selection stage and is indicative. Please note that any changes made during or after the project's lifetime will not be reflected here.)")){
+  } else if (
+    feature.getProperty(
+      "EU Grant award in euros (This amount represents the grant awarded after the selection stage and is indicative. Please note that any changes made during or after the project's lifetime will not be reflected here.)"
+    )
+  ) {
     //creative europe data
-        return <CreativeInfo feature={feature} />
-  } else if (feature.getProperty('budget_line_name_and_number')){
+    return <CreativeInfo feature={feature} />
+  } else if (feature.getProperty('budget_line_name_and_number')) {
     //creative europe data
-        return <FTSInfo feature={feature} />
+    return <FTSInfo feature={feature} />
   }
   return <GenericInfo feature={feature} />
 }
@@ -456,7 +465,7 @@ function setUpMap(googleMaps) {
   addPointData(googleMaps, map, niPath, infoWindow)
   addPointData(googleMaps, map, creativePath, infoWindow)
   addPointData(googleMaps, map, fts2016Path, infoWindow)
-  addPointData(googleMaps, map, fts2016Path, infoWindow)
+  addPointData(googleMaps, map, fts2017Path, infoWindow)
 }
 
 function setUpSearchBox(googleMaps, map) {
