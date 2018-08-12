@@ -109,3 +109,6 @@ venv.bak/
 .DS_Store
 .Rproj.user
 ~$*.xlsx
+
+# Temporarily ignore CAP datafiles while collecting them.
+data/cap_ltd_company_beneficiaries
