@@ -10,9 +10,9 @@ const Nav = () => {
           width="30"
           height="30"
           className="d-inline-block align-top"
-          alt="My.EU Logo"
+          alt="MyEU Logo"
         />
-        &nbsp;My.EU
+        &nbsp;MyEU.UK
       </a>
       <ul className="navbar-nav">
         <li className="nav-item">
