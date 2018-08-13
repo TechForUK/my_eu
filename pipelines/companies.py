@@ -168,8 +168,11 @@ class CompanySearch(DocFrameTransformer):
         """Make a DataFrame from the company search results."""
 
         company_search = DataFrame(company_search)
-        company_search = company_search.join(company_search.address.apply(lambda address: Series(address)))
-        company_search = company_search.rename(columns={'postal_code': 'postcode'})
+
+        if 'address' in company_search.columns:
+            company_search = company_search.join(company_search.address.apply(lambda address: Series(address)))
+            company_search = company_search.rename(columns={'postal_code': 'postcode'})
+
         company_search['search_company'] = self.company
         return company_search
 
@@ -197,9 +200,12 @@ class CompanySearch(DocFrameTransformer):
 
         doc = self.read_doc()
         company_search = self.make_frame(doc['items'])
-        company_search_officers_target = yield self.require_company_search_officers(company_search)
-        company_search_officers = self.read_company_search_officers(company_search_officers_target)
-        company_search = company_search.merge(company_search_officers, on='company_number')
+
+        if len(company_search):
+            company_search_officers_target = yield self.require_company_search_officers(company_search)
+            company_search_officers = self.read_company_search_officers(company_search_officers_target)
+            company_search = company_search.merge(company_search_officers, on='company_number')
+
         self.write_transformed(company_search)
 
 
@@ -231,7 +237,7 @@ class CompaniesSearch(FrameAggregatorTransformer, ReadFrameMixin):
     params = luigi.DictParameter(default={
         'items_per_page': 100,
         'start_index': 0,
-        'max_search_officers': 5
+        'max_search_officers': 2
     })
 
     @property
