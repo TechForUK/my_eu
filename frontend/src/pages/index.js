@@ -10,8 +10,12 @@ function findPageProps(data) {
   const path = data.path
   const assets = Object.keys(data.webpackStats.compilation.assets)
   const nonStaticAssets = assets.filter(file => !file.startsWith('static'))
-  const scripts = nonStaticAssets.filter(file => file.match(/\.js$/))
-  const stylesheets = nonStaticAssets.filter(file => file.match(/\.css$/))
+  const scripts = nonStaticAssets
+    .filter(file => file.match(/\.js$/))
+    .map(file => '/' + file)
+  const stylesheets = nonStaticAssets
+    .filter(file => file.match(/\.css$/))
+    .map(file => '/' + file)
   return { path, scripts, stylesheets }
 }
 
