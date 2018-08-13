@@ -49,6 +49,15 @@ npm run dev
 
 This will start the application using the `webpack-serve` development server on `http://localhost:8080`. Changes to the application's source files in `frontend/src` will in most cases automatically reload the page.
 
+You can also preview the as it will be built in production (but with a development Google Maps API key, so the map will load) with
+
+```
+cd frontend
+PRODUCTION_MY_EU_API_KEY=$DEVELOPMENT_MY_EU_API_KEY npm run build
+npm run serve
+rm -rf dist # don't leak your development key!
+```
+
 ## Code Style
 
 There is an [editorconfig](https://editorconfig.org/) in the root that defines encoding, tabs vs spaces, etc.. Please use it. The best way to do this is to get an editorconfig plugin for your editor.

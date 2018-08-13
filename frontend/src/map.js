@@ -6,6 +6,7 @@ import $ from 'jquery'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+
 import loadGoogleMapsApi from './load_google_maps_api'
 import twttr from './social/twitter'
 
@@ -580,3 +581,6 @@ export default class Map extends React.Component {
     return <div id="my-eu-map" />
   }
 }
+
+const container = document.getElementById('my-eu-map')
+if (container) ReactDOM.render(<Map />, container)
