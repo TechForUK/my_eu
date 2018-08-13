@@ -33,7 +33,6 @@ const App = () => {
                       <span className="input-group-text">&#x1f50d;</span>
                     </div>
                   </div>
-                                        
                 </div>
               </form>
             </div>
