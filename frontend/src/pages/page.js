@@ -29,7 +29,7 @@ const Page = ({ path, scripts, stylesheets }) => {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/about">
+          <Route path="/about/">
             <About />
           </Route>
         </Switch>

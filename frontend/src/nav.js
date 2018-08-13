@@ -16,7 +16,7 @@ const Nav = () => {
       </a>
       <ul className="navbar-nav">
         <li className="nav-item">
-          <a className="nav-link" href="/about">
+          <a className="nav-link" href="/about/">
             About
           </a>
         </li>
