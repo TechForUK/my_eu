@@ -1,13 +1,17 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+const StaticSiteGeneratorWebpackPlugin = require('static-site-generator-webpack-plugin')
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
 
-const devMode = process.env.NODE_ENV != 'production'
+const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
+  entry: {
+    main: './src/index.js',
+    static: './src/pages/index.js'
+  },
   module: {
     rules: [
       {
@@ -71,10 +75,6 @@ module.exports = {
         ]
       },
       {
-        test: /\.pug$/,
-        use: 'pug-loader'
-      },
-      {
         test: /\.html$/,
         use: [
           {
@@ -86,13 +86,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebPackPlugin({
-      template: './src/templates/index.pug'
-    }),
-    new HtmlWebPackPlugin({
-      template: './src/templates/about/index.pug',
-      filename: 'about/index.html'
-    }),
     new webpack.EnvironmentPlugin([
       'DEVELOPMENT_MY_EU_API_KEY',
       'PRODUCTION_MY_EU_API_KEY'
@@ -100,6 +93,10 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+    }),
+    new StaticSiteGeneratorWebpackPlugin({
+      entry: 'static',
+      paths: ['/', '/about']
     })
   ],
   optimization: {
@@ -113,6 +110,8 @@ module.exports = {
     ]
   },
   output: {
-    filename: devMode ? '[name].[hash].js' : '[name].[contenthash].js'
+    filename: devMode ? '[name].[hash].js' : '[name].[contenthash].js',
+    libraryTarget: 'umd', // for StaticSiteGeneratorPlugin
+    globalObject: 'this' // for StaticSiteGeneratorPlugin
   }
 }
