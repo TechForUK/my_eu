@@ -5,6 +5,7 @@ import { Link, Meta } from 'react-head'
 
 import Home from './home'
 import About from './about'
+import myEuPath from '../images/myeu.png'
 
 const SITE_ROOT =
   process.env.NODE_ENV === 'production'
@@ -21,6 +22,7 @@ const Page = ({ path, scripts, stylesheets }) => {
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
       <Meta property="og:url" content={SITE_ROOT + path} />
+      <Meta property="og:image" content={myEuPath} />
       {stylesheets.map(path => (
         <Link key={path} rel="stylesheet" type="text/css" href={path} />
       ))}
