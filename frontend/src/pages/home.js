@@ -1,6 +1,8 @@
 import React from 'react'
 import { Meta, Title } from 'react-head'
 
+import App from './components/app'
+
 const Home = () => (
   <React.Fragment>
     <Title>MyEU.UK</Title>
@@ -9,7 +11,7 @@ const Home = () => (
       property="og:description"
       content="See what the EU has done in your area"
     />
-    <div id="my-eu-app" />
+    <App />
   </React.Fragment>
 )
 

@@ -1,14 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 
-import Map from './map'
 import Nav from './nav'
 
 const App = () => {
   return (
-    <div className="row no-gutters" id="my-eu-root">
+    <div className="row no-gutters" id="my-eu-app">
       <div className="col-md-4" id="my-eu-bar">
-        <Nav />
+        <Nav path="/" />
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -40,12 +38,9 @@ const App = () => {
         </div>
       </div>
       <div className="col-md-8">
-        <Map />
+        <div id="my-eu-map" />
       </div>
     </div>
   )
 }
 export default App
-
-const container = document.getElementById('my-eu-app')
-if (container) ReactDOM.render(<App />, container)
