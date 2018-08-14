@@ -70,18 +70,17 @@ class CompanyOfficersScraper(SlowScraper, FilenameMixin):
     def complete(self) -> bool:
         """Add logic to cope with exceeding rate limit by forcing entire pipeline to pause for a while."""
 
-        # TODO: Figure out what these error conditions are.
-        if (
-            False
-        ):
+        # TODO: Figure out what this error conditions is.
+        if False:
             # Requesting results too quickly. Wait for a while and try again...
             logger.warning('Over rate limit. Having a nap...')
             self.sleep(min_sleep=self.over_rate_sleep)
             return False
-        elif (
-            False
-        ):
-            raise RuntimeError(f'Unknown company "{self.company_number}".')
+        elif self.response.status_code == 404:
+            logger.warning(f'Company does not exist or no officers found for company number {self.company_number}.')
+            # We want to continue regardless if no officers. SlowsScraper checks response status was a 200, so
+            # call grandparent Task, which just checks for file existence. Yik.
+            return super(SlowScraper, self).complete()
         elif (
             self.response.status_code == 401 and
             self.response.headers.get('Ch-Authentication-Error', None) == 'Invalid authorization header'
@@ -139,5 +138,5 @@ class CompanyOfficers(DocFrameTransformer):
         """Save this company's officers as a DataFrame."""
 
         doc = self.read_doc()
-        officers = self.make_frame(doc['items'], self.company_number)
+        officers = self.make_frame(doc.get('items', {}), self.company_number)
         self.write_transformed(officers)

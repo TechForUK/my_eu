@@ -151,7 +151,6 @@ class CompanySearch(DocFrameTransformer):
     """
 
     out_filename = 'company_search_{}_{}.pkl'
-    # max_search_officers = luigi.IntParameter()
     company = luigi.Parameter()
     params = luigi.DictParameter()
 
@@ -204,7 +203,7 @@ class CompanySearch(DocFrameTransformer):
         if len(company_search):
             company_search_officers_target = yield self.require_company_search_officers(company_search)
             company_search_officers = self.read_company_search_officers(company_search_officers_target)
-            company_search = company_search.merge(company_search_officers, on='company_number')
+            company_search = company_search.merge(company_search_officers, on='company_number', how='outer')
 
         self.write_transformed(company_search)
 
@@ -283,7 +282,6 @@ class CompaniesSearch(FrameAggregatorTransformer, ReadFrameMixin):
     def require_companies(self, search_companies: Series) -> List[CompanySearch]:
         """Create dynamic dependency list to query all companies requested."""
 
-        # task_params = {'max_results': self.max_results}
         return self.require_tasks(CompanySearch, {}, 'company', search_companies)
 
     def run(self) -> None:
