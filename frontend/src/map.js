@@ -273,23 +273,22 @@ BeneficiaryInfo.propTypes = {
 // descriptions and sometimes links.
 const CordisInfo = ({ feature }) => {
   let title = feature.getProperty('title')
-  const coordinator = feature.getProperty('coordinator')
+  const name = feature.getProperty('name')
   const acronym = feature.getProperty('acronym')
-  const ecMaxContribution = feature.getProperty('ecMaxContribution')
+  const ecContribution = feature.getProperty('ecUKContribution')
   const totalCost = feature.getProperty('totalCost')
 
   // Some have no title, some have the acronym in the title.
   if (!title) title = `Project "${acronym}"`
 
-  const displayEcMaxContribution = formatRoundPounds(ecMaxContribution)
-  const displayPercentage = formatRoundPercentage(ecMaxContribution / totalCost)
+  const displayEcContribution = formatRoundPounds(ecContribution)
+  const displayPercentage = formatRoundPercentage(ecContribution / totalCost)
 
   let lead
-  if (!totalCost || ecMaxContribution >= totalCost) {
+  if (!totalCost || ecContribution >= totalCost) {
     lead = (
       <p className="lead">
-        The EU provided {coordinator} with {displayEcMaxContribution} to fund
-        the &quot;
+        The EU provided {name} with {displayEcContribution} to fund the &quot;
         {acronym}
         &quot; research project.
       </p>
@@ -297,7 +296,7 @@ const CordisInfo = ({ feature }) => {
   } else {
     lead = (
       <p className="lead">
-        The EU provided {coordinator} with {displayEcMaxContribution} to fund{' '}
+        The EU provided {name} with {displayEcContribution} to fund{' '}
         {displayPercentage} of the &quot;
         {acronym}
         &quot; research project.
@@ -438,7 +437,7 @@ function makePointInfoWindow(feature) {
   if (feature.getProperty('beneficiary')) {
     return <BeneficiaryInfo feature={feature} />
   } else if (feature.getProperty('ecMaxContribution')) {
-    return <GenericInfo feature={feature} />
+    return <CordisInfo feature={feature} />
   } else if (feature.getProperty('EU funds awarded')) {
     // walesPath, walesEduPath
     return <GenericInfo feature={feature} />

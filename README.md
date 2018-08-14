@@ -79,21 +79,6 @@ npm run eslint
 
 to check all the code.
 
-## TODO
-
-- about page needs updating with licenses
-- anywhere to source images for the popups?
-- prettier pop-ups
-  - there are now different pop-ups for different data sources - add pop-ups for more data sources
-- idea: zoom in when a region is clicked
-- idea: see what it looks like with marker clustering
-  - also https://github.com/googlemaps/js-rich-marker ?
-- social media buttons
-  - tweet the 'lead' paragraphs in the pop-ups?
-- fix bug with enter key handling in the search box (see comments in `setUpSearchBox`)
-- refactor map.js --- it is getting quite large now
-- add creative europe data
-
 ## Deployment
 
 The static website is deployed to Google Cloud Storage behind CloudFlare for SSL. To deploy:
