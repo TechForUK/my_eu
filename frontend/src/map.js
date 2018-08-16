@@ -16,7 +16,6 @@ import beneficiariesPath from './data/beneficiaries.geo.json'
 import cordisPath from './data/cordis_data.geo.json'
 import scotlandPath from './data/scotland_data.geo.json'
 import walesPath from './data/wales_data.geo.json'
-import walesEduPath from './data/wales_edu_data.geo.json'
 import niPath from './data/ni_data.geo.json'
 import creativePath from './data/creative_data.geo.json'
 import fts2016Path from './data/fts2016_data.geo.json'
@@ -439,7 +438,7 @@ function makePointInfoWindow(feature) {
   } else if (feature.getProperty('ecMaxContribution')) {
     return <CordisInfo feature={feature} />
   } else if (feature.getProperty('EU funds awarded')) {
-    // walesPath, walesEduPath
+    // walesPath
     return <GenericInfo feature={feature} />
   } else if (feature.getProperty('Total Eligible Project Cost')) {
     // niData
@@ -493,7 +492,6 @@ function setUpMap(googleMaps) {
   addPointData(googleMaps, map, cordisPath, infoWindow)
   addPointData(googleMaps, map, scotlandPath, infoWindow)
   addPointData(googleMaps, map, walesPath, infoWindow)
-  addPointData(googleMaps, map, walesEduPath, infoWindow)
   addPointData(googleMaps, map, niPath, infoWindow)
   addPointData(googleMaps, map, creativePath, infoWindow)
   addPointData(googleMaps, map, fts2016Path, infoWindow)
