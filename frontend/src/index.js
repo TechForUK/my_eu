@@ -7,4 +7,4 @@ import './google_analytics'
 
 import './social/twitter'
 
-import './map'
+import './components/map'
