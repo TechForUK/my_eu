@@ -19,7 +19,6 @@ import twttr from '../../social/twitter'
 
 import eusmallPath from '../../images/eusmall.png'
 
-import scotlandPath from '../../data/scotland_data.geo.json'
 import walesPath from '../../data/wales_data.geo.json'
 import niPath from '../../data/ni_data.geo.json'
 import creativePath from '../../data/creative_data.geo.json'
@@ -110,7 +109,6 @@ function setUpMap(googleMaps) {
 
   setUpSearchBox(googleMaps, map)
   addCapData(googleMaps, map, infoWindow, updateInfoWindowContent)
-  addPointData(googleMaps, map, scotlandPath, infoWindow)
   addPointData(googleMaps, map, walesPath, infoWindow)
   addPointData(googleMaps, map, niPath, infoWindow)
   addPointData(googleMaps, map, creativePath, infoWindow)
