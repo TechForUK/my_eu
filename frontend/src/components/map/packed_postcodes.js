@@ -1,4 +1,4 @@
-/* global alert fetch */
+/* global fetch */
 
 import packedPostcodesPath from '../../data/map/output/packed_postcodes.data.json'
 
@@ -36,8 +36,5 @@ export default function addPackedPostcodeData(googleMaps, map) {
     })
     .then(function(json) {
       return addPackedPostcodeLayer(googleMaps, map, json)
-    })
-    .catch(function() {
-      alert('Sorry, we could not load the map data. Please try again.')
     })
 }

@@ -1,3 +1,5 @@
+/* global alert */
+
 import $ from 'jquery'
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -115,21 +117,25 @@ function setUpMap(googleMaps) {
   addPointData(googleMaps, map, fts2016Path, infoWindow)
   addPointData(googleMaps, map, fts2017Path, infoWindow)
 
-  addPackedPostcodeLayer(googleMaps, map).then(function(layer) {
-    layer.setStyle(function(feature) {
-      return { icon: eusmallPath }
-    })
+  addPackedPostcodeLayer(googleMaps, map)
+    .then(function(layer) {
+      layer.setStyle(function(feature) {
+        return { icon: eusmallPath }
+      })
 
-    layer.addListener('click', function(event) {
-      const feature = event.feature
-      infoWindow.setPosition(feature.getGeometry().get())
-      updateInfoWindowContent(
-        map,
-        infoWindow,
-        makeAsyncPointInfoWindow(feature)
-      )
+      layer.addListener('click', function(event) {
+        const feature = event.feature
+        infoWindow.setPosition(feature.getGeometry().get())
+        updateInfoWindowContent(
+          map,
+          infoWindow,
+          makeAsyncPointInfoWindow(feature)
+        )
+      })
     })
-  })
+    .catch(function() {
+      alert('Sorry, we could not load the map data. Please try again.')
+    })
 }
 
 export default class Map extends React.Component {
