@@ -722,7 +722,8 @@ function setUpMap(googleMaps) {
     zoom: 6,
     styles: mapStyles,
     mapTypeControl: false,
-    streetViewControl: false
+    streetViewControl: false,
+    fullscreenControl: false
   })
 
   const infoWindow = new google.maps.InfoWindow({
