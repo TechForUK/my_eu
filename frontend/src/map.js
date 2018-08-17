@@ -1,4 +1,4 @@
-/* global google alert */
+/* global google alert fetch */
 
 import * as d3Scale from 'd3-scale'
 import * as d3ScaleChromatic from 'd3-scale-chromatic'
@@ -12,8 +12,10 @@ import twttr from './social/twitter'
 
 import eusmallPath from './images/eusmall.png'
 import capPath from './data/cap_by_area.geo.json'
-import beneficiariesPath from './data/beneficiaries.geo.json'
-import cordisPath from './data/cordis_data.geo.json'
+
+import districtDataPath from './data/map/output/district'
+import packedPostcodesPath from './data/map/output/packed_postcodes.data.json'
+
 import scotlandPath from './data/scotland_data.geo.json'
 import walesPath from './data/wales_data.geo.json'
 import niPath from './data/ni_data.geo.json'
@@ -210,6 +212,70 @@ function addCapData(googleMaps, map, infoWindow) {
   }
 }
 
+const EsifInfo = ({
+  organisationName,
+  projectTitle,
+  summary,
+  funds,
+  euInvestment,
+  projectCost
+}) => {
+  const displayEuInvestment = formatRoundPounds(euInvestment)
+  const displayPercentage = formatRoundPercentage(euInvestment / projectCost)
+  const tweet = `The EU provided ${organisationName} with ${displayEuInvestment} to fund ${projectTitle}.`
+
+  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    tweet
+  )}`
+
+  let lead
+  if (!projectCost || euInvestment >= projectCost) {
+    // Note: Some are overfunded. (TODO: may not be true any more; to check)
+    lead = (
+      <p className="lead">
+        The EU provided {organisationName} with {displayEuInvestment} to fund
+        this project.
+      </p>
+    )
+  } else {
+    lead = (
+      <p className="lead">
+        The EU provided {organisationName} with {displayEuInvestment} to fund{' '}
+        {displayPercentage} of this project.
+      </p>
+    )
+  }
+
+  return (
+    <div>
+      <h3>{projectTitle}</h3>
+      {lead}
+      <p>
+        The EU supported this project through its European Structural and
+        Investment Funds, which are the EU&apos;s main funding programmes for
+        supporting growth and jobs in the UK and across the EU.{' '}
+        <a href="/about" target="_blank">
+          Find out more.
+        </a>
+      </p>
+      <p>
+        <a className="twitter-share-button" href={twitterLink}>
+          Tweet
+        </a>
+      </p>
+    </div>
+  )
+}
+
+EsifInfo.propTypes = {
+  organisationName: PropTypes.string,
+  projectTitle: PropTypes.string,
+  summary: PropTypes.string,
+  funds: PropTypes.string,
+  euInvestment: PropTypes.number,
+  projectCost: PropTypes.number
+}
+
 // NB: These are ESIF. There are more data we can pull in here, e.g. project
 // descriptions.
 const BeneficiaryInfo = ({ feature }) => {
@@ -270,24 +336,39 @@ BeneficiaryInfo.propTypes = {
 
 // NB: More data are available in many cases, e.g. detailed project
 // descriptions and sometimes links.
-const CordisInfo = ({ feature }) => {
-  let title = feature.getProperty('title')
-  const name = feature.getProperty('name')
-  const acronym = feature.getProperty('acronym')
-  const ecContribution = feature.getProperty('ecUKContribution')
-  const totalCost = feature.getProperty('totalCost')
 
-  // Some have no title, some have the acronym in the title.
-  if (!title) title = `Project "${acronym}"`
-
-  const displayEcContribution = formatRoundPounds(ecContribution)
-  const displayPercentage = formatRoundPercentage(ecContribution / totalCost)
-
+const CordisInfo = ({
+  projectTitle,
+  organisationName,
+  objective,
+  ecContribution,
+  totalCost,
+  acronym,
+  briefTitle,
+  teaser,
+  article,
+  projectUrl,
+  organizationUrl,
+  imageUrl
+}) => {
   let lead
-  if (!totalCost || ecContribution >= totalCost) {
+  if (ecContribution && totalCost && ecContribution <= totalCost) {
+    const displayEcContribution = formatRoundPounds(ecContribution)
+    const displayPercentage = formatRoundPercentage(ecContribution / totalCost)
     lead = (
       <p className="lead">
-        The EU provided {name} with {displayEcContribution} to fund the &quot;
+        The EU provided {organisationName} with {displayEcContribution} to fund{' '}
+        {displayPercentage} of the &quot;
+        {acronym}
+        &quot; research project.
+      </p>
+    )
+  } else if (ecContribution) {
+    const displayEcContribution = formatRoundPounds(ecContribution)
+    lead = (
+      <p className="lead">
+        The EU provided {organisationName} with {displayEcContribution} to fund
+        the &quot;
         {acronym}
         &quot; research project.
       </p>
@@ -295,8 +376,7 @@ const CordisInfo = ({ feature }) => {
   } else {
     lead = (
       <p className="lead">
-        The EU provided {name} with {displayEcContribution} to fund{' '}
-        {displayPercentage} of the &quot;
+        The EU supported {organisationName} as part of the &quot;
         {acronym}
         &quot; research project.
       </p>
@@ -305,8 +385,10 @@ const CordisInfo = ({ feature }) => {
 
   return (
     <div className="my-eu-info-window">
-      <h2>{title}</h2>
+      <h3>{projectTitle}</h3>
       {lead}
+      <h4>Objective</h4>
+      <p>{objective}</p>
       <p>
         The European Research Council funds research that saves lives and drives
         innovation in the UK and across the EU.{' '}
@@ -319,7 +401,18 @@ const CordisInfo = ({ feature }) => {
 }
 
 CordisInfo.propTypes = {
-  feature: PropTypes.object
+  projectTitle: PropTypes.string,
+  organisationName: PropTypes.string,
+  objective: PropTypes.string,
+  ecContribution: PropTypes.number,
+  totalCost: PropTypes.number,
+  acronym: PropTypes.string,
+  briefTitle: PropTypes.string,
+  teaser: PropTypes.string,
+  article: PropTypes.string,
+  projectUrl: PropTypes.string,
+  organizationUrl: PropTypes.string,
+  imageUrl: PropTypes.string
 }
 
 // creative europe
@@ -359,7 +452,7 @@ const CreativeInfo = ({ feature }) => {
       <p>
         This grant as part of Creative Europe, which is a €1.46 billion European
         Union programme for the cultural and creative sectors for the years
-        2014-2020..{' '}
+        2014-2020.{' '}
         <a href="/about" target="_blank">
           Find out more.
         </a>
@@ -433,12 +526,8 @@ GenericInfo.propTypes = {
 }
 
 function makePointInfoWindow(feature) {
-  if (feature.getProperty('beneficiary')) {
-    return <BeneficiaryInfo feature={feature} />
-  } else if (feature.getProperty('ecMaxContribution')) {
-    return <CordisInfo feature={feature} />
-  } else if (feature.getProperty('EU funds awarded')) {
-    // walesPath
+  if (feature.getProperty('EU funds awarded')) {
+    // walesPath, walesEduPath
     return <GenericInfo feature={feature} />
   } else if (feature.getProperty('Total Eligible Project Cost')) {
     // niData
@@ -470,6 +559,156 @@ function addPointData(googleMaps, map, path, infoWindow) {
   })
 }
 
+const dataCache = {}
+
+function lookupInDataCache(outwardCode, inwardCode) {
+  const districtData = dataCache[outwardCode]
+  if (!districtData) return null
+
+  const results = []
+  const datasets = districtData.datasets
+  for (let datasetName in datasets) {
+    if (!datasets.hasOwnProperty(datasetName)) continue
+    const dataset = datasets[datasetName]
+    const columns = dataset.columns
+    for (let row of dataset.data) {
+      if (row[0] !== inwardCode) continue
+      const item = { dataset: datasetName }
+      for (let i = 0; i < row.length; ++i) {
+        item[columns[i]] = row[i]
+      }
+      results.push(item)
+    }
+  }
+  return results
+}
+
+function makeProjectInfo(data) {
+  if (data.dataset === 'esif') {
+    return <EsifInfo {...data} />
+  } else if (data.dataset === 'cordis') {
+    console.log(data)
+    return <CordisInfo {...data} />
+  } else {
+    return <div>TODO</div>
+  }
+}
+
+class InfoWrapper extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      postcodeData: this.lookup()
+    }
+  }
+
+  lookup() {
+    return lookupInDataCache(this.props.outwardCode, this.props.inwardCode)
+  }
+
+  componentDidMount() {
+    console.log(this.state.postcodeData)
+    if (this.state.postcodeData) return
+    console.log(districtDataPath[this.props.outwardCode])
+    fetch(districtDataPath[this.props.outwardCode])
+      .then(response => response.json())
+      .then(data => {
+        dataCache[this.props.outwardCode] = data
+        this.setState({ postcodeData: this.lookup() })
+      })
+  }
+
+  render() {
+    const projects = this.state.postcodeData
+    if (projects) {
+      let header
+      if (projects.length > 1) {
+        header = (
+          <h2>
+            {projects.length} projects at {this.props.postcode}
+          </h2>
+        )
+      }
+      return (
+        <div className="my-eu-info-window">
+          {header}
+          {projects.map(makeProjectInfo)}
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          Loading projects for {this.props.postcode}
+          &hellip;
+        </div>
+      )
+    }
+  }
+}
+
+InfoWrapper.propTypes = {
+  outwardCode: PropTypes.string,
+  inwardCode: PropTypes.string,
+  postcode: PropTypes.string
+}
+
+function makeAsyncPointInfoWindow(feature) {
+  return (
+    <InfoWrapper
+      outwardCode={feature.getProperty('outwardCode')}
+      inwardCode={feature.getProperty('inwardCode')}
+      postcode={feature.getId()}
+    />
+  )
+}
+
+function addPackedPostcodeLayer(googleMaps, map, infoWindow, data) {
+  const layer = new googleMaps.Data({ map })
+
+  const minLongitude = data.min_longitude
+  const minLatitude = data.min_latitude
+  for (let outwardCode in data.postcodes) {
+    if (!data.postcodes.hasOwnProperty(outwardCode)) continue
+    const codeData = data.postcodes[outwardCode]
+    for (let i = 0; i < codeData.length; i += 3) {
+      const inwardCode = codeData[i]
+      const deltaLongitude = codeData[i + 1]
+      const deltaLatitude = codeData[i + 2]
+      const geometry = new googleMaps.LatLng(
+        minLatitude + deltaLatitude,
+        minLongitude + deltaLongitude
+      )
+      const id = `${outwardCode} ${inwardCode}`
+      const properties = { outwardCode, inwardCode }
+      layer.add({ geometry, id, properties })
+    }
+  }
+
+  layer.setStyle(function(feature) {
+    return { icon: eusmallPath }
+  })
+
+  layer.addListener('click', function(event) {
+    const feature = event.feature
+    infoWindow.setPosition(feature.getGeometry().get())
+    updateInfoWindowContent(map, infoWindow, makeAsyncPointInfoWindow(feature))
+  })
+}
+
+function addPostcodeData(googleMaps, map, infoWindow) {
+  fetch(packedPostcodesPath)
+    .then(function(response) {
+      return response.json()
+    })
+    .then(function(json) {
+      addPackedPostcodeLayer(googleMaps, map, infoWindow, json)
+    })
+    .catch(function() {
+      alert('Sorry, we could not load the map. Please try again.')
+    })
+}
+
 function setUpMap(googleMaps) {
   const map = new googleMaps.Map(document.getElementById('my-eu-map'), {
     center: {
@@ -488,14 +727,13 @@ function setUpMap(googleMaps) {
 
   setUpSearchBox(googleMaps, map)
   addCapData(googleMaps, map, infoWindow)
-  addPointData(googleMaps, map, beneficiariesPath, infoWindow)
-  addPointData(googleMaps, map, cordisPath, infoWindow)
   addPointData(googleMaps, map, scotlandPath, infoWindow)
   addPointData(googleMaps, map, walesPath, infoWindow)
   addPointData(googleMaps, map, niPath, infoWindow)
   addPointData(googleMaps, map, creativePath, infoWindow)
   addPointData(googleMaps, map, fts2016Path, infoWindow)
   addPointData(googleMaps, map, fts2017Path, infoWindow)
+  addPostcodeData(googleMaps, map, infoWindow)
 }
 
 function setUpSearchBox(googleMaps, map) {

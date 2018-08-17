@@ -62,7 +62,7 @@ module.exports = {
       },
       {
         type: 'javascript/auto', // workaround for https://github.com/webpack/webpack/issues/6586
-        test: /\.geo\.json$/,
+        test: /\.(geo|data)\.json$/,
         use: [
           {
             loader: 'file-loader',
