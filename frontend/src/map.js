@@ -611,7 +611,9 @@ class InfoWrapper extends React.Component {
     console.log(this.state.postcodeData)
     if (this.state.postcodeData) return
     console.log(districtDataPath[this.props.outwardCode])
-    fetch(districtDataPath[this.props.outwardCode])
+    fetch(districtDataPath[this.props.outwardCode], {
+      credentials: 'same-origin'
+    })
       .then(response => response.json())
       .then(data => {
         dataCache[this.props.outwardCode] = data
@@ -697,7 +699,9 @@ function addPackedPostcodeLayer(googleMaps, map, infoWindow, data) {
 }
 
 function addPostcodeData(googleMaps, map, infoWindow) {
-  fetch(packedPostcodesPath)
+  fetch(packedPostcodesPath, {
+    credentials: 'same-origin'
+  })
     .then(function(response) {
       return response.json()
     })
