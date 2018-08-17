@@ -353,7 +353,7 @@ const CordisInfo = ({
 }) => {
   let lead
   if (ecContribution && totalCost && ecContribution <= totalCost) {
-    const displayEcContribution = formatRoundPounds(ecContribution)
+    const displayEcContribution = formatRoundEuros(ecContribution)
     const displayPercentage = formatRoundPercentage(ecContribution / totalCost)
     lead = (
       <p className="lead">
@@ -364,7 +364,7 @@ const CordisInfo = ({
       </p>
     )
   } else if (ecContribution) {
-    const displayEcContribution = formatRoundPounds(ecContribution)
+    const displayEcContribution = formatRoundEuros(ecContribution)
     lead = (
       <p className="lead">
         The EU provided {organisationName} with {displayEcContribution} to fund
