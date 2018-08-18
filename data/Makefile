@@ -5,7 +5,7 @@ OUTPUTS :=
 CLEAN := $(wildcard **/*.ipynb.html)
 
 # Include the description for each module.
-MODULES := postcodes cap cordis esif
+MODULES := postcodes cap cordis esif fts
 include $(patsubst %,%/module.mk,$(MODULES))
 
 # Run a jupyter notebook.

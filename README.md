@@ -112,3 +112,6 @@ http://duspviz.mit.edu/tutorials/intro-postgis/
 Post code area boundaries:
 https://www.freemaptools.com/download-uk-postcode-outcode-boundaries.htm
 (alternative: https://geolytix.co.uk/?postal_geom)
+
+Exchange rates:
+http://ec.europa.eu/budget/contracts_grants/info_contracts/inforeuro/index_en.cfm

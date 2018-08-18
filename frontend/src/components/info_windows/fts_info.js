@@ -5,9 +5,9 @@ import { formatRoundEuros } from './utilities'
 
 const FtsInfo = ({ feature }) => {
   let budgetLine = feature.getProperty('budget_line_name_and_number')
-  const benificiary = feature.getProperty('name_of_beneficiary')
-  const amount = feature.getProperty('Amount')
-  const year = feature.getProperty('Year')
+  const benificiary = feature.getProperty('beneficiary')
+  const amount = feature.getProperty('amount')
+  const year = feature.getProperty('year')
 
   const displayEuGrant = formatRoundEuros(amount)
 
