@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import ProjectStore from './project_store'
 import CordisInfo from '../info_windows/cordis_info'
 import EsifInfo from '../info_windows/esif_info'
+import Fts2016Info from '../info_windows/fts_2016_info'
 
 // TODO This may not be the right thing... may have to close and re-open the
 // popup, because otherwise it doesn't size properly.
@@ -13,6 +14,8 @@ function makeProjectInfo(data) {
     return <EsifInfo {...data} />
   } else if (data.dataset === 'cordis') {
     return <CordisInfo {...data} />
+  } else if (data.dataset === 'fts') {
+    return <Fts2016Info key={data.myEuId} {...data} />
   } else {
     return <div>TODO</div>
   }

@@ -21,7 +21,6 @@ import twttr from '../../social/twitter'
 import eusmallPath from '../../images/eusmall.png'
 
 import creativePath from '../../data/creative_data.geo.json'
-import fts2016Path from '../../data/fts2016_data.geo.json'
 import fts2017Path from '../../data/fts2017_data.geo.json'
 
 // TODO change styles when zoomed in?
@@ -103,7 +102,6 @@ function setUpMap(googleMaps) {
   setUpSearchBox(googleMaps, map)
   addCapData(googleMaps, map, infoWindow, updateInfoWindowContent)
   addPointData(googleMaps, map, creativePath, infoWindow)
-  addPointData(googleMaps, map, fts2016Path, infoWindow)
   addPointData(googleMaps, map, fts2017Path, infoWindow)
 
   addPackedPostcodeLayer(googleMaps, map)
