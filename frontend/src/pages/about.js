@@ -38,26 +38,59 @@ const About = () => (
         Fund (ERDF) and European Agricultural Fund for Rural Development
         (EAFRD). We got this data from separate datasets for:{' '}
       </p>
-        <p>
-        England, from <a href="https://www.gov.uk/government/publications/european-structural-and-investment-funds-useful-resources">
+      <p>
+        England, from{' '}
+        <a href="https://www.gov.uk/government/publications/european-structural-and-investment-funds-useful-resources">
           Gov.uk
-        </a> (Contains public sector information licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0.</a>)
-        ,{' '}
-        <br />
-        Scotland, from <a href="https://beta.gov.scot/publications/esif-operations-funding/">Gov.scot
-      </a> (Contains public sector information licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0.</a>)
-        ,{' '}
-        <br />Wales from <a href="https://gov.wales/funding/eu-funds/2014-2020/approved-projects/?lang=en">
+        </a>{' '}
+        (Contains public sector information licensed under the{' '}
+        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
+          Open Government Licence v3.0.
+        </a>
+        ) , <br />
+        Scotland, from{' '}
+        <a href="https://beta.gov.scot/publications/esif-operations-funding/">
+          Gov.scot
+        </a>{' '}
+        (Contains public sector information licensed under the{' '}
+        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
+          Open Government Licence v3.0.
+        </a>
+        ) , <br />
+        Wales from{' '}
+        <a href="https://gov.wales/funding/eu-funds/2014-2020/approved-projects/?lang=en">
           Gov.wales
-        </a> (Welsh Governement © <a href="https://gov.wales/copyright_statement/?lang=en">Crown copyright 2018</a> licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0.</a>){' '}
-        <br />Northern Ireland from <a href="https://www.economy-ni.gov.uk/esf">Department for the Economy NI</a> (Department for the Economy © <a href="https://www.economy-ni.gov.uk/crown-copyright">Crown copyright 2018</a> licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0.</a>).
+        </a>{' '}
+        (Welsh Governement ©{' '}
+        <a href="https://gov.wales/copyright_statement/?lang=en">
+          Crown copyright 2018
+        </a>{' '}
+        licensed under the{' '}
+        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
+          Open Government Licence v3.0.
+        </a>
+        ) <br />
+        Northern Ireland from{' '}
+        <a href="https://www.economy-ni.gov.uk/esf">
+          Department for the Economy NI
+        </a>{' '}
+        (Department for the Economy ©{' '}
+        <a href="https://www.economy-ni.gov.uk/crown-copyright">
+          Crown copyright 2018
+        </a>{' '}
+        licensed under the{' '}
+        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
+          Open Government Licence v3.0.
+        </a>
+        ).
       </p>
       <p>
         All funding direct from the EU budget centrally administered by the
         Commission from 2017 and 2016 from the{' '}
         <a href="http://ec.europa.eu/budget/fts/index_en.htm">
           Financial Transparency system
-        </a> (c) European Union, 1995-2018
+        </a>{' '}
+        (c) European Union, 1995-2018
       </p>
       <p>
         <a href="http://ec.europa.eu/programmes/creative-europe/projects/">
@@ -72,21 +105,29 @@ const About = () => (
           seventh framework programme for research and technological development
           (FP7)
         </a>{' '}
-        from 2007 to 2013 from the EU Open data portal. (c) European Union, 1995-2018
+        from 2007 to 2013 from the EU Open data portal. (c) European Union,
+        1995-2018
       </p>
       <p>
-        Common Agricultural Policy Funding data from 2015 from the {' '}
+        Common Agricultural Policy Funding data from 2015 from the{' '}
         <a href="http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/06307dc0-4dcb-4305-a3e2-a8fdeb2a2a25">
-        Detail Data Portal
-      </a> (licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0.</a>)
-        .
+          Detail Data Portal
+        </a>{' '}
+        (licensed under the{' '}
+        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
+          Open Government Licence v3.0.
+        </a>
+        ) .
       </p>
       <h2>What action can I take?</h2>
       <p>
         If you&apos;re interested in taking action off the back of this dataset,
         one thing you can do is email your MP to tell them your feelings.
-        Emailing your MP can really help. {' '}
-        <a href="https://www.bestforbritain.org/contact_your_mp">Contact your MP</a> and tell them how you feel.
+        Emailing your MP can really help.{' '}
+        <a href="https://www.bestforbritain.org/contact_your_mp">
+          Contact your MP
+        </a>{' '}
+        and tell them how you feel.
       </p>
     </div>
   </React.Fragment>

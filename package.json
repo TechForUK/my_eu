@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "eslint": "eslint data/utilities/*.js frontend/src/**.js",
-    "prettier": "prettier --write data/utilities/*.js frontend/src/**.js",
+    "prettier": "prettier --write data/utilities/*.js frontend/src/*.js frontend/src/**/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
