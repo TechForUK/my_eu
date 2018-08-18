@@ -5,6 +5,13 @@ OUTPUTS += $(ESIF_ENGLAND_OUTPUTS)
 esif/england_esif_clean.ipynb.html: esif/england_esif_clean.ipynb esif/input/**/* postcodes/input/**/*
 $(ESIF_ENGLAND_OUTPUTS): esif/england_esif_clean.ipynb.html
 
+ESIF_NI_OUTPUTS := esif/output/ni_data.geo.json \
+	esif/output/esif_ni.pkl.gz
+OUTPUTS += $(ESIF_NI_OUTPUTS)
+
+esif/ni_esif_clean.ipynb.html: esif/ni_esif_clean.ipynb esif/input/**/* postcodes/input/**/*
+$(ESIF_NI_OUTPUTS): esif/ni_esif_clean.ipynb.html
+
 ESIF_SCOTLAND_OUTPUTS := esif/output/scotland_data.geo.json \
 	esif/output/esif_scotland.pkl.gz
 OUTPUTS += $(ESIF_SCOTLAND_OUTPUTS)

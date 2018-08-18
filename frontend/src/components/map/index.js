@@ -5,7 +5,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactGA from 'react-ga'
 
-
 import addCapData from './cap_data'
 import InfoWrapper from './info_wrapper'
 import mapStyles from './map_styles'
@@ -21,7 +20,6 @@ import twttr from '../../social/twitter'
 
 import eusmallPath from '../../images/eusmall.png'
 
-import niPath from '../../data/ni_data.geo.json'
 import creativePath from '../../data/creative_data.geo.json'
 import fts2016Path from '../../data/fts2016_data.geo.json'
 import fts2017Path from '../../data/fts2017_data.geo.json'
@@ -48,10 +46,7 @@ function updateInfoWindowContent(map, infoWindow, component) {
 }
 
 function makePointInfoWindow(feature) {
-  if (feature.getProperty('Total Eligible Project Cost')) {
-    // niData
-    return <GenericInfo feature={feature} />
-  } else if (
+  if (
     feature.getProperty(
       "EU Grant award in euros (This amount represents the grant awarded after the selection stage and is indicative. Please note that any changes made during or after the project's lifetime will not be reflected here.)"
     )
@@ -107,7 +102,6 @@ function setUpMap(googleMaps) {
 
   setUpSearchBox(googleMaps, map)
   addCapData(googleMaps, map, infoWindow, updateInfoWindowContent)
-  addPointData(googleMaps, map, niPath, infoWindow)
   addPointData(googleMaps, map, creativePath, infoWindow)
   addPointData(googleMaps, map, fts2016Path, infoWindow)
   addPointData(googleMaps, map, fts2017Path, infoWindow)
@@ -129,7 +123,7 @@ function setUpMap(googleMaps) {
         ReactGA.event({
           category: 'Map',
           action: 'Clicked Popup'
-});
+        })
       })
     })
     .catch(function() {

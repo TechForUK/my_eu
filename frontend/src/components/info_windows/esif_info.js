@@ -37,10 +37,20 @@ const EsifInfo = ({
     )
   }
 
+  let summarySection
+  if (summary)
+    summarySection = (
+      <React.Fragment>
+        <h4>Summary</h4>
+        <p>{summary}</p>
+      </React.Fragment>
+    )
+
   return (
     <div>
       <h3>{projectTitle}</h3>
       {lead}
+      {summarySection}
       <p>
         The EU supported this project through its European Structural and
         Investment Funds, which are the EU&apos;s main funding programmes for
