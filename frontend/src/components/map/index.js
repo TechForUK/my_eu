@@ -3,6 +3,8 @@
 import $ from 'jquery'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import ReactGA from 'react-ga'
+
 
 import addCapData from './cap_data'
 import InfoWrapper from './info_wrapper'
@@ -129,6 +131,10 @@ function setUpMap(googleMaps) {
           infoWindow,
           makeAsyncPointInfoWindow(feature)
         )
+        ReactGA.event({
+          category: 'Map',
+          action: 'Clicked Popup'
+});
       })
     })
     .catch(function() {
