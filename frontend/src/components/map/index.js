@@ -21,7 +21,6 @@ import twttr from '../../social/twitter'
 
 import eusmallPath from '../../images/eusmall.png'
 
-import walesPath from '../../data/wales_data.geo.json'
 import niPath from '../../data/ni_data.geo.json'
 import creativePath from '../../data/creative_data.geo.json'
 import fts2016Path from '../../data/fts2016_data.geo.json'
@@ -49,10 +48,7 @@ function updateInfoWindowContent(map, infoWindow, component) {
 }
 
 function makePointInfoWindow(feature) {
-  if (feature.getProperty('EU funds awarded')) {
-    // walesPath, walesEduPath
-    return <GenericInfo feature={feature} />
-  } else if (feature.getProperty('Total Eligible Project Cost')) {
+  if (feature.getProperty('Total Eligible Project Cost')) {
     // niData
     return <GenericInfo feature={feature} />
   } else if (
@@ -111,7 +107,6 @@ function setUpMap(googleMaps) {
 
   setUpSearchBox(googleMaps, map)
   addCapData(googleMaps, map, infoWindow, updateInfoWindowContent)
-  addPointData(googleMaps, map, walesPath, infoWindow)
   addPointData(googleMaps, map, niPath, infoWindow)
   addPointData(googleMaps, map, creativePath, infoWindow)
   addPointData(googleMaps, map, fts2016Path, infoWindow)
