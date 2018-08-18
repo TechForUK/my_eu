@@ -5,6 +5,9 @@ import ProjectStore from './project_store'
 import CordisInfo from '../info_windows/cordis_info'
 import EsifInfo from '../info_windows/esif_info'
 
+// TODO This may not be the right thing... may have to close and re-open the
+// popup, because otherwise it doesn't size properly.
+
 function makeProjectInfo(data) {
   if (data.dataset === 'esif') {
     return <EsifInfo {...data} />
