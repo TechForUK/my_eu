@@ -26,6 +26,7 @@ const Page = ({ path, scripts, stylesheets }) => {
       {stylesheets.map(path => (
         <Link key={path} rel="stylesheet" type="text/css" href={path} />
       ))}
+      <Link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
       <StaticRouter location={path} context={staticContext}>
         <Switch>
           <Route exact path="/">

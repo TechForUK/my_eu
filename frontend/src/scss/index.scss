@@ -18,6 +18,49 @@
   }
 }
 
+.respond-group{
+  margin-bottom: 5px;
+  font-size: 15px;
+
+}
+
+.btn-contact{
+  border-radius: 18px;
+  background-color: white;
+  color: #007bff;
+  border: 2px solid #007bff;
+  margin-bottom: 5px;
+  margin-right: 2px;
+
+}
+.btn-contact:hover{
+  border-radius: 18px;
+  background-color: #007bff;
+  color: white;
+  margin-bottom: 5px;
+  margin-right: 2px;
+  border: 2px solid #007bff;
+
+}
+  .btn-social{
+    border-radius: 50%;
+    background-color: white;
+    color: #007bff;
+    border: 2px solid #007bff;
+    margin-bottom: 5px;
+    margin-right: 3px;
+
+  }
+  .btn-social:hover{
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    margin-bottom: 5px;
+    margin-right: 3px;
+    border: 2px solid #007bff;
+}
+
+
 @media only screen and (min-width: 768px) {
   html,
   body {
