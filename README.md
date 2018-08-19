@@ -4,7 +4,11 @@
 
 ### Requirements
 
-We recommend using Python 3 with anaconda.
+We recommend using Python 3 with anaconda. There are also non-conda dependencies to install with pip:
+
+```
+pip install -r requirements.txt
+```
 
 To avoid committing the output of IPython notebooks, which can be very large and make diffs hard to read, please install [nbstripout](https://github.com/kynan/nbstripout) as a git filter.
 
