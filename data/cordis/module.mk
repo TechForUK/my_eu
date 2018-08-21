@@ -1,4 +1,4 @@
-CORDIS_OUTPUTS := cordis/output/cordis_data.geo.json \
+CORDIS_OUTPUTS := \
 	cordis/output/fp7_organizations.pkl.gz \
 	cordis/output/fp7_projects.pkl.gz
 OUTPUTS += $(CORDIS_OUTPUTS)
