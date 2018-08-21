@@ -116,9 +116,10 @@ function setUpMap(googleMaps) {
           infoWindow,
           makeAsyncPointInfoWindow(feature)
         )
+
         ReactGA.event({
           category: 'Map',
-          action: 'Clicked Popup'
+          action: 'Search'
         })
       })
     })

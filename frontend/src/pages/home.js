@@ -5,7 +5,7 @@ import App from './components/app'
 
 const Home = () => (
   <React.Fragment>
-    <Title>MyEU.UK</Title>
+    <Title>myeu.uk</Title>
     <Meta property="og:type" content="article" />
     <Meta
       property="og:description"

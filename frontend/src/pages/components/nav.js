@@ -25,7 +25,7 @@ const Nav = ({ path }) => {
           className="d-inline-block align-top"
           alt="MyEU.UK Logo"
         />
-        &nbsp;MyEU.UK
+        &nbsp;myeu.uk
       </a>
       <ul className="navbar-nav">
         {backToMap}
@@ -34,7 +34,7 @@ const Nav = ({ path }) => {
             className={classNames('nav-link', { active: path === '/about/' })}
             href="/about/"
           >
-            About
+            about
           </a>
         </li>
       </ul>
