@@ -11,16 +11,10 @@ import mapStyles from './map_styles'
 import addPackedPostcodeLayer from './packed_postcodes'
 import setUpSearchBox from './search_box'
 
-import CreativeInfo from '../info_windows/creative_info'
-import FtsInfo from '../info_windows/fts_info'
-import GenericInfo from '../info_windows/generic_info'
-
 import loadGoogleMapsApi from '../../load_google_maps_api'
 import twttr from '../../social/twitter'
 
 import eusmallPath from '../../images/eusmall.png'
-
-import fts2017Path from '../../data/fts2017_data.geo.json'
 
 // TODO change styles when zoomed in?
 // https://stackoverflow.com/questions/3121400/google-maps-v3-how-to-change-the-map-style-based-on-zoom-level
@@ -41,34 +35,6 @@ function updateInfoWindowContent(map, infoWindow, component) {
   infoWindow.setContent(container)
   infoWindow.open(map)
   twttr.widgets.load(container)
-}
-
-function makePointInfoWindow(feature) {
-  if (
-    feature.getProperty(
-      "EU Grant award in euros (This amount represents the grant awarded after the selection stage and is indicative. Please note that any changes made during or after the project's lifetime will not be reflected here.)"
-    )
-  ) {
-    // creative europe data
-    return <CreativeInfo feature={feature} />
-  } else if (feature.getProperty('budget_line_name_and_number')) {
-    // creative europe data
-    return <FtsInfo feature={feature} />
-  }
-  return <GenericInfo feature={feature} />
-}
-
-function addPointData(googleMaps, map, path, infoWindow) {
-  const layer = new googleMaps.Data({ map })
-  layer.loadGeoJson(path)
-  layer.setStyle(function(feature) {
-    return { icon: eusmallPath }
-  })
-  layer.addListener('click', function(event) {
-    const feature = event.feature
-    infoWindow.setPosition(feature.getGeometry().get())
-    updateInfoWindowContent(map, infoWindow, makePointInfoWindow(feature))
-  })
 }
 
 function makeAsyncPointInfoWindow(feature) {
@@ -100,7 +66,6 @@ function setUpMap(googleMaps) {
 
   setUpSearchBox(googleMaps, map)
   addCapData(googleMaps, map, infoWindow, updateInfoWindowContent)
-  addPointData(googleMaps, map, fts2017Path, infoWindow)
 
   addPackedPostcodeLayer(googleMaps, map)
     .then(function(layer) {

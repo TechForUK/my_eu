@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { formatRoundPercentage, formatRoundEuros } from './utilities'
+import { formatRoundPercentage, formatRoundPounds } from './utilities'
 
 const CordisInfo = ({
   projectTitle,
   organisationName,
   objective,
-  ecContribution,
+  contribution,
   totalCost,
   acronym,
   briefTitle,
@@ -15,12 +15,12 @@ const CordisInfo = ({
   article,
   projectUrl,
   organizationUrl,
-  imageUrl
+  imagePath
 }) => {
   let lead
-  if (ecContribution && totalCost && ecContribution <= totalCost) {
-    const displayEcContribution = formatRoundEuros(ecContribution)
-    const displayPercentage = formatRoundPercentage(ecContribution / totalCost)
+  if (contribution && totalCost && contribution <= totalCost) {
+    const displayEcContribution = formatRoundPounds(contribution)
+    const displayPercentage = formatRoundPercentage(contribution / totalCost)
     lead = (
       <p className="lead">
         The EU provided {organisationName} with {displayEcContribution} to fund{' '}
@@ -29,8 +29,8 @@ const CordisInfo = ({
         &quot; research project.
       </p>
     )
-  } else if (ecContribution) {
-    const displayEcContribution = formatRoundEuros(ecContribution)
+  } else if (contribution) {
+    const displayEcContribution = formatRoundPounds(contribution)
     lead = (
       <p className="lead">
         The EU provided {organisationName} with {displayEcContribution} to fund
@@ -70,7 +70,7 @@ CordisInfo.propTypes = {
   projectTitle: PropTypes.string,
   organisationName: PropTypes.string,
   objective: PropTypes.string,
-  ecContribution: PropTypes.number,
+  contribution: PropTypes.number,
   totalCost: PropTypes.number,
   acronym: PropTypes.string,
   briefTitle: PropTypes.string,
@@ -78,7 +78,7 @@ CordisInfo.propTypes = {
   article: PropTypes.string,
   projectUrl: PropTypes.string,
   organizationUrl: PropTypes.string,
-  imageUrl: PropTypes.string
+  imagePath: PropTypes.string
 }
 
 export default CordisInfo

@@ -1,16 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { formatRoundEuros } from './utilities'
+import { formatRoundPounds } from './utilities'
 
 const CreativeInfo = ({
   project,
   organisationName,
-  euInvestment,
+  maxContribution,
   organisationWebsite,
   coordinatorName
 }) => {
-  const displayEuGrant = formatRoundEuros(euInvestment)
+  const displayEuGrant = formatRoundPounds(maxContribution)
 
   let website
   if (organisationWebsite) {
@@ -52,7 +52,7 @@ const CreativeInfo = ({
 CreativeInfo.propTypes = {
   project: PropTypes.string,
   organisationName: PropTypes.string,
-  euInvestment: PropTypes.number,
+  maxContribution: PropTypes.number,
   organisationWebsite: PropTypes.string,
   coordinatorName: PropTypes.string
 }

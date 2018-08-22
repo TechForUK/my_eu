@@ -1,28 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { formatRoundEuros } from './utilities'
+import { formatRoundPounds } from './utilities'
 
-const FtsInfo = ({ feature }) => {
-  let budgetLine = feature.getProperty('budget_line_name_and_number')
-  const benificiary = feature.getProperty('name_of_beneficiary')
-  const amount = feature.getProperty('Amount')
-  const year = feature.getProperty('Year')
-
-  const displayEuGrant = formatRoundEuros(amount)
+const FtsInfo = ({
+  myEuId,
+  beneficiary,
+  amount,
+  budgetLineNameAndNumber,
+  year
+}) => {
+  const displayEuGrant = formatRoundPounds(amount)
 
   let lead
 
   lead = (
     <p className="lead">
-      In {year}, the EU provided {benificiary} {displayEuGrant} as part of the{' '}
-      {budgetLine} programme.
+      In {year}, the EU provided {beneficiary} {displayEuGrant} as part of the{' '}
+      {budgetLineNameAndNumber} programme.
     </p>
   )
 
   return (
-    <div className="my-eu-info-window">
-      <h2>{benificiary}</h2>
+    <div>
+      <h2>{beneficiary}</h2>
       {lead}
       <p>
         This grant was from the EU budget centrally administered by the
@@ -36,7 +37,11 @@ const FtsInfo = ({ feature }) => {
 }
 
 FtsInfo.propTypes = {
-  feature: PropTypes.object
+  myEuId: PropTypes.string,
+  beneficiary: PropTypes.string,
+  amount: PropTypes.number,
+  budgetLineNameAndNumber: PropTypes.string,
+  year: PropTypes.number
 }
 
 export default FtsInfo

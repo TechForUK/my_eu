@@ -5,20 +5,20 @@ import ProjectStore from './project_store'
 import CordisInfo from '../info_windows/cordis_info'
 import CreativeInfo from '../info_windows/creative_info'
 import EsifInfo from '../info_windows/esif_info'
-import Fts2016Info from '../info_windows/fts_2016_info'
+import FtsInfo from '../info_windows/fts_info'
 
 // TODO This may not be the right thing... may have to close and re-open the
 // popup, because otherwise it doesn't size properly.
 
 function makeProjectInfo(data) {
   if (data.dataset === 'esif') {
-    return <EsifInfo {...data} />
+    return <EsifInfo key={data.myEuId} {...data} />
   } else if (data.dataset === 'cordis') {
-    return <CordisInfo {...data} />
+    return <CordisInfo key={data.myEuId} {...data} />
   } else if (data.dataset === 'creative') {
-    return <CreativeInfo {...data} />
+    return <CreativeInfo key={data.myEuId} {...data} />
   } else if (data.dataset === 'fts') {
-    return <Fts2016Info key={data.myEuId} {...data} />
+    return <FtsInfo key={data.myEuId} {...data} />
   } else {
     return <div>TODO</div>
   }
