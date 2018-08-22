@@ -10,7 +10,7 @@ include $(patsubst %,%/module.mk,$(MODULES))
 
 # Run a jupyter notebook.
 %.ipynb.html: %.ipynb
-	jupyter nbconvert --execute --output=$(notdir $<).html $<
+	jupyter nbconvert --execute --ExecutePreprocessor.timeout=180 --output=$(notdir $<).html $<
 
 .PHONY: outputs
 outputs: $(OUTPUTS)
