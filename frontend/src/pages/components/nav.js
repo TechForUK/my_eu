@@ -25,7 +25,7 @@ const Nav = ({ path }) => {
           className="d-inline-block align-top"
           alt="MyEU.UK Logo"
         />
-        &nbsp;myeu.uk
+        &nbsp;<div className="logo">myeu.uk</div>
       </a>
       <ul className="navbar-nav">
         {backToMap}

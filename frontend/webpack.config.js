@@ -82,6 +82,10 @@ module.exports = {
             options: { minimize: true }
           }
         ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf)$/,
+        loader: 'url-loader?limit=100000'
       }
     ]
   },

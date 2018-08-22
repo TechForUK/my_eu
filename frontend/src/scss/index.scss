@@ -1,5 +1,28 @@
 @import 'custom';
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+@font-face {
+    font-family: 'bariolregular';
+    src: url('bariol/bariol_regular-webfont.eot');
+    src: url('bariol/bariol_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('bariol/bariol_regular-webfont.woff2') format('woff2'),
+         url('bariol/bariol_regular-webfont.woff') format('woff'),
+         url('bariol/bariol_regular-webfont.ttf') format('truetype'),
+         url('bariol/bariol_regular-webfont.svg#bariolregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.logo{
+
+ font-family: 'bariolregular';
+}
 
 .my-eu-info-window {
   margin-top: 5px;
@@ -15,6 +38,7 @@
 
   p {
     margin-bottom: 0.75rem;
+
   }
 }
 
@@ -76,6 +100,7 @@
     }
   }
 }
+
 
 @media only screen and (max-width: 768px) {
   #my-eu-map {
