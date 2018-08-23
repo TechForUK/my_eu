@@ -3,25 +3,24 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 @font-face {
-    font-family: 'bariolregular';
-    src: url('bariol/bariol_regular-webfont.eot');
-    src: url('bariol/bariol_regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('bariol/bariol_regular-webfont.woff2') format('woff2'),
-         url('bariol/bariol_regular-webfont.woff') format('woff'),
-         url('bariol/bariol_regular-webfont.ttf') format('truetype'),
-         url('bariol/bariol_regular-webfont.svg#bariolregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: 'bariolregular';
+  src: url('bariol/bariol_regular-webfont.eot');
+  src: url('bariol/bariol_regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('bariol/bariol_regular-webfont.woff2') format('woff2'),
+    url('bariol/bariol_regular-webfont.woff') format('woff'),
+    url('bariol/bariol_regular-webfont.ttf') format('truetype'),
+    url('bariol/bariol_regular-webfont.svg#bariolregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
-body{
-    font-family: 'Source Sans Pro', sans-serif;
+body {
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
-.logo{
-
- font-family: 'bariolregular';
+.logo {
+  font-family: 'bariolregular';
 }
 
 .my-eu-info-window {
@@ -38,52 +37,46 @@ body{
 
   p {
     margin-bottom: 0.75rem;
-
   }
 }
 
-.respond-group{
+.respond-group {
   margin-bottom: 5px;
   font-size: 15px;
-
 }
 
-.btn-contact{
+.btn-contact {
   border-radius: 18px;
   background-color: white;
   color: #007bff;
   border: 2px solid #007bff;
   margin-bottom: 5px;
   margin-right: 2px;
-
 }
-.btn-contact:hover{
+.btn-contact:hover {
   border-radius: 18px;
   background-color: #007bff;
   color: white;
   margin-bottom: 5px;
   margin-right: 2px;
   border: 2px solid #007bff;
-
 }
-  .btn-social{
-    border-radius: 50%;
-    background-color: white;
-    color: #007bff;
-    border: 2px solid #007bff;
-    margin-bottom: 5px;
-    margin-right: 3px;
-
-  }
-  .btn-social:hover{
-    border-radius: 50%;
-    background-color: #007bff;
-    color: white;
-    margin-bottom: 5px;
-    margin-right: 3px;
-    border: 2px solid #007bff;
+.btn-social {
+  border-radius: 50%;
+  background-color: white;
+  color: #007bff;
+  border: 2px solid #007bff;
+  margin-bottom: 5px;
+  margin-right: 3px;
 }
-
+.btn-social:hover {
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  margin-bottom: 5px;
+  margin-right: 3px;
+  border: 2px solid #007bff;
+}
 
 @media only screen and (min-width: 768px) {
   html,
@@ -100,7 +93,6 @@ body{
     }
   }
 }
-
 
 @media only screen and (max-width: 768px) {
   #my-eu-map {
