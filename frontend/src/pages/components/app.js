@@ -11,7 +11,7 @@ const App = () => {
           <div className="row">
             <div className="col-md-12">
               <h1>What has the EU done for your area?</h1>
-              <form>
+              <form id="my-eu-search-form">
                 <div className="form-group">
                   <label htmlFor="my-eu-search-box">
                     The EU invests around{' '}
@@ -28,7 +28,11 @@ const App = () => {
                       placeholder="e.g. SW1A 1AA"
                     />
                     <div className="input-group-append">
-                      <span className="input-group-text">&#x1f50d;</span>
+                      <input
+                        className="btn btn-outline-primary"
+                        type="submit"
+                        value="&#x1f50d;"
+                      />
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 /* global alert */
 
 export default function setUpSearchBox(googleMaps, map) {
+  const form = document.getElementById('my-eu-search-form')
   const input = document.getElementById('my-eu-search-box')
   const autocompleteOptions = {
     types: ['geocode'],
@@ -12,29 +13,39 @@ export default function setUpSearchBox(googleMaps, map) {
   )
 
   // Only return fields we need, to avoid paying lots of money.
-  const autocompleteFields = ['geometry', 'formatted_address', 'icon']
-  autocomplete.setFields(autocompleteFields)
+  const fields = ['geometry', 'formatted_address', 'icon']
+  autocomplete.setFields(fields)
 
   // Bias the results toward the current view.
   autocomplete.bindTo('bounds', map)
 
-  // Don't submit the form if the user presses enter.
-  googleMaps.event.addDomListener(input, 'keydown', function(event) {
-    if (event.keyCode === 13) {
-      event.preventDefault()
-    }
-  })
-
-  let marker = null
+  // If the user presses enter or clicks the submit button, the place doesn't
+  // get picked up from the fancy dropdown, so we need extra logic.
+  //
+  // 1. Happy path: user types in query, selects from dropdown. The
+  // place_changed event fires. The geometry is present. The submit event does
+  // not fire. All is well.
+  //
+  // 2. User types in query and presses enter. The place_changed event fires,
+  // but there is no geometry. The form submit fires, and we look up the user's
+  // query using the AutocompleteService and then find it with the
+  // PlacesService.
+  //
+  // 3. User types in query and then clicks the submit button. The place_changed
+  // event does not fire. The submit event does fire, and we proceed as in (2).
+  //
+  // Approach for (2-3) based on https://stackoverflow.com/a/28100636/2053820
   autocomplete.addListener('place_changed', function() {
     const place = autocomplete.getPlace()
-    if (place.geometry) {
-      markPlace(place)
-    } else {
-      lookUpPlacePrediction(place)
-    }
+    if (place.geometry) markPlace(place)
   })
 
+  form.onsubmit = function handleSearchFormSubmit(event) {
+    findPlaceName(input.value)
+    return false
+  }
+
+  let marker = null
   function markPlace(place) {
     // Clear out the old marker.
     if (marker) {
@@ -74,20 +85,17 @@ export default function setUpSearchBox(googleMaps, map) {
     }
   }
 
-  // User pressed enter, which doesn't complete the address. Use the
-  // autocomplete service to try to find what they wanted.
-  // Based on https://stackoverflow.com/a/28100636/2053820
-  function lookUpPlacePrediction(place) {
+  function findPlaceName(name) {
     const autocompleteService = new googleMaps.places.AutocompleteService()
     const placePredictionOptions = Object.assign({}, autocompleteOptions, {
-      input: place.name,
-      offset: place.name.length
+      input: name,
+      offset: name.length
     })
     autocompleteService.getPlacePredictions(
       placePredictionOptions,
       function receivePlacePredictions(list, _status) {
         if (list && list.length > 0) {
-          markPlacePrediction(list[0])
+          markFoundPlace(list[0].place_id)
         } else {
           showNotFoundError()
         }
@@ -95,18 +103,18 @@ export default function setUpSearchBox(googleMaps, map) {
     )
   }
 
-  function markPlacePrediction(prediction) {
+  function markFoundPlace(placeId) {
     const placesService = new googleMaps.places.PlacesService(map)
-    placesService.getDetails(
-      { fields: autocompleteFields, placeId: prediction.place_id },
-      function receivePlaceDetails(place, _status) {
-        if (place && place.geometry) {
-          markPlace(place)
-        } else {
-          showNotFoundError()
-        }
+    placesService.getDetails({ fields, placeId }, function receivePlaceDetails(
+      place,
+      _status
+    ) {
+      if (place && place.geometry) {
+        markPlace(place)
+      } else {
+        showNotFoundError()
       }
-    )
+    })
   }
 
   function showNotFoundError() {
