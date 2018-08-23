@@ -1,37 +1,52 @@
 /* global alert */
 
 export default function setUpSearchBox(googleMaps, map) {
+  const form = document.getElementById('my-eu-search-form')
   const input = document.getElementById('my-eu-search-box')
-  const autocomplete = new googleMaps.places.Autocomplete(input, {
+  const autocompleteOptions = {
     types: ['geocode'],
     componentRestrictions: { country: ['UK'] }
-  })
+  }
+  const autocomplete = new googleMaps.places.Autocomplete(
+    input,
+    autocompleteOptions
+  )
 
   // Only return fields we need, to avoid paying lots of money.
-  autocomplete.setFields(['geometry', 'formatted_address', 'icon'])
+  const fields = ['geometry', 'formatted_address', 'icon']
+  autocomplete.setFields(fields)
 
   // Bias the results toward the current view.
   autocomplete.bindTo('bounds', map)
 
-  // TODO better hacks: https://stackoverflow.com/a/28100636/2053820
-  // but might still want the below to prevent a form submit... but then again
-  // maybe just block the form submit more directly.
-
-  // Don't submit the form if the user presses enter.
-  googleMaps.event.addDomListener(input, 'keydown', function(event) {
-    if (event.keyCode === 13) {
-      event.preventDefault()
-    }
-  })
-
-  let marker = null
+  // If the user presses enter or clicks the submit button, the place doesn't
+  // get picked up from the fancy dropdown, so we need extra logic.
+  //
+  // 1. Happy path: user types in query, selects from dropdown. The
+  // place_changed event fires. The geometry is present. The submit event does
+  // not fire. All is well.
+  //
+  // 2. User types in query and presses enter. The place_changed event fires,
+  // but there is no geometry. The form submit fires, and we look up the user's
+  // query using the AutocompleteService and then find it with the
+  // PlacesService.
+  //
+  // 3. User types in query and then clicks the submit button. The place_changed
+  // event does not fire. The submit event does fire, and we proceed as in (2).
+  //
+  // Approach for (2-3) based on https://stackoverflow.com/a/28100636/2053820
   autocomplete.addListener('place_changed', function() {
     const place = autocomplete.getPlace()
-    if (!place.geometry) {
-      alert("Sorry, we couldn't find that place. Please try again.")
-      return
-    }
+    if (place.geometry) markPlace(place)
+  })
 
+  form.onsubmit = function handleSearchFormSubmit(event) {
+    findPlaceName(input.value)
+    return false
+  }
+
+  let marker = null
+  function markPlace(place) {
     // Clear out the old marker.
     if (marker) {
       marker.setMap(null)
@@ -68,5 +83,41 @@ export default function setUpSearchBox(googleMaps, map) {
     if (map.getZoom() > 12) {
       map.setZoom(12)
     }
-  })
+  }
+
+  function findPlaceName(name) {
+    const autocompleteService = new googleMaps.places.AutocompleteService()
+    const placePredictionOptions = Object.assign({}, autocompleteOptions, {
+      input: name,
+      offset: name.length
+    })
+    autocompleteService.getPlacePredictions(
+      placePredictionOptions,
+      function receivePlacePredictions(list, _status) {
+        if (list && list.length > 0) {
+          markFoundPlace(list[0].place_id)
+        } else {
+          showNotFoundError()
+        }
+      }
+    )
+  }
+
+  function markFoundPlace(placeId) {
+    const placesService = new googleMaps.places.PlacesService(map)
+    placesService.getDetails({ fields, placeId }, function receivePlaceDetails(
+      place,
+      _status
+    ) {
+      if (place && place.geometry) {
+        markPlace(place)
+      } else {
+        showNotFoundError()
+      }
+    })
+  }
+
+  function showNotFoundError() {
+    alert("Sorry, we couldn't find that place. Please try again.")
+  }
 }
