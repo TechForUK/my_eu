@@ -7,8 +7,10 @@ import ReactGA from 'react-ga'
 
 import addCapData from './cap_data'
 import InfoWrapper from './info_wrapper'
+import LoadingInfo from './loading_info'
 import mapStyles from './map_styles'
 import addPackedPostcodeLayer from './packed_postcodes'
+import ProjectStore from './project_store'
 import setUpSearchBox from './search_box'
 
 import loadGoogleMapsApi from '../../load_google_maps_api'
@@ -18,6 +20,8 @@ import eusmallPath from '../../images/eusmall.png'
 
 // TODO change styles when zoomed in?
 // https://stackoverflow.com/questions/3121400/google-maps-v3-how-to-change-the-map-style-based-on-zoom-level
+
+const projectStore = new ProjectStore()
 
 function updateInfoWindowContent(map, infoWindow, component) {
   // Clean up previous window, if any.
@@ -45,6 +49,34 @@ function makeAsyncPointInfoWindow(feature) {
       postcode={feature.getId()}
     />
   )
+}
+
+function showProjectInfoWindow(map, infoWindow, feature) {
+  const outwardCode = feature.getProperty('outwardCode')
+  const inwardCode = feature.getProperty('inwardCode')
+  const postcode = feature.getId()
+  let projects = projectStore.lookup(outwardCode, inwardCode)
+  if (projects) {
+    updateInfoWindowContent(
+      map,
+      infoWindow,
+      <InfoWrapper postcode={postcode} projects={projects} />
+    )
+  } else {
+    updateInfoWindowContent(
+      map,
+      infoWindow,
+      <LoadingInfo postcode={postcode} />
+    )
+    projectStore.load(outwardCode).then(function() {
+      projects = projectStore.lookup(outwardCode, inwardCode)
+      updateInfoWindowContent(
+        map,
+        infoWindow,
+        <InfoWrapper postcode={postcode} projects={projects} />
+      )
+    })
+  }
 }
 
 function setUpMap(googleMaps) {
@@ -76,11 +108,7 @@ function setUpMap(googleMaps) {
       layer.addListener('click', function(event) {
         const feature = event.feature
         infoWindow.setPosition(feature.getGeometry().get())
-        updateInfoWindowContent(
-          map,
-          infoWindow,
-          makeAsyncPointInfoWindow(feature)
-        )
+        showProjectInfoWindow(map, infoWindow, feature)
 
         ReactGA.event({
           category: 'Map',
