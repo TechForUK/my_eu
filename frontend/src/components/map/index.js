@@ -41,16 +41,6 @@ function updateInfoWindowContent(map, infoWindow, component) {
   twttr.widgets.load(container)
 }
 
-function makeAsyncPointInfoWindow(feature) {
-  return (
-    <InfoWrapper
-      outwardCode={feature.getProperty('outwardCode')}
-      inwardCode={feature.getProperty('inwardCode')}
-      postcode={feature.getId()}
-    />
-  )
-}
-
 function showProjectInfoWindow(map, infoWindow, feature) {
   const outwardCode = feature.getProperty('outwardCode')
   const inwardCode = feature.getProperty('inwardCode')
