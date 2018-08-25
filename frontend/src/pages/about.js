@@ -106,13 +106,11 @@ const About = () => (
           seventh framework programme for research and technological development
           (FP7)
         </a>{' '}
-        from 2007 to 2013 and
-        {' '}
+        from 2007 to 2013 and{' '}
         <a href="https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects">
           Horizon 2020
-        </a>{' '}from 2014 to 2020 
-
-        from the EU Open data portal. (c) European Union,
+        </a>{' '}
+        from 2014 to 2020 from the EU Open data portal. (c) European Union,
         1995-2018
       </p>
       <p>
@@ -120,39 +118,39 @@ const About = () => (
         <a href="http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/06307dc0-4dcb-4305-a3e2-a8fdeb2a2a25">
           2015
         </a>{' '}
-        and
-        {' '}
+        and{' '}
         <a href="http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/e153b560-7538-442b-b3ab-a40bf4adf576">
           2014
-        </a>{' '} and from
-        {' '}
-        <a href="http://cap-payments.defra.gov.uk/Download.aspx">
-          DEFRA
-        </a>{' '} for 2016 and 2017
-
-
-        (both licensed under the{' '}
+        </a>{' '}
+        and from{' '}
+        <a href="http://cap-payments.defra.gov.uk/Download.aspx">DEFRA</a> for
+        2016 and 2017 (both licensed under the{' '}
         <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
           Open Government Licence v3.0.
         </a>
         ) .
       </p>
-      <p>Postcode data from {' '}
-      <a href="https://www.freemaptools.com/download-uk-postcode-lat-lng.htm">
-  FreeMapTools
-</a>{' '}. Postcode data contains Ordnance Survey data © Crown copyright and database right 2017, contains Royal Mail data © Royal Mail copyright and database right 2017 and contains National Statistics data © Crown copyright and database right 2017
-</p>
-<p>
-  {' '}
- <a href="https://grid.ac/">
-Global Research Identifier Database (GRID)
- </a>{' '}
-   from Digital Science, shared under the
-  {' '}
-  <a href="https://creativecommons.org/publicdomain/zero/1.0/">
-Creative Commons Public Domain 1.0 International licence
-</a>{' '}.
-</p>
+      <p>
+        Postcode data from{' '}
+        <a href="https://www.freemaptools.com/download-uk-postcode-lat-lng.htm">
+          FreeMapTools
+        </a>{' '}
+        . Postcode data contains Ordnance Survey data © Crown copyright and
+        database right 2017, contains Royal Mail data © Royal Mail copyright and
+        database right 2017 and contains National Statistics data © Crown
+        copyright and database right 2017
+      </p>
+      <p>
+        {' '}
+        <a href="https://grid.ac/">
+          Global Research Identifier Database (GRID)
+        </a>{' '}
+        from Digital Science, shared under the{' '}
+        <a href="https://creativecommons.org/publicdomain/zero/1.0/">
+          Creative Commons Public Domain 1.0 International licence
+        </a>{' '}
+        .
+      </p>
       <h2>What action can I take?</h2>
       <p>
         If you&apos;re interested in taking action off the back of this dataset,
