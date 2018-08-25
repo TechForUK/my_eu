@@ -54,7 +54,10 @@ function setUpClusterer(googleMaps, map, markers) {
       height: size
     }
   })
-  const markerClusterer = new MarkerClusterer(map, markers, { styles })
+  const markerClusterer = new MarkerClusterer(map, markers, {
+    maxZoom: 14, // can't be much lower and still see London
+    styles
+  })
   markerClusterer.setCalculator(function calculator(markers, numStyles) {
     let total = 0
     for (let marker of markers) total += marker.myEu.amount

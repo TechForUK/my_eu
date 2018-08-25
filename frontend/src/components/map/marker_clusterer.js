@@ -180,7 +180,7 @@ function MarkerClusterer(map, opt_markers, opt_options) {
   })
 
   // Finally, add the markers
-  if (opt_markers && (opt_markers.length || Object.keys(opt_markers).length)) {
+  if (opt_markers && opt_markers.length) {
     this.addMarkers(opt_markers, false)
   }
 }
@@ -391,10 +391,6 @@ MarkerClusterer.prototype.addMarkers = function(markers, opt_nodraw) {
   if (markers.length) {
     for (var i = 0, marker; (marker = markers[i]); i++) {
       this.pushMarkerTo_(marker)
-    }
-  } else if (Object.keys(markers).length) {
-    for (var marker in markers) {
-      this.pushMarkerTo_(markers[marker])
     }
   }
   if (!opt_nodraw) {
@@ -1027,6 +1023,12 @@ ClusterIcon.prototype.triggerClusterClick = function() {
   if (markerClusterer.isZoomOnClick()) {
     // Zoom into the cluster.
     this.map_.fitBounds(this.cluster_.getBounds())
+
+    // Don't zoom in further than needed to get them to de-cluster.
+    const maxZoom = markerClusterer.getMaxZoom()
+    if (maxZoom && this.map_.getZoom() > maxZoom) {
+      this.map_.setZoom(maxZoom + 1)
+    }
   }
 }
 
