@@ -10,7 +10,7 @@ const Nav = ({ path }) => {
     backToMap = (
       <li className="nav-item">
         <a className="nav-link" href="/">
-          Back to the Map
+          back to the map
         </a>
       </li>
     )
@@ -18,7 +18,6 @@ const Nav = ({ path }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/">
-
         <img
           src={logoPath}
           width="20"
