@@ -17,7 +17,7 @@ export default function addCapData(
   updateInfoWindowContent
 ) {
   function getFeatureValue(feature) {
-    return feature.getProperty('total') / feature.getProperty('count')
+    return Math.pow(feature.getProperty('total'), 0.33)
   }
 
   const layer = new googleMaps.Data({ map })
@@ -26,7 +26,7 @@ export default function addCapData(
   function setUpCapDataLayer(features) {
     const maxFeatureValue = Math.max(...features.map(getFeatureValue))
     const scale = d3Scale
-      .scaleSequential(d3ScaleChromatic.interpolateBlues)
+      .scaleSequential(d3ScaleChromatic.interpolatePuBu)
       .domain([0, maxFeatureValue])
 
     layer.setStyle(function(feature) {
