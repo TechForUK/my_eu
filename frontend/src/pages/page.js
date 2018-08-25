@@ -16,7 +16,7 @@ const Page = ({ path, scripts, stylesheets }) => {
   const staticContext = {}
   return (
     <React.Fragment>
-      <Meta charset="utf-8" />
+      <Meta charSet="utf-8" />
       <Meta
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
