@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { formatRoundPounds } from './utilities'
+import { formatRoundPounds } from '../../utilities'
 
 const CreativeInfo = ({
   project,

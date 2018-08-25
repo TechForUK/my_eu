@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { formatRoundPercentage, formatRoundPounds } from './utilities'
+import { formatRoundPercentage, formatRoundPounds } from '../../utilities'
 
 const CordisInfo = ({
   projectTitle,

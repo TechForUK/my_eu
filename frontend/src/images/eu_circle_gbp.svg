@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="460" height="460">
+  <defs>
+    <g id="d">
+      <g id="b">
+        <path id="a" d="M0 0v1h.5z" transform="rotate(18 3.157 -.5)"/>
+        <use width="100%" height="100%" transform="scale(-1 1)" xlink:href="#a"/>
+      </g>
+      <g id="c">
+        <use width="100%" height="100%" transform="rotate(72)" xlink:href="#b"/>
+        <use width="100%" height="100%" transform="rotate(144)" xlink:href="#b"/>
+      </g>
+      <use width="100%" height="100%" transform="scale(-1 1)" xlink:href="#c"/>
+    </g>
+  </defs>
+  <circle cx="230" cy="230" r="230" fill="#039"/>
+  <g fill="#fc0" transform="matrix(30 0 0 30 230 232.865)">
+    <use width="100%" height="100%" y="-6" xlink:href="#d"/>
+    <use width="100%" height="100%" y="6" xlink:href="#d"/>
+    <g id="e">
+      <use width="100%" height="100%" x="-6" xlink:href="#d"/>
+      <use width="100%" height="100%" transform="rotate(-144 -2.344 -2.11)" xlink:href="#d"/>
+      <use width="100%" height="100%" transform="rotate(144 -2.11 -2.344)" xlink:href="#d"/>
+      <use width="100%" height="100%" transform="rotate(72 -4.663 -2.076)" xlink:href="#d"/>
+      <use width="100%" height="100%" transform="rotate(72 -5.076 .534)" xlink:href="#d"/>
+    </g>
+    <use width="100%" height="100%" transform="scale(-1 1)" xlink:href="#e"/>
+  </g>
+  <text x="140.922" y="332.758" fill="#fc0" font-family="sans-serif" font-size="141.394" font-weight="400" letter-spacing="0" style="line-height:125%" word-spacing="0">
+    <tspan x="140.922" y="332.758" font-family="Source Sans Pro" font-size="318.137" font-weight="900" style="line-height:125%;-inkscape-font-specification:'Source Sans Pro, Heavy';text-align:start">£</tspan>
+  </text>
+</svg>

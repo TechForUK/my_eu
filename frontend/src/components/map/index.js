@@ -16,8 +16,6 @@ import setUpSearchBox from './search_box'
 import loadGoogleMapsApi from '../../load_google_maps_api'
 import twttr from '../../social/twitter'
 
-import eusmallPath from '../../images/eusmall.png'
-
 // TODO change styles when zoomed in?
 // https://stackoverflow.com/questions/3121400/google-maps-v3-how-to-change-the-map-style-based-on-zoom-level
 
@@ -41,10 +39,8 @@ function updateInfoWindowContent(map, infoWindow, component) {
   twttr.widgets.load(container)
 }
 
-function showProjectInfoWindow(map, infoWindow, feature) {
-  const outwardCode = feature.getProperty('outwardCode')
-  const inwardCode = feature.getProperty('inwardCode')
-  const postcode = feature.getId()
+function showProjectInfoWindow(map, infoWindow, myEuData) {
+  const { outwardCode, inwardCode, postcode } = myEuData
   let projects = projectStore.lookup(outwardCode, inwardCode)
   if (projects) {
     updateInfoWindowContent(
@@ -89,26 +85,20 @@ function setUpMap(googleMaps) {
   setUpSearchBox(googleMaps, map)
   addCapData(googleMaps, map, infoWindow, updateInfoWindowContent)
 
-  addPackedPostcodeLayer(googleMaps, map)
-    .then(function(layer) {
-      layer.setStyle(function(feature) {
-        return { icon: eusmallPath }
-      })
-
-      layer.addListener('click', function(event) {
-        const feature = event.feature
-        infoWindow.setPosition(feature.getGeometry().get())
-        showProjectInfoWindow(map, infoWindow, feature)
-
-        ReactGA.event({
-          category: 'Map',
-          action: 'Search'
-        })
-      })
+  function handlePostcodeClick(event, myEuData) {
+    infoWindow.setPosition(event.latLng)
+    showProjectInfoWindow(map, infoWindow, myEuData)
+    ReactGA.event({
+      category: 'Map',
+      action: 'Click Postcode'
     })
-    .catch(function() {
+  }
+
+  addPackedPostcodeLayer(googleMaps, map, handlePostcodeClick).catch(
+    function() {
       alert('Sorry, we could not load the map data. Please try again.')
-    })
+    }
+  )
 }
 
 export default class Map extends React.Component {
