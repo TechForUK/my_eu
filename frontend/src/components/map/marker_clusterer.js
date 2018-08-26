@@ -1045,9 +1045,10 @@ ClusterIcon.prototype.onAdd = function() {
   var panes = this.getPanes()
   panes.overlayMouseTarget.appendChild(this.div_)
 
+  google.maps.OverlayView.preventMapHitsFrom(this.div_)
+
   var that = this
   google.maps.event.addDomListener(this.div_, 'click', function(event) {
-    event.stopPropagation()
     that.triggerClusterClick()
   })
 }
