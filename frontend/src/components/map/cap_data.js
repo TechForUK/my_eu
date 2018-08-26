@@ -54,5 +54,19 @@ export default function addCapData(
         map.fitBounds(bounds)
       })
     })
+
+    layer.addListener('mouseover', function(event) {
+      layer.revertStyle()
+      layer.overrideStyle(event.feature, {
+        strokeColor: '#fc0',
+        strokeOpacity: 1,
+        strokeWeight: 2,
+        zIndex: 1
+      })
+    })
+
+    layer.addListener('mouseout', function(event) {
+      layer.revertStyle()
+    })
   }
 }
