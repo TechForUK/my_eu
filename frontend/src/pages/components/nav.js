@@ -18,7 +18,7 @@ const Nav = ({ path }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/">
-
+<div className="logo">
         <img
           src={logoPath}
           width="20"
@@ -26,8 +26,7 @@ const Nav = ({ path }) => {
           className="logoimage"
           alt="MyEU.UK Logo"
         />
-        &nbsp;
-        <div className="logo">myeu.uk</div>
+        myeu.uk</div>
       </a>
       <ul className="navbar-nav">
         {backToMap}

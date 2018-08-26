@@ -9,6 +9,7 @@ const About = () => (
     <Nav path="/about/" />
     <div className="container">
       <h1>About MyEU</h1>
+      <h2>Why MyEU?</h2>
       <p>
         The UK Government will spend about{' '}
         <a href="https://www.gov.uk/government/publications/autumn-budget-2017-documents/autumn-budget-2017">
@@ -18,8 +19,11 @@ const About = () => (
         <a href="https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/articles/theukcontributiontotheeubudget/2017-10-31">
           less than 2%
         </a>{' '}
-        of this goes to the EU. We wondered what impact that spending was having
-        in the UK, and this map was an attempt to see.
+        of this goes to the EU.
+      </p>
+      <p>
+        We wondered what impact that spending was having
+        in the UK, and made this site to find out.
       </p>
       <p>
         This isn&apos;t a complete list - we know that there are data sources
@@ -31,14 +35,16 @@ const About = () => (
         .
       </p>
       <h2>Data and Methodology</h2>
-      <p>The map uses the following datasets:</p>
+      <p>We used data from the following datasets to create myeu.uk:</p>
       <p>
+        <ul>
+          <li>
         European Structural and Investment Funds (ESIF) 2014-2020. ESIF includes
         money from the European Social Fund (ESF), European Regional Development
         Fund (ERDF) and European Agricultural Fund for Rural Development
         (EAFRD). We got this data from separate datasets for:{' '}
-      </p>
-      <p>
+        <ul>
+        <li>
         England, from{' '}
         <a href="https://www.gov.uk/government/publications/european-structural-and-investment-funds-useful-resources">
           Gov.uk
@@ -47,7 +53,9 @@ const About = () => (
         <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
           Open Government Licence v3.0.
         </a>
-        ) , <br />
+
+        ) </li>
+        <li>
         Scotland, from{' '}
         <a href="https://beta.gov.scot/publications/esif-operations-funding/">
           Gov.scot
@@ -56,7 +64,9 @@ const About = () => (
         <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
           Open Government Licence v3.0.
         </a>
-        ) , <br />
+      ) </li>
+      <li>
+
         Wales from{' '}
         <a href="https://gov.wales/funding/eu-funds/2014-2020/approved-projects/?lang=en">
           Gov.wales
@@ -69,7 +79,9 @@ const About = () => (
         <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
           Open Government Licence v3.0.
         </a>
-        ) <br />
+        )
+      </li>
+      <li>
         Northern Ireland from{' '}
         <a href="https://www.economy-ni.gov.uk/esf">
           Department for the Economy NI
@@ -83,24 +95,30 @@ const About = () => (
           Open Government Licence v3.0.
         </a>
         ).
-      </p>
-      <p>
+                </li>
+                </ul>
+
+            </li>
+
+
+
+
+<li>
         All funding direct from the EU budget centrally administered by the
         Commission from 2017 and 2016 from the{' '}
         <a href="http://ec.europa.eu/budget/fts/index_en.htm">
           Financial Transparency system
         </a>{' '}
         (c) European Union, 1995-2018
-      </p>
-      <p>
+</li>
+<li>
         <a href="http://ec.europa.eu/programmes/creative-europe/projects/">
           Creative Europe
         </a>{' '}
         funding 2014-2020, which is the EU&apos;s programme for support for
         cultural and audiovisual funding. (c) European Union, 1995-2018
-      </p>
-
-      <p>
+</li>
+<li>
         Projects funded by the European Union under the{' '}
         <a href="https://data.europa.eu/euodp/data/dataset/cordisfp7projects">
           seventh framework programme for research and technological development
@@ -110,12 +128,12 @@ const About = () => (
         {' '}
         <a href="https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects">
           Horizon 2020
-        </a>{' '}from 2014 to 2020 
+        </a>{' '}from 2014 to 2020
 
         from the EU Open data portal. (c) European Union,
         1995-2018
-      </p>
-      <p>
+</li>
+<li>
         Common Agricultural Policy Funding data from the Detail Data Portal for{' '}
         <a href="http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/06307dc0-4dcb-4305-a3e2-a8fdeb2a2a25">
           2015
@@ -136,14 +154,17 @@ const About = () => (
           Open Government Licence v3.0.
         </a>
         ) .
-      </p>
-      <p>Postcode data from {' '}
+</li>
+<li>
+
+        Postcode data from {' '}
       <a href="https://www.freemaptools.com/download-uk-postcode-lat-lng.htm">
   FreeMapTools
 </a>{' '}. Postcode data contains Ordnance Survey data © Crown copyright and database right 2017, contains Royal Mail data © Royal Mail copyright and database right 2017 and contains National Statistics data © Crown copyright and database right 2017
-</p>
-<p>
+
   {' '}
+</li>
+<li>
  <a href="https://grid.ac/">
 Global Research Identifier Database (GRID)
  </a>{' '}
@@ -152,6 +173,8 @@ Global Research Identifier Database (GRID)
   <a href="https://creativecommons.org/publicdomain/zero/1.0/">
 Creative Commons Public Domain 1.0 International licence
 </a>{' '}.
+</li>
+  </ul>
 </p>
       <h2>What action can I take?</h2>
       <p>
