@@ -2,10 +2,7 @@
 
 import packedPostcodesPath from '../../data/map/output/packed_postcodes.data.json'
 import MarkerClusterer from './marker_clusterer'
-import euCircleGbpClusterPath from '../../images/eu_circle_gbp_cluster.svg'
 import euCircleGbpPath from '../../images/eu_circle_gbp.svg'
-
-import { formatSemiCompact } from '../../utilities'
 
 const MARKER_SIZE = 26
 
@@ -47,7 +44,7 @@ function unpackPostcodeMarkers(googleMaps, map, data, handleClick) {
 function setUpClusterer(googleMaps, map, markers) {
   const styles = [30, 34, 38, 42, 46, 50].map(function(size) {
     return {
-      url: euCircleGbpClusterPath,
+      url: euCircleGbpPath,
       textSize: 12,
       textColor: '#fc0',
       width: size,
@@ -61,7 +58,7 @@ function setUpClusterer(googleMaps, map, markers) {
   markerClusterer.setCalculator(function calculator(markers, numStyles) {
     let total = 0
     for (let marker of markers) total += marker.myEu.amount
-    const text = formatSemiCompact(total)
+    const text = ''
     const index = Math.round(Math.log10(total) - 3)
     return { text, index }
   })
