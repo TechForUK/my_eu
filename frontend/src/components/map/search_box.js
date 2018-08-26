@@ -69,7 +69,8 @@ export default function setUpSearchBox(googleMaps, map) {
       map: map,
       icon: icon,
       title: place.name,
-      position: place.geometry.location
+      position: place.geometry.location,
+      clickable: false
     })
 
     if (place.geometry.viewport) {
