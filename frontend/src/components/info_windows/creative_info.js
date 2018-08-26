@@ -8,11 +8,10 @@ const CreativeInfo = ({
   organisationName,
   maxContribution,
   organisationWebsite,
-  coordinatorName
+  coordinatorName,
+  summary
 }) => {
   const displayEuGrant = formatRoundPounds(maxContribution)
-
-
 
   let website
   if (organisationWebsite) {
@@ -28,12 +27,7 @@ const CreativeInfo = ({
 
   let coordinator
   if (coordinatorName) {
-    website = (
-      <span>
-        , coordinated by{' '}
-        {coordinatorName}
-      </span>
-    )
+    website = <span>, coordinated by {coordinatorName}</span>
   }
   const tweet = `${organisationName} was part of the ${project} project${coordinator}. The EU provided ${displayEuGrant} for this project as a
   whole. See more funded projects at @myeuuk `
@@ -43,19 +37,20 @@ const CreativeInfo = ({
   )}`
 
   let lead = (
-
     <p className="lead">
-      {organisationName} was part of the {project} project{coordinator}. The EU provided {displayEuGrant} for this project as a
+      {organisationName} was part of the {project} project
+      {coordinator}. The EU provided {displayEuGrant} for this project as a
       whole.
       {website}
     </p>
-
   )
 
   return (
     <div className="my-eu-info-window">
       <h2>{organisationName}</h2>
       {lead}
+      <h3>Summary</h3>
+      <p>{summary}</p>
       <p>
         This grant as part of Creative Europe, which is a €1.46 billion European
         Union programme for the cultural and creative sectors for the years
@@ -78,7 +73,8 @@ CreativeInfo.propTypes = {
   organisationName: PropTypes.string,
   maxContribution: PropTypes.number,
   organisationWebsite: PropTypes.string,
-  coordinatorName: PropTypes.string
+  coordinatorName: PropTypes.string,
+  summary: PropTypes.string
 }
 
 export default CreativeInfo
