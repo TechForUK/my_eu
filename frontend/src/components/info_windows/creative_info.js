@@ -24,10 +24,19 @@ const CreativeInfo = ({
     )
   }
 
+  let coordinator
+  if (coordinatorName) {
+    website = (
+      <span>
+        , coordinated by{' '}
+        {coordinatorName}
+      </span>
+    )
+  }
+
   let lead = (
     <p className="lead">
-      {organisationName} was part of the {project} project, coordinated by{' '}
-      {coordinatorName}. The EU provided {displayEuGrant} for this project as a
+      {organisationName} was part of the {project} project{coordinator}. The EU provided {displayEuGrant} for this project as a
       whole.
       {website}
     </p>

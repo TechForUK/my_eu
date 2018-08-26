@@ -127,14 +127,8 @@ const About = () => (
         from 2007 to 2013 and{' '}
         <a href="https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects">
           Horizon 2020
-<<<<<<< HEAD
-        </a>{' '}from 2014 to 2020
-
-        from the EU Open data portal. (c) European Union,
-=======
         </a>{' '}
         from 2014 to 2020 from the EU Open data portal. (c) European Union,
->>>>>>> d11aa81e8507f752505bcb4becf358df4d01f793
         1995-2018
 </li>
 <li>
@@ -153,7 +147,6 @@ const About = () => (
           Open Government Licence v3.0.
         </a>
         ) .
-<<<<<<< HEAD
 </li>
 <li>
 
@@ -176,30 +169,6 @@ Creative Commons Public Domain 1.0 International licence
 </li>
   </ul>
 </p>
-=======
-      </p>
-      <p>
-        Postcode data from{' '}
-        <a href="https://www.freemaptools.com/download-uk-postcode-lat-lng.htm">
-          FreeMapTools
-        </a>{' '}
-        . Postcode data contains Ordnance Survey data © Crown copyright and
-        database right 2017, contains Royal Mail data © Royal Mail copyright and
-        database right 2017 and contains National Statistics data © Crown
-        copyright and database right 2017
-      </p>
-      <p>
-        {' '}
-        <a href="https://grid.ac/">
-          Global Research Identifier Database (GRID)
-        </a>{' '}
-        from Digital Science, shared under the{' '}
-        <a href="https://creativecommons.org/publicdomain/zero/1.0/">
-          Creative Commons Public Domain 1.0 International licence
-        </a>{' '}
-        .
-      </p>
->>>>>>> d11aa81e8507f752505bcb4becf358df4d01f793
       <h2>What action can I take?</h2>
       <p>
         If you&apos;re interested in taking action off the back of this dataset,
