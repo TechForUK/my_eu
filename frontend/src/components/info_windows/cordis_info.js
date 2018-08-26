@@ -48,6 +48,10 @@ const CordisInfo = ({
       </p>
     )
   }
+  const tweet = `The EU supported ${organisationName} as part of the ${acronym} research project. See more funded projects at @myeuuk`
+  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    tweet
+  )}`
 
   return (
     <div className="my-eu-info-window">
@@ -60,6 +64,11 @@ const CordisInfo = ({
         innovation in the UK and across the EU.{' '}
         <a href="/about" target="_blank">
           Find out more.
+        </a>
+      </p>
+      <p>
+        <a className="twitter-share-button" href={twitterLink}>
+          Tweet
         </a>
       </p>
     </div>

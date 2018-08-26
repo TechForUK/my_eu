@@ -13,7 +13,7 @@ const EsifInfo = ({
 }) => {
   const displayEuInvestment = formatRoundPounds(euInvestment)
   const displayPercentage = formatRoundPercentage(euInvestment / projectCost)
-  const tweet = `The EU provided ${organisationName} with ${displayEuInvestment} to fund ${projectTitle}.`
+  const tweet = `The EU provided ${organisationName} with ${displayEuInvestment} to fund ${projectTitle}. See more funded projects at @myeuuk`
 
   const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
     tweet

@@ -12,6 +12,8 @@ const CreativeInfo = ({
 }) => {
   const displayEuGrant = formatRoundPounds(maxContribution)
 
+
+
   let website
   if (organisationWebsite) {
     website = (
@@ -33,13 +35,21 @@ const CreativeInfo = ({
       </span>
     )
   }
+  const tweet = `${organisationName} was part of the ${project} project${coordinator}. The EU provided ${displayEuGrant} for this project as a
+  whole. See more funded projects at @myeuuk `
+
+  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    tweet
+  )}`
 
   let lead = (
+
     <p className="lead">
       {organisationName} was part of the {project} project{coordinator}. The EU provided {displayEuGrant} for this project as a
       whole.
       {website}
     </p>
+
   )
 
   return (
@@ -52,6 +62,11 @@ const CreativeInfo = ({
         2014-2020.{' '}
         <a href="/about" target="_blank">
           Find out more.
+        </a>
+      </p>
+      <p>
+        <a className="twitter-share-button" href={twitterLink}>
+          Tweet
         </a>
       </p>
     </div>

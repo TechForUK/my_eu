@@ -15,6 +15,10 @@ const CapInfo = ({ feature }) => {
   const displayAverage = formatRoundPounds(
     feature.getProperty('total') / feature.getProperty('count')
   )
+  const tweet = `the EU provided ${displayTotal} in funding to ${displayCount} farms in ${areaName}. See more funded projects at @myeuuk`
+  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    tweet
+  )}`
   return (
     <div className="my-eu-info-window">
       <h2>Funding for Farms in {areaName}</h2>
@@ -58,6 +62,11 @@ const CapInfo = ({ feature }) => {
         rural areas.{' '}
         <a href="/about" target="_blank">
           Find out more.
+        </a>
+      </p>
+      <p>
+        <a className="twitter-share-button" href={twitterLink}>
+          Tweet
         </a>
       </p>
     </div>

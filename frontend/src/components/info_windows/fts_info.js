@@ -12,6 +12,13 @@ const FtsInfo = ({
 }) => {
   const displayEuGrant = formatRoundPounds(amount)
 
+  const tweet = `In ${year}, the EU provided ${beneficiary} ${displayEuGrant} as part of the
+  ${budgetLineNameAndNumber} programme. See more funded projects at @myeuuk `
+
+  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    tweet
+  )}`
+
   let lead
 
   lead = (
@@ -30,6 +37,11 @@ const FtsInfo = ({
         Commission{' '}
         <a href="/about" target="_blank">
           Find out more.
+        </a>
+      </p>
+      <p>
+        <a className="twitter-share-button" href={twitterLink}>
+          Tweet
         </a>
       </p>
     </div>
