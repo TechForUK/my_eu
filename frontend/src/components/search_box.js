@@ -59,6 +59,9 @@ class SearchBox extends React.Component {
   }
 
   setUpAutocomplete(googleMaps, map) {
+    // We may have been unmounted.
+    if (!this.inputRef.current || !this.formRef.current) return
+
     const autocomplete = new googleMaps.places.Autocomplete(
       this.inputRef.current,
       autocompleteOptions

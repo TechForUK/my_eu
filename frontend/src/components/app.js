@@ -1,39 +1,48 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import AppHome from './app_home'
 import Info from './info'
+import Map from './map'
 import Nav from './nav'
 
-const App = () => {
-  return (
-    <React.Fragment>
-      <div className="row no-gutters" id="my-eu-app">
-        <div className="col-md-5" id="my-eu-bar">
-          <Nav path="/" />
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <Route exact path="/" component={AppHome} />
-                <Route
-                  path="/postcode/:outwardCode/:inwardCode"
-                  component={Info}
-                />
-                <div id="my-eu-side-info-container">
-                  <div id="my-eu-info" />
+class App extends React.Component {
+  componentDidMount() {
+    this.setState({ isClient: true })
+  }
+
+  render() {
+    // Trick to avoid rehydration mismatch. The server always renders the home
+    // page, but the user might be loading with a path in the anchor; rehydrate
+    // with the home page first, then re-render with actual content. This
+    // approach is from https://reactjs.org/docs/react-dom.html#hydrate .
+    const secondRender = Boolean(this.state && this.state.isClient)
+
+    return (
+      <React.Fragment>
+        <div className="row no-gutters" id="my-eu-app">
+          <div className="col-md-5" id="my-eu-bar">
+            <Nav path="/" />
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <Switch>
+                    <Route exact={secondRender} path="/" component={AppHome} />
+                    <Route
+                      path="/postcode/:outwardCode/:inwardCode"
+                      component={Info}
+                    />
+                  </Switch>
                 </div>
               </div>
             </div>
           </div>
+          <div className="col-md-7">
+            <Map />
+          </div>
         </div>
-        <div className="col-md-7">
-          <div id="my-eu-map" />
-        </div>
-      </div>
-      <div className="row no-gutters d-md-none" id="my-eu-bottom-info-row">
-        <div className="col" id="my-eu-bottom-info-container" />
-      </div>
-    </React.Fragment>
-  )
+      </React.Fragment>
+    )
+  }
 }
 export default App

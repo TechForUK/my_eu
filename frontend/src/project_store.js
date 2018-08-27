@@ -1,6 +1,6 @@
 /* global fetch */
 
-import districtDataPath from '../../data/map/output/district'
+import districtDataPath from './data/map/output/district'
 
 export default class ProjectStore {
   constructor() {
@@ -33,7 +33,10 @@ export default class ProjectStore {
     return fetch(districtDataPath[outwardCode], {
       credentials: 'same-origin'
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.status === 200) return response.json()
+        throw new Error('outwardCode not found')
+      })
       .then(data => {
         this.cache[outwardCode] = data
       })
