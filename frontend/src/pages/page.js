@@ -5,9 +5,9 @@ import { Link, Meta } from 'react-head'
 
 import Home from './home'
 import About from './about'
+import Mockups from './mockups'
 import iconPath from '../images/logo.png'
 import myEuPath from '../images/myeu.png'
-
 
 const SITE_ROOT =
   process.env.NODE_ENV === 'production'
@@ -32,9 +32,7 @@ const Page = ({ path, scripts, stylesheets }) => {
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       />
-      <Link rel="icon"
-      type="image/png"
-      href={iconPath} />
+      <Link rel="icon" type="image/png" href={iconPath} />
       <StaticRouter location={path} context={staticContext}>
         <Switch>
           <Route exact path="/">
@@ -42,6 +40,9 @@ const Page = ({ path, scripts, stylesheets }) => {
           </Route>
           <Route path="/about/">
             <About />
+          </Route>
+          <Route path="/mockups/">
+            <Mockups />
           </Route>
         </Switch>
       </StaticRouter>

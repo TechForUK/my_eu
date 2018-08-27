@@ -100,7 +100,7 @@ module.exports = {
     }),
     new StaticSiteGeneratorWebpackPlugin({
       entry: 'static',
-      paths: ['/', '/about/']
+      paths: ['/', '/about/', '/mockups/']
     })
   ],
   optimization: {
