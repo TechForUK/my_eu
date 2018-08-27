@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
@@ -7,17 +8,40 @@ import Map from './map'
 import Nav from './nav'
 
 class App extends React.Component {
-  componentDidMount() {
-    this.setState({ isClient: true })
+  constructor(props) {
+    super(props)
+
+    this.bottomRef = React.createRef()
+    this.state = {
+      isClient: false,
+      infoOnBottom: false
+    }
   }
 
-  render() {
+  componentDidMount() {
     // Trick to avoid rehydration mismatch. The server always renders the home
     // page, but the user might be loading with a path in the anchor; rehydrate
     // with the home page first, then re-render with actual content. This
     // approach is from https://reactjs.org/docs/react-dom.html#hydrate .
-    const secondRender = Boolean(this.state && this.state.isClient)
+    this.setState({ isClient: true })
 
+    // Trick to render the info bar below the map on mobile.
+    // The bottom row's visibility is controlled by a media query.
+    const handleResize = () => {
+      const infoOnBottom = $(this.bottomRef.current).is(':visible')
+      if (this.state.infoOnBottom !== infoOnBottom)
+        this.setState({ infoOnBottom })
+    }
+    window.addEventListener('resize', handleResize)
+    handleResize()
+  }
+
+  render() {
+    const { isClient, infoOnBottom } = this.state
+
+    const info = (
+      <Route path="/postcode/:outwardCode/:inwardCode" component={Info} />
+    )
     return (
       <React.Fragment>
         <div className="row no-gutters" id="my-eu-app">
@@ -25,13 +49,10 @@ class App extends React.Component {
             <Nav path="/" />
             <div className="container">
               <div className="row">
-                <div className="col-md-12">
+                <div className="col">
                   <Switch>
-                    <Route exact={secondRender} path="/" component={AppHome} />
-                    <Route
-                      path="/postcode/:outwardCode/:inwardCode"
-                      component={Info}
-                    />
+                    <Route exact={isClient} path="/" component={AppHome} />
+                    {!infoOnBottom && info}
                   </Switch>
                 </div>
               </div>
@@ -39,6 +60,15 @@ class App extends React.Component {
           </div>
           <div className="col-md-7">
             <Map />
+          </div>
+        </div>
+        <div ref={this.bottomRef} className="row no-gutters d-md-none">
+          <div className="col">
+            <div className="container">
+              <div className="row">
+                <div className="col">{infoOnBottom && info}</div>
+              </div>
+            </div>
           </div>
         </div>
       </React.Fragment>
