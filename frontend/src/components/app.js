@@ -3,7 +3,8 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import AppHome from './app_home'
-import Info from './info'
+import PostcodeAreaInfo from './postcode_area_info'
+import PostcodeInfo from './postcode_info'
 import Map from './map'
 import Nav from './nav'
 
@@ -39,9 +40,16 @@ class App extends React.Component {
   render() {
     const { isClient, infoOnBottom } = this.state
 
-    const info = (
-      <Route path="/postcode/:outwardCode/:inwardCode" component={Info} />
+    const postcodeInfo = (
+      <Route
+        path="/postcode/:outwardCode/:inwardCode"
+        component={PostcodeInfo}
+      />
     )
+    const areaInfo = (
+      <Route path="/area/:postcodeArea" component={PostcodeAreaInfo} />
+    )
+
     return (
       <React.Fragment>
         <div className="row no-gutters" id="my-eu-app">
@@ -52,7 +60,8 @@ class App extends React.Component {
                 <div className="col">
                   <Switch>
                     <Route exact={isClient} path="/" component={AppHome} />
-                    {!infoOnBottom && info}
+                    {!infoOnBottom && postcodeInfo}
+                    {!infoOnBottom && areaInfo}
                   </Switch>
                 </div>
               </div>
@@ -66,7 +75,12 @@ class App extends React.Component {
           <div className="col">
             <div className="container">
               <div className="row">
-                <div className="col">{infoOnBottom && info}</div>
+                <div className="col">
+                  <Switch>
+                    {infoOnBottom && postcodeInfo}
+                    {infoOnBottom && areaInfo}
+                  </Switch>
+                </div>
               </div>
             </div>
           </div>

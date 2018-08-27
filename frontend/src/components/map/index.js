@@ -42,7 +42,16 @@ class Map extends React.Component {
     })
     registerGoogleMap(map)
 
-    // addCapData(googleMaps, map, infoWindow, updateInfoWindowContent)
+    const handleAreaClick = postcodeArea => {
+      this.props.history.push(`/area/${postcodeArea}`)
+      ReactGA.event({
+        category: 'Map',
+        action: 'Click Area',
+        label: postcodeArea
+      })
+    }
+
+    addCapData(googleMaps, map, handleAreaClick)
 
     const handlePostcodeClick = (event, myEuData) => {
       const { outwardCode, inwardCode } = myEuData

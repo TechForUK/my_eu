@@ -23,7 +23,7 @@ function makeProjectInfo(data) {
   }
 }
 
-class Info extends React.Component {
+class PostcodeInfo extends React.Component {
   constructor(props) {
     super(props)
     this.state = { outwardCode: null }
@@ -68,7 +68,7 @@ class Info extends React.Component {
   }
 }
 
-Info.propTypes = {
+PostcodeInfo.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       outwardCode: PropTypes.string.isRequired,
@@ -77,4 +77,4 @@ Info.propTypes = {
   })
 }
 
-export default Info
+export default PostcodeInfo
