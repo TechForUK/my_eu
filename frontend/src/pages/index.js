@@ -32,7 +32,7 @@ function removeDataAttrs(html) {
 //
 module.exports = function render(data) {
   const headTags = []
-  const content = ReactDOMServer.renderToStaticMarkup(
+  const content = ReactDOMServer.renderToString(
     <HeadCollector headTags={headTags}>
       <Page {...findPageProps(data)} />
     </HeadCollector>

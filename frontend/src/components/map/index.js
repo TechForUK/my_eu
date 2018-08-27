@@ -21,6 +21,8 @@ import twttr from '../../social/twitter'
 
 const projectStore = new ProjectStore()
 
+const mapContainer = document.getElementById('my-eu-map')
+
 function updateInfoWindowContent(map, infoWindow, component) {
   // Clean up previous window, if any.
   const container = infoWindow.getContent()
@@ -66,7 +68,7 @@ function showProjectInfoWindow(map, infoWindow, myEuData) {
 }
 
 function setUpMap(googleMaps) {
-  const map = new googleMaps.Map(document.getElementById('my-eu-map'), {
+  const map = new googleMaps.Map(mapContainer, {
     center: {
       lat: 54.595,
       lng: -2.888
@@ -101,15 +103,4 @@ function setUpMap(googleMaps) {
   )
 }
 
-export default class Map extends React.Component {
-  componentDidMount() {
-    loadGoogleMapsApi.then(setUpMap)
-  }
-
-  render() {
-    return <div id="my-eu-map" />
-  }
-}
-
-const container = document.getElementById('my-eu-map')
-if (container) ReactDOM.render(<Map />, container)
+if (mapContainer) loadGoogleMapsApi.then(setUpMap)

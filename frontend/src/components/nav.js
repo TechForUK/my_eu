@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-import logoPath from '../../images/logo.svg'
+import logoPath from '../images/logo.svg'
 
 const Nav = ({ path }) => {
   let backToMap
@@ -18,15 +18,16 @@ const Nav = ({ path }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/">
-<div className="logo">
-        <img
-          src={logoPath}
-          width="20"
-          height="30"
-          className="logoimage"
-          alt="MyEU.UK Logo"
-        />
-        myeu.uk</div>
+        <div className="logo">
+          <img
+            src={logoPath}
+            width="20"
+            height="30"
+            className="logoimage"
+            alt="MyEU.UK Logo"
+          />
+          myeu.uk
+        </div>
       </a>
       <ul className="navbar-nav">
         {backToMap}

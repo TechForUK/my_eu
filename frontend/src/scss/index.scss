@@ -116,12 +116,17 @@ h2 {
     height: 100%;
   }
 
-  #my-eu-app {
+  #my-eu-root {
     min-height: 100%;
     height: 100%;
 
-    #my-eu-map {
+    #my-eu-app {
+      min-height: 100%;
       height: 100%;
+
+      #my-eu-map {
+        height: 100%;
+      }
     }
   }
 }

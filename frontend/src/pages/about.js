@@ -1,7 +1,7 @@
 import React from 'react'
 import { Title } from 'react-head'
 
-import Nav from './components/nav'
+import Nav from '../components/nav'
 
 const About = () => (
   <React.Fragment>
@@ -22,8 +22,8 @@ const About = () => (
         of this goes to the EU.
       </p>
       <p>
-        We wondered what impact that spending was having
-        in the UK, and made this site to find out.
+        We wondered what impact that spending was having in the UK, and made
+        this site to find out.
       </p>
       <p>
         This isn&apos;t a complete list - we know that there are data sources
@@ -34,144 +34,147 @@ const About = () => (
         </a>
         .
       </p>
-      <p>The myeu team are: <a href="https://twitter.com/jdleesmiller">John Lees-Miller</a>, <a href="https://twitter.com/h0peth0mas">Hope Thomas</a>, <a href="https://twitter.com/Kiyanak">Kiyana Katebi</a> and <a href="https://twitter.com/meloncholy">Andrew Weeks</a></p>
+      <p>
+        The myeu team are:{' '}
+        <a href="https://twitter.com/jdleesmiller">John Lees-Miller</a>,{' '}
+        <a href="https://twitter.com/h0peth0mas">Hope Thomas</a>,{' '}
+        <a href="https://twitter.com/Kiyanak">Kiyana Katebi</a> and{' '}
+        <a href="https://twitter.com/meloncholy">Andrew Weeks</a>
+      </p>
       <h2>Data and Methodology</h2>
       <p>We used data from the following datasets to create myeu.uk:</p>
       <p>
         <ul>
           <li>
-        European Structural and Investment Funds (ESIF) 2014-2020. ESIF includes
-        money from the European Social Fund (ESF), European Regional Development
-        Fund (ERDF) and European Agricultural Fund for Rural Development
-        (EAFRD). We got this data from separate datasets for:{' '}
-        <ul>
-        <li>
-        England, from{' '}
-        <a href="https://www.gov.uk/government/publications/european-structural-and-investment-funds-useful-resources">
-          Gov.uk
-        </a>{' '}
-        (Contains public sector information licensed under the{' '}
-        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
-          Open Government Licence v3.0.
-        </a>
+            European Structural and Investment Funds (ESIF) 2014-2020. ESIF
+            includes money from the European Social Fund (ESF), European
+            Regional Development Fund (ERDF) and European Agricultural Fund for
+            Rural Development (EAFRD). We got this data from separate datasets
+            for:{' '}
+            <ul>
+              <li>
+                England, from{' '}
+                <a href="https://www.gov.uk/government/publications/european-structural-and-investment-funds-useful-resources">
+                  Gov.uk
+                </a>{' '}
+                (Contains public sector information licensed under the{' '}
+                <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
+                  Open Government Licence v3.0.
+                </a>
+                ){' '}
+              </li>
+              <li>
+                Scotland, from{' '}
+                <a href="https://beta.gov.scot/publications/esif-operations-funding/">
+                  Gov.scot
+                </a>{' '}
+                (Contains public sector information licensed under the{' '}
+                <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
+                  Open Government Licence v3.0.
+                </a>
+                ){' '}
+              </li>
+              <li>
+                Wales from{' '}
+                <a href="https://gov.wales/funding/eu-funds/2014-2020/approved-projects/?lang=en">
+                  Gov.wales
+                </a>{' '}
+                (Welsh Governement ©{' '}
+                <a href="https://gov.wales/copyright_statement/?lang=en">
+                  Crown copyright 2018
+                </a>{' '}
+                licensed under the{' '}
+                <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
+                  Open Government Licence v3.0.
+                </a>
+                )
+              </li>
+              <li>
+                Northern Ireland from{' '}
+                <a href="https://www.economy-ni.gov.uk/esf">
+                  Department for the Economy NI
+                </a>{' '}
+                (Department for the Economy ©{' '}
+                <a href="https://www.economy-ni.gov.uk/crown-copyright">
+                  Crown copyright 2018
+                </a>{' '}
+                licensed under the{' '}
+                <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
+                  Open Government Licence v3.0.
+                </a>
+                ).
+              </li>
+            </ul>
+          </li>
 
-        ) </li>
-        <li>
-        Scotland, from{' '}
-        <a href="https://beta.gov.scot/publications/esif-operations-funding/">
-          Gov.scot
-        </a>{' '}
-        (Contains public sector information licensed under the{' '}
-        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
-          Open Government Licence v3.0.
-        </a>
-      ) </li>
-      <li>
-
-        Wales from{' '}
-        <a href="https://gov.wales/funding/eu-funds/2014-2020/approved-projects/?lang=en">
-          Gov.wales
-        </a>{' '}
-        (Welsh Governement ©{' '}
-        <a href="https://gov.wales/copyright_statement/?lang=en">
-          Crown copyright 2018
-        </a>{' '}
-        licensed under the{' '}
-        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
-          Open Government Licence v3.0.
-        </a>
-        )
-      </li>
-      <li>
-        Northern Ireland from{' '}
-        <a href="https://www.economy-ni.gov.uk/esf">
-          Department for the Economy NI
-        </a>{' '}
-        (Department for the Economy ©{' '}
-        <a href="https://www.economy-ni.gov.uk/crown-copyright">
-          Crown copyright 2018
-        </a>{' '}
-        licensed under the{' '}
-        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
-          Open Government Licence v3.0.
-        </a>
-        ).
-                </li>
-                </ul>
-
-            </li>
-
-
-
-
-<li>
-        All funding direct from the EU budget centrally administered by the
-        Commission from 2017 and 2016 from the{' '}
-        <a href="http://ec.europa.eu/budget/fts/index_en.htm">
-          Financial Transparency system
-        </a>{' '}
-        (c) European Union, 1995-2018
-</li>
-<li>
-        <a href="http://ec.europa.eu/programmes/creative-europe/projects/">
-          Creative Europe
-        </a>{' '}
-        funding 2014-2020, which is the EU&apos;s programme for support for
-        cultural and audiovisual funding. (c) European Union, 1995-2018
-</li>
-<li>
-        Projects funded by the European Union under the{' '}
-        <a href="https://data.europa.eu/euodp/data/dataset/cordisfp7projects">
-          seventh framework programme for research and technological development
-          (FP7)
-        </a>{' '}
-        from 2007 to 2013 and{' '}
-        <a href="https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects">
-          Horizon 2020
-        </a>{' '}
-        from 2014 to 2020 from the EU Open data portal. (c) European Union,
-        1995-2018
-</li>
-<li>
-        Common Agricultural Policy Funding data from the Detail Data Portal for{' '}
-        <a href="http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/06307dc0-4dcb-4305-a3e2-a8fdeb2a2a25">
-          2015
-        </a>{' '}
-        and{' '}
-        <a href="http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/e153b560-7538-442b-b3ab-a40bf4adf576">
-          2014
-        </a>{' '}
-        and from{' '}
-        <a href="http://cap-payments.defra.gov.uk/Download.aspx">DEFRA</a> for
-        2016 and 2017 (both licensed under the{' '}
-        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
-          Open Government Licence v3.0.
-        </a>
-        ) .
-</li>
-<li>
-
-        Postcode data from {' '}
-      <a href="https://www.freemaptools.com/download-uk-postcode-lat-lng.htm">
-  FreeMapTools
-</a>{' '}. Postcode data contains Ordnance Survey data © Crown copyright and database right 2017, contains Royal Mail data © Royal Mail copyright and database right 2017 and contains National Statistics data © Crown copyright and database right 2017
-
-  {' '}
-</li>
-<li>
- <a href="https://grid.ac/">
-Global Research Identifier Database (GRID)
- </a>{' '}
-   from Digital Science, shared under the
-  {' '}
-  <a href="https://creativecommons.org/publicdomain/zero/1.0/">
-Creative Commons Public Domain 1.0 International licence
-</a>{' '}.
-</li>
-  </ul>
-</p>
-
-
+          <li>
+            All funding direct from the EU budget centrally administered by the
+            Commission from 2017 and 2016 from the{' '}
+            <a href="http://ec.europa.eu/budget/fts/index_en.htm">
+              Financial Transparency system
+            </a>{' '}
+            (c) European Union, 1995-2018
+          </li>
+          <li>
+            <a href="http://ec.europa.eu/programmes/creative-europe/projects/">
+              Creative Europe
+            </a>{' '}
+            funding 2014-2020, which is the EU&apos;s programme for support for
+            cultural and audiovisual funding. (c) European Union, 1995-2018
+          </li>
+          <li>
+            Projects funded by the European Union under the{' '}
+            <a href="https://data.europa.eu/euodp/data/dataset/cordisfp7projects">
+              seventh framework programme for research and technological
+              development (FP7)
+            </a>{' '}
+            from 2007 to 2013 and{' '}
+            <a href="https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects">
+              Horizon 2020
+            </a>{' '}
+            from 2014 to 2020 from the EU Open data portal. (c) European Union,
+            1995-2018
+          </li>
+          <li>
+            Common Agricultural Policy Funding data from the Detail Data Portal
+            for{' '}
+            <a href="http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/06307dc0-4dcb-4305-a3e2-a8fdeb2a2a25">
+              2015
+            </a>{' '}
+            and{' '}
+            <a href="http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/e153b560-7538-442b-b3ab-a40bf4adf576">
+              2014
+            </a>{' '}
+            and from{' '}
+            <a href="http://cap-payments.defra.gov.uk/Download.aspx">DEFRA</a>{' '}
+            for 2016 and 2017 (both licensed under the{' '}
+            <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
+              Open Government Licence v3.0.
+            </a>
+            ) .
+          </li>
+          <li>
+            Postcode data from{' '}
+            <a href="https://www.freemaptools.com/download-uk-postcode-lat-lng.htm">
+              FreeMapTools
+            </a>{' '}
+            . Postcode data contains Ordnance Survey data © Crown copyright and
+            database right 2017, contains Royal Mail data © Royal Mail copyright
+            and database right 2017 and contains National Statistics data ©
+            Crown copyright and database right 2017{' '}
+          </li>
+          <li>
+            <a href="https://grid.ac/">
+              Global Research Identifier Database (GRID)
+            </a>{' '}
+            from Digital Science, shared under the{' '}
+            <a href="https://creativecommons.org/publicdomain/zero/1.0/">
+              Creative Commons Public Domain 1.0 International licence
+            </a>{' '}
+            .
+          </li>
+        </ul>
+      </p>
 
       <h2>What action can I take?</h2>
       <p>

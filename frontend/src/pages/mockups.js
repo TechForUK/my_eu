@@ -1,7 +1,7 @@
 import React from 'react'
 import { Title } from 'react-head'
 
-import Nav from './components/nav'
+import Nav from '../components/nav'
 
 // button.my-eu-collapse-toggle:after {
 //   content: 'v';

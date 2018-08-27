@@ -1,7 +1,7 @@
 import React from 'react'
 import { Meta, Title } from 'react-head'
 
-import App from './components/app'
+import App from '../components/app'
 
 const Home = () => (
   <React.Fragment>
@@ -11,7 +11,9 @@ const Home = () => (
       property="og:description"
       content="See what the EU has done in your area"
     />
-    <App />
+    <div id="my-eu-root">
+      <App />
+    </div>
   </React.Fragment>
 )
 
