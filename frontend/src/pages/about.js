@@ -34,6 +34,7 @@ const About = () => (
         </a>
         .
       </p>
+      <p>The myeu team are: <a href="https://twitter.com/jdleesmiller">John Lees-Miller</a>, <a href="https://twitter.com/h0peth0mas">Hope Thomas</a>, <a href="https://twitter.com/Kiyanak">Kiyana Katebi</a> and <a href="https://twitter.com/meloncholy">Andrew Weeks</a></p>
       <h2>Data and Methodology</h2>
       <p>We used data from the following datasets to create myeu.uk:</p>
       <p>
@@ -169,6 +170,9 @@ Creative Commons Public Domain 1.0 International licence
 </li>
   </ul>
 </p>
+
+
+
       <h2>What action can I take?</h2>
       <p>
         If you&apos;re interested in taking action off the back of this dataset,
