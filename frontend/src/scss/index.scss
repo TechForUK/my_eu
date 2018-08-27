@@ -80,34 +80,34 @@ h2 {
 .btn-contact {
   border-radius: 18px;
   background-color: white;
-  color: #0F73AE;
-  border: 2px solid #0F73AE;
+  color: #0f73ae;
+  border: 2px solid #0f73ae;
   margin-bottom: 5px;
   margin-right: 2px;
 }
 .btn-contact:hover {
   border-radius: 18px;
-  background-color: #0F73AE;
+  background-color: #0f73ae;
   color: white;
   margin-bottom: 5px;
   margin-right: 2px;
-  border: 2px solid #0F73AE;
+  border: 2px solid #0f73ae;
 }
 .btn-social {
   border-radius: 50%;
   background-color: white;
-  color: #0F73AE;
-  border: 2px solid #0F73AE;
+  color: #0f73ae;
+  border: 2px solid #0f73ae;
   margin-bottom: 5px;
   margin-right: 3px;
 }
 .btn-social:hover {
   border-radius: 50%;
-  background-color: #0F73AE;
+  background-color: #0f73ae;
   color: white;
   margin-bottom: 5px;
   margin-right: 3px;
-  border: 2px solid #0F73AE;
+  border: 2px solid #0f73ae;
 }
 
 @include media-breakpoint-up(md) {
@@ -134,5 +134,6 @@ h2 {
 @include media-breakpoint-down(md) {
   #my-eu-map {
     height: 100vh;
+    min-height: 540px;
   }
 }
