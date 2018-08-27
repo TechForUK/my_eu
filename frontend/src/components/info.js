@@ -26,31 +26,11 @@ function makeProjectInfo(data) {
 class Info extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      projects: this.lookup()
-    }
-  }
-
-  lookup() {
-    const { outwardCode, inwardCode } = this.props.match.params
-    return projectStore.lookup(outwardCode, inwardCode)
-  }
-
-  componentDidMount() {
-    if (this.state.projects) return
-    const { outwardCode } = this.props.match.params
-    projectStore.load(outwardCode).then(() => {
-      this.setState({ projects: this.lookup() })
-    })
-  }
-
-  getPostcode() {
-    const { outwardCode, inwardCode } = this.props.match.params
-    return `${outwardCode} ${inwardCode}`
+    this.state = { outwardCode: null }
   }
 
   render() {
-    const projects = this.state.projects
+    const projects = this.lookup()
     if (projects) {
       let header
       if (projects.length > 1) {
@@ -68,8 +48,23 @@ class Info extends React.Component {
         </div>
       )
     } else {
-      return <div>loading</div>
+      return <div>loading {this.getPostcode()}</div>
     }
+  }
+
+  lookup() {
+    const { outwardCode, inwardCode } = this.props.match.params
+    const projects = projectStore.lookup(outwardCode, inwardCode)
+    if (projects) return projects
+    projectStore.load(outwardCode).then(() => {
+      this.setState({ outwardCode: outwardCode })
+    })
+    return null
+  }
+
+  getPostcode() {
+    const { outwardCode, inwardCode } = this.props.match.params
+    return `${outwardCode} ${inwardCode}`
   }
 }
 
