@@ -11,9 +11,8 @@ import LoadingInfo from './loading_info'
 import mapStyles from './map_styles'
 import addPackedPostcodeLayer from './packed_postcodes'
 import ProjectStore from './project_store'
-import setUpSearchBox from './search_box'
 
-import loadGoogleMapsApi from '../../load_google_maps_api'
+import { getGoogleMapsApi, registerGoogleMap } from '../../google_maps'
 import twttr from '../../social/twitter'
 
 // TODO change styles when zoomed in?
@@ -79,12 +78,12 @@ function setUpMap(googleMaps) {
     streetViewControl: false,
     fullscreenControl: false
   })
+  registerGoogleMap(map)
 
   const infoWindow = new googleMaps.InfoWindow({
     content: document.createElement('div')
   })
 
-  setUpSearchBox(googleMaps, map)
   addCapData(googleMaps, map, infoWindow, updateInfoWindowContent)
 
   function handlePostcodeClick(event, myEuData) {
@@ -103,4 +102,4 @@ function setUpMap(googleMaps) {
   )
 }
 
-if (mapContainer) loadGoogleMapsApi.then(setUpMap)
+if (mapContainer) getGoogleMapsApi().then(setUpMap)
