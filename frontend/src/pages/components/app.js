@@ -6,7 +6,7 @@ const App = () => {
   return (
     <React.Fragment>
       <div className="row no-gutters" id="my-eu-app">
-        <div className="col-md-4" id="my-eu-bar">
+        <div className="col-md-5" id="my-eu-bar">
           <Nav path="/" />
           <div className="container">
             <div className="row">
@@ -71,7 +71,7 @@ const App = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-8">
+        <div className="col-md-7">
           <div id="my-eu-map" />
         </div>
       </div>
