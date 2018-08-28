@@ -41,6 +41,13 @@ const About = () => (
         <a href="https://twitter.com/Kiyanak">Kiyana Katebi</a> and{' '}
         <a href="https://twitter.com/meloncholy">Andrew Weeks</a>
       </p>
+      <p>
+        Thanks to {' '}
+        <a href="https://techforuk.com/">Tech for UK</a>{' '}
+        and{' '}
+        <a href="https://www.bestforbritain.org/">Best for Britain</a>{' '}
+        for their support.
+      </p>
       <h2>Data and Methodology</h2>
       <p>We used data from the following datasets to create myeu.uk:</p>
       <p>
