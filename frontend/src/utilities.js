@@ -15,6 +15,11 @@ export function formatRoundPounds(pounds) {
   })
 }
 
+export function getSearchQuery(location) {
+  if (location.search) return decodeURIComponent(location.search.slice(1))
+  return ''
+}
+
 // Print a number using at most 4 letters.
 export function formatSemiCompact(n) {
   n = Number(n.toPrecision(2))

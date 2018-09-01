@@ -8,6 +8,7 @@ import PostcodeInfo from './postcode_info'
 import Map from './map'
 import Nav from './nav'
 
+const SEARCH_PATH = '/search'
 const POSTCODE_PATH = '/postcode/:outwardCode/:inwardCode'
 const POSTCODE_AREA_PATH = '/area/:postcodeArea'
 
@@ -58,6 +59,7 @@ class App extends React.Component {
                 <div className="col">
                   <Switch>
                     <Route exact={isClient} path="/" component={AppHome} />
+                    <Route path={SEARCH_PATH} component={AppHome} />
                     {!infoOnBottom && postcodeInfo}
                     {!infoOnBottom && areaInfo}
                   </Switch>
@@ -68,6 +70,7 @@ class App extends React.Component {
           <div className="col-md-7">
             <Switch>
               <Route exact path="/" component={Map} />
+              <Route path={SEARCH_PATH} component={Map} />
               <Route path={POSTCODE_PATH} component={Map} />
               <Route path={POSTCODE_AREA_PATH} component={Map} />
             </Switch>

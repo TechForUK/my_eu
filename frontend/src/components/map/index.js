@@ -7,6 +7,9 @@ import mapStyles from './map_styles'
 import PackedPostcodes from './packed_postcodes'
 
 import { getGoogleMapsApi, registerGoogleMap } from '../../google_maps'
+import getSearchStore from '../../search_store'
+import logoPath from '../../images/logo.svg'
+import { getSearchQuery } from '../../utilities'
 
 // TODO change styles when zoomed in?
 // https://stackoverflow.com/questions/3121400/google-maps-v3-how-to-change-the-map-style-based-on-zoom-level
@@ -15,6 +18,9 @@ class Map extends React.Component {
   constructor(props) {
     super(props)
     this.divRef = React.createRef()
+    this.googleMaps = null
+    this.map = null
+    this.searchMarker = null
     this.areaDataLayer = null
     this.packedPostcodes = null
 
@@ -42,7 +48,8 @@ class Map extends React.Component {
   }
 
   setUpMap(googleMaps) {
-    const map = new googleMaps.Map(this.divRef.current, {
+    this.googleMaps = googleMaps
+    this.map = new googleMaps.Map(this.divRef.current, {
       center: {
         lat: 54.595,
         lng: -2.888
@@ -53,7 +60,7 @@ class Map extends React.Component {
       streetViewControl: false,
       fullscreenControl: false
     })
-    registerGoogleMap(map)
+    registerGoogleMap(this.map)
 
     const handleAreaClick = postcodeArea => {
       this.navigate(`/area/${postcodeArea}`)
@@ -63,7 +70,11 @@ class Map extends React.Component {
         label: postcodeArea
       })
     }
-    this.areaDataLayer = new AreaDataLayer(googleMaps, map, handleAreaClick)
+    this.areaDataLayer = new AreaDataLayer(
+      googleMaps,
+      this.map,
+      handleAreaClick
+    )
 
     const handlePostcodeClick = (event, myEuData) => {
       const { outwardCode, inwardCode } = myEuData
@@ -76,7 +87,7 @@ class Map extends React.Component {
 
     this.packedPostcodes = new PackedPostcodes(
       googleMaps,
-      map,
+      this.map,
       handlePostcodeClick
     )
     this.zoomToRouteParams()
@@ -88,6 +99,17 @@ class Map extends React.Component {
   }
 
   zoomToRouteParams() {
+    if (this.props.location.pathname === '/search') {
+      const placeName = getSearchQuery(this.props.location)
+      getSearchStore()
+        .then(searchStore => searchStore.findPlaceByName(placeName))
+        .then(place => {
+          const bounds = this.findPlaceBounds(place)
+          this.packedPostcodes.zoomMapWithMinMarkers(bounds)
+          this.showPlaceMarker(place)
+        })
+      return
+    }
     const { outwardCode, inwardCode, postcodeArea } = this.props.match.params
     if (outwardCode && inwardCode && this.packedPostcodes) {
       this.packedPostcodes.zoomMapToPostcode(outwardCode, inwardCode)
@@ -95,11 +117,49 @@ class Map extends React.Component {
       this.areaDataLayer.zoomMapToArea(postcodeArea)
     }
   }
+
+  findPlaceBounds(place) {
+    const bounds = new this.googleMaps.LatLngBounds()
+    if (place.geometry.viewport) {
+      // Only geocodes have viewport.
+      bounds.union(place.geometry.viewport)
+    } else {
+      bounds.extend(place.geometry.location)
+    }
+    return bounds
+  }
+
+  showPlaceMarker(place) {
+    // Clear out the old marker.
+    if (this.placeMarker) {
+      this.placeMarker.setMap(null)
+      this.placeMarker = null
+    }
+    var icon = {
+      url: logoPath,
+      size: new this.googleMaps.Size(50, 50),
+      anchor: new this.googleMaps.Point(25, 50),
+      scaledSize: new this.googleMaps.Size(50, 50)
+    }
+
+    // Create a marker for each place.
+    this.placeMarker = new this.googleMaps.Marker({
+      map: this.map,
+      icon: icon,
+      title: place.name,
+      position: place.geometry.location,
+      clickable: false
+    })
+  }
 }
 
 Map.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
+  }),
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+    search: PropTypes.string
   }),
   match: PropTypes.shape({
     params: PropTypes.shape({

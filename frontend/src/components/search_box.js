@@ -1,16 +1,12 @@
 /* global alert */
 
+import PropTypes from 'prop-types'
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
 import { getGoogleMapsApiAndMap } from '../google_maps'
-
-const autocompleteOptions = {
-  types: ['geocode'],
-  componentRestrictions: { country: ['UK'] }
-}
-
-// Only return fields we need, to avoid paying lots of money.
-const fields = ['geometry', 'formatted_address', 'icon']
+import getSearchStore, { FIELDS, AUTOCOMPLETE_OPTIONS } from '../search_store'
+import { getSearchQuery } from '../utilities'
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -43,6 +39,7 @@ class SearchBox extends React.Component {
                 ref={this.inputRef}
                 className="form-control"
                 placeholder="e.g. SW1A 1AA"
+                defaultValue={getSearchQuery(this.props.location)}
               />
               <div className="input-group-append">
                 <input
@@ -64,9 +61,9 @@ class SearchBox extends React.Component {
 
     const autocomplete = new googleMaps.places.Autocomplete(
       this.inputRef.current,
-      autocompleteOptions
+      AUTOCOMPLETE_OPTIONS
     )
-    autocomplete.setFields(fields)
+    autocomplete.setFields(FIELDS)
 
     // Bias the results toward the current view.
     autocomplete.bindTo('bounds', map)
@@ -89,94 +86,45 @@ class SearchBox extends React.Component {
     // Approach for (2-3) based on https://stackoverflow.com/a/28100636/2053820
     autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace()
-      if (place.geometry) this.markPlace(googleMaps, map, place)
+      if (place.geometry) this.markPlace(place)
     })
 
     this.formRef.current.onsubmit = event => {
-      this.findPlaceName(googleMaps, map, this.inputRef.current.value)
+      this.markPlace(null)
       return false
     }
   }
 
-  markPlace(googleMaps, map, place) {
-    // Clear out the old marker.
-    if (this.marker) {
-      this.marker.setMap(null)
-      this.marker = null
-    }
-
-    // For each place, get the icon, name and location.
-    var bounds = new googleMaps.LatLngBounds()
-
-    var icon = {
-      url: place.icon,
-      size: new googleMaps.Size(71, 71),
-      origin: new googleMaps.Point(0, 0),
-      anchor: new googleMaps.Point(17, 34),
-      scaledSize: new googleMaps.Size(25, 25)
-    }
-
-    // Create a marker for each place.
-    this.marker = new googleMaps.Marker({
-      map: map,
-      icon: icon,
-      title: place.name,
-      position: place.geometry.location,
-      clickable: false
-    })
-
-    if (place.geometry.viewport) {
-      // Only geocodes have viewport.
-      bounds.union(place.geometry.viewport)
-    } else {
-      bounds.extend(place.geometry.location)
-    }
-
-    map.fitBounds(bounds)
-    if (map.getZoom() > 12) {
-      map.setZoom(12)
-    }
-  }
-
-  findPlaceName(googleMaps, map, name) {
-    const autocompleteService = new googleMaps.places.AutocompleteService()
-
-    const placePredictionOptions = Object.assign({}, autocompleteOptions, {
-      input: name,
-      offset: name.length
-    })
-
-    const receivePlacePredictions = (list, _status) => {
-      if (list && list.length > 0) {
-        this.markFoundPlace(googleMaps, map, list[0].place_id)
-      } else {
-        this.showNotFoundError()
-      }
-    }
-
-    autocompleteService.getPlacePredictions(
-      placePredictionOptions,
-      receivePlacePredictions
-    )
-  }
-
-  markFoundPlace(googleMaps, map, placeId) {
-    const placesService = new googleMaps.places.PlacesService(map)
-
-    const receivePlaceDetails = (place, _status) => {
-      if (place && place.geometry) {
-        this.markPlace(googleMaps, map, place)
-      } else {
-        this.showNotFoundError()
-      }
-    }
-
-    placesService.getDetails({ fields, placeId }, receivePlaceDetails)
-  }
-
-  showNotFoundError() {
-    alert("Sorry, we couldn't find that place. Please try again.")
+  markPlace(place) {
+    const name = this.inputRef.current.value
+    getSearchStore()
+      .then(searchStore => {
+        if (place) {
+          searchStore.storePlaceByName(name, place)
+        } else {
+          return searchStore.findPlaceByName(name)
+        }
+      })
+      .then(() => {
+        this.props.history.push({ pathname: '/search', search: `${name}` })
+      })
+      .catch(err => {
+        if (err.message === 'place not found') {
+          alert("Sorry, we couldn't find that place. Please try again.")
+        } else {
+          throw err
+        }
+      })
   }
 }
 
-export default SearchBox
+SearchBox.propTypes = {
+  location: PropTypes.shape({
+    search: PropTypes.string
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  })
+}
+
+export default withRouter(SearchBox)
