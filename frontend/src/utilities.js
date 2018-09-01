@@ -15,6 +15,11 @@ export function formatRoundPounds(pounds) {
   })
 }
 
+export function extractPostcodeArea(postcode) {
+  const area = /^[A-Z]{1,2}/.exec(postcode)
+  return area && area[0]
+}
+
 export function getSearchQuery(location) {
   if (location.search) return decodeURIComponent(location.search.slice(1))
   return ''
