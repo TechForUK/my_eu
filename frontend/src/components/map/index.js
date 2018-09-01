@@ -1,5 +1,3 @@
-/* global alert */
-
 import PropTypes from 'prop-types'
 import React from 'react'
 import ReactGA from 'react-ga'
