@@ -6,7 +6,7 @@ import ReactGA from 'react-ga'
 
 import AreaDataLayer from './area_data_layer'
 import mapStyles from './map_styles'
-import addPackedPostcodeLayer from './packed_postcodes'
+import PackedPostcodes from './packed_postcodes'
 
 import { getGoogleMapsApi, registerGoogleMap } from '../../google_maps'
 
@@ -61,19 +61,18 @@ class Map extends React.Component {
       })
     }
 
-    addPackedPostcodeLayer(googleMaps, map, handlePostcodeClick).catch(
-      function() {
-        alert('Sorry, we could not load the map data. Please try again.')
-      }
+    this.packedPostcodes = new PackedPostcodes(
+      googleMaps,
+      map,
+      handlePostcodeClick
     )
-
     this.zoomOnLoad()
   }
 
   zoomOnLoad() {
     const { outwardCode, inwardCode, postcodeArea } = this.props.match.params
     if (outwardCode && inwardCode) {
-      // TODO
+      this.packedPostcodes.zoomMapToPostcode(outwardCode, inwardCode)
     } else if (postcodeArea) {
       this.areaDataLayer.zoomMapToArea(postcodeArea)
     }

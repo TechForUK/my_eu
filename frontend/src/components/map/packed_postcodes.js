@@ -4,16 +4,24 @@ import packedPostcodesPath from '../../data/map/output/packed_postcodes.data.jso
 import MarkerClusterer from './marker_clusterer'
 import euCircleGbpPath from '../../images/eu_circle_gbp.svg'
 
+const MIN_MARKERS = 5
 const MARKER_SIZE = 26
 
-function unpackPostcodeMarkers(googleMaps, map, data, handleClick) {
-  const markers = []
+class PostcodeData {
+  constructor(amount, position) {
+    this.amount = amount
+    this.position = position
+  }
+}
 
+function unpack(googleMaps, data) {
+  const outwardCodes = {}
   const minLongitude = data.min_longitude
   const minLatitude = data.min_latitude
   for (let outwardCode in data.postcodes) {
     if (!data.postcodes.hasOwnProperty(outwardCode)) continue
     const codeData = data.postcodes[outwardCode]
+    const inwardCodes = (outwardCodes[outwardCode] = {})
     for (let i = 0; i < codeData.length; i += 4) {
       const inwardCode = codeData[i]
       const deltaLongitude = codeData[i + 1]
@@ -23,6 +31,20 @@ function unpackPostcodeMarkers(googleMaps, map, data, handleClick) {
         minLatitude + deltaLatitude,
         minLongitude + deltaLongitude
       )
+      inwardCodes[inwardCode] = new PostcodeData(amount, position)
+    }
+  }
+  return outwardCodes
+}
+
+function unpackPostcodeMarkers(googleMaps, map, postcodes, handleClick) {
+  const markers = []
+
+  for (let outwardCode in postcodes) {
+    if (!postcodes.hasOwnProperty(outwardCode)) continue
+    const inwardCodes = postcodes[outwardCode]
+    for (let inwardCode in inwardCodes) {
+      const { amount, position } = inwardCodes[inwardCode]
       const postcode = `${outwardCode} ${inwardCode}`
       const myEu = { outwardCode, inwardCode, postcode, amount }
       const icon = {
@@ -52,6 +74,7 @@ function setUpClusterer(googleMaps, map, markers) {
     }
   })
   const markerClusterer = new MarkerClusterer(map, markers, {
+    minimumClusterSize: MIN_MARKERS,
     maxZoom: 14, // can't be much lower and still see London
     styles
   })
@@ -65,15 +88,60 @@ function setUpClusterer(googleMaps, map, markers) {
   return markerClusterer
 }
 
-export default function addPackedPostcodeData(googleMaps, map, handleClick) {
-  return fetch(packedPostcodesPath, {
-    credentials: 'same-origin'
-  })
-    .then(function(response) {
-      return response.json()
+export default class PackedPostcodes {
+  constructor(googleMaps, map, handleClick) {
+    this.googleMaps = googleMaps
+    this.map = map
+
+    this._loadData = fetch(packedPostcodesPath, {
+      credentials: 'same-origin'
     })
-    .then(function(json) {
-      const markers = unpackPostcodeMarkers(googleMaps, map, json, handleClick)
-      setUpClusterer(googleMaps, map, markers)
-    })
+      .then(response => response.json())
+      .then(json => {
+        this.postcodes = unpack(googleMaps, json)
+        this.markers = unpackPostcodeMarkers(
+          googleMaps,
+          map,
+          this.postcodes,
+          handleClick
+        )
+        setUpClusterer(googleMaps, map, this.markers)
+      })
+  }
+
+  zoomMapToPostcode(outwardCode, inwardCode) {
+    const findPostcodeAndZoom = () => {
+      const inwardCodes = this.postcodes[outwardCode]
+      if (!inwardCodes) return
+      const postcode = inwardCodes[inwardCode]
+      if (!postcode) return
+
+      const bounds = new this.googleMaps.LatLngBounds()
+      bounds.extend(postcode.position)
+      this.zoomMapWithMinMarkers(bounds)
+    }
+    this._loadData.then(findPostcodeAndZoom)
+  }
+
+  zoomMapWithMinMarkers(bounds, minMarkers = MIN_MARKERS) {
+    this.map.fitBounds(bounds)
+    const zoomOutIfNeeded = () => {
+      for (;;) {
+        if (this._countVisibleMarkers() >= minMarkers) break
+        if (this.map.getZoom() <= 1) break
+        this.map.setZoom(this.map.getZoom() - 1)
+      }
+    }
+    this._loadData.then(zoomOutIfNeeded)
+  }
+
+  _countVisibleMarkers() {
+    const mapBounds = this.map.getBounds()
+    if (!mapBounds) return 0
+    let count = 0
+    for (let marker of this.markers) {
+      if (mapBounds.contains(marker.getPosition())) ++count
+    }
+    return count
+  }
 }
