@@ -3,9 +3,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import ReactGA from 'react-ga'
-import { withRouter } from 'react-router-dom'
 
-import addCapData from './cap_data'
+import AreaDataLayer from './area_data_layer'
 import mapStyles from './map_styles'
 import addPackedPostcodeLayer from './packed_postcodes'
 
@@ -18,6 +17,7 @@ class Map extends React.Component {
   constructor(props) {
     super(props)
     this.divRef = React.createRef()
+    this.areaDataLayer = null
   }
 
   componentDidMount() {
@@ -50,8 +50,7 @@ class Map extends React.Component {
         label: postcodeArea
       })
     }
-
-    addCapData(googleMaps, map, handleAreaClick)
+    this.areaDataLayer = new AreaDataLayer(googleMaps, map, handleAreaClick)
 
     const handlePostcodeClick = (event, myEuData) => {
       const { outwardCode, inwardCode } = myEuData
@@ -67,13 +66,31 @@ class Map extends React.Component {
         alert('Sorry, we could not load the map data. Please try again.')
       }
     )
+
+    this.zoomOnLoad()
+  }
+
+  zoomOnLoad() {
+    const { outwardCode, inwardCode, postcodeArea } = this.props.match.params
+    if (outwardCode && inwardCode) {
+      // TODO
+    } else if (postcodeArea) {
+      this.areaDataLayer.zoomMapToArea(postcodeArea)
+    }
   }
 }
 
 Map.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
+  }),
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      outwardCode: PropTypes.string,
+      inwardCode: PropTypes.string,
+      postcodeArea: PropTypes.string
+    })
   })
 }
 
-export default withRouter(Map)
+export default Map

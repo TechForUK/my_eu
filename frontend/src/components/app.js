@@ -8,6 +8,9 @@ import PostcodeInfo from './postcode_info'
 import Map from './map'
 import Nav from './nav'
 
+const POSTCODE_PATH = '/postcode/:outwardCode/:inwardCode'
+const POSTCODE_AREA_PATH = '/area/:postcodeArea'
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -40,14 +43,9 @@ class App extends React.Component {
   render() {
     const { isClient, infoOnBottom } = this.state
 
-    const postcodeInfo = (
-      <Route
-        path="/postcode/:outwardCode/:inwardCode"
-        component={PostcodeInfo}
-      />
-    )
+    const postcodeInfo = <Route path={POSTCODE_PATH} component={PostcodeInfo} />
     const areaInfo = (
-      <Route path="/area/:postcodeArea" component={PostcodeAreaInfo} />
+      <Route path={POSTCODE_AREA_PATH} component={PostcodeAreaInfo} />
     )
 
     return (
@@ -68,7 +66,11 @@ class App extends React.Component {
             </div>
           </div>
           <div className="col-md-7">
-            <Map />
+            <Switch>
+              <Route exact path="/" component={Map} />
+              <Route path={POSTCODE_PATH} component={Map} />
+              <Route path={POSTCODE_AREA_PATH} component={Map} />
+            </Switch>
           </div>
         </div>
         <div ref={this.bottomRef} className="row no-gutters d-md-none">
