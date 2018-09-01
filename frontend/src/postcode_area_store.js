@@ -3,7 +3,7 @@
 // TODO: generate actual data
 import postcodeAreaDataPath from './data/cap_by_area.geo.json'
 
-export default class ProjectStore {
+export default class PostcodeAreaStore {
   constructor() {
     this.data = null
   }
