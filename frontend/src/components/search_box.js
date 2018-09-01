@@ -90,6 +90,7 @@ class SearchBox extends React.Component {
     })
 
     this.formRef.current.onsubmit = event => {
+      this.inputRef.current.blur() // to hide keyboard on mobile
       this.markPlace(null)
       return false
     }
