@@ -5,6 +5,7 @@ import MarkerClusterer from './marker_clusterer'
 import euCircleGbpPath from '../../images/eu_circle_gbp.svg'
 
 const MIN_MARKERS = 5
+const MAX_ZOOM = 15
 const MARKER_SIZE = 26
 
 class PostcodeData {
@@ -75,7 +76,7 @@ function setUpClusterer(googleMaps, map, markers) {
   })
   const markerClusterer = new MarkerClusterer(map, markers, {
     minimumClusterSize: MIN_MARKERS,
-    maxZoom: 14, // can't be much lower and still see London
+    maxZoom: MAX_ZOOM,
     styles
   })
   markerClusterer.setCalculator(function calculator(markers, numStyles) {
