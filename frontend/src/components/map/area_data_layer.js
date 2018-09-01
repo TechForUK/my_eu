@@ -1,6 +1,6 @@
 import * as d3Scale from 'd3-scale'
 import * as d3ScaleChromatic from 'd3-scale-chromatic'
-import capPath from '../../data/cap_by_area.geo.json'
+import capPath from '../../data/map/output/postcode_areas.geo.json'
 
 function getGeometryLatLngBounds(googleMaps, geometry) {
   const bounds = new googleMaps.LatLngBounds()
