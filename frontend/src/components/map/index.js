@@ -18,10 +18,25 @@ class Map extends React.Component {
     super(props)
     this.divRef = React.createRef()
     this.areaDataLayer = null
+    this.packedPostcodes = null
+
+    // If the user clicks a link outside the map, we want to show what they
+    // clicked, but if the user has just clicked the map, don't change the view.
+    // The first componentDidUpdate will be before the map data have loaded, so
+    // we can also safely ignore the first update.
+    this.ignoreNextUpdate = true
   }
 
   componentDidMount() {
     getGoogleMapsApi().then(this.setUpMap.bind(this))
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.ignoreNextUpdate) {
+      this.ignoreNextUpdate = false
+      return
+    }
+    this.zoomToRouteParams()
   }
 
   render() {
@@ -43,7 +58,7 @@ class Map extends React.Component {
     registerGoogleMap(map)
 
     const handleAreaClick = postcodeArea => {
-      this.props.history.push(`/area/${postcodeArea}`)
+      this.navigate(`/area/${postcodeArea}`)
       ReactGA.event({
         category: 'Map',
         action: 'Click Area',
@@ -54,7 +69,7 @@ class Map extends React.Component {
 
     const handlePostcodeClick = (event, myEuData) => {
       const { outwardCode, inwardCode } = myEuData
-      this.props.history.push(`/postcode/${outwardCode}/${inwardCode}`)
+      this.navigate(`/postcode/${outwardCode}/${inwardCode}`)
       ReactGA.event({
         category: 'Map',
         action: 'Click Postcode'
@@ -66,14 +81,19 @@ class Map extends React.Component {
       map,
       handlePostcodeClick
     )
-    this.zoomOnLoad()
+    this.zoomToRouteParams()
   }
 
-  zoomOnLoad() {
+  navigate(path) {
+    this.ignoreNextUpdate = true
+    this.props.history.push(path)
+  }
+
+  zoomToRouteParams() {
     const { outwardCode, inwardCode, postcodeArea } = this.props.match.params
-    if (outwardCode && inwardCode) {
+    if (outwardCode && inwardCode && this.packedPostcodes) {
       this.packedPostcodes.zoomMapToPostcode(outwardCode, inwardCode)
-    } else if (postcodeArea) {
+    } else if (postcodeArea && this.areaDataLayer) {
       this.areaDataLayer.zoomMapToArea(postcodeArea)
     }
   }

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import PostcodeAreaStore from '../postcode_area_store'
+import SearchAgain from './search_again'
 import { formatRoundPounds } from '../utilities'
 
 const postcodeAreaStore = new PostcodeAreaStore()
@@ -25,6 +26,9 @@ class PostcodeAreaInfo extends React.Component {
     )}`
     return (
       <div className="my-eu-info-window">
+        <ul className="nav">
+          <SearchAgain />
+        </ul>
         <h2>Funding for Farms in {areaName}</h2>
         <p className="lead">
           In 2015, the EU provided {displayTotal} in funding to {displayCount}{' '}

@@ -1,7 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import ProjectStore from '../project_store'
+import SearchAgain from './search_again'
+
 import CordisInfo from './info_windows/cordis_info'
 import CreativeInfo from './info_windows/creative_info'
 import EsifInfo from './info_windows/esif_info'
@@ -43,6 +46,7 @@ class PostcodeInfo extends React.Component {
 
       return (
         <div id="my-eu-info">
+          {this.renderLinks()}
           {header}
           {projects.map(makeProjectInfo)}
         </div>
@@ -50,6 +54,28 @@ class PostcodeInfo extends React.Component {
     } else {
       return <div>loading {this.getPostcode()}</div>
     }
+  }
+
+  renderLinks() {
+    let postcodeAreaLink
+    const postcodeArea = this.getPostcodeArea()
+    if (postcodeArea) {
+      const postcodeAreaPath = `/area/${postcodeArea}`
+      postcodeAreaLink = (
+        <li className="nav-item">
+          <Link to={postcodeAreaPath} className="nav-link">
+            <i className="fa fa-level-up" />
+            &nbsp; More Projects in {postcodeArea}
+          </Link>
+        </li>
+      )
+    }
+    return (
+      <ul className="nav">
+        <SearchAgain />
+        {postcodeAreaLink}
+      </ul>
+    )
   }
 
   lookup() {
@@ -60,6 +86,11 @@ class PostcodeInfo extends React.Component {
       this.setState({ outwardCode: outwardCode })
     })
     return null
+  }
+
+  getPostcodeArea() {
+    const area = /^[A-Z]{1,2}/.exec(this.props.match.params.outwardCode)
+    return area && area[0]
   }
 
   getPostcode() {
