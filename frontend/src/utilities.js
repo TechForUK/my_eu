@@ -38,6 +38,10 @@ export function formatSemiCompact(n) {
   return '>1T'
 }
 
+export function formatSemiCompactPounds(x) {
+  return `£${formatSemiCompact(x)}`
+}
+
 // Print a number up to 9 trillion in at most 3 letters.
 export function formatCompact(n) {
   if (n < 1e3) return n.toString()

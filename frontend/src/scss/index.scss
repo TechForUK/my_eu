@@ -110,6 +110,14 @@ h2 {
   border: 2px solid #0f73ae;
 }
 
+button.my-eu-details-toggle.collapsed:before {
+  content: 'Show ';
+}
+
+button.my-eu-details-toggle:before {
+  content: 'Hide ';
+}
+
 @include media-breakpoint-up(md) {
   html,
   body {

@@ -3,23 +3,23 @@
 import postcodeAreaDataPath from './data/map/output/postcode_areas.data.json'
 import { extractPostcodeArea } from './utilities'
 
+function convertSplitRowToRecord(columns, row, skipIndex = -1) {
+  const record = {}
+  for (let i = 0; i < columns.length; ++i) {
+    if (i === skipIndex) continue
+    record[columns[i]] = row[i]
+  }
+  return record
+}
+
 function convertSplitRowsToRecords(columns, data, skipIndex = -1) {
-  return data.map(row => {
-    const result = {}
-    for (let i = 0; i < columns.length; ++i) {
-      if (i === skipIndex) continue
-      result[columns[i]] = row[i]
-    }
-    return result
-  })
+  return data.map(row => convertSplitRowToRecord(columns, row, skipIndex))
 }
 
 function parseStartAndEndDates(record) {
   const MS_PER_S = 1e3
-  record.startDate = new Date(record.start_date * MS_PER_S)
-  delete record.start_date
-  record.endDate = new Date(record.end_date * MS_PER_S)
-  delete record.end_date
+  record.start_date = new Date(record.start_date * MS_PER_S)
+  record.end_date = new Date(record.end_date * MS_PER_S)
   return record
 }
 
@@ -28,41 +28,19 @@ export default class PostcodeAreaStore {
     this.data = null
   }
 
-  lookupTotalAmounts(postcodeArea) {
-    if (!this.data) return null
-    const totals = this.data.totals
-    const postcodeAreaIndex = totals.columns.indexOf('postcode_area')
-    return convertSplitRowsToRecords(
-      totals.columns,
-      totals.data.filter(row => row[postcodeAreaIndex] === postcodeArea),
-      postcodeAreaIndex
-    )
-  }
-
-  lookupProjects(postcodeArea, kind) {
-    if (!this.data) return null
-    const projects = this.data[kind]
-    if (!projects) return null
-    const postcodeIndex = projects.columns.indexOf('postcode')
-    return convertSplitRowsToRecords(
-      projects.columns,
-      projects.data.filter(
-        row => extractPostcodeArea(row[postcodeIndex]) === postcodeArea
-      )
-    ).map(parseStartAndEndDates)
-  }
-
   lookup(postcodeArea) {
     if (!this.data) return null
 
-    const totalAmounts = this.lookupTotalAmounts(postcodeArea)
-    if (!totalAmounts.length) return null
+    const name = this._lookupName(postcodeArea)
+    if (!name) throw new Error('postcode area not found')
 
-    const cordis = this.lookupProjects(postcodeArea, 'cordis')
-    const creative = this.lookupProjects(postcodeArea, 'creative')
-    const esif = this.lookupProjects(postcodeArea, 'esif')
+    const totalAmounts = this._lookupTotalAmounts(postcodeArea)
+    const cap = this._lookupCap(postcodeArea)
+    const cordis = this._lookupProjects(postcodeArea, 'cordis')
+    const creative = this._lookupProjects(postcodeArea, 'creative')
+    const esif = this._lookupProjects(postcodeArea, 'esif')
 
-    return { totalAmounts, cordis, creative, esif }
+    return { postcodeArea, name, totalAmounts, cap, cordis, creative, esif }
   }
 
   load() {
@@ -76,5 +54,47 @@ export default class PostcodeAreaStore {
       .then(data => {
         this.data = data
       })
+  }
+
+  _lookupName(postcodeArea) {
+    const areas = this.data.areas
+    const postcodeAreaIndex = areas.columns.indexOf('postcode_area')
+    const postcodeAreaNameIndex = areas.columns.indexOf('postcode_area_name')
+    const areaRow = areas.data.find(
+      row => row[postcodeAreaIndex] === postcodeArea
+    )
+    return areaRow && areaRow[postcodeAreaNameIndex]
+  }
+
+  _lookupTotalAmounts(postcodeArea) {
+    const totals = this.data.totals
+    const postcodeAreaIndex = totals.columns.indexOf('postcode_area')
+    return convertSplitRowsToRecords(
+      totals.columns,
+      totals.data.filter(row => row[postcodeAreaIndex] === postcodeArea),
+      postcodeAreaIndex
+    )
+  }
+
+  _lookupCap(postcodeArea) {
+    const cap = this.data.cap
+    const postcodeAreaIndex = cap.columns.indexOf('postcode_area')
+    return convertSplitRowsToRecords(
+      cap.columns,
+      cap.data.filter(row => row[postcodeAreaIndex] === postcodeArea),
+      postcodeAreaIndex
+    )
+  }
+
+  _lookupProjects(postcodeArea, kind) {
+    const projects = this.data[kind]
+    if (!projects) return []
+    const postcodeIndex = projects.columns.indexOf('postcode')
+    return convertSplitRowsToRecords(
+      projects.columns,
+      projects.data.filter(
+        row => extractPostcodeArea(row[postcodeIndex]) === postcodeArea
+      )
+    ).map(parseStartAndEndDates)
   }
 }

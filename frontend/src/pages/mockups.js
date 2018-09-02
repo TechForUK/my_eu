@@ -3,14 +3,6 @@ import { Title } from 'react-head'
 
 import Nav from '../components/nav'
 
-// button.my-eu-details-toggle.collapsed:before {
-//   content: 'Show ';
-// }
-//
-// button.my-eu-details-toggle:before {
-//   content: 'Hide ';
-// }
-
 const Mockups = () => (
   <React.Fragment>
     <Title>Mockups - MyEU.UK</Title>
