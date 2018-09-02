@@ -42,14 +42,14 @@ EsifProject.propTypes = {
   project: PropTypes.object
 }
 
-const EsifInfo = ({ postcodeArea, name, esif, totalAmounts, counts }) => {
+const EsifInfo = ({ postcodeArea, name, esif, totalAmounts, projects }) => {
   const esifTotal = sum(
     totalAmounts
       .filter(row => row.funds === 'ERDF' || row.funds === 'ESF')
       .map(row => row.total)
   )
 
-  let esifCount = counts.find(row => row.kind === 'esif')
+  let esifCount = projects.find(row => row.kind === 'esif')
   if (!esifCount || !esifCount.count) return null
   esifCount = esifCount.count
 
@@ -118,7 +118,7 @@ EsifInfo.propTypes = {
   name: PropTypes.string,
   esif: PropTypes.array,
   totalAmounts: PropTypes.array,
-  counts: PropTypes.array
+  projects: PropTypes.array
 }
 
 export default EsifInfo

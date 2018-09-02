@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
-  indefinitePluralise,
-  sum
+  indefinitePluralise
 } from '../../utilities'
 
 const TOP_N = 3
@@ -71,15 +70,12 @@ const CreativeInfo = ({
   name,
   creative,
   totalAmounts,
-  counts
+  projects
 }) => {
-  const creativeTotal = sum(
-    totalAmounts.filter(row => row.funds === 'CE').map(row => row.total)
-  )
-
-  let creativeCount = counts.find(row => row.kind === 'creative')
-  if (!creativeCount || !creativeCount.count) return null
-  creativeCount = creativeCount.count
+  let creativeProjects = projects.find(row => row.kind === 'creative')
+  if (!creativeProjects || !creativeProjects.count) return null
+  const creativeCount = creativeProjects.count
+  const creativeTotal = creativeProjects.total
 
   let topN = creativeCount > TOP_N ? `Top ${TOP_N} ` : ''
 
@@ -145,7 +141,7 @@ CreativeInfo.propTypes = {
   name: PropTypes.string,
   creative: PropTypes.array,
   totalAmounts: PropTypes.array,
-  counts: PropTypes.array
+  projects: PropTypes.array
 }
 
 export default CreativeInfo

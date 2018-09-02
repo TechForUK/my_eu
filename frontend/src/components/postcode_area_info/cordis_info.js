@@ -44,13 +44,13 @@ CordisProject.propTypes = {
   project: PropTypes.object
 }
 
-const CordisInfo = ({ postcodeArea, name, cordis, totalAmounts, counts }) => {
+const CordisInfo = ({ postcodeArea, name, cordis, totalAmounts, projects }) => {
   const cordisTotal = sum(
     totalAmounts
       .filter(row => row.funds === 'FP7' || row.funds === 'H2020')
       .map(row => row.total)
   )
-  let cordisCount = counts.find(row => row.kind === 'cordis')
+  let cordisCount = projects.find(row => row.kind === 'cordis')
   if (!cordisCount || !cordisCount.count) return null
   cordisCount = cordisCount.count
 
@@ -116,7 +116,7 @@ CordisInfo.propTypes = {
   name: PropTypes.string,
   cordis: PropTypes.array,
   totalAmounts: PropTypes.array,
-  counts: PropTypes.array
+  projects: PropTypes.array
 }
 
 export default CordisInfo

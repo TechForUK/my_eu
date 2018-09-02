@@ -23,7 +23,10 @@ const CapInfo = ({ postcodeArea, name, cap }) => {
 
   return (
     <div className="card mt-3">
-      <h3 className="card-header">{compactTotal} for Farmers</h3>
+      <h3 className="card-header">
+        {compactTotal}
+        /year for Farmers
+      </h3>
       <div className="card-body">
         <h4 className="card-title">EU Support for Farming</h4>
         <p className="card-text lead">
