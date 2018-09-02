@@ -1,49 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import PostcodeAreaStore from '../postcode_area_store'
-import SearchAgain from './search_again'
-import { formatRoundPounds, formatSemiCompactPounds } from '../utilities'
-
-const postcodeAreaStore = new PostcodeAreaStore()
-
-function sum(xs) {
-  let total = 0
-  for (let x of xs) total += x
-  return total
-}
-
-function findLatestYearWithCapData(totalAmounts) {
-  const capYears = totalAmounts
-    .filter(row => row.funds === 'CAP')
-    .map(row => row.year)
-  return Math.max.apply(null, capYears)
-}
-
-const Header = ({ name, totalAmounts }) => {
-  const latestCapYear = findLatestYearWithCapData(totalAmounts)
-  const capYearTotals = totalAmounts
-    .filter(row => row.year === latestCapYear)
-    .map(row => row.total)
-  let total = 0
-  for (let yearTotal of capYearTotals) total += yearTotal
-  const displayTotal = formatRoundPounds(total)
-
-  return (
-    <React.Fragment>
-      <h2>EU Investment in {name}</h2>
-      <p className="lead">
-        In {latestCapYear}, the EU invested {displayTotal} in {name} to support
-        farms, research, culture and the local economy.
-      </p>
-    </React.Fragment>
-  )
-}
-
-Header.propTypes = {
-  name: PropTypes.string,
-  totalAmounts: PropTypes.array
-}
+import {
+  formatRoundPounds,
+  formatSemiCompactPounds,
+  sum
+} from '../../utilities'
 
 const CapInfo = ({ name, cap }) => {
   const maxCapYear = Math.max.apply(null, cap.map(row => row.year))
@@ -61,19 +23,15 @@ const CapInfo = ({ name, cap }) => {
 
   return (
     <div className="card mt-3">
-      <h3 className="card-header">
-        {compactTotal} for Farmers
-        <a
-          className="btn btn-social fa fa-twitter float-right"
-          href="#"
-          role="button"
-        />
-      </h3>
+      <h3 className="card-header">{compactTotal} for Farmers</h3>
       <div className="card-body">
         <h4 className="card-title">EU Support for Farming</h4>
         <p className="card-text lead">
           In {maxCapYear}, the EU invested {displayTotal} to support{' '}
           {displayCount} farmers in {name}.
+        </p>
+        <p>
+          <a className="btn btn-social fa fa-twitter" href="#" role="button" />
         </p>
         <div id={id} className="collapse">
           <h5>Farm Funding in {name} 2014&ndash;2017</h5>
@@ -172,38 +130,4 @@ CapInfo.propTypes = {
   cap: PropTypes.array
 }
 
-class PostcodeAreaInfo extends React.Component {
-  render() {
-    const data = this.lookup()
-    if (!data) return <div>Loading postcode data&hellip;</div>
-    return (
-      <div className="my-eu-postcode-area-info">
-        <ul className="nav">
-          <SearchAgain />
-        </ul>
-        <Header {...data} />
-        <CapInfo {...data} />
-      </div>
-    )
-  }
-
-  lookup() {
-    const { postcodeArea } = this.props.match.params
-    const data = postcodeAreaStore.lookup(postcodeArea)
-    if (data) return data
-    postcodeAreaStore.load().then(() => {
-      this.setState({ loaded: true })
-    })
-    return null
-  }
-}
-
-PostcodeAreaInfo.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      postcodeArea: PropTypes.string.isRequired
-    })
-  })
-}
-
-export default PostcodeAreaInfo
+export default CapInfo

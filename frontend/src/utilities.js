@@ -61,3 +61,9 @@ export function formatCompact(n) {
   if (r < 10) return r + 'T'
   return '>9T'
 }
+
+export function sum(xs) {
+  let total = 0
+  for (let x of xs) total += x
+  return total
+}
