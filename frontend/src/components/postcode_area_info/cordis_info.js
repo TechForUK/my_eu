@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import {
   formatRoundPounds,
@@ -20,6 +21,7 @@ const CordisProject = ({ project }) => {
     ) : (
       <span>{startYear}</span>
     )
+  const postcodePath = `/postcode/${project.postcode.split(/\s/).join('/')}`
 
   return (
     <li className="list-group-item">
@@ -29,7 +31,7 @@ const CordisProject = ({ project }) => {
       <p className="display-4">{formatRoundPounds(project.contribution_gbp)}</p>
       <p className="text-muted">{yearRange}</p>
       <p className="text-muted">
-        {project.name}, {project.postcode}
+        {project.name}, <Link to={postcodePath}>{project.postcode}</Link>
       </p>
     </li>
   )
