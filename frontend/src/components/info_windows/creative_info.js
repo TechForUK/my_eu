@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { formatRoundPounds } from '../../utilities'
+import Summary from './summary'
 
 const CreativeInfo = ({
   project,
@@ -38,34 +39,31 @@ const CreativeInfo = ({
   )}`
 
   let lead
-  if (coordinatorName === organisationName){
-    lead =
-    (
-     <p className="lead">
-       {organisationName} was the coordinator of the {project} project. The EU provided {displayEuGrant} for this project as a
-       whole.
-       {website}
-     </p>
-   )
+  if (coordinatorName === organisationName) {
+    lead = (
+      <p className="lead">
+        {organisationName} was the coordinator of the {project} project. The EU
+        provided {displayEuGrant} for this project as a whole.
+        {website}
+      </p>
+    )
+  } else {
+    lead = (
+      <p className="lead">
+        {organisationName} was part of the {project} project
+        {coordinator}. The EU provided {displayEuGrant} for this project as a
+        whole.
+        {website}
+      </p>
+    )
   }
-  else {
-
-   lead = (
-    <p className="lead">
-      {organisationName} was part of the {project} project
-      {coordinator}. The EU provided {displayEuGrant} for this project as a
-      whole.
-      {website}
-    </p>
-  )
-}
 
   return (
     <div className="my-eu-info-window">
       <h2>{organisationName}</h2>
       {lead}
       <h3>Summary</h3>
-      <p>{summary}</p>
+      <Summary text={summary} />
       <p>
         This grant as part of Creative Europe, which is a €1.46 billion European
         Union programme for the cultural and creative sectors for the years

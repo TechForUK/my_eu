@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { formatRoundPercentage, formatRoundPounds } from '../../utilities'
+import Summary from './summary'
 
 const CordisInfo = ({
   projectTitle,
@@ -58,7 +59,7 @@ const CordisInfo = ({
       <h3>{projectTitle}</h3>
       {lead}
       <h4>Objective</h4>
-      <p>{objective}</p>
+      <Summary text={objective} />
       <p>
         The European Research Council funds research that saves lives and drives
         innovation in the UK and across the EU.{' '}

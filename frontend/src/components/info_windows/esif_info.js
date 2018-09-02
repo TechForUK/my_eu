@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { formatRoundPercentage, formatRoundPounds } from '../../utilities'
+import Summary from './summary'
 
 const EsifInfo = ({
   organisationName,
@@ -42,7 +43,7 @@ const EsifInfo = ({
     summarySection = (
       <React.Fragment>
         <h4>Summary</h4>
-        <p>{summary}</p>
+        <Summary text={summary} />
       </React.Fragment>
     )
 
