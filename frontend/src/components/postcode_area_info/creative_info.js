@@ -26,13 +26,34 @@ const CreativeProject = ({ project }) => {
     )
   const postcodePath = `/postcode/${project.postcode.split(/\s/).join('/')}`
 
+  let numOrganisations
+  if (project.num_organisations > 1) {
+    if (project.num_countries > 1) {
+      numOrganisations = (
+        <span>
+          , between {project.num_organisations} organisations in{' '}
+          {project.num_countries} countries
+        </span>
+      )
+    } else {
+      numOrganisations = (
+        <span>
+          , between {project.num_organisations} organisations in the UK
+        </span>
+      )
+    }
+  }
+
   return (
     <li className="list-group-item">
       <p className="text-truncate">{project.project}</p>
       <p className="display-4">
         {formatRoundPounds(project.max_contribution_gbp)}
       </p>
-      <p className="text-muted">{yearRange}</p>
+      <p className="text-muted">
+        {yearRange}
+        {numOrganisations}
+      </p>
       <p className="text-muted">
         {project.organisation_name},{' '}
         <Link to={postcodePath}>{project.postcode}</Link>
@@ -97,7 +118,7 @@ const CreativeInfo = ({
             Creative Projects in {name}
           </h5>
           <ul className="list-group list-group-flush">
-            {creative.slice(0, 3).map(project => (
+            {creative.slice(0, TOP_N).map(project => (
               <CreativeProject key={project.my_eu_id} project={project} />
             ))}
           </ul>

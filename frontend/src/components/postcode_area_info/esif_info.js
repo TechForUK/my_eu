@@ -91,7 +91,7 @@ const EsifInfo = ({ postcodeArea, name, esif, totalAmounts, counts }) => {
             Growth Projects in {name}
           </h5>
           <ul className="list-group list-group-flush">
-            {esif.slice(0, 3).map(project => (
+            {esif.slice(0, TOP_N).map(project => (
               <EsifProject key={project.my_eu_id} project={project} />
             ))}
           </ul>
