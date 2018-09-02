@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom'
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
+  indefinitePluralise,
   sum
 } from '../../utilities'
 
-const MIN_TOTAL = 100
+const TOP_N = 3
 
 const EsifProject = ({ project }) => {
   const startYear = project.start_date.getFullYear()
@@ -41,13 +42,28 @@ EsifProject.propTypes = {
   project: PropTypes.object
 }
 
-const EsifInfo = ({ postcodeArea, name, esif, totalAmounts }) => {
+const EsifInfo = ({ postcodeArea, name, esif, totalAmounts, counts }) => {
   const esifTotal = sum(
     totalAmounts
       .filter(row => row.funds === 'ERDF' || row.funds === 'ESF')
       .map(row => row.total)
   )
-  if (esifTotal < MIN_TOTAL) return null
+
+  let esifCount = counts.find(row => row.kind === 'esif')
+  if (!esifCount || !esifCount.count) return null
+  esifCount = esifCount.count
+
+  let topN = esifCount > TOP_N ? `Top ${TOP_N} ` : ''
+
+  let moreProjects = null
+  if (esifCount > TOP_N) {
+    moreProjects = (
+      <p>
+        Browse the map to find{' '}
+        {indefinitePluralise(esifCount - TOP_N, 'more project')} in {name}.
+      </p>
+    )
+  }
 
   const id = `my-eu-postcode-area-info-${postcodeArea}-esif`
   const anchor = '#' + id
@@ -62,19 +78,24 @@ const EsifInfo = ({ postcodeArea, name, esif, totalAmounts }) => {
           EU Support for Employment and the Economy
         </h4>
         <p className="card-text lead">
-          The EU has invested {formatRoundPounds(esifTotal)} to support creative
-          projects in {name}.
+          The EU has invested {formatRoundPounds(esifTotal)} to support{' '}
+          {indefinitePluralise(esifCount, 'project', 4)} to create jobs in{' '}
+          {name}.
         </p>
         <p>
           <a className="btn btn-social fa fa-twitter" href="#" role="button" />
         </p>
         <div id={id} className="collapse">
-          <h5>Research Projects in {name}</h5>
+          <h5>
+            {topN}
+            Growth Projects in {name}
+          </h5>
           <ul className="list-group list-group-flush">
             {esif.slice(0, 3).map(project => (
               <EsifProject key={project.my_eu_id} project={project} />
             ))}
           </ul>
+          {moreProjects}
         </div>
       </div>
       <div className="card-footer text-center">
@@ -96,7 +117,8 @@ EsifInfo.propTypes = {
   postcodeArea: PropTypes.string,
   name: PropTypes.string,
   esif: PropTypes.array,
-  totalAmounts: PropTypes.array
+  totalAmounts: PropTypes.array,
+  counts: PropTypes.array
 }
 
 export default EsifInfo

@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom'
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
+  indefinitePluralise,
   sum
 } from '../../utilities'
 
-const MIN_TOTAL = 100
+const TOP_N = 3
 
 const CreativeProject = ({ project }) => {
   const startYear = project.start_date.getFullYear()
@@ -44,11 +45,32 @@ CreativeProject.propTypes = {
   project: PropTypes.object
 }
 
-const CreativeInfo = ({ postcodeArea, name, creative, totalAmounts }) => {
+const CreativeInfo = ({
+  postcodeArea,
+  name,
+  creative,
+  totalAmounts,
+  counts
+}) => {
   const creativeTotal = sum(
     totalAmounts.filter(row => row.funds === 'CE').map(row => row.total)
   )
-  if (creativeTotal < MIN_TOTAL) return null
+
+  let creativeCount = counts.find(row => row.kind === 'creative')
+  if (!creativeCount || !creativeCount.count) return null
+  creativeCount = creativeCount.count
+
+  let topN = creativeCount > TOP_N ? `Top ${TOP_N} ` : ''
+
+  let moreProjects = null
+  if (creativeCount > TOP_N) {
+    moreProjects = (
+      <p>
+        Browse the map to find{' '}
+        {indefinitePluralise(creativeCount - TOP_N, 'more project')} in {name}.
+      </p>
+    )
+  }
 
   const id = `my-eu-postcode-area-info-${postcodeArea}-creative`
   const anchor = '#' + id
@@ -63,19 +85,23 @@ const CreativeInfo = ({ postcodeArea, name, creative, totalAmounts }) => {
           EU Support for Culture, Creativity and the Arts
         </h4>
         <p className="card-text lead">
-          The EU has invested {formatRoundPounds(creativeTotal)} to support
-          creative projects in {name}.
+          The EU has invested {formatRoundPounds(creativeTotal)} to support{' '}
+          {indefinitePluralise(creativeCount, 'creative project', 4)} in {name}.
         </p>
         <p>
           <a className="btn btn-social fa fa-twitter" href="#" role="button" />
         </p>
         <div id={id} className="collapse">
-          <h5>Research Projects in {name}</h5>
+          <h5>
+            {topN}
+            Creative Projects in {name}
+          </h5>
           <ul className="list-group list-group-flush">
             {creative.slice(0, 3).map(project => (
               <CreativeProject key={project.my_eu_id} project={project} />
             ))}
           </ul>
+          {moreProjects}
         </div>
       </div>
       <div className="card-footer text-center">
@@ -97,7 +123,8 @@ CreativeInfo.propTypes = {
   postcodeArea: PropTypes.string,
   name: PropTypes.string,
   creative: PropTypes.array,
-  totalAmounts: PropTypes.array
+  totalAmounts: PropTypes.array,
+  counts: PropTypes.array
 }
 
 export default CreativeInfo

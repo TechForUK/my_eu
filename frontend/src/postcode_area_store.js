@@ -35,12 +35,22 @@ export default class PostcodeAreaStore {
     if (!name) throw new Error('postcode area not found')
 
     const totalAmounts = this._lookupTotalAmounts(postcodeArea)
+    const counts = this._lookupCounts(postcodeArea)
     const cap = this._lookupCap(postcodeArea)
     const cordis = this._lookupProjects(postcodeArea, 'cordis')
     const creative = this._lookupProjects(postcodeArea, 'creative')
     const esif = this._lookupProjects(postcodeArea, 'esif')
 
-    return { postcodeArea, name, totalAmounts, cap, cordis, creative, esif }
+    return {
+      postcodeArea,
+      name,
+      totalAmounts,
+      counts,
+      cap,
+      cordis,
+      creative,
+      esif
+    }
   }
 
   load() {
@@ -72,6 +82,16 @@ export default class PostcodeAreaStore {
     return convertSplitRowsToRecords(
       totals.columns,
       totals.data.filter(row => row[postcodeAreaIndex] === postcodeArea),
+      postcodeAreaIndex
+    )
+  }
+
+  _lookupCounts(postcodeArea) {
+    const counts = this.data.counts
+    const postcodeAreaIndex = counts.columns.indexOf('postcode_area')
+    return convertSplitRowsToRecords(
+      counts.columns,
+      counts.data.filter(row => row[postcodeAreaIndex] === postcodeArea),
       postcodeAreaIndex
     )
   }

@@ -5,8 +5,11 @@ import { Link } from 'react-router-dom'
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
+  indefinitePluralise,
   sum
 } from '../../utilities'
+
+const TOP_N = 3
 
 const CordisProject = ({ project }) => {
   const startYear = project.start_date.getFullYear()
@@ -41,12 +44,27 @@ CordisProject.propTypes = {
   project: PropTypes.object
 }
 
-const CordisInfo = ({ postcodeArea, name, cordis, totalAmounts }) => {
+const CordisInfo = ({ postcodeArea, name, cordis, totalAmounts, counts }) => {
   const cordisTotal = sum(
     totalAmounts
       .filter(row => row.funds === 'FP7' || row.funds === 'H2020')
       .map(row => row.total)
   )
+  let cordisCount = counts.find(row => row.kind === 'cordis')
+  if (!cordisCount || !cordisCount.count) return null
+  cordisCount = cordisCount.count
+
+  let topN = cordisCount > TOP_N ? `Top ${TOP_N} ` : ''
+
+  let moreProjects = null
+  if (cordisCount > TOP_N) {
+    moreProjects = (
+      <p>
+        Browse the map to find{' '}
+        {indefinitePluralise(cordisCount - TOP_N, 'more project')} in {name}.
+      </p>
+    )
+  }
 
   const id = `my-eu-postcode-area-info-${postcodeArea}-cordis`
   const anchor = '#' + id
@@ -59,19 +77,23 @@ const CordisInfo = ({ postcodeArea, name, cordis, totalAmounts }) => {
       <div className="card-body">
         <h4 className="card-title">EU Support for Research</h4>
         <p className="card-text lead">
-          The EU has invested {formatRoundPounds(cordisTotal)} to support
-          research projects in {name}.
+          The EU has invested {formatRoundPounds(cordisTotal)} to support{' '}
+          {indefinitePluralise(cordisCount, 'research project', 4)} in {name}.
         </p>
         <p>
           <a className="btn btn-social fa fa-twitter" href="#" role="button" />
         </p>
         <div id={id} className="collapse">
-          <h5>Research Projects in {name}</h5>
+          <h5>
+            {topN}
+            Research Projects in {name}
+          </h5>
           <ul className="list-group list-group-flush">
-            {cordis.slice(0, 3).map(project => (
+            {cordis.slice(0, TOP_N).map(project => (
               <CordisProject key={project.my_eu_id} project={project} />
             ))}
           </ul>
+          {moreProjects}
         </div>
       </div>
       <div className="card-footer text-center">
@@ -93,7 +115,8 @@ CordisInfo.propTypes = {
   postcodeArea: PropTypes.string,
   name: PropTypes.string,
   cordis: PropTypes.array,
-  totalAmounts: PropTypes.array
+  totalAmounts: PropTypes.array,
+  counts: PropTypes.array
 }
 
 export default CordisInfo

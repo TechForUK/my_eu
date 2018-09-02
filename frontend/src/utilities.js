@@ -67,3 +67,8 @@ export function sum(xs) {
   for (let x of xs) total += x
   return total
 }
+
+export function indefinitePluralise(n, noun, limit = 1, plural = `${noun}s`) {
+  if (n <= limit) return plural
+  return `${n} ${plural}`
+}
