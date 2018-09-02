@@ -5,6 +5,7 @@ import PostcodeAreaStore from '../../postcode_area_store'
 import SearchAgain from '../search_again'
 
 import CapInfo from './cap_info'
+import CordisInfo from './cordis_info'
 import Header from './header'
 
 const postcodeAreaStore = new PostcodeAreaStore()
@@ -20,6 +21,7 @@ class PostcodeAreaInfo extends React.Component {
         </ul>
         <Header {...data} />
         <CapInfo {...data} />
+        <CordisInfo {...data} />
       </div>
     )
   }

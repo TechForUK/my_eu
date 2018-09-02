@@ -7,7 +7,7 @@ import {
   sum
 } from '../../utilities'
 
-const CapInfo = ({ name, cap }) => {
+const CapInfo = ({ postcodeArea, name, cap }) => {
   const maxCapYear = Math.max.apply(null, cap.map(row => row.year))
   const latestCap = cap.find(row => row.year === maxCapYear)
   const compactTotal = formatSemiCompactPounds(latestCap.total)
@@ -18,7 +18,7 @@ const CapInfo = ({ name, cap }) => {
   const allTimeTotalEagf = sum(cap.map(row => row.eagf))
   const allTimeTotalEafrd = sum(cap.map(row => row.eafrd))
 
-  const id = `my-eu-postcode-area-info-${cap.postcodeArea}-cap`
+  const id = `my-eu-postcode-area-info-${postcodeArea}-cap`
   const anchor = '#' + id
 
   return (
@@ -126,6 +126,7 @@ const CapInfo = ({ name, cap }) => {
 }
 
 CapInfo.propTypes = {
+  postcodeArea: PropTypes.string,
   name: PropTypes.string,
   cap: PropTypes.array
 }
