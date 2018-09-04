@@ -66,7 +66,7 @@ const EsifInfo = ({ postcodeArea, name, esif, totalAmounts, projects }) => {
   }
 
   const lead =
-    `The EU has invested {formatRoundPounds(esifTotal)} to support` +
+    `The EU has invested ${formatRoundPounds(esifTotal)} to support` +
     ` ${indefinitePluralise(esifCount, 'project', 4)} to create jobs in` +
     ` ${name}.`
   const tweet = encodeURIComponent(lead)
