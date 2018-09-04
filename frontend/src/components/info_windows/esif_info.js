@@ -48,7 +48,7 @@ const EsifInfo = ({
     )
 
   return (
-    <div>
+    <div className="my-eu-info-window">
       <h3>{projectTitle}</h3>
       {lead}
       {summarySection}

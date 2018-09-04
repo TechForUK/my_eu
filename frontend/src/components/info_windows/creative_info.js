@@ -60,9 +60,9 @@ const CreativeInfo = ({
 
   return (
     <div className="my-eu-info-window">
-      <h2>{organisationName}</h2>
+      <h3>{organisationName}</h3>
       {lead}
-      <h3>Summary</h3>
+      <h4>Summary</h4>
       <Summary text={summary} />
       <p>
         This grant as part of Creative Europe, which is a €1.46 billion European

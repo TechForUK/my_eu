@@ -29,8 +29,8 @@ const FtsInfo = ({
   )
 
   return (
-    <div>
-      <h2>{beneficiary}</h2>
+    <div className="my-eu-info-window">
+      <h3>{beneficiary}</h3>
       {lead}
       <p>
         This grant was from the EU budget centrally administered by the

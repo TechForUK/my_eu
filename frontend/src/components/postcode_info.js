@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import ProjectStore from '../project_store'
 import SearchAgain from './search_again'
-import { extractPostcodeArea } from '../utilities'
+import { extractPostcodeArea, indefinitePluralise } from '../utilities'
 
 import CordisInfo from './info_windows/cordis_info'
 import CreativeInfo from './info_windows/creative_info'
@@ -36,14 +36,12 @@ class PostcodeInfo extends React.Component {
   render() {
     const projects = this.lookup()
     if (projects) {
-      let header
-      if (projects.length > 1) {
-        header = (
-          <h2>
-            {projects.length} projects at {this.getPostcode()}
-          </h2>
-        )
-      }
+      const header = (
+        <h2>
+          {indefinitePluralise(projects.length, 'Project')} at{' '}
+          {this.getPostcode()}
+        </h2>
+      )
 
       return (
         <div id="my-eu-info">

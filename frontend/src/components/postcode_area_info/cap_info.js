@@ -18,6 +18,12 @@ const CapInfo = ({ postcodeArea, name, cap }) => {
   const allTimeTotalEagf = sum(cap.map(row => row.eagf))
   const allTimeTotalEafrd = sum(cap.map(row => row.eafrd))
 
+  const lead =
+    `In ${maxCapYear}, the EU invested ${displayTotal} to support` +
+    ` ${displayCount} farmers in ${name}.`
+  const tweet = encodeURIComponent(lead)
+  const url = encodeURIComponent(document.location.href)
+
   const id = `my-eu-postcode-area-info-${postcodeArea}-cap`
   const anchor = '#' + id
 
@@ -29,12 +35,13 @@ const CapInfo = ({ postcodeArea, name, cap }) => {
       </h3>
       <div className="card-body">
         <h4 className="card-title">EU Support for Farming</h4>
-        <p className="card-text lead">
-          In {maxCapYear}, the EU invested {displayTotal} to support{' '}
-          {displayCount} farmers in {name}.
-        </p>
+        <p className="card-text lead">{lead}</p>
         <p>
-          <a className="btn btn-social fa fa-twitter" href="#" role="button" />
+          <a
+            className="btn btn-social fa fa-twitter"
+            href={`https://twitter.com/intent/tweet?text=${tweet}&url=${url}`}
+            role="button"
+          />
         </p>
         <div id={id} className="collapse">
           <h5>Farm Funding in {name} 2014&ndash;2017</h5>

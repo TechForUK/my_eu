@@ -65,6 +65,13 @@ const EsifInfo = ({ postcodeArea, name, esif, totalAmounts, projects }) => {
     )
   }
 
+  const lead =
+    `The EU has invested {formatRoundPounds(esifTotal)} to support` +
+    ` ${indefinitePluralise(esifCount, 'project', 4)} to create jobs in` +
+    ` ${name}.`
+  const tweet = encodeURIComponent(lead)
+  const url = encodeURIComponent(document.location.href)
+
   const id = `my-eu-postcode-area-info-${postcodeArea}-esif`
   const anchor = '#' + id
 
@@ -77,13 +84,13 @@ const EsifInfo = ({ postcodeArea, name, esif, totalAmounts, projects }) => {
         <h4 className="card-title">
           EU Support for Employment and the Economy
         </h4>
-        <p className="card-text lead">
-          The EU has invested {formatRoundPounds(esifTotal)} to support{' '}
-          {indefinitePluralise(esifCount, 'project', 4)} to create jobs in{' '}
-          {name}.
-        </p>
+        <p className="card-text lead">{lead}</p>
         <p>
-          <a className="btn btn-social fa fa-twitter" href="#" role="button" />
+          <a
+            className="btn btn-social fa fa-twitter"
+            href={`https://twitter.com/intent/tweet?text=${tweet}&url=${url}`}
+            role="button"
+          />
         </p>
         <div id={id} className="collapse">
           <h5>

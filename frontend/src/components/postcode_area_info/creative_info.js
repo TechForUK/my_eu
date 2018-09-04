@@ -89,6 +89,12 @@ const CreativeInfo = ({
     )
   }
 
+  const lead =
+    `The EU has invested ${formatRoundPounds(creativeTotal)} to support` +
+    ` ${indefinitePluralise(creativeCount, 'creative project', 4)} in ${name}.`
+  const tweet = encodeURIComponent(lead)
+  const url = encodeURIComponent(document.location.href)
+
   const id = `my-eu-postcode-area-info-${postcodeArea}-creative`
   const anchor = '#' + id
 
@@ -101,12 +107,13 @@ const CreativeInfo = ({
         <h4 className="card-title">
           EU Support for Culture, Creativity and the Arts
         </h4>
-        <p className="card-text lead">
-          The EU has invested {formatRoundPounds(creativeTotal)} to support{' '}
-          {indefinitePluralise(creativeCount, 'creative project', 4)} in {name}.
-        </p>
+        <p className="card-text lead">{lead}</p>
         <p>
-          <a className="btn btn-social fa fa-twitter" href="#" role="button" />
+          <a
+            className="btn btn-social fa fa-twitter"
+            href={`https://twitter.com/intent/tweet?text=${tweet}&url=${url}`}
+            role="button"
+          />
         </p>
         <div id={id} className="collapse">
           <h5>

@@ -66,6 +66,12 @@ const CordisInfo = ({ postcodeArea, name, cordis, totalAmounts, projects }) => {
     )
   }
 
+  const lead =
+    `The EU has invested ${formatRoundPounds(cordisTotal)} to support` +
+    ` ${indefinitePluralise(cordisCount, 'research project', 4)} in ${name}.`
+  const tweet = encodeURIComponent(lead)
+  const url = encodeURIComponent(document.location.href)
+
   const id = `my-eu-postcode-area-info-${postcodeArea}-cordis`
   const anchor = '#' + id
 
@@ -76,12 +82,13 @@ const CordisInfo = ({ postcodeArea, name, cordis, totalAmounts, projects }) => {
       </h3>
       <div className="card-body">
         <h4 className="card-title">EU Support for Research</h4>
-        <p className="card-text lead">
-          The EU has invested {formatRoundPounds(cordisTotal)} to support{' '}
-          {indefinitePluralise(cordisCount, 'research project', 4)} in {name}.
-        </p>
+        <p className="card-text lead">{lead}</p>
         <p>
-          <a className="btn btn-social fa fa-twitter" href="#" role="button" />
+          <a
+            className="btn btn-social fa fa-twitter"
+            href={`https://twitter.com/intent/tweet?text=${tweet}&url=${url}`}
+            role="button"
+          />
         </p>
         <div id={id} className="collapse">
           <h5>
