@@ -31,8 +31,10 @@ const CreativeInfo = ({
     coordinator = <span>, coordinated by {coordinatorName}</span>
   }
 
-  const tweet = `${organisationName} was part of the ${project} project${coordinator}. The EU provided ${displayEuGrant} for this project as a
-  whole. See more funded projects at @myeuuk `
+  const tweet =
+    `${organisationName} was part of the ${project} project.` +
+    ` The EU provided ${displayEuGrant} for this project as a whole.` +
+    ` See more funded projects at @myeuuk`
 
   const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
     tweet

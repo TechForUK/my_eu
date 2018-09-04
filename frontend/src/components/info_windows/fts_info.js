@@ -12,8 +12,10 @@ const FtsInfo = ({
 }) => {
   const displayEuGrant = formatRoundPounds(amount)
 
-  const tweet = `In ${year}, the EU provided ${beneficiary} ${displayEuGrant} as part of the
-  ${budgetLineNameAndNumber} programme. See more funded projects at @myeuuk `
+  const tweet =
+    `In ${year}, the EU provided ${beneficiary} ${displayEuGrant}` +
+    ` as part of the ${budgetLineNameAndNumber} programme.` +
+    ` See more funded projects at @myeuuk`
 
   const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
     tweet
