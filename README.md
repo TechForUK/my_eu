@@ -91,11 +91,11 @@ The static website is deployed to Google Cloud Storage behind CloudFlare for SSL
 
 2. You need to get the `PRODUCTION_MY_EU_API_KEY`, which restricts the referrer to `www.myeu.uk` (and does not allow localhost or other domains).
 
-The commands are then:
+Then run the deploy script to deploy:
 
 ```
-npm run build
-gsutil rsync -c -R dist gs://www.myeu.uk
+cd frontend
+./deploy.sh
 ```
 
 ## Other Sources
