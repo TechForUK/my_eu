@@ -1,12 +1,14 @@
 import React from 'react'
-import { Title } from 'react-head'
+import { Meta, Title } from 'react-head'
 
 import Nav from '../components/nav'
 import Share from '../components/share'
+import { SITE_EMAIL_BODY, SITE_URL } from '../strings'
 
 const About = () => (
   <React.Fragment>
-    <Title>About - MyEU.UK</Title>
+    <Title>about - myeu.uk - see what the EU has done for you</Title>
+    <Meta property="og:type" content="article" />
     <Nav path="/about/" />
     <div className="container">
       <h1>About MyEU</h1>
@@ -194,7 +196,8 @@ const About = () => (
       </p>
       <Share
         message="See what the EU has funded in your area"
-        url="https://www.myeu.uk"
+        url={SITE_URL}
+        emailBody={SITE_EMAIL_BODY}
       />
     </div>
   </React.Fragment>

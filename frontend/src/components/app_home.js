@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { SITE_EMAIL_BODY, SITE_URL } from '../strings'
 import SearchBox from './search_box'
 import Share from './share'
 
@@ -10,7 +11,8 @@ const AppHome = () => {
       <SearchBox />
       <Share
         message="See what the EU has funded in your area"
-        url="https://www.myeu.uk"
+        url={SITE_URL}
+        emailBody={SITE_EMAIL_BODY}
       />
     </React.Fragment>
   )
