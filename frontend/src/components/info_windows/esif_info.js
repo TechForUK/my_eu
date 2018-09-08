@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { formatRoundPercentage, formatRoundPounds } from '../../utilities'
+import Share from '../share'
 import Summary from './summary'
+import { formatRoundPercentage, formatRoundPounds } from '../../utilities'
 
 const EsifInfo = ({
   organisationName,
@@ -14,11 +15,7 @@ const EsifInfo = ({
 }) => {
   const displayEuInvestment = formatRoundPounds(euInvestment)
   const displayPercentage = formatRoundPercentage(euInvestment / projectCost)
-  const tweet = `The EU provided ${organisationName} with ${displayEuInvestment} to fund ${projectTitle}. See more funded projects at @myeuuk`
-
-  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-    tweet
-  )}`
+  const tweet = `The EU provided ${organisationName} with ${displayEuInvestment} to fund ${projectTitle}.`
 
   let lead
   if (!projectCost || euInvestment >= projectCost) {
@@ -60,11 +57,7 @@ const EsifInfo = ({
           Find out more.
         </a>
       </p>
-      <p>
-        <a className="twitter-share-button" href={twitterLink}>
-          Tweet
-        </a>
-      </p>
+      <Share message={tweet} />
     </div>
   )
 }

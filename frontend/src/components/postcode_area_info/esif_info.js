@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import Share from '../share'
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
@@ -71,8 +72,8 @@ const EsifInfo = ({ postcodeArea, esif, totalAmounts, projects }) => {
     `The EU has invested ${formatRoundPounds(esifTotal)} to support` +
     ` ${indefinitePluralise(esifCount, 'project', 4)} to create jobs` +
     ` ${getPrepositionAreaName(postcodeArea)}.`
-  const tweet = encodeURIComponent(lead)
-  const url = encodeURIComponent(document.location.href)
+  const title = 'EU Support for Employment and the Economy'
+  const emailSubject = `${title} ${getPrepositionAreaName(postcodeArea)}`
 
   const id = `my-eu-postcode-area-info-${postcodeArea}-esif`
   const anchor = '#' + id
@@ -83,17 +84,9 @@ const EsifInfo = ({ postcodeArea, esif, totalAmounts, projects }) => {
         {formatSemiCompactPounds(esifTotal)} for Growth and Jobs
       </h3>
       <div className="card-body">
-        <h4 className="card-title">
-          EU Support for Employment and the Economy
-        </h4>
+        <h4 className="card-title">{title}</h4>
         <p className="card-text lead">{lead}</p>
-        <p>
-          <a
-            className="btn btn-social fa fa-twitter"
-            href={`https://twitter.com/intent/tweet?text=${tweet}&url=${url}`}
-            role="button"
-          />
-        </p>
+        <Share message={lead} emailSubject={emailSubject} />
         <div id={id} className="collapse">
           <h5>
             {topN}

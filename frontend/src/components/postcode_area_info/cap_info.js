@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Share from '../share'
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
@@ -22,8 +23,8 @@ const CapInfo = ({ postcodeArea, cap }) => {
   const lead =
     `In ${maxCapYear}, the EU invested ${displayTotal} to support` +
     ` ${displayCount} farmers ${getPrepositionAreaName(postcodeArea)}.`
-  const tweet = encodeURIComponent(lead)
-  const url = encodeURIComponent(document.location.href)
+  const title = 'EU Support for Farming'
+  const emailSubject = `${title} ${getPrepositionAreaName(postcodeArea)}`
 
   const id = `my-eu-postcode-area-info-${postcodeArea}-cap`
   const anchor = '#' + id
@@ -35,15 +36,9 @@ const CapInfo = ({ postcodeArea, cap }) => {
         /year for Farmers
       </h3>
       <div className="card-body">
-        <h4 className="card-title">EU Support for Farming</h4>
+        <h4 className="card-title">{title}</h4>
         <p className="card-text lead">{lead}</p>
-        <p>
-          <a
-            className="btn btn-social fa fa-twitter"
-            href={`https://twitter.com/intent/tweet?text=${tweet}&url=${url}`}
-            role="button"
-          />
-        </p>
+        <Share message={lead} emailSubject={emailSubject} />
         <div id={id} className="collapse">
           <h5>
             Farm Funding {getPrepositionAreaName(postcodeArea)} 2014&ndash;2017

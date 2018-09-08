@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import Share from '../share'
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
@@ -75,8 +76,8 @@ const CordisInfo = ({ postcodeArea, cordis, totalAmounts, projects }) => {
     'research project',
     4
   )} ${getPrepositionAreaName(postcodeArea)}.`
-  const tweet = encodeURIComponent(lead)
-  const url = encodeURIComponent(document.location.href)
+  const title = 'EU Support for Research'
+  const emailSubject = `${title} ${getPrepositionAreaName(postcodeArea)}`
 
   const id = `my-eu-postcode-area-info-${postcodeArea}-cordis`
   const anchor = '#' + id
@@ -87,15 +88,9 @@ const CordisInfo = ({ postcodeArea, cordis, totalAmounts, projects }) => {
         {formatSemiCompactPounds(cordisTotal)} for Research
       </h3>
       <div className="card-body">
-        <h4 className="card-title">EU Support for Research</h4>
+        <h4 className="card-title">{title}</h4>
         <p className="card-text lead">{lead}</p>
-        <p>
-          <a
-            className="btn btn-social fa fa-twitter"
-            href={`https://twitter.com/intent/tweet?text=${tweet}&url=${url}`}
-            role="button"
-          />
-        </p>
+        <Share message={lead} emailSubject={emailSubject} />
         <div id={id} className="collapse">
           <h5>
             {topN}

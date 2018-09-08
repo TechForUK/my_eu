@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { formatRoundPounds } from '../../utilities'
+import Share from '../share'
 import Summary from './summary'
+import { formatRoundPounds } from '../../utilities'
 
 const CreativeInfo = ({
   project,
@@ -33,12 +34,7 @@ const CreativeInfo = ({
 
   const tweet =
     `${organisationName} was part of the ${project} project.` +
-    ` The EU provided ${displayEuGrant} for this project as a whole.` +
-    ` See more funded projects at @myeuuk`
-
-  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-    tweet
-  )}`
+    ` The EU provided ${displayEuGrant} for this project as a whole.`
 
   let lead
   if (coordinatorName === organisationName) {
@@ -74,11 +70,7 @@ const CreativeInfo = ({
           Find out more.
         </a>
       </p>
-      <p>
-        <a className="twitter-share-button" href={twitterLink}>
-          Tweet
-        </a>
-      </p>
+      <Share message={tweet} />
     </div>
   )
 }

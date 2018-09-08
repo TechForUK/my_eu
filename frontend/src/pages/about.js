@@ -2,6 +2,7 @@ import React from 'react'
 import { Title } from 'react-head'
 
 import Nav from '../components/nav'
+import Share from '../components/share'
 
 const About = () => (
   <React.Fragment>
@@ -42,11 +43,9 @@ const About = () => (
         <a href="https://twitter.com/meloncholy">Andrew Weeks</a>
       </p>
       <p>
-        Thanks to {' '}
-        <a href="https://techforuk.com/">Tech for UK</a>{' '}
-        and{' '}
-        <a href="https://www.bestforbritain.org/">Best for Britain</a>{' '}
-        for their support.
+        Thanks to <a href="https://techforuk.com/">Tech for UK</a> and{' '}
+        <a href="https://www.bestforbritain.org/">Best for Britain</a> for their
+        support.
       </p>
       <h2>Data and Methodology</h2>
       <p>We used data from the following datasets to create myeu.uk:</p>
@@ -192,33 +191,11 @@ const About = () => (
           Contact your MP
         </a>{' '}
         and tell them how you feel.
-        <div className="respond-group">
-          Share:
-          <br />
-          <a
-            className="btn btn-social fa fa-twitter"
-            href="https://twitter.com/intent/tweet?text=See%20what%20the%20EU%20has%20funded%20in%20your%20area;url=https%3A%2F%2Fmyeu.uk"
-            role="button"
-          />
-          <a
-            className="btn btn-social fa fa-facebook"
-            href="https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=https%3A%2F%2Fmyeu.uk%2F&display=popup&ref=plugin&src=share_button"
-            role="button"
-          />
-          <a
-            className="btn btn-social fa fa-envelope"
-            href="mailto:?subject=What%20has%20the%20EU%20done%20for%20you&#63&amp;body=https%3A%2F%2Fmyeu.uk"
-            role="button"
-          />
-          <a
-            className="btn btn-contact"
-            href="https://www.bestforbritain.org/contact_your_mp"
-            role="button"
-          >
-            Contact your MP
-          </a>
-        </div>
       </p>
+      <Share
+        message="See what the EU has funded in your area"
+        url="https://www.myeu.uk"
+      />
     </div>
   </React.Fragment>
 )

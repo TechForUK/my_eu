@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Share from '../share'
 import { formatRoundPounds } from '../../utilities'
 
 const FtsInfo = ({
@@ -14,12 +15,7 @@ const FtsInfo = ({
 
   const tweet =
     `In ${year}, the EU provided ${beneficiary} ${displayEuGrant}` +
-    ` as part of the ${budgetLineNameAndNumber} programme.` +
-    ` See more funded projects at @myeuuk`
-
-  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-    tweet
-  )}`
+    ` as part of the ${budgetLineNameAndNumber} programme.`
 
   let lead
 
@@ -41,11 +37,7 @@ const FtsInfo = ({
           Find out more.
         </a>
       </p>
-      <p>
-        <a className="twitter-share-button" href={twitterLink}>
-          Tweet
-        </a>
-      </p>
+      <Share message={tweet} />
     </div>
   )
 }
