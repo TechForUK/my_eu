@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
+  getPrepositionAreaName,
   indefinitePluralise,
   sum
 } from '../../utilities'
@@ -44,7 +45,7 @@ CordisProject.propTypes = {
   project: PropTypes.object
 }
 
-const CordisInfo = ({ postcodeArea, name, cordis, totalAmounts, projects }) => {
+const CordisInfo = ({ postcodeArea, cordis, totalAmounts, projects }) => {
   const cordisTotal = sum(
     totalAmounts
       .filter(row => row.funds === 'FP7' || row.funds === 'H2020')
@@ -61,14 +62,19 @@ const CordisInfo = ({ postcodeArea, name, cordis, totalAmounts, projects }) => {
     moreProjects = (
       <p>
         Browse the map to find{' '}
-        {indefinitePluralise(cordisCount - TOP_N, 'more project')} in {name}.
+        {indefinitePluralise(cordisCount - TOP_N, 'more project')}{' '}
+        {getPrepositionAreaName(postcodeArea)}.
       </p>
     )
   }
 
-  const lead =
-    `The EU has invested ${formatRoundPounds(cordisTotal)} to support` +
-    ` ${indefinitePluralise(cordisCount, 'research project', 4)} in ${name}.`
+  const lead = `The EU has invested ${formatRoundPounds(
+    cordisTotal
+  )} to support ${indefinitePluralise(
+    cordisCount,
+    'research project',
+    4
+  )} ${getPrepositionAreaName(postcodeArea)}.`
   const tweet = encodeURIComponent(lead)
   const url = encodeURIComponent(document.location.href)
 
@@ -93,7 +99,7 @@ const CordisInfo = ({ postcodeArea, name, cordis, totalAmounts, projects }) => {
         <div id={id} className="collapse">
           <h5>
             {topN}
-            Research Projects in {name}
+            Research Projects {getPrepositionAreaName(postcodeArea)}
           </h5>
           <ul className="list-group list-group-flush">
             {cordis.slice(0, TOP_N).map(project => (
@@ -120,7 +126,6 @@ const CordisInfo = ({ postcodeArea, name, cordis, totalAmounts, projects }) => {
 
 CordisInfo.propTypes = {
   postcodeArea: PropTypes.string,
-  name: PropTypes.string,
   cordis: PropTypes.array,
   totalAmounts: PropTypes.array,
   projects: PropTypes.array

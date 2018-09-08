@@ -6,6 +6,7 @@ import {
   formatRoundPounds,
   formatSemiCompactPounds,
   indefinitePluralise,
+  getPrepositionAreaName,
   sum
 } from '../../utilities'
 
@@ -42,7 +43,7 @@ EsifProject.propTypes = {
   project: PropTypes.object
 }
 
-const EsifInfo = ({ postcodeArea, name, esif, totalAmounts, projects }) => {
+const EsifInfo = ({ postcodeArea, esif, totalAmounts, projects }) => {
   const esifTotal = sum(
     totalAmounts
       .filter(row => row.funds === 'ERDF' || row.funds === 'ESF')
@@ -60,15 +61,16 @@ const EsifInfo = ({ postcodeArea, name, esif, totalAmounts, projects }) => {
     moreProjects = (
       <p>
         Browse the map to find{' '}
-        {indefinitePluralise(esifCount - TOP_N, 'more project')} in {name}.
+        {indefinitePluralise(esifCount - TOP_N, 'more project')}{' '}
+        {getPrepositionAreaName(postcodeArea)}.
       </p>
     )
   }
 
   const lead =
     `The EU has invested ${formatRoundPounds(esifTotal)} to support` +
-    ` ${indefinitePluralise(esifCount, 'project', 4)} to create jobs in` +
-    ` ${name}.`
+    ` ${indefinitePluralise(esifCount, 'project', 4)} to create jobs` +
+    ` ${getPrepositionAreaName(postcodeArea)}.`
   const tweet = encodeURIComponent(lead)
   const url = encodeURIComponent(document.location.href)
 
@@ -95,7 +97,7 @@ const EsifInfo = ({ postcodeArea, name, esif, totalAmounts, projects }) => {
         <div id={id} className="collapse">
           <h5>
             {topN}
-            Growth Projects in {name}
+            Growth Projects {getPrepositionAreaName(postcodeArea)}
           </h5>
           <ul className="list-group list-group-flush">
             {esif.slice(0, TOP_N).map(project => (
@@ -122,7 +124,6 @@ const EsifInfo = ({ postcodeArea, name, esif, totalAmounts, projects }) => {
 
 EsifInfo.propTypes = {
   postcodeArea: PropTypes.string,
-  name: PropTypes.string,
   esif: PropTypes.array,
   totalAmounts: PropTypes.array,
   projects: PropTypes.array

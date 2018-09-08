@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
+  getPrepositionAreaName,
   indefinitePluralise
 } from '../../utilities'
 
@@ -65,13 +66,7 @@ CreativeProject.propTypes = {
   project: PropTypes.object
 }
 
-const CreativeInfo = ({
-  postcodeArea,
-  name,
-  creative,
-  totalAmounts,
-  projects
-}) => {
+const CreativeInfo = ({ postcodeArea, creative, totalAmounts, projects }) => {
   let creativeProjects = projects.find(row => row.kind === 'creative')
   if (!creativeProjects || !creativeProjects.count) return null
   const creativeCount = creativeProjects.count
@@ -84,14 +79,19 @@ const CreativeInfo = ({
     moreProjects = (
       <p>
         Browse the map to find{' '}
-        {indefinitePluralise(creativeCount - TOP_N, 'more project')} in {name}.
+        {indefinitePluralise(creativeCount - TOP_N, 'more project')}{' '}
+        {getPrepositionAreaName(postcodeArea)}.
       </p>
     )
   }
 
   const lead =
     `The EU has invested ${formatRoundPounds(creativeTotal)} to support` +
-    ` ${indefinitePluralise(creativeCount, 'creative project', 4)} in ${name}.`
+    ` ${indefinitePluralise(
+      creativeCount,
+      'creative project',
+      4
+    )} ${getPrepositionAreaName(postcodeArea)}.`
   const tweet = encodeURIComponent(lead)
   const url = encodeURIComponent(document.location.href)
 
@@ -118,7 +118,7 @@ const CreativeInfo = ({
         <div id={id} className="collapse">
           <h5>
             {topN}
-            Creative Projects in {name}
+            Creative Projects {getPrepositionAreaName(postcodeArea)}
           </h5>
           <ul className="list-group list-group-flush">
             {creative.slice(0, TOP_N).map(project => (
@@ -145,7 +145,6 @@ const CreativeInfo = ({
 
 CreativeInfo.propTypes = {
   postcodeArea: PropTypes.string,
-  name: PropTypes.string,
   creative: PropTypes.array,
   totalAmounts: PropTypes.array,
   projects: PropTypes.array

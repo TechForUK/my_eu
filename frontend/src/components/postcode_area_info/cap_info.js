@@ -4,10 +4,11 @@ import PropTypes from 'prop-types'
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
+  getPrepositionAreaName,
   sum
 } from '../../utilities'
 
-const CapInfo = ({ postcodeArea, name, cap }) => {
+const CapInfo = ({ postcodeArea, cap }) => {
   const maxCapYear = Math.max.apply(null, cap.map(row => row.year))
   const latestCap = cap.find(row => row.year === maxCapYear)
   const compactTotal = formatSemiCompactPounds(latestCap.total)
@@ -20,7 +21,7 @@ const CapInfo = ({ postcodeArea, name, cap }) => {
 
   const lead =
     `In ${maxCapYear}, the EU invested ${displayTotal} to support` +
-    ` ${displayCount} farmers in ${name}.`
+    ` ${displayCount} farmers ${getPrepositionAreaName(postcodeArea)}.`
   const tweet = encodeURIComponent(lead)
   const url = encodeURIComponent(document.location.href)
 
@@ -44,7 +45,9 @@ const CapInfo = ({ postcodeArea, name, cap }) => {
           />
         </p>
         <div id={id} className="collapse">
-          <h5>Farm Funding in {name} 2014&ndash;2017</h5>
+          <h5>
+            Farm Funding {getPrepositionAreaName(postcodeArea)} 2014&ndash;2017
+          </h5>
           <div className="table-responsive">
             <table className="table table-sm">
               <thead>
@@ -137,7 +140,6 @@ const CapInfo = ({ postcodeArea, name, cap }) => {
 
 CapInfo.propTypes = {
   postcodeArea: PropTypes.string,
-  name: PropTypes.string,
   cap: PropTypes.array
 }
 

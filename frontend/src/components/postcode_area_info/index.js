@@ -14,6 +14,7 @@ const postcodeAreaStore = new PostcodeAreaStore()
 
 class PostcodeAreaInfo extends React.Component {
   render() {
+    const { postcodeArea } = this.props.match.params
     const data = this.lookup()
     if (!data) return <div>Loading postcode data&hellip;</div>
     return (
@@ -21,7 +22,7 @@ class PostcodeAreaInfo extends React.Component {
         <ul className="nav">
           <SearchAgain />
         </ul>
-        <Header {...data} />
+        <Header postcodeArea={postcodeArea} />
         <CapInfo {...data} />
         <CordisInfo {...data} />
         <CreativeInfo {...data} />

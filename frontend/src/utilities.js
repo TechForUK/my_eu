@@ -1,3 +1,5 @@
+import postcodeAreaNames from './data/postcodes/output/postcode_area_names'
+
 export function formatRoundPercentage(fraction) {
   return fraction.toLocaleString('en-GB', {
     style: 'percent',
@@ -18,6 +20,14 @@ export function formatRoundPounds(pounds) {
 export function extractPostcodeArea(postcode) {
   const area = /^[A-Z]{1,2}/.exec(postcode)
   return area && area[0]
+}
+
+// Strings like "around Watford" and "in North London".
+export function getPrepositionAreaName(postcodeArea) {
+  const aroundName = postcodeAreaNames[postcodeArea]
+  if (!aroundName) return
+  const [preposition, name] = aroundName
+  return `${preposition} ${name}`
 }
 
 export function getSearchQuery(location) {

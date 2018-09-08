@@ -4,7 +4,11 @@ import PropTypes from 'prop-types'
 
 import ProjectStore from '../project_store'
 import SearchAgain from './search_again'
-import { extractPostcodeArea, indefinitePluralise } from '../utilities'
+import {
+  extractPostcodeArea,
+  indefinitePluralise,
+  getPrepositionAreaName
+} from '../utilities'
 
 import CordisInfo from './info_windows/cordis_info'
 import CreativeInfo from './info_windows/creative_info'
@@ -64,7 +68,7 @@ class PostcodeInfo extends React.Component {
         <li className="nav-item">
           <Link to={postcodeAreaPath} className="nav-link">
             <i className="fa fa-level-up" />
-            &nbsp; More Projects in {postcodeArea}
+            &nbsp; More Projects {getPrepositionAreaName(postcodeArea)}
           </Link>
         </li>
       )
