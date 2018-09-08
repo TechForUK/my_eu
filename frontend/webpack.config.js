@@ -1,12 +1,15 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const StaticSiteGeneratorWebpackPlugin = require('static-site-generator-webpack-plugin')
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
+
 const webpack = require('webpack')
 
 const devMode = process.env.NODE_ENV !== 'production'
 
-module.exports = {
+const config = {
   mode: process.env.NODE_ENV || 'development',
   entry: {
     main: './src/index.js',
@@ -119,3 +122,9 @@ module.exports = {
     globalObject: 'this' // for StaticSiteGeneratorPlugin
   }
 }
+
+if (!devMode && process.env.BUNDLE_ANALYZER) {
+  config.plugins.push(new BundleAnalyzerPlugin({ analyzerPort: 8889 }))
+}
+
+module.exports = config
