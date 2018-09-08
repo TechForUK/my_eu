@@ -11,9 +11,6 @@ import getSearchStore from '../../search_store'
 import logoPath from '../../images/logo.svg'
 import { getSearchQuery } from '../../utilities'
 
-// TODO change styles when zoomed in?
-// https://stackoverflow.com/questions/3121400/google-maps-v3-how-to-change-the-map-style-based-on-zoom-level
-
 const ZOOMED_IN_NAME = 'ZOOMED_IN'
 const ZOOMED_OUT_NAME = 'ZOOMED_OUT'
 
