@@ -3,7 +3,7 @@ import React from 'react'
 import ReactGA from 'react-ga'
 
 import AreaDataLayer from './area_data_layer'
-import mapStyles from './map_styles'
+import { ZOOMED_IN_STYLE, ZOOMED_OUT_STYLE } from './map_styles'
 import PackedPostcodes from './packed_postcodes'
 
 import { getGoogleMapsApi, registerGoogleMap } from '../../google_maps'
@@ -13,6 +13,9 @@ import { getSearchQuery } from '../../utilities'
 
 // TODO change styles when zoomed in?
 // https://stackoverflow.com/questions/3121400/google-maps-v3-how-to-change-the-map-style-based-on-zoom-level
+
+const ZOOMED_IN_NAME = 'ZOOMED_IN'
+const ZOOMED_OUT_NAME = 'ZOOMED_OUT'
 
 class Map extends React.Component {
   constructor(props) {
@@ -55,12 +58,14 @@ class Map extends React.Component {
         lng: -2.888
       },
       zoom: 6,
-      styles: mapStyles,
+      mapTypeId: 'ROADMAP',
       mapTypeControl: false,
       streetViewControl: false,
       fullscreenControl: false
     })
     registerGoogleMap(this.map)
+
+    this.setUpMapStyles()
 
     const handleAreaClick = postcodeArea => {
       this.navigate(`/area/${postcodeArea}`)
@@ -91,6 +96,33 @@ class Map extends React.Component {
       handlePostcodeClick
     )
     this.zoomToRouteParams()
+  }
+
+  setUpMapStyles() {
+    var zoomedInStyledMapType = new this.googleMaps.StyledMapType(
+      ZOOMED_IN_STYLE,
+      { map: this.map, name: ZOOMED_IN_NAME }
+    )
+    this.map.mapTypes.set(ZOOMED_IN_NAME, zoomedInStyledMapType)
+
+    var zoomedOutStyledMapType = new this.googleMaps.StyledMapType(
+      ZOOMED_OUT_STYLE,
+      { map: this.map, name: ZOOMED_OUT_NAME }
+    )
+    this.map.mapTypes.set(ZOOMED_OUT_NAME, zoomedOutStyledMapType)
+
+    this.setMapStyleFromZoom()
+    this.googleMaps.event.addListener(this.map, 'zoom_changed', () => {
+      this.setMapStyleFromZoom()
+    })
+  }
+
+  setMapStyleFromZoom() {
+    if (this.map.getZoom() > 9) {
+      this.map.setMapTypeId(ZOOMED_IN_NAME)
+    } else {
+      this.map.setMapTypeId(ZOOMED_OUT_NAME)
+    }
   }
 
   navigate(path) {

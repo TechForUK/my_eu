@@ -1,5 +1,6 @@
 const WHITE = '#fcfcfc'
-const mapStyles = [
+
+export const ZOOMED_OUT_STYLE = [
   {
     featureType: 'all',
     elementType: 'all',
@@ -27,4 +28,4 @@ const mapStyles = [
   }
 ]
 
-export default mapStyles
+export const ZOOMED_IN_STYLE = []
