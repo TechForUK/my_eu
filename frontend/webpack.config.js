@@ -1,5 +1,6 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const StaticSiteGeneratorWebpackPlugin = require('static-site-generator-webpack-plugin')
@@ -104,7 +105,8 @@ const config = {
     new StaticSiteGeneratorWebpackPlugin({
       entry: 'static',
       paths: ['/', '/about/', '/mockups/']
-    })
+    }),
+    new CopyWebpackPlugin([{ from: 'src/public' }])
   ],
   optimization: {
     minimizer: [

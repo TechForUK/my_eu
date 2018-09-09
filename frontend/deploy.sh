@@ -6,7 +6,7 @@ npm run build
 
 # Copy assets and hashed files with long-term caching headers.
 gsutil -m -h "Cache-Control:public,max-age=31536000" \
-  rsync -c -r -j js,css -x 'static\..+\.js$|.+\.html$' \
+  rsync -c -r -j js,css -x 'static\..+\.js$|.+\.html$|.+\.txt$' \
   dist gs://www.myeu.uk
 
 # Copy unhashed html files with the default caching headers.
