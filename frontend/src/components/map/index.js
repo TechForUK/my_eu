@@ -1,3 +1,5 @@
+/* global alert */
+
 import PropTypes from 'prop-types'
 import React from 'react'
 import ReactGA from 'react-ga'
@@ -136,6 +138,13 @@ class Map extends React.Component {
           const bounds = this.findPlaceBounds(place)
           this.packedPostcodes.zoomMapWithMinMarkers(bounds)
           this.showPlaceMarker(place)
+        })
+        .catch(err => {
+          if (err.message === 'place not found') {
+            // If the search in the location is invalid, show the default view.
+          } else {
+            throw err
+          }
         })
       return
     }
