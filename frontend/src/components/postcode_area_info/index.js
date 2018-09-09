@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import PostcodeAreaStore from '../../postcode_area_store'
 import SearchAgain from '../search_again'
+import PeoplesVote from '../peoples_vote'
 
 import CapInfo from './cap_info'
 import CordisInfo from './cordis_info'
@@ -27,6 +28,7 @@ class PostcodeAreaInfo extends React.Component {
         <CordisInfo {...data} />
         <CreativeInfo {...data} />
         <EsifInfo {...data} />
+        <PeoplesVote />
       </div>
     )
   }
