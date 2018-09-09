@@ -18,7 +18,7 @@ limitations under the License.
 
 ## Data
 
-The data in this repository are derived from input datasets which are subject to the licenses described on the [myeu.uk about page](https://www.myeu.uk/about/).
+The data in this repository are derived from input datasets which are subject to the licenses described on the [myeu.uk about page](https://www.myeu.uk/about/). Attribution to the original datasets may be required if you want to reuse the data from this repository.
 
 Data created by the myeu.uk team are licensed under the CC-BY-4.0 license:
 
