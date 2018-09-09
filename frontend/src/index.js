@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom'
 import { HashRouter } from 'react-router-dom'
 
 import './scss/index.scss'
+import './error_tracking'
 import './google_analytics'
 
 import App from './components/app'
