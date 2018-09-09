@@ -1,7 +1,7 @@
 {
   "name": "my_eu",
   "version": "1.0.0",
-  "description": "",
+  "description": "Find out what the EU has done for your area.",
   "main": "index.js",
   "scripts": {
     "eslint": "eslint data/utilities/*.js frontend/src/**.js",
@@ -13,11 +13,12 @@
     "url": "git+https://github.com/GreatBritishHackOff/my_eu.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/GreatBritishHackOff/my_eu/issues"
   },
   "homepage": "https://www.myeu.uk",
+  "private": true,
   "devDependencies": {
     "eslint": "^5.3.0",
     "eslint-config-prettier": "^2.9.0",
