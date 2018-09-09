@@ -65,12 +65,12 @@ class Map extends React.Component {
     this.setUpMapStyles()
 
     const handleAreaClick = postcodeArea => {
-      this.navigate(`/area/${postcodeArea}`)
       ReactGA.event({
         category: 'Map',
         action: 'Click Area',
         label: postcodeArea
       })
+      this.navigate(`/area/${postcodeArea}`)
     }
     this.areaDataLayer = new AreaDataLayer(
       googleMaps,
@@ -80,11 +80,11 @@ class Map extends React.Component {
 
     const handlePostcodeClick = (event, myEuData) => {
       const { outwardCode, inwardCode } = myEuData
-      this.navigate(`/postcode/${outwardCode}/${inwardCode}`)
       ReactGA.event({
         category: 'Map',
         action: 'Click Postcode'
       })
+      this.navigate(`/postcode/${outwardCode}/${inwardCode}`)
     }
 
     this.packedPostcodes = new PackedPostcodes(

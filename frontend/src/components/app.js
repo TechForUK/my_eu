@@ -7,6 +7,7 @@ import PostcodeAreaInfo from './postcode_area_info'
 import PostcodeInfo from './postcode_info'
 import Map from './map'
 import Nav from './nav'
+import PageviewTracker from './pageview_tracker'
 
 const SEARCH_PATH = '/search'
 const POSTCODE_PATH = '/postcode/:outwardCode/:inwardCode'
@@ -44,6 +45,7 @@ class App extends React.Component {
   render() {
     const { isClient, infoOnBottom } = this.state
 
+    const pageviewTracker = isClient && <PageviewTracker />
     const postcodeInfo = <Route path={POSTCODE_PATH} component={PostcodeInfo} />
     const areaInfo = (
       <Route path={POSTCODE_AREA_PATH} component={PostcodeAreaInfo} />
@@ -51,6 +53,7 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
+        {pageviewTracker}
         <div className="row no-gutters" id="my-eu-app">
           <div className="col-md-5" id="my-eu-bar">
             <Nav path="/" />
