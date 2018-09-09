@@ -1,0 +1,1 @@
+{"datasets": {"esif": {"columns": ["inwardCode", "projectTitle", "organisationName", "summary", "funds", "euInvestment", "projectCost", "myEuId"], "data": [["6LQ", "Superfast Satellite Terminals", "Avanti Communications Ltd", "Increasing coverage of superfast broadband with 30mb+", "ERDF", 1202711.0, 2181482.0, "erdf_england_482"]]}}, "outwardCode": "TR12"}

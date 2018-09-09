@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["7HZ", "SYMBIOS SPAZIO LTD", 109517.0, "Delivering operational services relying on space-borne observations and in-situ data (Copernicus) (02.06.01)", "fts_2017_46698", 2017]]}}, "outwardCode": "FK14"}

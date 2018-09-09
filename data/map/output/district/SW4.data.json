@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["9JS", "MOMENTUM WORLD CIC", 48151.0, "Communication of the Commission Representations, Citizens' Dialogues and 'Partnership' actions (16.03.01.04)", "fts_2016_55523", 2016]]}}, "outwardCode": "SW4"}

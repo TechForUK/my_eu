@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["7PE", "6 MILLION+ CHARITABLE TRUST", 77130.0, "Europe for citizens \u2014 Strengthening remembrance and enhancing capacity for civic participation at the Union level (18.04.01.01)", "fts_2016_50022", 2016]]}}, "outwardCode": "HD4"}

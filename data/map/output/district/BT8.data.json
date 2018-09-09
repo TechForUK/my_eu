@@ -1,0 +1,1 @@
+{"datasets": {"esif": {"columns": ["inwardCode", "projectTitle", "organisationName", "summary", "funds", "euInvestment", "projectCost", "myEuId"], "data": [["6BT", "EmployAbility2", "MENCAP", null, "ESF", 2745786.12, 4224286.36, "esf_ni_17"], ["6BT", "EmployAbility", "MENCAP", null, "ESF", 1343254.0, 3358133.0, "esf_ni_100"]]}}, "outwardCode": "BT8"}

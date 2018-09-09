@@ -19,6 +19,46 @@ cd data
 make
 ```
 
+### Input Datasets
+
+Most datasets are included in this repo, but some are quite large, so they must be downloaded separately, as follows.
+
+You only need to download these if you want to work on the relevant processing; the data needed for development on the app are in the
+
+#### CAP
+
+From these sources:
+
+- http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/e153b560-7538-442b-b3ab-a40bf4adf576 (2014)
+- http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/06307dc0-4dcb-4305-a3e2-a8fdeb2a2a25 (2015)
+- http://cap-payments.defra.gov.uk/Download.aspx (2016, 2017)
+
+Files must be stored here:
+
+- `data/cap/input/2014_All_CAP_Search_Results_Data_P14_1.xls`
+- `data/cap/input/2015/DAERA-Table 1.csv`
+- `data/cap/input/2015/RPA-Table 1.csv`
+- `data/cap/input/2015/RPA2-Table 1.csv`
+- `data/cap/input/2015/SGRPID-Table 1.csv`
+- `data/cap/input/2015/WG-Table 1.csv`
+- `data/cap/input/2016_All_CAP_Search_Results_Data_P14.xlsx`
+- `data/cap/input/2017_All_CAP_Search_Results_Data_P14.xlsx`
+
+# CORDIS:
+
+From these sources:
+
+- https://data.europa.eu/euodp/data/dataset/cordisfp7projects
+- https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects
+
+Files must be stored here:
+
+- `data/cordis/input/fp7/cordis-fp7briefs.xlsx`
+- `data/cordis/input/fp7/cordis-fp7organizations.xlsx`
+- `data/cordis/input/fp7/cordis-fp7projects.xlsx`
+- `data/cordis/input/h2020/cordis-h2020organizations.xlsx`
+- `data/cordis/input/h2020/cordis-h2020projects.xlsx`
+
 ## App Development
 
 The latest application is in the `frontend` directory. It is a static website built with webpack.

@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["4UN", "UNITED KINGDOM ACCREDITATION SERVICE LBG*", 7.0, "Support expenditure for research and innovation programmes in the \u2018Direct research\u2019 policy area (10.01.05)", "fts_2017_67061", 2017]]}}, "outwardCode": "TW13"}

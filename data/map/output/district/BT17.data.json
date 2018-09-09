@@ -1,0 +1,1 @@
+{"datasets": {"esif": {"columns": ["inwardCode", "projectTitle", "organisationName", "summary", "funds", "euInvestment", "projectCost", "myEuId"], "data": [["0UJ", "Building Your Future (BYF)", "POLEGLASS COMMUNITY ASSOCIATION @ SALLY GARDENS (PCA)", null, "ESF", 467048.0, 718536.0, "esf_ni_60"]]}}, "outwardCode": "BT17"}

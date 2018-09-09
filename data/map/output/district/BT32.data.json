@@ -1,0 +1,1 @@
+{"datasets": {"esif": {"columns": ["inwardCode", "projectTitle", "organisationName", "summary", "funds", "euInvestment", "projectCost", "myEuId"], "data": [["3HA", "Work Routes", "REED IN PARTNERSHIP", null, "ESF", 343620.0, 859050.0, "esf_ni_107"]]}}, "outwardCode": "BT32"}

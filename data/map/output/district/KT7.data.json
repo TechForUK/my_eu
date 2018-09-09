@@ -1,0 +1,1 @@
+{"datasets": {"esif": {"columns": ["inwardCode", "projectTitle", "organisationName", "summary", "funds", "euInvestment", "projectCost", "myEuId"], "data": [["0QJ", "Cornwall New Energy", "PRP Architects", "Promoting energy efficiency in SMEs.", "ERDF", 2657433.0, 3326945.0, "erdf_england_487"]]}}, "outwardCode": "KT7"}

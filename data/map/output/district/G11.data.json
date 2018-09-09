@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["7EX", "PARENT COMMUNITY SPORTS TRUST", 36831.0, "Developing the European dimension in sport (15.02.03)", "fts_2017_35838", 2017]]}}, "outwardCode": "G11"}

@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["0HY", "CORPORATE SOLUTIONS CONSULTING LIMITED*CSCL", 1120249.0, "Completion of actions in the area of European Neighbourhood Policy and relations with Russia (prior to 2014) (22.04.51)", "fts_2016_20175", 2016]]}}, "outwardCode": "HA2"}

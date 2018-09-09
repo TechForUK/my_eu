@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["8DN", "SPORT 4 LIFE UK", 16847.0, "Developing the European dimension in sport (15.02.03)", "fts_2016_33758", 2016]]}}, "outwardCode": "B16"}

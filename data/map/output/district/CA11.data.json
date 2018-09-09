@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["8ST", "LONSDALE SETTLED ESTATES LIMITED", 293.0, "Operational technical assistance (05.04.60.02)", "fts_2016_28983", 2016]]}}, "outwardCode": "CA11"}

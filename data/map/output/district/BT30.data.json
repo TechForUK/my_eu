@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["9EP", "ULSTER WILDLIFE TRUST LBG*", 397.0, "Other management expenditure (07.01.02.11)", "fts_2016_25125", 2016]]}}, "outwardCode": "BT30"}

@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["5BH", "BH LIVE ENTREPRISES LIMITED", 63119.0, "Fostering the development and implementation of the Union\u2019s integrated maritime policy (11.06.61)", "fts_2017_53054", 2017]]}}, "outwardCode": "BH2"}

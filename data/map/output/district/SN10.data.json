@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["1BN", "DEVIZES TOWN COUNCIL*", 19190.0, "Europe for citizens \u2014 Strengthening remembrance and enhancing capacity for civic participation at the Union level (18.04.01.01)", "fts_2017_66404", 2017]]}}, "outwardCode": "SN10"}

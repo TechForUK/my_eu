@@ -1,0 +1,1 @@
+{"datasets": {"esif": {"columns": ["inwardCode", "projectTitle", "organisationName", "summary", "funds", "euInvestment", "projectCost", "myEuId"], "data": [["5LU", "Practica", "TYRONE DONEGAL PARTNERSHIP", null, "ESF", 251308.0, 628269.0, "esf_ni_126"]]}}, "outwardCode": "BT78"}

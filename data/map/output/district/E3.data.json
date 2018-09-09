@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["2DA", "THE LANGUAGES COMPANY LIMITED", 56721.0, "Erasmus+ \u2014 Contribution from the development cooperation instrument (DCI) (21.02.20)", "fts_2017_26653", 2017]]}}, "outwardCode": "E3"}

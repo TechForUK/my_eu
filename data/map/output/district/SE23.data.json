@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["2RQ", "MUSICIANS UNION*", 933.0, "Other management expenditure (04.01.02.11)", "fts_2016_18846", 2016], ["2RQ", "MUSICIANS UNION*", 1939.0, "Other management expenditure (04.01.02.11)", "fts_2017_20213", 2017]]}}, "outwardCode": "SE23"}

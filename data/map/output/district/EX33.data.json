@@ -1,0 +1,1 @@
+{"datasets": {"fts": {"columns": ["inwardCode", "beneficiary", "amount", "budgetLineNameAndNumber", "myEuId", "year"], "data": [["1PX", "ACADEMY OF BEACH SPORTS", 8278.0, "Developing the European dimension in sport (15.02.03)", "fts_2017_59387", 2017]]}}, "outwardCode": "EX33"}

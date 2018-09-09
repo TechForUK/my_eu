@@ -1,0 +1,1 @@
+{"datasets": {"esif": {"columns": ["inwardCode", "projectTitle", "organisationName", "summary", "funds", "euInvestment", "projectCost", "myEuId"], "data": [["6EZ", "The L.E.A.P. Project (Learn/Educate/Achieve/Progress)", "GREENLIGHT GATEWAY", null, "ESF", 172900.0, 266000.0, "esf_ni_14"]]}}, "outwardCode": "BT54"}
