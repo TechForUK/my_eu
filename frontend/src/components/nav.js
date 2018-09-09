@@ -2,7 +2,6 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-import logoPath from '../images/logo.svg'
 import logoWithTextPath from '../images/logo_with_text.svg'
 
 const Nav = ({ path }) => {
