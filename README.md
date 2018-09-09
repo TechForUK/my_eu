@@ -44,7 +44,7 @@ Files must be stored here:
 - `data/cap/input/2016_All_CAP_Search_Results_Data_P14.xlsx`
 - `data/cap/input/2017_All_CAP_Search_Results_Data_P14.xlsx`
 
-# CORDIS:
+#### CORDIS:
 
 From these sources:
 
@@ -69,9 +69,9 @@ Install [node js](https://nodejs.org/en/) version 8.11 or higher.
 
 The application uses Google Maps, so you will need to create a Google Cloud Platform account for development. This requires putting in a credit card, but development usage will generally be in the free tier.
 
-1. [Go to the API list](https://console.cloud.google.com/google/maps-apis/api-list) and ensure that both the Google Maps JavaScript API and the Places API are enabled.
+1.  [Go to the API list](https://console.cloud.google.com/google/maps-apis/api-list) and ensure that both the Google Maps JavaScript API and the Places API are enabled.
 
-2. [Go to the Credentials list](https://console.cloud.google.com/apis/credentials) and generate an API key for development.
+2.  [Go to the Credentials list](https://console.cloud.google.com/apis/credentials) and generate an API key for development.
 
 ### Environment
 
@@ -127,9 +127,9 @@ to check all the code.
 
 The static website is deployed to Google Cloud Storage behind CloudFlare for SSL. To deploy:
 
-1. You need to be granted write access to the Google Cloud Storage bucket that hosts the website.
+1.  You need to be granted write access to the Google Cloud Storage bucket that hosts the website.
 
-2. You need to get the `PRODUCTION_MY_EU_API_KEY`, which restricts the referrer to `www.myeu.uk` (and does not allow localhost or other domains).
+2.  You need to get the `PRODUCTION_MY_EU_API_KEY`, which restricts the referrer to `www.myeu.uk` (and does not allow localhost or other domains).
 
 Then run the deploy script to deploy:
 
