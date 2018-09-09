@@ -56,7 +56,7 @@ const Share = ({
       />
       <a
         className="btn btn-contact"
-        href="https://www.bestforbritain.org/contact_your_mp"
+        href="https://www.writetothem.com/?a=westminstermp"
         onClick={trackShare('Tell your MP')}
         role="button"
         target="_blank"
