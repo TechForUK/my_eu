@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import PostcodeAreaStore from '../../postcode_area_store'
+import AddYourStory from '../add_your_story'
 import SearchAgain from '../search_again'
 import PeoplesVote from '../peoples_vote'
 
@@ -29,6 +30,7 @@ class PostcodeAreaInfo extends React.Component {
         <CreativeInfo {...data} />
         <EsifInfo {...data} />
         <PeoplesVote />
+        <AddYourStory />
       </div>
     )
   }
