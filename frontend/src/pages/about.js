@@ -50,6 +50,13 @@ const About = () => (
         support.
       </p>
       <h2>Data and Methodology</h2>
+      <p>
+        myeu.uk{' '}
+        <a href="https://github.com/GreatBritishHackOff/my_eu">
+          is open source <i className="fa fa-github" />
+        </a>
+        .
+      </p>
       <p>We used data from the following datasets to create myeu.uk:</p>
       <p>
         <ul>
