@@ -24,7 +24,7 @@ const Page = ({ path, scripts, stylesheets }) => {
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
       <Meta property="og:url" content={SITE_ROOT + path} />
-      <Meta property="og:image" content={myEuPath} />
+      <Meta property="og:image" content={SITE_ROOT + myEuPath} />
       {stylesheets.map(path => (
         <Link key={path} rel="stylesheet" type="text/css" href={path} />
       ))}
