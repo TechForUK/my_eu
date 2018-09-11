@@ -77,6 +77,12 @@ h2 {
   border: 2px solid #0f73ae;
 }
 
+.my-eu-sidebar-ad {
+  text-align: center;
+  margin-top: 3 * $spacer;
+  margin-bottom: $spacer;
+}
+
 .my-eu-sidebar-cta {
   margin-top: $spacer;
   text-align: center;
@@ -120,7 +126,11 @@ button.my-eu-details-toggle:before {
   }
 }
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(sm) {
+  #my-eu-home-extra {
+    display: none;
+  }
+
   #my-eu-map {
     height: 50vh;
     min-height: 300px;

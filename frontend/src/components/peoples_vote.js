@@ -24,17 +24,6 @@ const PeoplesVote = () => {
           Contact your MP
         </a>
       </p>
-      <p className="text-muted">
-        Working with{' '}
-        <a
-          href="https://www.bestforbritain.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Best for Britain
-        </a>
-        .
-      </p>
     </div>
   )
 }
