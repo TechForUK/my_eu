@@ -25,6 +25,7 @@ const Page = ({ path, scripts, stylesheets }) => {
       />
       <Meta property="og:url" content={SITE_ROOT + path} />
       <Meta property="og:image" content={SITE_ROOT + myEuPath} />
+      <Meta property="twitter:image" content={SITE_ROOT + myEuPath} />
       {stylesheets.map(path => (
         <Link key={path} rel="stylesheet" type="text/css" href={path} />
       ))}
