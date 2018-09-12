@@ -1,5 +1,5 @@
 import 'bootstrap'
-import 'whatwg-fetch'
+import 'cross-fetch/polyfill'
 import 'promise-polyfill/src/polyfill'
 
 import React from 'react'

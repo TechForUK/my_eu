@@ -1,3 +1,4 @@
+/* global fetch */
 import postcodeAreaNames from './data/postcodes/output/postcode_area_names'
 
 export function formatRoundPercentage(fraction) {
@@ -81,4 +82,14 @@ export function sum(xs) {
 export function indefinitePluralise(n, noun, limit = 1, plural = `${noun}s`) {
   if (n <= limit) return plural
   return `${n} ${plural}`
+}
+
+// From https://stackoverflow.com/a/49857905/2053820
+export function fetchWithTimeout(url, options, timeout) {
+  return Promise.race([
+    fetch(url, options),
+    new Promise((resolve, reject) =>
+      setTimeout(() => reject(new Error('timeout')), timeout)
+    )
+  ])
 }

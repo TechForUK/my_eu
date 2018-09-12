@@ -1,5 +1,3 @@
-/* global alert */
-
 import PropTypes from 'prop-types'
 import React from 'react'
 import ReactGA from 'react-ga'
@@ -9,7 +7,7 @@ import { ZOOMED_IN_STYLE, ZOOMED_OUT_STYLE } from './map_styles'
 import PackedPostcodes from './packed_postcodes'
 
 import { getGoogleMapsApi, registerGoogleMap } from '../../google_maps'
-import getSearchStore from '../../search_store'
+import getSearchStore, { PLACE_NOT_FOUND } from '../../search_store'
 import logoPath from '../../images/logo.svg'
 import { getSearchQuery } from '../../utilities'
 
@@ -140,7 +138,7 @@ class Map extends React.Component {
           this.showPlaceMarker(place)
         })
         .catch(err => {
-          if (err.message === 'place not found') {
+          if (err.message === PLACE_NOT_FOUND) {
             // If the search in the location is invalid, show the default view.
           } else {
             throw err

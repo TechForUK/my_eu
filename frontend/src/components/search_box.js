@@ -5,7 +5,11 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { getGoogleMapsApiAndMap } from '../google_maps'
-import getSearchStore, { FIELDS, AUTOCOMPLETE_OPTIONS } from '../search_store'
+import getSearchStore, {
+  AUTOCOMPLETE_OPTIONS,
+  FIELDS,
+  PLACE_NOT_FOUND
+} from '../search_store'
 import { getSearchQuery } from '../utilities'
 
 class SearchBox extends React.Component {
@@ -110,7 +114,7 @@ class SearchBox extends React.Component {
         this.props.history.push({ pathname: '/search', search: `${name}` })
       })
       .catch(err => {
-        if (err.message === 'place not found') {
+        if (err.message === PLACE_NOT_FOUND) {
           alert("Sorry, we couldn't find that place. Please try again.")
         } else {
           throw err
