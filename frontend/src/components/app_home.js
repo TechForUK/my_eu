@@ -2,7 +2,6 @@ import React from 'react'
 
 import { SITE_EMAIL_BODY, SITE_URL } from '../strings'
 
-import HackathonAd from './hackathon_ad'
 import SearchBox from './search_box'
 import Share from './share'
 
@@ -16,9 +15,7 @@ const AppHome = () => {
         url={SITE_URL}
         emailBody={SITE_EMAIL_BODY}
       />
-      <div id="my-eu-home-extra">
-        <HackathonAd />
-      </div>
+      <div id="my-eu-home-extra" />
     </React.Fragment>
   )
 }
