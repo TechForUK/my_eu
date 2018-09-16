@@ -138,6 +138,13 @@ const About = () => (
             cultural and audiovisual funding. (c) European Union, 1995-2018
           </li>
           <li>
+            <a href="http://ec.europa.eu/programmes/erasmus-plus/projects/eplus-projects-compendium/">
+              Erasmus +
+            </a>{' '}
+            funding 2007-2018, which is the EU&apos;s programme for support for
+            young people. (c) European Union, 1995-2018
+          </li>
+          <li>
             Projects funded by the European Union under the{' '}
             <a href="https://data.europa.eu/euodp/data/dataset/cordisfp7projects">
               seventh framework programme for research and technological

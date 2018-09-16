@@ -23,7 +23,7 @@ make
 
 Most datasets are included in this repo, but some are quite large, so they must be downloaded separately, as follows.
 
-You only need to download these if you want to work on the relevant processing; the data needed for development on the app are in the
+You only need to download these if you want to work on the relevant processing; the data needed for development on the app are in the `data/*/output` folders, especially `data/map/output`.
 
 #### CAP
 
@@ -44,7 +44,7 @@ Files must be stored here:
 - `data/cap/input/2016_All_CAP_Search_Results_Data_P14.xlsx`
 - `data/cap/input/2017_All_CAP_Search_Results_Data_P14.xlsx`
 
-#### CORDIS:
+#### CORDIS
 
 From these sources:
 
@@ -58,6 +58,30 @@ Files must be stored here:
 - `data/cordis/input/fp7/cordis-fp7projects.xlsx`
 - `data/cordis/input/h2020/cordis-h2020organizations.xlsx`
 - `data/cordis/input/h2020/cordis-h2020projects.xlsx`
+
+#### Erasmus
+
+From this page:
+
+- http://ec.europa.eu/programmes/erasmus-plus/projects/eplus-projects-compendium/
+
+Files must be stored here:
+
+- `data/erasmus/input/CoopIndustrialisedCountries_Projects_Overview_2018-09-10.xls`
+- `data/erasmus/input/ErasmusMundus_Projects_Overview_2018-09-10.xls`
+- `data/erasmus/input/ErasmusPlus_JeanMonnet_Projects_Overview_2018-09-10.xls`
+- `data/erasmus/input/ErasmusPlus_KA1_2014_LearningMobilityOfIndividuals_Projects_Overview_2018-09-11.xls`
+- `data/erasmus/input/ErasmusPlus_KA1_2015_LearningMobilityOfIndividuals_Projects_Overview_2018-09-11.xls`
+- `data/erasmus/input/ErasmusPlus_KA1_2016_LearningMobilityOfIndividuals_Projects_Overview_2018-09-11.xls`
+- `data/erasmus/input/ErasmusPlus_KA1_2017_LearningMobilityOfIndividuals_Projects_Overview_2018-09-10.xls`
+- `data/erasmus/input/ErasmusPlus_KA1_2018_LearningMobilityOfIndividuals_Projects_Overview_2018-09-10.xls`
+- `data/erasmus/input/ErasmusPlus_KA2_CooperationForInnovationAndTheExchangeOfGoodPractices_Projects_Overview_2018-09-10.xls`
+- `data/erasmus/input/ErasmusPlus_KA3_SupportForPolicyReform_Projects_Overview_2018-09-10.xls`
+- `data/erasmus/input/ErasmusPlus_Sports_Projects_Overview_2018-09-10.xls`
+- `data/erasmus/input/LifeLongLearning_Projects_Overview_2018-09-10.xls`
+- `data/erasmus/input/Sports_Projects_Overview_2018-09-10.xls`
+- `data/erasmus/input/Tempus_Projects_Overview_2018-09-10.xls`
+- `data/erasmus/input/YouthInAction_Projects_Overview_2018-09-10.xls`
 
 ## App Development
 

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 import ProjectStore from '../project_store'
 import AddYourStory from './add_your_story'
-import HackathonAd from './hackathon_ad'
 import PeoplesVote from './peoples_vote'
 import SearchAgain from './search_again'
 import {
@@ -17,6 +16,7 @@ import CordisInfo from './info_windows/cordis_info'
 import CreativeInfo from './info_windows/creative_info'
 import EsifInfo from './info_windows/esif_info'
 import FtsInfo from './info_windows/fts_info'
+import ErasmusInfo from './info_windows/erasmus_info'
 
 const projectStore = new ProjectStore()
 
@@ -29,6 +29,8 @@ function makeProjectInfo(data) {
     return <CreativeInfo key={data.myEuId} {...data} />
   } else if (data.dataset === 'fts') {
     return <FtsInfo key={data.myEuId} {...data} />
+  }  else if (data.dataset === 'erasmus') {
+      return <ErasmusInfo key={data.myEuId} {...data} />
   } else {
     return <div>TODO</div>
   }
@@ -55,7 +57,6 @@ class PostcodeInfo extends React.Component {
           {this.renderLinks()}
           {header}
           {projects.map(makeProjectInfo)}
-          <HackathonAd />
           <AddYourStory />
           <PeoplesVote />
         </div>
