@@ -8,6 +8,7 @@ import PostcodeInfo from './postcode_info'
 import Map from './map'
 import Nav from './nav'
 import PageviewTracker from './pageview_tracker'
+import RedButton from './red_button'
 
 const SEARCH_PATH = '/search'
 const POSTCODE_PATH = '/postcode/:outwardCode/:inwardCode'
@@ -57,7 +58,7 @@ class App extends React.Component {
         <div className="row no-gutters" id="my-eu-app">
           <div className="col-md-5" id="my-eu-bar">
             <Nav path="/" />
-            <div className="container">
+            <div className="container flex flex-column h-100">
               <div className="row">
                 <div className="col">
                   <Switch>
@@ -67,6 +68,9 @@ class App extends React.Component {
                     {!infoOnBottom && areaInfo}
                   </Switch>
                 </div>
+              </div>
+              <div className="row flex-grow-1 align-items-end">
+                <RedButton />
               </div>
             </div>
           </div>

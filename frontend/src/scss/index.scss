@@ -83,6 +83,14 @@ h2 {
   margin-bottom: $spacer;
 }
 
+
+.my-eu-button-ad {
+
+  .button img {
+    max-width: 150px;
+  }
+}
+
 .my-eu-sidebar-cta {
   margin-top: $spacer;
   text-align: center;
@@ -98,6 +106,15 @@ button.my-eu-details-toggle.collapsed:before {
 
 button.my-eu-details-toggle:before {
   content: 'Hide ';
+}
+
+#my-eu-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
 }
 
 @include media-breakpoint-up(md) {
@@ -127,7 +144,7 @@ button.my-eu-details-toggle:before {
 }
 
 @include media-breakpoint-down(sm) {
-  #my-eu-home-extra {
+  .my-eu-button-ad {
     display: none;
   }
 

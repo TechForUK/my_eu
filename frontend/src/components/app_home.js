@@ -15,7 +15,6 @@ const AppHome = () => {
         url={SITE_URL}
         emailBody={SITE_EMAIL_BODY}
       />
-      <div id="my-eu-home-extra" />
     </React.Fragment>
   )
 }
