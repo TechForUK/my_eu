@@ -1,0 +1,1 @@
+{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "name"], "data": [["9RW", "RM3", "TAMESIDE GENERAL HOSPITAL"], ["9RW", "RMP", "TAMESIDE GENERAL HOSPITAL"], ["9RW", "RT2", "A&E LIAISON - TAMESIDE GENERAL HOSPITAL"], ["9RW", "RT2", "TAMESIDE HOSPITAL MENTAL HEALTH SERVICES"], ["9RW", "RY2", "TAMESIDE GENERAL HOSPITAL"]]}}, "outwardCode": "OL6"}

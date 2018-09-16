@@ -1,0 +1,1 @@
+{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "name"], "data": [["9EP", "RM3", "WRIGHTINGTON HOSPITAL"], ["9EP", "RRF", "WRIGHTINGTON HOSPITAL"], ["9EP", "RXN", "WRIGHTINGTON HOSPITAL"], ["9EP", "RY2", "WRIGHTINGTON HOSPITAL"]]}}, "outwardCode": "WN6"}

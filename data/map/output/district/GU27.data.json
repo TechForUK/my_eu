@@ -1,0 +1,1 @@
+{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "name"], "data": [["1NQ", "RA2", "HOLYCROSS HOSPITAL"], ["2BJ", "RA2", "HASLEMERE HOSPITAL"], ["2BJ", "RA2", "HASLEMERE HOSPITAL MINOR INJURIES UNIT"], ["2BJ", "RDU", "HASLEMERE AND DISTRICT HOSPITAL"], ["2BJ", "RTK", "HASLEMERE & DISTRICT HOSPITAL"], ["2BJ", "RXX", "HASLEMERE HOSPITAL"]]}}, "outwardCode": "GU27"}

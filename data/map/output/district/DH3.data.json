@@ -1,0 +1,1 @@
+{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "name"], "data": [["3AT", "RLN", "CHESTER-LE-STREET HOSPITAL"], ["3AT", "RTD", "CHESTER-LE-STREET COMMUNITY HOSPITAL"], ["3AT", "RXP", "CHESTER LE STREET HOSPITAL"], ["3AT", "RXP", "REHABILITATION WARD - CLS COMMUNITY HOSPITAL"]]}}, "outwardCode": "DH3"}

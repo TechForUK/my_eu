@@ -1,0 +1,1 @@
+{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "name"], "data": [["1NS", "R1E", "AIRS - CHEADLE HOSPITAL"], ["1NS", "R1E", "CHEADLE HOSPITAL"], ["1NS", "RJE", "CHEADLE HOSPITAL"], ["1NS", "RJE", "CHEADLE HOSPITAL (E-PACT)"], ["1NT", "RLY", "CHEADLE HOSPITAL- NORTH STAFFS COMBINED HEALTHCARE"], ["1NS", "RRE", "CHEADLE HOSPITAL"]]}}, "outwardCode": "ST10"}

@@ -1,0 +1,1 @@
+{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "name"], "data": [["3AS", "RHW", "WEST BERKSHIRE COMMUNITY HOSPITAL"], ["3AS", "RTH", "WEST BERKSHIRE COMMUNITY HOSPITALS"], ["3AS", "RWX", "NUTRITION & DIETETICS AT WEST BERKS HOSPITAL"], ["3AS", "RWX", "WEST BERKSHIRE COMMUNITY HOSPITAL"]]}}, "outwardCode": "RG18"}

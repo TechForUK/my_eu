@@ -1,0 +1,1 @@
+{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "name"], "data": [["9ES", "RBK", "WALSALL DIABETES CENTRE (MANOR HOSPITAL)"], ["9PS", "RBK", "MANOR HOSPITAL"], ["9XH", "RBK", "DOROTHY PATTISON HOSPITAL"], ["9PS", "RL4", "WALSALL MANOR HOSPITAL"], ["9XH", "RYK", "DOROTHY PATTISON HOSPITAL"], ["9XH", "RYK", "DOROTHY PATTISON HOSPITAL 1"]]}}, "outwardCode": "WS2"}
