@@ -32,7 +32,7 @@ const RedButton = () => {
               Demand a
               <a
                 onClick={trackClick('FinalSay')}
-                href="https://twitter.com/intent/tweet?#FinalSay"
+                href="https://twitter.com/intent/tweet?text=%23FinalSay"
               > #FinalSay </a>
               on the Brexit deal.
           </h2>
