@@ -36,6 +36,7 @@ const Share = ({
         onClick={trackShare('Twitter')}
         role="button"
         target="_blank"
+        alt="Share on Twitter"
         rel="noopener noreferrer"
       />
       <a
@@ -45,6 +46,7 @@ const Share = ({
         role="button"
         target="_blank"
         rel="noopener noreferrer"
+        alt="share on facebook"
       />
       <a
         className="btn btn-social fa fa-envelope"
@@ -53,6 +55,7 @@ const Share = ({
         role="button"
         target="_blank"
         rel="noopener noreferrer"
+        alt="share via email"
       />
       <a
         className="btn btn-contact"
@@ -61,6 +64,7 @@ const Share = ({
         role="button"
         target="_blank"
         rel="noopener noreferrer"
+        alt="contact your MP"
       >
         Tell your MP
       </a>
