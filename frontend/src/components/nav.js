@@ -23,12 +23,11 @@ const Nav = ({ path }) => {
       <ul className="navbar-nav">
         {backToMap}
         <li className="nav-item">
-
           <a
-            className={classNames('nav-link', { active: path === '/NHS/' })}
-            href="/NHS/"
+            className={classNames('nav-link', { active: path === '/about/' })}
+            href="/about/"
           >
-            NHS
+            about
           </a>
         </li>
       </ul>
