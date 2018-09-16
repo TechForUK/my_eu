@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 import ProjectStore from '../project_store'
 import AddYourStory from './add_your_story'
-import RedButton from './red_button'
 import PeoplesVote from './peoples_vote'
 import SearchAgain from './search_again'
 import {
@@ -58,7 +57,6 @@ class PostcodeInfo extends React.Component {
           {this.renderLinks()}
           {header}
           {projects.map(makeProjectInfo)}
-          <RedButton />
           <AddYourStory />
           <PeoplesVote />
         </div>
