@@ -17,13 +17,15 @@ const RedButton = () => {
     <div className="col col-md-12 my-eu-button-ad bg-light">
       <div className="container">
         <div className="row clearfix button-title my-3">
-          <div className="col-12"><h1>Brexit: We don&apos;t have to do it</h1></div>
+          <div className="col-12"><h1>Brexit: We don&apos;t have to do it.</h1></div>
         </div>
         <div className="row justify-content-center my-3">
           <div className="col-flex button">
             <a
               onClick={trackClick('Button')}
               href="https://www.bestforbritain.org/"
+              rel="noopener noreferrer"
+              target="_blank"
             ><img src={buttonLogo}/></a>
           </div>
         </div>
@@ -33,6 +35,8 @@ const RedButton = () => {
               <a
                 onClick={trackClick('FinalSay')}
                 href="https://twitter.com/intent/tweet?text=%23FinalSay"
+                rel="noopener noreferrer"
+                target="_blank"
               > #FinalSay </a>
               on the Brexit deal.
           </h2>
