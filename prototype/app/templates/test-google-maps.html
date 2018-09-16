@@ -77,7 +77,7 @@
       }
 
       function changeGradient() {
-        var gradient = [
+        /*var gradient = [
           'rgba(0, 255, 255, 0)',
           'rgba(0, 255, 255, 1)',
           'rgba(0, 191, 255, 1)',
@@ -92,7 +92,16 @@
           'rgba(127, 0, 63, 1)',
           'rgba(191, 0, 31, 1)',
           'rgba(255, 0, 0, 1)'
+        ]*/
+        var gradient = [
+          'rgb(153, 51, 51)',
+          'rgb(128, 0, 0)',
+          'rgb(153, 0, 0)',
+          'rgb(153, 51, 0)',
+          'rgb(204, 51, 0)',
+          'rgb(153, 0, 51)'
         ]
+        // change to red
         heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
       }
 
@@ -114,7 +123,7 @@
       }
     </script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=visualization&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key={{ AIzaSyC7yaTFTG4BSmnJJf8F_Uog0s6mMNMmYNc }}&libraries=visualization&callback=initMap">
     </script>
   </body>
 </html>
