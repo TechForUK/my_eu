@@ -115,6 +115,7 @@ button.my-eu-details-toggle:before {
 
 .flex {
   display: flex;
+  min-height: 1px;
 }
 
 @include media-breakpoint-up(md) {
@@ -130,10 +131,6 @@ button.my-eu-details-toggle:before {
     #my-eu-app {
       min-height: 100%;
       height: 100%;
-
-      #my-eu-bar {
-        overflow-y: auto;
-      }
 
       #my-eu-bar,
       #my-eu-map {
