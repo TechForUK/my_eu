@@ -58,8 +58,8 @@ class App extends React.Component {
         <div className="row no-gutters" id="my-eu-app">
           <div className="col-md-5" id="my-eu-bar">
             <Nav path="/" />
-            <div className="container flex flex-column h-100">
-              <div className="row my-eu-data">
+            <div className="container my-eu-data flex flex-column h-100">
+              <div className="row flex-shrink-0">
                 <div className="col">
                   <Switch>
                     <Route exact={isClient} path="/" component={AppHome} />
