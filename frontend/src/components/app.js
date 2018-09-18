@@ -59,7 +59,7 @@ class App extends React.Component {
           <div className="col-md-5" id="my-eu-bar">
             <Nav path="/" />
             <div className="container flex flex-column h-100">
-              <div className="row">
+              <div className="row my-eu-data">
                 <div className="col">
                   <Switch>
                     <Route exact={isClient} path="/" component={AppHome} />
@@ -69,7 +69,7 @@ class App extends React.Component {
                   </Switch>
                 </div>
               </div>
-              <div className="row flex-grow-1 align-items-end">
+              <div className="row flex-grow-1 flex-shrink-0 align-items-end">
                 <RedButton />
               </div>
             </div>

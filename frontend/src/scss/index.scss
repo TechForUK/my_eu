@@ -83,12 +83,12 @@ h2 {
   margin-bottom: $spacer;
 }
 
+.my-eu-data {
+  overflow-y: auto;
+}
 
-.my-eu-button-ad {
-
-  .button img {
-    max-width: 150px;
-  }
+.my-eu-button-ad .button img {
+  max-width: 120px;
 }
 
 .my-eu-sidebar-cta {

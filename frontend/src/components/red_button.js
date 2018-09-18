@@ -14,12 +14,12 @@ const RedButton = () => {
   }
 
   return (
-    <div className="col col-md-12 my-eu-button-ad bg-light">
+    <div className="col col-md-12 my-eu-button-ad bg-light border-top">
       <div className="container">
-        <div className="row clearfix button-title my-3">
+        <div className="row clearfix button-title mt-2">
           <div className="col-12"><h1>Brexit: We don&apos;t have to do it.</h1></div>
         </div>
-        <div className="row justify-content-center my-3">
+        <div className="row justify-content-center my-2 flex-shrink-0">
           <div className="col-flex button">
             <a
               onClick={trackClick('Button')}
@@ -29,7 +29,7 @@ const RedButton = () => {
             ><img src={buttonLogo}/></a>
           </div>
         </div>
-        <div className="row justify-content-center my-3">
+        <div className="row justify-content-center mt-1">
           <h2>
               Demand a
               <a
