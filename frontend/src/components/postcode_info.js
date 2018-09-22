@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 import ProjectStore from '../project_store'
 import AddYourStory from './add_your_story'
-import PeoplesVote from './peoples_vote'
 import SearchAgain from './search_again'
 import {
   extractPostcodeArea,
@@ -29,8 +28,8 @@ function makeProjectInfo(data) {
     return <CreativeInfo key={data.myEuId} {...data} />
   } else if (data.dataset === 'fts') {
     return <FtsInfo key={data.myEuId} {...data} />
-  }  else if (data.dataset === 'erasmus') {
-      return <ErasmusInfo key={data.myEuId} {...data} />
+  } else if (data.dataset === 'erasmus') {
+    return <ErasmusInfo key={data.myEuId} {...data} />
   } else {
     return <div>TODO</div>
   }
@@ -58,7 +57,6 @@ class PostcodeInfo extends React.Component {
           {header}
           {projects.map(makeProjectInfo)}
           <AddYourStory />
-          <PeoplesVote />
         </div>
       )
     } else {
