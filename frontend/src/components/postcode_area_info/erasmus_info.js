@@ -12,19 +12,9 @@ import {
 
 const TOP_N = 3
 
-const CreativeProject = ({ project }) => {
+const ErasmusProject = ({ project }) => {
   const startYear = project.start_date.getFullYear()
-  const endYear = project.end_date.getFullYear()
-  const yearRange =
-    endYear > startYear ? (
-      <span>
-        {startYear}
-        &ndash;
-        {endYear}
-      </span>
-    ) : (
-      <span>{startYear}</span>
-    )
+  const yearRange = <span>{startYear}</span>
   const postcodePath = `/postcode/${project.postcode.split(/\s/).join('/')}`
 
   let numOrganisations
@@ -52,7 +42,7 @@ const CreativeProject = ({ project }) => {
         {formatRoundPounds(project.max_contribution_gbp)}
       </p>
       <p className="text-muted">
-        {yearRange}
+        Started {yearRange}
         {numOrganisations}
       </p>
       <p className="text-muted">
@@ -63,46 +53,46 @@ const CreativeProject = ({ project }) => {
   )
 }
 
-CreativeProject.propTypes = {
+ErasmusProject.propTypes = {
   project: PropTypes.object
 }
 
-const CreativeInfo = ({ postcodeArea, creative, totalAmounts, projects }) => {
-  let creativeProjects = projects.find(row => row.kind === 'creative')
-  if (!creativeProjects || !creativeProjects.count) return null
-  const creativeCount = creativeProjects.count
-  const creativeTotal = creativeProjects.total
+const ErasmusInfo = ({ postcodeArea, erasmus, totalAmounts, projects }) => {
+  let erasmusProjects = projects.find(row => row.kind === 'erasmus')
+  if (!erasmusProjects || !erasmusProjects.count) return null
+  const erasmusCount = erasmusProjects.count
+  const erasmusTotal = erasmusProjects.total
 
-  let topN = creativeCount > TOP_N ? `Top ${TOP_N} ` : ''
+  let topN = erasmusCount > TOP_N ? `Top ${TOP_N} ` : ''
 
   let moreProjects = null
-  if (creativeCount > TOP_N) {
+  if (erasmusCount > TOP_N) {
     moreProjects = (
       <p>
         Browse the map to find{' '}
-        {indefinitePluralise(creativeCount - TOP_N, 'more project')}{' '}
+        {indefinitePluralise(erasmusCount - TOP_N, 'more project')}{' '}
         {getPrepositionAreaName(postcodeArea)}.
       </p>
     )
   }
 
   const lead =
-    `The EU has invested ${formatRoundPounds(creativeTotal)} to support` +
+    `The EU has invested ${formatRoundPounds(erasmusTotal)} to support` +
     ` ${indefinitePluralise(
-      creativeCount,
-      'creative project',
+      erasmusCount,
+      'education, training, youth and sport project',
       4
     )} with partners ${getPrepositionAreaName(postcodeArea)}.`
-  const title = 'EU Support for Culture, Creativity and the Arts'
+  const title = 'EU Support through Erasmus+'
   const emailSubject = `${title} ${getPrepositionAreaName(postcodeArea)}`
 
-  const id = `my-eu-postcode-area-info-${postcodeArea}-creative`
+  const id = `my-eu-postcode-area-info-${postcodeArea}-erasmus`
   const anchor = '#' + id
 
   return (
     <div className="card mt-3">
       <h3 className="card-header">
-        {formatSemiCompactPounds(creativeTotal)} for Culture
+        {formatSemiCompactPounds(erasmusTotal)} for Young People
       </h3>
       <div className="card-body">
         <h4 className="card-title">{title}</h4>
@@ -111,11 +101,11 @@ const CreativeInfo = ({ postcodeArea, creative, totalAmounts, projects }) => {
         <div id={id} className="collapse">
           <h5>
             {topN}
-            Creative Projects {getPrepositionAreaName(postcodeArea)}
+            Erasmus+ Projects {getPrepositionAreaName(postcodeArea)}
           </h5>
           <ul className="list-group list-group-flush">
-            {creative.slice(0, TOP_N).map(project => (
-              <CreativeProject key={project.my_eu_id} project={project} />
+            {erasmus.slice(0, TOP_N).map(project => (
+              <ErasmusProject key={project.my_eu_id} project={project} />
             ))}
           </ul>
           {moreProjects}
@@ -136,11 +126,11 @@ const CreativeInfo = ({ postcodeArea, creative, totalAmounts, projects }) => {
   )
 }
 
-CreativeInfo.propTypes = {
+ErasmusInfo.propTypes = {
   postcodeArea: PropTypes.string,
-  creative: PropTypes.array,
+  erasmus: PropTypes.array,
   totalAmounts: PropTypes.array,
   projects: PropTypes.array
 }
 
-export default CreativeInfo
+export default ErasmusInfo

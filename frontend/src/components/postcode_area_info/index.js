@@ -9,6 +9,7 @@ import PeoplesVote from '../peoples_vote'
 import CapInfo from './cap_info'
 import CordisInfo from './cordis_info'
 import CreativeInfo from './creative_info'
+import ErasmusInfo from './erasmus_info'
 import EsifInfo from './esif_info'
 import Header from './header'
 
@@ -28,6 +29,7 @@ class PostcodeAreaInfo extends React.Component {
         <CapInfo {...data} />
         <CordisInfo {...data} />
         <CreativeInfo {...data} />
+        <ErasmusInfo {...data} />
         <EsifInfo {...data} />
         <PeoplesVote />
         <AddYourStory />
