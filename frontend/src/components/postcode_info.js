@@ -16,6 +16,7 @@ import CreativeInfo from './info_windows/creative_info'
 import EsifInfo from './info_windows/esif_info'
 import FtsInfo from './info_windows/fts_info'
 import ErasmusInfo from './info_windows/erasmus_info'
+import NhsInfo from './info_windows/nhs_info'
 
 const projectStore = new ProjectStore()
 
@@ -30,6 +31,8 @@ function makeProjectInfo(data) {
     return <FtsInfo key={data.myEuId} {...data} />
   } else if (data.dataset === 'erasmus') {
     return <ErasmusInfo key={data.myEuId} {...data} />
+  } else if (data.dataset === 'nhs') {
+    return <NhsInfo key={data.organisation + '_' + data.name} {...data} />
   } else {
     return <div>TODO</div>
   }

@@ -93,3 +93,16 @@ export function fetchWithTimeout(url, options, timeout) {
     )
   ])
 }
+
+export function convertSplitRowToRecord(columns, row, skipIndex = -1) {
+  const record = {}
+  for (let i = 0; i < columns.length; ++i) {
+    if (i === skipIndex) continue
+    record[columns[i]] = row[i]
+  }
+  return record
+}
+
+export function convertSplitRowsToRecords(columns, data, skipIndex = -1) {
+  return data.map(row => convertSplitRowToRecord(columns, row, skipIndex))
+}
