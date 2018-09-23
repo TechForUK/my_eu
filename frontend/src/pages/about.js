@@ -29,9 +29,9 @@ const About = () => (
         this site to find out.
       </p>
       <p>
-        This isn&apos;t a complete list - we know that there are data sources
-        and projects we haven&apos;t captured yet. Got something that should be
-        on the map?{' '}
+        This isn&apos;t a complete list &mdash; we know that there are data
+        sources and projects we haven&apos;t captured yet. Got something that
+        should be on the map?{' '}
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfFuSkjkvuXWX70mHJJJrQlU4Ew6GKGd2XFLzGmZGLZbvFKfw/viewform?usp=sf_link">
           Get in touch
         </a>
@@ -42,7 +42,7 @@ const About = () => (
         <a href="https://twitter.com/jdleesmiller">John Lees-Miller</a>,{' '}
         <a href="https://twitter.com/h0peth0mas">Hope Thomas</a>,{' '}
         <a href="https://twitter.com/Kiyanak">Kiyana Katebi</a> and{' '}
-        <a href="https://twitter.com/meloncholy">Andrew Weeks</a>
+        <a href="https://twitter.com/meloncholy">Andrew Weeks</a>.
       </p>
       <p>
         Thanks to <a href="https://techforuk.com/">Tech for UK</a> and{' '}
@@ -62,10 +62,9 @@ const About = () => (
         <ul>
           <li>
             European Structural and Investment Funds (ESIF) 2014-2020. ESIF
-            includes money from the European Social Fund (ESF), European
-            Regional Development Fund (ERDF) and European Agricultural Fund for
-            Rural Development (EAFRD). We got this data from separate datasets
-            for:{' '}
+            includes money from the European Social Fund (ESF) and the European
+            Regional Development Fund (ERDF). We got this data from separate
+            datasets for:{' '}
             <ul>
               <li>
                 England, from{' '}
@@ -160,12 +159,12 @@ const About = () => (
           <li>
             Common Agricultural Policy Funding data from the Detail Data Portal
             for{' '}
-            <a href="http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/06307dc0-4dcb-4305-a3e2-a8fdeb2a2a25">
-              2015
-            </a>{' '}
-            and{' '}
             <a href="http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/e153b560-7538-442b-b3ab-a40bf4adf576">
               2014
+            </a>{' '}
+            and{' '}
+            <a href="http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/06307dc0-4dcb-4305-a3e2-a8fdeb2a2a25">
+              2015
             </a>{' '}
             and from{' '}
             <a href="http://cap-payments.defra.gov.uk/Download.aspx">DEFRA</a>{' '}
@@ -173,7 +172,8 @@ const About = () => (
             <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
               Open Government Licence v3.0.
             </a>
-            ) .
+            ). This includes the European Agricultural Guarantee Fund (EAGF) and
+            the European Agricultural Fund for Rural Development (EAFRD).
           </li>
           <li>
             Postcode data from{' '}
