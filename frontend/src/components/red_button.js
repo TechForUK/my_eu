@@ -51,9 +51,6 @@ const RedButton = () => {
             </a>{' '}
             on the Brexit deal.
           </h2>
-          <p>
-            <small className="text-muted">Sponsored by Best for Britain</small>
-          </p>
         </div>
       </div>
     </div>
