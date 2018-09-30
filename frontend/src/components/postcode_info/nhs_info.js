@@ -51,18 +51,24 @@ const NhsInfo = ({ hospitalName, organisation }) => {
   return (
     <React.Fragment>
       <h4>{hospitalName}</h4>
-      <p className="display-4">
-        <span className="my-eu-icon-number">
-          <i className="fas fa-user-md" />
-          &nbsp;
-          {data.nurses_visitors_eu}
-        </span>{' '}
-        <span className="my-eu-icon-number">
-          <i className="fas fa-bed" />
-          &nbsp;
-          {beds}
-        </span>
-      </p>
+      <div className="container">
+        <div className="row">
+          <div className="col-6">
+            <p className="display-4 my-eu-icon-number">
+              <i className="fas fa-user-md" />
+              &nbsp;
+              {data.nurses_visitors_eu}
+            </p>
+          </div>
+          <div className="col-6">
+            <p className="display-4 my-eu-icon-number">
+              <i className="fas fa-bed" />
+              &nbsp;
+              {beds}
+            </p>
+          </div>
+        </div>
+      </div>
       <p className="lead">{tweet}</p>
       <p>
         {hospitalName} is part of the {data.organisation_name}. An NHS hospital
@@ -75,29 +81,30 @@ const NhsInfo = ({ hospitalName, organisation }) => {
           <thead>
             <tr>
               <th />
-              <th>From EU</th>
-              <th>Total</th>
               <th>% From EU</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th>Doctors</th>
-              <td align="right">{data.hchs_doctors_eu}</td>
-              <td align="right">{totalDoctors}</td>
-              <td align="right">{formatRoundPercentage(percentDoctors)}</td>
+              <td align="right">
+                {formatRoundPercentage(percentDoctors)} ({data.hchs_doctors_eu}{' '}
+                / {totalDoctors})
+              </td>
             </tr>
             <tr>
               <th>Nurses and Health Visitors</th>
-              <td align="right">{data.nurses_visitors_eu}</td>
-              <td align="right">{totalNurses}</td>
-              <td align="right">{formatRoundPercentage(percentNurses)}</td>
+              <td align="right">
+                {formatRoundPercentage(percentNurses)} (
+                {data.nurses_visitors_eu} / {totalNurses})
+              </td>
             </tr>
             <tr>
               <th>Other Staff</th>
-              <td align="right">{data.other_eu}</td>
-              <td align="right">{totalOther}</td>
-              <td align="right">{formatRoundPercentage(percentOther)}</td>
+              <td align="right">
+                {formatRoundPercentage(percentOther)} ({data.other_eu} /{' '}
+                {totalOther})
+              </td>
             </tr>
           </tbody>
         </table>
