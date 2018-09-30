@@ -84,6 +84,11 @@ export function indefinitePluralise(n, noun, limit = 1, plural = `${noun}s`) {
   return `${n} ${plural}`
 }
 
+export function definitePluralise(n, noun, plural = `${noun}s`) {
+  if (n === 1) return `${n} ${noun}`
+  return `${n} ${plural}`
+}
+
 // From https://stackoverflow.com/a/49857905/2053820
 export function fetchWithTimeout(url, options, timeout) {
   return Promise.race([

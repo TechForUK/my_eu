@@ -4,7 +4,12 @@ import PropTypes from 'prop-types'
 
 import ProjectStore from '../../project_store'
 
-import { extractPostcodeArea, getPrepositionAreaName } from '../../utilities'
+import {
+  definitePluralise,
+  extractPostcodeArea,
+  getPrepositionAreaName,
+  indefinitePluralise
+} from '../../utilities'
 
 import AddYourStory from '../add_your_story'
 import SearchAgain from '../search_again'
@@ -27,64 +32,128 @@ const INFO_COMPONENT = {
   nhs: NhsInfo
 }
 
-const CordisInfoFooter = () => {
+const CordisInfoFooter = ({ extra }) => {
   return (
-    <p>
-      The European Research Council funds research that saves lives and drives
-      innovation in the UK and across the EU.{' '}
-      <a href="/about" target="_blank">
-        Find out more.
-      </a>
-    </p>
+    <React.Fragment>
+      <h4>Plus {definitePluralise(extra, 'More Research Project')}</h4>
+      <p>
+        Check out the{' '}
+        <a
+          href="https://cordis.europa.eu/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Community Research and Development Information Service
+        </a>{' '}
+        (CORDIS) to find more research projects funded by the European Research
+        Council.
+      </p>
+    </React.Fragment>
   )
 }
 
-const CreativeInfoFooter = () => {
+CordisInfoFooter.propTypes = {
+  extra: PropTypes.number
+}
+
+const CreativeInfoFooter = ({ extra }) => {
   return (
-    <p>
-      This grant was part of Creative Europe, which is a €1.46 billion European
-      Union programme for the cultural and creative sectors for the years
-      2014-2020.{' '}
-      <a href="/about" target="_blank">
-        Find out more.
-      </a>
-    </p>
+    <React.Fragment>
+      <h4>Plus {definitePluralise(extra, 'More Creative Project')}</h4>
+      <p>
+        Check out{' '}
+        <a
+          href="http://www.creativeeuropeuk.eu/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Creative Europe UK
+        </a>{' '}
+        to find more creative and cultural projects supported by the EU.
+      </p>
+    </React.Fragment>
   )
 }
 
-const ErasmusInfoFooter = () => {
+CreativeInfoFooter.propTypes = {
+  extra: PropTypes.number
+}
+
+const ErasmusInfoFooter = ({ extra }) => {
   return (
-    <p>
-      This grant as part of Erasmus+, which helps young people.{' '}
-      <a href="/about" target="_blank">
-        Find out more.
-      </a>
-    </p>
+    <React.Fragment>
+      <h4>Plus {definitePluralise(extra, 'More Erasmus Project')}</h4>
+      <p>
+        Check out{' '}
+        <a
+          href="http://ec.europa.eu/programmes/erasmus-plus/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          the Erasmus+ Programme
+        </a>{' '}
+        to find out more about how the EU supports young people.
+      </p>
+    </React.Fragment>
   )
 }
 
-const EsifInfoFooter = () => {
+ErasmusInfoFooter.propTypes = {
+  extra: PropTypes.number
+}
+
+const EsifInfoFooter = ({ extra }) => {
   return (
-    <p>
-      The EU supported this project through its European Structural and
-      Investment Funds, which are the EU&apos;s main funding programmes for
-      supporting growth and jobs in the UK and across the EU.{' '}
-      <a href="/about" target="_blank">
-        Find out more.
-      </a>
-    </p>
+    <React.Fragment>
+      <h4>Plus {definitePluralise(extra, 'More Structural Project')}</h4>
+      <p>
+        Find out more about how the EU supports jobs and growth through the{' '}
+        <a
+          href="https://en.wikipedia.org/wiki/European_Regional_Development_Fund"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          European Regional Development Fund
+        </a>{' '}
+        and the{' '}
+        <a
+          href="https://en.wikipedia.org/wiki/European_Social_Fund"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          European Social Fund
+        </a>
+        .
+      </p>
+    </React.Fragment>
   )
 }
 
-const FtsInfoFooter = () => {
+EsifInfoFooter.propTypes = {
+  extra: PropTypes.number
+}
+
+const FtsInfoFooter = ({ extra }) => {
   return (
-    <p>
-      This grant was from the EU budget centrally administered by the Commission{' '}
-      <a href="/about" target="_blank">
-        Find out more.
-      </a>
-    </p>
+    <React.Fragment>
+      <h4>Plus {definitePluralise(extra, 'More European Commission Grant')}</h4>
+      <p>
+        Find out more about EU commision grants from the{' '}
+        <a
+          href="http://ec.europa.eu/budget/fts/index_en.htm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Financial Tranparency System
+        </a>
+        .
+      </p>
+    </React.Fragment>
   )
+}
+
+FtsInfoFooter.propTypes = {
+  extra: PropTypes.number
 }
 
 const NhsInfoFooter = () => {
@@ -100,17 +169,18 @@ const INFO_FOOTER = {
   nhs: NhsInfoFooter
 }
 
-const INFO_TITLE = {
-  cordis: 'Research Projects',
-  creative: 'Cultural and Creative Projects',
-  erasmus: 'Young People',
-  esif: 'Growth and Jobs',
-  fts: 'European Commission Grants',
-  nhs: 'NHS Hospitals'
-}
-
 // Set the order of the sections
 const INFO = ['nhs', 'erasmus', 'esif', 'creative', 'cordis', 'fts']
+
+function countProjects(projects) {
+  let count = 0
+  for (let datasetName in projects) {
+    if (!projects.hasOwnProperty(datasetName)) continue
+    const dataset = projects[datasetName]
+    count += dataset.data.length + (dataset.extra || 0)
+  }
+  return count
+}
 
 function makeProjectsInfo(projects) {
   const results = []
@@ -119,9 +189,6 @@ function makeProjectsInfo(projects) {
     if (!dataset) continue
     const Info = INFO_COMPONENT[datasetName]
     const InfoFooter = INFO_FOOTER[datasetName]
-    results.push(
-      <h3 key={'header_' + datasetName}>{INFO_TITLE[datasetName]}</h3>
-    )
     for (let data of dataset.data) {
       results.push(
         <li key={data.myEuId} className="list-group-item">
@@ -129,7 +196,13 @@ function makeProjectsInfo(projects) {
         </li>
       )
     }
-    results.push(<InfoFooter key={'footer_' + datasetName} />)
+    if (dataset.extra) {
+      results.push(
+        <li key={`extra_${datasetName}`} className="list-group-item">
+          <InfoFooter extra={dataset.extra} />
+        </li>
+      )
+    }
   }
   return results
 }
@@ -143,7 +216,12 @@ class PostcodeInfo extends React.Component {
   render() {
     const projects = this.lookup()
     if (projects) {
-      const header = <h2>{this.getPostcode()}</h2>
+      const header = (
+        <h2>
+          {indefinitePluralise(countProjects(projects), 'Story', 5, 'Stories')}{' '}
+          at {this.getPostcode()}
+        </h2>
+      )
 
       return (
         <div className="my-eu-info my-eu-postcode-info">

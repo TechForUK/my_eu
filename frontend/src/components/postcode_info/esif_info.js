@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Summary from './summary'
 
 import DisplayAmount from '../info/display_amount'
+import SourceBadge from '../info/source_badge'
 
 import Share from '../share'
 
@@ -48,7 +49,9 @@ const EsifInfo = ({
 
   return (
     <React.Fragment>
-      <h4>{projectTitle}</h4>
+      <h4>
+        {projectTitle} <SourceBadge source="esif" />
+      </h4>
       <DisplayAmount amount={euInvestment} />
       <p className="text-muted">{yearRange}</p>
       {lead}

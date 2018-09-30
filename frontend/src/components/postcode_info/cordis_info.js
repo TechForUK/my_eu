@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Summary from './summary'
 
 import DisplayAmount from '../info/display_amount'
+import SourceBadge from '../info/source_badge'
 
 import Share from '../share'
 
@@ -66,7 +67,9 @@ const CordisInfo = ({
 
   return (
     <React.Fragment>
-      <h4>{projectTitle}</h4>
+      <h4>
+        {projectTitle} <SourceBadge source="cordis" />
+      </h4>
       <DisplayAmount amount={contribution} />
       <p className="text-muted">{yearRange}</p>
       {lead}

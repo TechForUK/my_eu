@@ -5,6 +5,7 @@ import Summary from './summary'
 
 import DisplayAmount from '../info/display_amount'
 import SharedBetween from '../info/shared_between'
+import SourceBadge from '../info/source_badge'
 
 import Share from '../share'
 
@@ -66,7 +67,9 @@ const CreativeInfo = ({
 
   return (
     <React.Fragment>
-      <h4>{project}</h4>
+      <h4>
+        {project} <SourceBadge source="creative" />
+      </h4>
       <DisplayAmount amount={maxContribution} />
       <p className="text-muted">
         {yearRange}

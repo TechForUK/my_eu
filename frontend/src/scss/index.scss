@@ -12,6 +12,10 @@ body {
 }
 
 .my-eu-info {
+  h2 {
+    text-align: center;
+  }
+
   .display-4 {
     font-size: 2.5rem;
   }
@@ -74,6 +78,14 @@ body {
 
 .my-eu-data {
   overflow-y: auto;
+}
+
+.my-eu-button-ad {
+  h1,
+  h2 {
+    text-align: center;
+    font-size: 1.3rem;
+  }
 }
 
 .my-eu-button-ad .button img {
