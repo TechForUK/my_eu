@@ -20,7 +20,7 @@ class PostcodeAreaInfo extends React.Component {
     const data = this.lookup()
     if (!data) return <div>Loading postcode data&hellip;</div>
     return (
-      <div className="my-eu-postcode-area-info">
+      <div className="my-eu-info my-eu-postcode-area-info">
         <ul className="nav">
           <SearchAgain />
         </ul>

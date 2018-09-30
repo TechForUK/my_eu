@@ -84,6 +84,11 @@ export function indefinitePluralise(n, noun, limit = 1, plural = `${noun}s`) {
   return `${n} ${plural}`
 }
 
+export function definitePluralise(n, noun, plural = `${noun}s`) {
+  if (n === 1) return `${n} ${noun}`
+  return `${n} ${plural}`
+}
+
 // From https://stackoverflow.com/a/49857905/2053820
 export function fetchWithTimeout(url, options, timeout) {
   return Promise.race([
@@ -92,4 +97,23 @@ export function fetchWithTimeout(url, options, timeout) {
       setTimeout(() => reject(new Error('timeout')), timeout)
     )
   ])
+}
+
+export function convertSplitRowToRecord(columns, row, skipIndex = -1) {
+  const record = {}
+  for (let i = 0; i < columns.length; ++i) {
+    if (i === skipIndex) continue
+    record[columns[i]] = row[i]
+  }
+  return record
+}
+
+export function convertSplitRowsToRecords(columns, data, skipIndex = -1) {
+  return data.map(row => convertSplitRowToRecord(columns, row, skipIndex))
+}
+
+export function formatYearRange(startDate, endDate) {
+  const startYear = startDate.getFullYear()
+  const endYear = endDate.getFullYear()
+  return endYear > startYear ? `${startYear}–${endYear}` : `${startYear}`
 }

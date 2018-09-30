@@ -2,10 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import SharedBetween from '../info/shared_between'
+
 import Share from '../share'
+
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
+  formatYearRange,
   getPrepositionAreaName,
   indefinitePluralise
 } from '../../utilities'
@@ -13,37 +17,8 @@ import {
 const TOP_N = 3
 
 const CreativeProject = ({ project }) => {
-  const startYear = project.start_date.getFullYear()
-  const endYear = project.end_date.getFullYear()
-  const yearRange =
-    endYear > startYear ? (
-      <span>
-        {startYear}
-        &ndash;
-        {endYear}
-      </span>
-    ) : (
-      <span>{startYear}</span>
-    )
+  const yearRange = formatYearRange(project.start_date, project.end_date)
   const postcodePath = `/postcode/${project.postcode.split(/\s/).join('/')}`
-
-  let numOrganisations
-  if (project.num_organisations > 1) {
-    if (project.num_countries > 1) {
-      numOrganisations = (
-        <span>
-          , shared between {project.num_organisations} organisations in{' '}
-          {project.num_countries} countries
-        </span>
-      )
-    } else {
-      numOrganisations = (
-        <span>
-          , shared between {project.num_organisations} organisations in the UK
-        </span>
-      )
-    }
-  }
 
   return (
     <li className="list-group-item">
@@ -53,7 +28,10 @@ const CreativeProject = ({ project }) => {
       </p>
       <p className="text-muted">
         {yearRange}
-        {numOrganisations}
+        <SharedBetween
+          numCountries={project.num_countries}
+          numOrganisations={project.num_organisations}
+        />
       </p>
       <p className="text-muted">
         {project.organisation_name},{' '}

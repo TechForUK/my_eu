@@ -7,44 +7,15 @@ body {
   color: #37474f;
 }
 
-h1 {
-  font-size: 1.8rem;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-}
-
-h2 {
-  font-size: 1.4rem;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-}
-
 .navbar-brand img {
   margin-left: 22px;
 }
 
-.my-eu-info-window {
-  margin-top: 5px;
-  font-family: 'Source Sans Pro', sans-serif;
-
+.my-eu-info {
   h2 {
-    font-size: 1.4rem;
+    text-align: center;
   }
 
-  p {
-    margin-bottom: 0.75rem;
-  }
-}
-
-.my-eu-postcode-area-info {
   .display-4 {
     font-size: 2.5rem;
   }
@@ -83,6 +54,24 @@ h2 {
   border: 2px solid #0f73ae;
 }
 
+.my-eu-about {
+  h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+}
+
+.my-eu-icon-number {
+  text-align: center;
+  white-space: nowrap;
+  padding-top: $spacer;
+}
+
 .my-eu-sidebar-ad {
   text-align: center;
   margin-top: 3 * $spacer;
@@ -91,6 +80,14 @@ h2 {
 
 .my-eu-data {
   overflow-y: auto;
+}
+
+.my-eu-button-ad {
+  h1,
+  h2 {
+    text-align: center;
+    font-size: 1.3rem;
+  }
 }
 
 .my-eu-button-ad .button img {

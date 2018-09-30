@@ -1,11 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Share from '../share'
 import Summary from './summary'
-import { formatRoundPercentage, formatRoundPounds } from '../../utilities'
+
+import DisplayAmount from '../info/display_amount'
+import SourceBadge from '../info/source_badge'
+
+import Share from '../share'
+
+import {
+  formatRoundPercentage,
+  formatRoundPounds,
+  formatYearRange
+} from '../../utilities'
 
 const CordisInfo = ({
+  startDate,
+  endDate,
   projectTitle,
   organisationName,
   objective,
@@ -19,6 +30,8 @@ const CordisInfo = ({
   organizationUrl,
   imagePath
 }) => {
+  const yearRange = formatYearRange(startDate, endDate)
+
   let lead
   if (contribution && totalCost && contribution <= totalCost) {
     const displayEcContribution = formatRoundPounds(contribution)
@@ -53,24 +66,22 @@ const CordisInfo = ({
   const tweet = `The EU supported ${organisationName} as part of the ${acronym} research project.`
 
   return (
-    <div className="my-eu-info-window">
-      <h3>{projectTitle}</h3>
+    <React.Fragment>
+      <h4>
+        {projectTitle} <SourceBadge source="cordis" />
+      </h4>
+      <DisplayAmount amount={contribution} />
+      <p className="text-muted">{yearRange}</p>
       {lead}
-      <h4>Objective</h4>
       <Summary text={objective} />
-      <p>
-        The European Research Council funds research that saves lives and drives
-        innovation in the UK and across the EU.{' '}
-        <a href="/about" target="_blank">
-          Find out more.
-        </a>
-      </p>
       <Share message={tweet} />
-    </div>
+    </React.Fragment>
   )
 }
 
 CordisInfo.propTypes = {
+  startDate: PropTypes.instanceOf(Date),
+  endDate: PropTypes.instanceOf(Date),
   projectTitle: PropTypes.string,
   organisationName: PropTypes.string,
   objective: PropTypes.string,

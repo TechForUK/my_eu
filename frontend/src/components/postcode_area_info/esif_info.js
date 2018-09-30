@@ -6,6 +6,7 @@ import Share from '../share'
 import {
   formatRoundPounds,
   formatSemiCompactPounds,
+  formatYearRange,
   indefinitePluralise,
   getPrepositionAreaName,
   sum
@@ -14,18 +15,7 @@ import {
 const TOP_N = 3
 
 const EsifProject = ({ project }) => {
-  const startYear = project.start_date.getFullYear()
-  const endYear = project.end_date.getFullYear()
-  const yearRange =
-    endYear > startYear ? (
-      <span>
-        {startYear}
-        &ndash;
-        {endYear}
-      </span>
-    ) : (
-      <span>{startYear}</span>
-    )
+  const yearRange = formatYearRange(project.start_date, project.end_date)
   const postcodePath = `/postcode/${project.postcode.split(/\s/).join('/')}`
 
   return (

@@ -1,20 +1,7 @@
 /* global fetch */
 
 import postcodeAreaDataPath from './data/map/output/postcode_areas.data.json'
-import { extractPostcodeArea } from './utilities'
-
-function convertSplitRowToRecord(columns, row, skipIndex = -1) {
-  const record = {}
-  for (let i = 0; i < columns.length; ++i) {
-    if (i === skipIndex) continue
-    record[columns[i]] = row[i]
-  }
-  return record
-}
-
-function convertSplitRowsToRecords(columns, data, skipIndex = -1) {
-  return data.map(row => convertSplitRowToRecord(columns, row, skipIndex))
-}
+import { extractPostcodeArea, convertSplitRowsToRecords } from './utilities'
 
 function parseStartAndEndDates(record) {
   const MS_PER_S = 1e3

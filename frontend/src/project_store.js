@@ -1,6 +1,14 @@
 /* global fetch */
 
 import districtDataPath from './data/map/output/district'
+import districtColumns from './data/map/output/district_columns'
+import { convertSplitRowsToRecords } from './utilities'
+
+function parseStartAndEndDates(record) {
+  record.startDate = new Date(record.startDate)
+  record.endDate = new Date(record.endDate)
+  return record
+}
 
 export default class ProjectStore {
   constructor() {
@@ -11,19 +19,17 @@ export default class ProjectStore {
     const districtData = this.cache[outwardCode]
     if (!districtData) return null
 
-    const results = []
-    const datasets = districtData.datasets
+    const results = {}
+    const datasets = districtData.postcodes[inwardCode]
     for (let datasetName in datasets) {
       if (!datasets.hasOwnProperty(datasetName)) continue
       const dataset = datasets[datasetName]
-      const columns = dataset.columns
-      for (let row of dataset.data) {
-        if (row[0] !== inwardCode) continue
-        const item = { dataset: datasetName }
-        for (let i = 0; i < row.length; ++i) {
-          item[columns[i]] = row[i]
-        }
-        results.push(item)
+      results[datasetName] = {
+        data: convertSplitRowsToRecords(
+          districtColumns[datasetName],
+          dataset.data
+        ).map(parseStartAndEndDates),
+        extra: dataset.extra
       }
     }
     return results
