@@ -50,7 +50,19 @@ const NhsInfo = ({ hospitalName, organisation }) => {
   }
   return (
     <div className="my-eu-info-window">
-      <h3>{hospitalName}</h3>
+      <h4>{hospitalName}</h4>
+      <p className="display-4">
+        <span className="my-eu-icon-number">
+          <i className="fas fa-user-md" />
+          &nbsp;
+          {data.nurses_visitors_eu}
+        </span>{' '}
+        <span className="my-eu-icon-number">
+          <i className="fas fa-bed" />
+          &nbsp;
+          {beds}
+        </span>
+      </p>
       <p className="lead">{tweet}</p>
       <p>
         {hospitalName} is part of the {data.organisation_name}. An NHS hospital

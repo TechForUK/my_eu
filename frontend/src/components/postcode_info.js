@@ -5,11 +5,7 @@ import PropTypes from 'prop-types'
 import ProjectStore from '../project_store'
 import AddYourStory from './add_your_story'
 import SearchAgain from './search_again'
-import {
-  extractPostcodeArea,
-  indefinitePluralise,
-  getPrepositionAreaName
-} from '../utilities'
+import { extractPostcodeArea, getPrepositionAreaName } from '../utilities'
 
 import CordisInfo from './info_windows/cordis_info'
 import CreativeInfo from './info_windows/creative_info'
@@ -20,22 +16,120 @@ import NhsInfo from './info_windows/nhs_info'
 
 const projectStore = new ProjectStore()
 
-function makeProjectInfo(data) {
-  if (data.dataset === 'esif') {
-    return <EsifInfo key={data.myEuId} {...data} />
-  } else if (data.dataset === 'cordis') {
-    return <CordisInfo key={data.myEuId} {...data} />
-  } else if (data.dataset === 'creative') {
-    return <CreativeInfo key={data.myEuId} {...data} />
-  } else if (data.dataset === 'fts') {
-    return <FtsInfo key={data.myEuId} {...data} />
-  } else if (data.dataset === 'erasmus') {
-    return <ErasmusInfo key={data.myEuId} {...data} />
-  } else if (data.dataset === 'nhs') {
-    return <NhsInfo key={data.organisation + '_' + data.name} {...data} />
-  } else {
-    return <div>TODO</div>
+const INFO_COMPONENT = {
+  cordis: CordisInfo,
+  creative: CreativeInfo,
+  esif: EsifInfo,
+  fts: FtsInfo,
+  erasmus: ErasmusInfo,
+  nhs: NhsInfo
+}
+
+const CordisInfoFooter = () => {
+  return (
+    <p>
+      The European Research Council funds research that saves lives and drives
+      innovation in the UK and across the EU.{' '}
+      <a href="/about" target="_blank">
+        Find out more.
+      </a>
+    </p>
+  )
+}
+
+const CreativeInfoFooter = () => {
+  return (
+    <p>
+      This grant was part of Creative Europe, which is a €1.46 billion European
+      Union programme for the cultural and creative sectors for the years
+      2014-2020.{' '}
+      <a href="/about" target="_blank">
+        Find out more.
+      </a>
+    </p>
+  )
+}
+
+const ErasmusInfoFooter = () => {
+  return (
+    <p>
+      This grant as part of Erasmus+, which helps young people.{' '}
+      <a href="/about" target="_blank">
+        Find out more.
+      </a>
+    </p>
+  )
+}
+
+const EsifInfoFooter = () => {
+  return (
+    <p>
+      The EU supported this project through its European Structural and
+      Investment Funds, which are the EU&apos;s main funding programmes for
+      supporting growth and jobs in the UK and across the EU.{' '}
+      <a href="/about" target="_blank">
+        Find out more.
+      </a>
+    </p>
+  )
+}
+
+const FtsInfoFooter = () => {
+  return (
+    <p>
+      This grant was from the EU budget centrally administered by the Commission{' '}
+      <a href="/about" target="_blank">
+        Find out more.
+      </a>
+    </p>
+  )
+}
+
+const NhsInfoFooter = () => {
+  return null
+}
+
+const INFO_FOOTER = {
+  cordis: CordisInfoFooter,
+  creative: CreativeInfoFooter,
+  erasmus: ErasmusInfoFooter,
+  esif: EsifInfoFooter,
+  fts: FtsInfoFooter,
+  nhs: NhsInfoFooter
+}
+
+const INFO_TITLE = {
+  cordis: 'Research Projects',
+  creative: 'Cultural and Creative Projects',
+  erasmus: 'Young People',
+  esif: 'Growth and Jobs',
+  fts: 'European Commission Grants',
+  nhs: 'NHS Hospitals'
+}
+
+// Set the order of the sections
+const INFO = ['nhs', 'erasmus', 'esif', 'creative', 'cordis', 'fts']
+
+function makeProjectsInfo(projects) {
+  const results = []
+  for (let datasetName of INFO) {
+    const dataset = projects[datasetName]
+    if (!dataset) continue
+    const Info = INFO_COMPONENT[datasetName]
+    const InfoFooter = INFO_FOOTER[datasetName]
+    results.push(
+      <h3 key={'header_' + datasetName}>{INFO_TITLE[datasetName]}</h3>
+    )
+    for (let data of dataset.data) {
+      results.push(
+        <li key={data.myEuId} className="list-group-item">
+          <Info {...data} />
+        </li>
+      )
+    }
+    results.push(<InfoFooter key={'footer_' + datasetName} />)
   }
+  return results
 }
 
 class PostcodeInfo extends React.Component {
@@ -47,18 +141,15 @@ class PostcodeInfo extends React.Component {
   render() {
     const projects = this.lookup()
     if (projects) {
-      const header = (
-        <h2>
-          {indefinitePluralise(projects.length, 'Project')} at{' '}
-          {this.getPostcode()}
-        </h2>
-      )
+      const header = <h2>{this.getPostcode()}</h2>
 
       return (
         <div id="my-eu-info">
           {this.renderLinks()}
           {header}
-          {projects.map(makeProjectInfo)}
+          <ul className="list-group list-group-flush">
+            {makeProjectsInfo(projects)}
+          </ul>
           <AddYourStory />
         </div>
       )

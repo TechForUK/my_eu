@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import DisplayAmount from '../info/display_amount'
+
 import Share from '../share'
+
 import { formatRoundPounds } from '../../utilities'
 
 const FtsInfo = ({
@@ -28,15 +31,10 @@ const FtsInfo = ({
 
   return (
     <div className="my-eu-info-window">
-      <h3>{beneficiary}</h3>
+      <h4>{beneficiary}</h4>
+      <DisplayAmount amount={amount} />
+      <p className="text-muted">{year}</p>
       {lead}
-      <p>
-        This grant was from the EU budget centrally administered by the
-        Commission{' '}
-        <a href="/about" target="_blank">
-          Find out more.
-        </a>
-      </p>
       <Share message={tweet} />
     </div>
   )
