@@ -8,21 +8,19 @@ import SharedBetween from '../info/shared_between'
 
 import Share from '../share'
 
-import { formatRoundPounds, formatYearRange } from '../../utilities'
+import { formatRoundPounds } from '../../utilities'
 
-const CreativeInfo = ({
-  startDate,
-  endDate,
+const ErasmusInfo = ({
+  callYear,
   project,
   organisationName,
   maxContribution,
-  organisationWebsite,
   numCountries,
   numOrganisations,
+  organisationWebsite,
   coordinatorName,
   summary
 }) => {
-  const yearRange = formatYearRange(startDate, endDate)
   const displayEuGrant = formatRoundPounds(maxContribution)
 
   let website
@@ -65,24 +63,23 @@ const CreativeInfo = ({
   }
 
   return (
-    <div className="my-eu-info-window">
+    <React.Fragment>
       <h4>{project}</h4>
       <DisplayAmount amount={maxContribution} />
       <p className="text-muted">
-        {yearRange}
+        Started {callYear}
         <SharedBetween {...{ numCountries, numOrganisations }} />
       </p>
       {lead}
       <Summary text={summary} />
       {website}
       <Share message={tweet} />
-    </div>
+    </React.Fragment>
   )
 }
 
-CreativeInfo.propTypes = {
-  startDate: PropTypes.instanceOf(Date),
-  endDate: PropTypes.instanceOf(Date),
+ErasmusInfo.propTypes = {
+  callYear: PropTypes.number,
   project: PropTypes.string,
   organisationName: PropTypes.string,
   maxContribution: PropTypes.number,
@@ -93,4 +90,4 @@ CreativeInfo.propTypes = {
   summary: PropTypes.string
 }
 
-export default CreativeInfo
+export default ErasmusInfo

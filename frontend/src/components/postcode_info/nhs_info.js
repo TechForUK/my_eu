@@ -49,7 +49,7 @@ const NhsInfo = ({ hospitalName, organisation }) => {
     } are from the EU.`
   }
   return (
-    <div className="my-eu-info-window">
+    <React.Fragment>
       <h4>{hospitalName}</h4>
       <p className="display-4">
         <span className="my-eu-icon-number">
@@ -103,7 +103,7 @@ const NhsInfo = ({ hospitalName, organisation }) => {
         </table>
       </div>
       <Share message={tweet} />
-    </div>
+    </React.Fragment>
   )
 }
 

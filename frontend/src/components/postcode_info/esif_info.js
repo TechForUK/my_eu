@@ -47,14 +47,14 @@ const EsifInfo = ({
   }
 
   return (
-    <div className="my-eu-info-window">
+    <React.Fragment>
       <h4>{projectTitle}</h4>
       <DisplayAmount amount={euInvestment} />
       <p className="text-muted">{yearRange}</p>
       {lead}
       <Summary text={summary} />
       <Share message={tweet} />
-    </div>
+    </React.Fragment>
   )
 }
 

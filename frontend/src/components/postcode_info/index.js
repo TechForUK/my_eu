@@ -2,17 +2,19 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import ProjectStore from '../project_store'
-import AddYourStory from './add_your_story'
-import SearchAgain from './search_again'
-import { extractPostcodeArea, getPrepositionAreaName } from '../utilities'
+import ProjectStore from '../../project_store'
 
-import CordisInfo from './info_windows/cordis_info'
-import CreativeInfo from './info_windows/creative_info'
-import EsifInfo from './info_windows/esif_info'
-import FtsInfo from './info_windows/fts_info'
-import ErasmusInfo from './info_windows/erasmus_info'
-import NhsInfo from './info_windows/nhs_info'
+import { extractPostcodeArea, getPrepositionAreaName } from '../../utilities'
+
+import AddYourStory from '../add_your_story'
+import SearchAgain from '../search_again'
+
+import CordisInfo from './cordis_info'
+import CreativeInfo from './creative_info'
+import EsifInfo from './esif_info'
+import FtsInfo from './fts_info'
+import ErasmusInfo from './erasmus_info'
+import NhsInfo from './nhs_info'
 
 const projectStore = new ProjectStore()
 
@@ -144,7 +146,7 @@ class PostcodeInfo extends React.Component {
       const header = <h2>{this.getPostcode()}</h2>
 
       return (
-        <div id="my-eu-info">
+        <div className="my-eu-info my-eu-postcode-info">
           {this.renderLinks()}
           {header}
           <ul className="list-group list-group-flush">

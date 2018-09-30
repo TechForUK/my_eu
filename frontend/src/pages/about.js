@@ -10,7 +10,7 @@ const About = () => (
     <Title>about - myeu.uk - see what the EU has done for you</Title>
     <Meta property="og:type" content="article" />
     <Nav path="/about/" />
-    <div className="container">
+    <div className="container my-eu-about">
       <h1>About MyEU</h1>
       <h2>Why MyEU?</h2>
       <p>

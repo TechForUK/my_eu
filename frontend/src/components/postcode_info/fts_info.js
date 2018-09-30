@@ -30,13 +30,13 @@ const FtsInfo = ({
   )
 
   return (
-    <div className="my-eu-info-window">
+    <React.Fragment>
       <h4>{beneficiary}</h4>
       <DisplayAmount amount={amount} />
       <p className="text-muted">{year}</p>
       {lead}
       <Share message={tweet} />
-    </div>
+    </React.Fragment>
   )
 }
 
