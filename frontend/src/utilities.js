@@ -106,3 +106,9 @@ export function convertSplitRowToRecord(columns, row, skipIndex = -1) {
 export function convertSplitRowsToRecords(columns, data, skipIndex = -1) {
   return data.map(row => convertSplitRowToRecord(columns, row, skipIndex))
 }
+
+export function formatYearRange(startDate, endDate) {
+  const startYear = startDate.getFullYear()
+  const endYear = endDate.getFullYear()
+  return endYear > startYear ? `${startYear}–${endYear}` : `${startYear}`
+}
