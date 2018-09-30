@@ -5,7 +5,7 @@ const SearchAgain = () => {
   return (
     <li className="nav-item">
       <Link to="/" className="nav-link">
-        <i className="fa fa-undo" />
+        <i className="fas fa-undo" />
         &nbsp; Search Again
       </Link>
     </li>

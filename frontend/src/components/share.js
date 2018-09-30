@@ -31,7 +31,7 @@ const Share = ({
       Share:
       <br />
       <a
-        className="btn btn-social fa fa-twitter"
+        className="btn btn-social fab fa-twitter"
         href={`https://twitter.com/intent/tweet?text=${encodedMessage}&url=${encodedUrl}&via=myeuuk`}
         onClick={trackShare('Twitter')}
         role="button"
@@ -40,7 +40,7 @@ const Share = ({
         rel="noopener noreferrer"
       />
       <a
-        className="btn btn-social fa fa-facebook"
+        className="btn btn-social fab fa-facebook-square"
         href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
         onClick={trackShare('Facebook')}
         role="button"
@@ -49,7 +49,7 @@ const Share = ({
         alt="share on facebook"
       />
       <a
-        className="btn btn-social fa fa-envelope"
+        className="btn btn-social fas fa-envelope"
         href={`mailto:?subject=${encodedEmailSubject}&body=${encodedEmailBody}`}
         onClick={trackShare('Email')}
         role="button"

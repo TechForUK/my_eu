@@ -53,7 +53,7 @@ const About = () => (
       <p>
         myeu.uk{' '}
         <a href="https://github.com/GreatBritishHackOff/my_eu">
-          is open source <i className="fa fa-github" />
+          is open source <i className="fab fa-github" />
         </a>
         .
       </p>

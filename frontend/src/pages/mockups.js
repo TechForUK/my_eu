@@ -276,7 +276,7 @@ const Mockups = () => (
             <h3 className="card-header">
               £300M for Research
               <a
-                className="btn btn-social fa fa-twitter float-right"
+                className="btn btn-social fab fa-twitter float-right"
                 href="#"
                 role="button"
               />
@@ -333,7 +333,7 @@ const Mockups = () => (
             <h3 className="card-header">
               £3M for Culture
               <a
-                className="btn btn-social fa fa-twitter float-right"
+                className="btn btn-social fab fa-twitter float-right"
                 href="#"
                 role="button"
               />
@@ -395,7 +395,7 @@ const Mockups = () => (
             <h3 className="card-header">
               £30M for Farmers
               <a
-                className="btn btn-social fa fa-twitter float-right"
+                className="btn btn-social fab fa-twitter float-right"
                 href="#"
                 role="button"
               />
@@ -462,7 +462,7 @@ const Mockups = () => (
             <h3 className="card-header">
               £300M for Research
               <a
-                className="btn btn-social fa fa-twitter float-right"
+                className="btn btn-social fab fa-twitter float-right"
                 href="#"
                 role="button"
               />
@@ -519,7 +519,7 @@ const Mockups = () => (
             <h3 className="card-header">
               £3M for Culture
               <a
-                className="btn btn-social fa fa-twitter float-right"
+                className="btn btn-social fab fa-twitter float-right"
                 href="#"
                 role="button"
               />
@@ -578,7 +578,7 @@ const Mockups = () => (
             <h3 className="card-header">
               £6M for Growth and Jobs
               <a
-                className="btn btn-social fa fa-twitter float-right"
+                className="btn btn-social fab fa-twitter float-right"
                 href="#"
                 role="button"
               />

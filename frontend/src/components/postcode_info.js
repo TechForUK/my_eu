@@ -75,7 +75,7 @@ class PostcodeInfo extends React.Component {
       postcodeAreaLink = (
         <li className="nav-item">
           <Link to={postcodeAreaPath} className="nav-link">
-            <i className="fa fa-level-up" />
+            <i className="fas fa-level-up-alt" />
             &nbsp; More Projects {getPrepositionAreaName(postcodeArea)}
           </Link>
         </li>
