@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["0BQ", "RM1", "Cromer and District Hospital"]]}}, "outwardCode": "NR27"}
+{"outwardCode": "NR27", "postcodes": {"0BQ": {"nhs": {"data": [["RM1", "Cromer and District Hospital", "nhs_RM131"]]}}}}

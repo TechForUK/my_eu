@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["1HB", "RDR", "Crowborough War Memorial Hospital - Sussex Community NHS Foundation Trust"]]}}, "outwardCode": "TN6"}
+{"outwardCode": "TN6", "postcodes": {"1HB": {"nhs": {"data": [["RDR", "Crowborough War Memorial Hospital - Sussex Community NHS Foundation Trust", "nhs_RDRCR"]]}}}}

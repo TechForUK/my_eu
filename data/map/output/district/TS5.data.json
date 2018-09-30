@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["4EE", "RX3", "West Lane Hospital, Middlesbrough"]]}}, "outwardCode": "TS5"}
+{"outwardCode": "TS5", "postcodes": {"4EE": {"nhs": {"data": [["RX3", "West Lane Hospital, Middlesbrough", "nhs_RX3LF"]]}}}}

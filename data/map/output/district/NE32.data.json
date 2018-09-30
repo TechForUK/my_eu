@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["3UX", "RE9", "Palmer Community Hospital"], ["5HA", "RE9", "Primrose Hill Hospital"], ["5NN", "RE9", "Elmville Unit at Monkton Hall"]]}}, "outwardCode": "NE32"}
+{"outwardCode": "NE32", "postcodes": {"3UX": {"nhs": {"data": [["RE9", "Palmer Community Hospital", "nhs_RE9GF"]]}}, "5HA": {"nhs": {"data": [["RE9", "Primrose Hill Hospital", "nhs_RE9GC"]]}}, "5NN": {"nhs": {"data": [["RE9", "Elmville Unit at Monkton Hall", "nhs_RE906"]]}}}}

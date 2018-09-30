@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["9DW", "RP6", "Moorfields At St Anthony's Hospital"], ["9DW", "RRV", "Uclh Outreach - St Anthony's"]]}}, "outwardCode": "SM3"}
+{"outwardCode": "SM3", "postcodes": {"9DW": {"nhs": {"data": [["RP6", "Moorfields At St Anthony's Hospital", "nhs_RP640"], ["RRV", "Uclh Outreach - St Anthony's", "nhs_RRV90"]]}}}}

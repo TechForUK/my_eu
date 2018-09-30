@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["6QA", "RY3", "Kelling Hospital"]]}}, "outwardCode": "NR25"}
+{"outwardCode": "NR25", "postcodes": {"6QA": {"nhs": {"data": [["RY3", "Kelling Hospital", "nhs_RY335"]]}}}}

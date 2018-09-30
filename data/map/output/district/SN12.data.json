@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["7NZ", "RVN", "Melksham Community Hospital"]]}}, "outwardCode": "SN12"}
+{"outwardCode": "SN12", "postcodes": {"7NZ": {"nhs": {"data": [["RVN", "Melksham Community Hospital", "nhs_RVN6V"]]}}}}

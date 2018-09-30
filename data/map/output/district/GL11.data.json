@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["4BA", "R1J", "Vale Community Hospital"]]}}, "outwardCode": "GL11"}
+{"outwardCode": "GL11", "postcodes": {"4BA": {"nhs": {"data": [["R1J", "Vale Community Hospital", "nhs_R1J07"]]}}}}

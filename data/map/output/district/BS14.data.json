@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["0DB", "RA7", "South Bristol Community Hospital"]]}}, "outwardCode": "BS14"}
+{"outwardCode": "BS14", "postcodes": {"0DB": {"nhs": {"data": [["RA7", "South Bristol Community Hospital", "nhs_RA773"]]}}}}

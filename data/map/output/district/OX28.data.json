@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["6JJ", "RNU", "Witney Community Hospital"]]}}, "outwardCode": "OX28"}
+{"outwardCode": "OX28", "postcodes": {"6JJ": {"nhs": {"data": [["RNU", "Witney Community Hospital", "nhs_RNUDM"]]}}}}

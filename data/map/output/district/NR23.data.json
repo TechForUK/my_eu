@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["1RF", "RY3", "Wells Cottage Hospital"]]}}, "outwardCode": "NR23"}
+{"outwardCode": "NR23", "postcodes": {"1RF": {"nhs": {"data": [["RY3", "Wells Cottage Hospital", "nhs_RY333"]]}}}}

@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["4EX", "RDD", "Basildon Hospital - Dermatology Benfleet"]]}}, "outwardCode": "SS7"}
+{"outwardCode": "SS7", "postcodes": {"4EX": {"nhs": {"data": [["RDD", "Basildon Hospital - Dermatology Benfleet", "nhs_RDD03"]]}}}}

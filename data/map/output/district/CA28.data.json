@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["8JG", "RNL", "West Cumberland Hospital"]]}}, "outwardCode": "CA28"}
+{"outwardCode": "CA28", "postcodes": {"8JG": {"nhs": {"data": [["RNL", "West Cumberland Hospital", "nhs_RNLBX"]]}}}}

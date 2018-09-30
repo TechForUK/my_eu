@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["4EX", "RDE", "The Fryatt Hospital And Mayflower Medical Centre"]]}}, "outwardCode": "CO12"}
+{"outwardCode": "CO12", "postcodes": {"4EX": {"nhs": {"data": [["RDE", "The Fryatt Hospital And Mayflower Medical Centre", "nhs_RDEEE"]]}}}}

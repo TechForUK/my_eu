@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["3AB", "RT1", "North Cambridgeshire Hospital - Cambridgeshire and Peterborough NHS Foundation Trust"]]}}, "outwardCode": "PE13"}
+{"outwardCode": "PE13", "postcodes": {"3AB": {"nhs": {"data": [["RT1", "North Cambridgeshire Hospital - Cambridgeshire and Peterborough NHS Foundation Trust", "nhs_RT182"]]}}}}

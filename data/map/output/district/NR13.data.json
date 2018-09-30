@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["5EW", "RY3", "Little Plumstead Hospital"]]}}, "outwardCode": "NR13"}
+{"outwardCode": "NR13", "postcodes": {"5EW": {"nhs": {"data": [["RY3", "Little Plumstead Hospital", "nhs_RY328"]]}}}}

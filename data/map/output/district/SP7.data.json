@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["8BD", "RDY", "Westminster Memorial Hospital"]]}}, "outwardCode": "SP7"}
+{"outwardCode": "SP7", "postcodes": {"8BD": {"nhs": {"data": [["RDY", "Westminster Memorial Hospital", "nhs_RDYEY"]]}}}}

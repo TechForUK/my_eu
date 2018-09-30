@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["7HL", "RY3", "Swaffham Community Hospital"]]}}, "outwardCode": "PE37"}
+{"outwardCode": "PE37", "postcodes": {"7HL": {"nhs": {"data": [["RY3", "Swaffham Community Hospital", "nhs_RY33E"]]}}}}

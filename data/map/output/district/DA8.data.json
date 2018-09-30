@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["3EE", "RN7", "Erith and District Hospital"]]}}, "outwardCode": "DA8"}
+{"outwardCode": "DA8", "postcodes": {"3EE": {"nhs": {"data": [["RN7", "Erith and District Hospital", "nhs_RN7ED"]]}}}}

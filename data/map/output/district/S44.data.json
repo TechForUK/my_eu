@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["5BL", "RFS", "Chesterfield Royal Hospital"], ["5BL", "RXM", "Hartington Unit"], ["6DH", "RY8", "Bolsover Hospital"]]}}, "outwardCode": "S44"}
+{"outwardCode": "S44", "postcodes": {"5BL": {"nhs": {"data": [["RFS", "Chesterfield Royal Hospital", "nhs_RFSDA"], ["RXM", "Hartington Unit", "nhs_RXM02"]]}}, "6DH": {"nhs": {"data": [["RY8", "Bolsover Hospital", "nhs_RY8NT"]]}}}}

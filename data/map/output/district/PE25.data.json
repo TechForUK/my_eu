@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["2BS", "RY5", "Skegness and District General Hospital"]]}}, "outwardCode": "PE25"}
+{"outwardCode": "PE25", "postcodes": {"2BS": {"nhs": {"data": [["RY5", "Skegness and District General Hospital", "nhs_RY539"]]}}}}

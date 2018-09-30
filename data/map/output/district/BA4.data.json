@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["4PG", "RH5", "Shepton Mallet Community Hospital"]]}}, "outwardCode": "BA4"}
+{"outwardCode": "BA4", "postcodes": {"4PG": {"nhs": {"data": [["RH5", "Shepton Mallet Community Hospital", "nhs_RH5F7"]]}}}}

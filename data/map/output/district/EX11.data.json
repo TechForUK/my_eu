@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["1DN", "RH8", "Ottery St Mary Hospital"]]}}, "outwardCode": "EX11"}
+{"outwardCode": "EX11", "postcodes": {"1DN": {"nhs": {"data": [["RH8", "Ottery St Mary Hospital", "nhs_RH834"]]}}}}

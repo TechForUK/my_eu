@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["1QJ", "RTF", "Hexham General Hospital"]]}}, "outwardCode": "NE46"}
+{"outwardCode": "NE46", "postcodes": {"1QJ": {"nhs": {"data": [["RTF", "Hexham General Hospital", "nhs_RTFDR"]]}}}}

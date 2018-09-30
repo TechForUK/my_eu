@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["9DQ", "RH5", "Wincanton Community Hospital"]]}}, "outwardCode": "BA9"}
+{"outwardCode": "BA9", "postcodes": {"9DQ": {"nhs": {"data": [["RH5", "Wincanton Community Hospital", "nhs_RH5G2"]]}}}}

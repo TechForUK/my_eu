@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["1NE", "RW1", "Odiham Cottage Hospital"]]}}, "outwardCode": "RG29"}
+{"outwardCode": "RG29", "postcodes": {"1NE": {"nhs": {"data": [["RW1", "Odiham Cottage Hospital", "nhs_RW11F"]]}}}}

@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["5DX", "RY5", "Horncastle War Memorial Hospital"]]}}, "outwardCode": "LN9"}
+{"outwardCode": "LN9", "postcodes": {"5DX": {"nhs": {"data": [["RY5", "Horncastle War Memorial Hospital", "nhs_RY584"]]}}}}

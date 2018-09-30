@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["2TS", "RX3", "Tees, Esk, Wear Valley NHS Trust (Durham)"], ["2TS", "RX3", "West Park Hospital, Darlington"]]}}, "outwardCode": "DL2"}
+{"outwardCode": "DL2", "postcodes": {"2TS": {"nhs": {"data": [["RX3", "Tees, Esk, Wear Valley NHS Trust (Durham)", "nhs_RX301"], ["RX3", "West Park Hospital, Darlington", "nhs_RX3MM"]]}}}}

@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["5JQ", "RV9", "Mill View Court - Inpatient Unit"], ["5JQ", "RWA", "Castle Hill Hospital"]]}}, "outwardCode": "HU16"}
+{"outwardCode": "HU16", "postcodes": {"5JQ": {"nhs": {"data": [["RV9", "Mill View Court - Inpatient Unit", "nhs_RV942"], ["RWA", "Castle Hill Hospital", "nhs_RWA16"]]}}}}

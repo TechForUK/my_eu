@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["4PU", "RYY", "Hawkhurst Hospital"]]}}, "outwardCode": "TN18"}
+{"outwardCode": "TN18", "postcodes": {"4PU": {"nhs": {"data": [["RYY", "Hawkhurst Hospital", "nhs_RYYD6"]]}}}}

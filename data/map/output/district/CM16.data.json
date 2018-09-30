@@ -1,1 +1,1 @@
-{"datasets": {"nhs": {"columns": ["inwardCode", "organisation", "hospitalName"], "data": [["6TN", "RQW", "St Margaret's Hospital"]]}}, "outwardCode": "CM16"}
+{"outwardCode": "CM16", "postcodes": {"6TN": {"nhs": {"data": [["RQW", "St Margaret's Hospital", "nhs_RQWG1"]]}}}}
