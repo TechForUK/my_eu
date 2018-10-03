@@ -1833,7 +1833,6 @@ export default {
   SS16: require('./district/SS16.data.json'),
   SS2: require('./district/SS2.data.json'),
   SS3: require('./district/SS3.data.json'),
-  SS4: require('./district/SS4.data.json'),
   SS5: require('./district/SS5.data.json'),
   SS6: require('./district/SS6.data.json'),
   SS7: require('./district/SS7.data.json'),

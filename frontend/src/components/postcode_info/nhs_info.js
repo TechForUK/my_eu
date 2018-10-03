@@ -22,29 +22,31 @@ const NhsInfo = ({ hospitalName, organisation }) => {
   const data = findTrustData(organisation)
   if (!data) return <span />
 
-  const totalStaff = data.all_staff_eu + data.all_staff_uk
-  const totalDoctors = data.hchs_doctors_eu + data.hchs_doctors_uk
-  const percentDoctors = data.hchs_doctors_eu / totalDoctors
-  const totalNurses = data.nurses_visitors_eu + data.nurses_visitors_uk
-  const percentNurses = data.nurses_visitors_eu / totalNurses
-  const totalOther = data.other_eu + data.other_uk
-  const percentOther = data.other_eu / totalOther
+  const totalEuStaff = data.eu_doctors + data.eu_nurses + data.eu_other
+  const totalStaff =
+    totalEuStaff + data.non_eu_doctors + data.non_eu_nurses + data.non_eu_other
+  const totalDoctors = data.eu_doctors + data.non_eu_doctors
+  const percentDoctors = data.eu_doctors / totalDoctors
+  const totalNurses = data.eu_nurses + data.non_eu_nurses
+  const percentNurses = data.eu_nurses / totalNurses
+  const totalOther = data.eu_other + data.non_eu_other
+  const percentOther = data.eu_other / totalOther
 
   const bedsPerWard = 24
   const nursesPerWard = 29
   const bedsPerNurse = bedsPerWard / nursesPerWard
 
-  const beds = Math.round(bedsPerNurse * data.nurses_visitors_eu)
+  const beds = Math.round(bedsPerNurse * data.eu_nurses)
 
   let tweet
   if (beds >= 10) {
     tweet = `${
-      data.nurses_visitors_eu
+      data.eu_nurses
     } NHS nurses from the EU staff ${beds} hospital beds in the ${
       data.organisation_name
     }.`
   } else {
-    tweet = `${data.all_staff_eu} of ${totalStaff} staff at ${
+    tweet = `${totalEuStaff} of ${totalStaff} staff at ${
       data.organisation_name
     } are from the EU.`
   }
@@ -57,7 +59,7 @@ const NhsInfo = ({ hospitalName, organisation }) => {
             <p className="display-4 my-eu-icon-number">
               <i className="fas fa-user-md" />
               &nbsp;
-              {data.nurses_visitors_eu}
+              {data.eu_nurses}
             </p>
           </div>
           <div className="col-6">
@@ -88,21 +90,21 @@ const NhsInfo = ({ hospitalName, organisation }) => {
             <tr>
               <th>Doctors</th>
               <td align="right">
-                {formatRoundPercentage(percentDoctors)} ({data.hchs_doctors_eu}{' '}
-                / {totalDoctors})
+                {formatRoundPercentage(percentDoctors)} ({data.eu_doctors} /{' '}
+                {totalDoctors})
               </td>
             </tr>
             <tr>
               <th>Nurses and Health Visitors</th>
               <td align="right">
-                {formatRoundPercentage(percentNurses)} (
-                {data.nurses_visitors_eu} / {totalNurses})
+                {formatRoundPercentage(percentNurses)} ({data.eu_nurses} /{' '}
+                {totalNurses})
               </td>
             </tr>
             <tr>
               <th>Other Staff</th>
               <td align="right">
-                {formatRoundPercentage(percentOther)} ({data.other_eu} /{' '}
+                {formatRoundPercentage(percentOther)} ({data.eu_other} /{' '}
                 {totalOther})
               </td>
             </tr>

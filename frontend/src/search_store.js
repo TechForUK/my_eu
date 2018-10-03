@@ -2,7 +2,6 @@ import { getGoogleMapsApiAndMap } from './google_maps'
 import { fetchWithTimeout } from './utilities'
 
 export const AUTOCOMPLETE_OPTIONS = {
-  types: ['geocode'],
   componentRestrictions: { country: ['UK'] }
 }
 
