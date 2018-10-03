@@ -89,6 +89,24 @@ export function definitePluralise(n, noun, plural = `${noun}s`) {
   return `${n} ${plural}`
 }
 
+export function definitePluraliseList(ns, nouns, plurals = []) {
+  return ns
+    .map((n, i) => {
+      if (n > 0) return definitePluralise(n, nouns[i], plurals[i])
+    })
+    .filter(Boolean)
+}
+
+export function toSentence(words) {
+  if (words.length === 0) return ''
+  if (words.length === 1) return words[0]
+  if (words.length === 2) return `${words[0]} and ${words[1]}`
+  return (
+    words.slice(0, words.length - 1).join(', ') +
+    ` and ${words[words.length - 1]}`
+  )
+}
+
 // From https://stackoverflow.com/a/49857905/2053820
 export function fetchWithTimeout(url, options, timeout) {
   return Promise.race([

@@ -2,7 +2,12 @@
 
 import assert from 'assert'
 
-import { formatSemiCompact, formatCompact } from '../src/utilities'
+import {
+  formatSemiCompact,
+  formatCompact,
+  definitePluraliseList,
+  toSentence
+} from '../src/utilities'
 
 describe('utilities', function() {
   describe('formatSemiCompact()', function() {
@@ -97,6 +102,42 @@ describe('utilities', function() {
       assert.strictEqual(formatCompact(950000000000), '1T')
       assert.strictEqual(formatCompact(9499999999999), '9T')
       assert.strictEqual(formatCompact(9500000000000), '>9T')
+    })
+  })
+
+  describe('definitePluraliseList()', function() {
+    it('pluralises multiple terms', function() {
+      assert.deepStrictEqual(definitePluraliseList([], []), [])
+      assert.deepStrictEqual(definitePluraliseList([0], ['a']), [])
+      assert.deepStrictEqual(definitePluraliseList([1], ['a']), ['1 a'])
+      assert.deepStrictEqual(definitePluraliseList([2], ['a']), ['2 as'])
+      assert.deepStrictEqual(definitePluraliseList([1], ['a'], ['aa']), ['1 a'])
+      assert.deepStrictEqual(definitePluraliseList([2], ['a'], ['aa']), [
+        '2 aa'
+      ])
+
+      assert.deepStrictEqual(definitePluraliseList([], []), [])
+      assert.deepStrictEqual(definitePluraliseList([0, 1], ['a', 'b']), ['1 b'])
+      assert.deepStrictEqual(definitePluraliseList([0, 2], ['a', 'b']), [
+        '2 bs'
+      ])
+      assert.deepStrictEqual(
+        definitePluraliseList([0, 2], ['a', 'b'], ['aa', 'bb']),
+        ['2 bb']
+      )
+    })
+  })
+
+  describe('toSentence()', function() {
+    it('formats sentences', function() {
+      assert.strictEqual(toSentence([]), '')
+      assert.strictEqual(toSentence(['foo']), 'foo')
+      assert.strictEqual(toSentence(['foo', 'bar']), 'foo and bar')
+      assert.strictEqual(toSentence(['foo', 'bar', 'baz']), 'foo, bar and baz')
+      assert.strictEqual(
+        toSentence(['foo', 'bar', 'baz', 'bat']),
+        'foo, bar, baz and bat'
+      )
     })
   })
 })
