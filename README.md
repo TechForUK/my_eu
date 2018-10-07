@@ -155,6 +155,8 @@ The static website is deployed to Google Cloud Storage behind CloudFlare for SSL
 
 2.  You need to get the `PRODUCTION_MY_EU_API_KEY`, which restricts the referrer to `www.myeu.uk` (and does not allow localhost or other domains).
 
+3.  To deploy with error monitoring, you need to get the `ROLLBAR_ACCESS_TOKEN` (`post_client_item`) and `ROLLBAR_DEPLOY_ACCESS_TOKEN` (`post_server_item`) keys for our rollbar project.
+
 Then run the deploy script to deploy:
 
 ```

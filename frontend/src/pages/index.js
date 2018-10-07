@@ -4,6 +4,7 @@ import { HeadCollector } from 'react-head'
 import cheerio from 'cheerio'
 
 import Page from './page'
+import makeRollbarScript from './rollbar_script'
 
 // Based on https://github.com/markdalgleish/static-site-generator-webpack-plugin#asset-support
 function findPageProps(data) {
@@ -41,7 +42,7 @@ module.exports = function render(data) {
   return `
 <!doctype html>
 <html lang="en">
-<head>${removeDataAttrs(headHtml)}</head>
+<head>${makeRollbarScript()}${removeDataAttrs(headHtml)}</head>
 <body>${content}</body>
 </html>`.trim()
 }

@@ -96,7 +96,8 @@ const config = {
   plugins: [
     new webpack.EnvironmentPlugin([
       'DEVELOPMENT_MY_EU_API_KEY',
-      'PRODUCTION_MY_EU_API_KEY'
+      'PRODUCTION_MY_EU_API_KEY',
+      'ROLLBAR_ACCESS_TOKEN'
     ]),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
