@@ -63,6 +63,9 @@ const ErasmusInfo = ({
     )
   }
 
+  let summaryComponent
+  if (summary) summaryComponent = <Summary text={summary} />
+
   return (
     <React.Fragment>
       <h4>
@@ -74,7 +77,7 @@ const ErasmusInfo = ({
         <SharedBetween {...{ numCountries, numOrganisations }} />
       </p>
       {lead}
-      <Summary text={summary} />
+      {summaryComponent}
       {website}
       <Share message={tweet} />
     </React.Fragment>
