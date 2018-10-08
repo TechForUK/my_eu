@@ -175,8 +175,13 @@ function MarkerClusterer(map, opt_markers, opt_options) {
     }
   })
 
-  google.maps.event.addListener(this.map_, 'idle', function() {
+  // Redraw requires that we know the map bounds, but idle can fire first.
+  // Approach based on https://stackoverflow.com/a/8818506/2053820
+  google.maps.event.addListenerOnce(this.map_, 'bounds_changed', function() {
     that.redraw()
+    google.maps.event.addListener(that.map_, 'idle', function() {
+      that.redraw()
+    })
   })
 
   // Finally, add the markers
