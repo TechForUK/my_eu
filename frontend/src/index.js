@@ -1,6 +1,6 @@
+import '@babel/polyfill'
 import 'bootstrap'
 import 'cross-fetch/polyfill'
-import 'promise-polyfill/src/polyfill'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
