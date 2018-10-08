@@ -47,6 +47,9 @@ const EsifInfo = ({
     )
   }
 
+  let summaryComponent
+  if (summary) summaryComponent = <Summary text={summary} />
+
   return (
     <React.Fragment>
       <h4>
@@ -55,7 +58,7 @@ const EsifInfo = ({
       <DisplayAmount amount={euInvestment} />
       <p className="text-muted">{yearRange}</p>
       {lead}
-      <Summary text={summary} />
+      {summaryComponent}
       <Share message={tweet} />
     </React.Fragment>
   )
