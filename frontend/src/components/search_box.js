@@ -102,6 +102,7 @@ class SearchBox extends React.Component {
 
   markPlace(place) {
     const name = this.inputRef.current.value
+    if (name.length === 0) return
     getSearchStore()
       .then(searchStore => {
         if (place) {
