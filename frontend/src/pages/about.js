@@ -195,14 +195,14 @@ const About = () => (
             </a>{' '}
             .
           </li>
-          <li>
+          {/* <li>
             NHS staffing data are from NHS Digital&apos;s{' '}
             <a href="http://webarchive.nationalarchives.gov.uk/20180307192547/http://content.digital.nhs.uk/7572">
               HCHS staff with an EU or UK nationality, by staff group and
               organisation
             </a>{' '}
             dataset from 2017, shared under the Open Government License.
-          </li>
+          </li> */}
         </ul>
       </p>
 
