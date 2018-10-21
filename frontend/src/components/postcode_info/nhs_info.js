@@ -150,7 +150,7 @@ const NhsInfo = ({ hospitalName, organisation, myEuId }) => {
           </table>
         </div>
         <p className="text-muted">
-          <small>These data are from September, 2016. {unknownsNote}</small>
+          <small>These data are from June, 2018. {unknownsNote}</small>
         </p>
       </div>
       <Share message={tweet} />

@@ -24,6 +24,10 @@ As above, but a few months earlier.
 
 This is the most recent dataset I could find that has EU staff totals for all nationalities.
 
+### September 2017, June 2018
+
+"HCHS staff by staff group, nationality and organisation, September 2017 and June 2018" from https://digital.nhs.uk/data-and-information/find-data-and-publications/supplementary-information/2018-supplementary-information-files/hchs-staff-by-staff-group-nationality-and-organisation-september-2017-and-june-2018 . Downloaded 21 Oct 2018.
+
 ### Related
 
 - [EU staff by staff group and organisation, January 2010 to 2018](https://digital.nhs.uk/data-and-information/find-data-and-publications/supplementary-information/2018-supplementary-information-files/eu-staff-by-staff-group-and-organisation-january-2010-to-2018) - has only EU staff (not other staff)
