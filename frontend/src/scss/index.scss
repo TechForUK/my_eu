@@ -86,20 +86,12 @@ body {
   margin-bottom: $spacer;
 }
 
-.my-eu-data {
-  overflow-y: auto;
-}
-
 .my-eu-button-ad {
   h1,
   h2 {
     text-align: center;
     font-size: 1.3rem;
   }
-}
-
-.my-eu-button-ad .button img {
-  max-width: 120px;
 }
 
 .my-eu-sidebar-cta {
@@ -119,16 +111,6 @@ button.my-eu-details-toggle:before {
   content: 'Hide ';
 }
 
-#my-eu-bar {
-  display: flex;
-  flex-direction: column;
-}
-
-.flex {
-  display: flex;
-  min-height: 1px;
-}
-
 @include media-breakpoint-up(md) {
   html,
   body {
@@ -143,6 +125,10 @@ button.my-eu-details-toggle:before {
       min-height: 100%;
       height: 100%;
 
+      #my-eu-bar {
+        overflow-y: auto;
+      }
+
       #my-eu-bar,
       #my-eu-map {
         height: 100%;
@@ -152,7 +138,7 @@ button.my-eu-details-toggle:before {
 }
 
 @include media-breakpoint-down(sm) {
-  .my-eu-button-ad {
+  #my-eu-home-extra {
     display: none;
   }
 

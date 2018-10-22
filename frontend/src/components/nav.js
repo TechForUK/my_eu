@@ -16,7 +16,7 @@ const Nav = ({ path }) => {
     )
   }
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/">
         <img src={logoWithTextPath} height="30" alt="MyEU.UK Logo" />
       </a>

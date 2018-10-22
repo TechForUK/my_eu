@@ -2,6 +2,7 @@ import React from 'react'
 
 import { SITE_EMAIL_BODY, SITE_URL } from '../strings'
 
+import BfbAd from './bfb_ad'
 import SearchBox from './search_box'
 import Share from './share'
 
@@ -15,6 +16,9 @@ const AppHome = () => {
         url={SITE_URL}
         emailBody={SITE_EMAIL_BODY}
       />
+      <div id="my-eu-home-extra">
+        <BfbAd />
+      </div>
     </React.Fragment>
   )
 }
