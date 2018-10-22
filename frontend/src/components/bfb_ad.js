@@ -23,7 +23,7 @@ const BfbAd = () => {
         <h5 className="card-title">Demand a #FinalSay on Brexit</h5>
         <p className="card-text">
           <a
-            href="https://www.bestforbritain.org/join"
+            href="https://www.bestforbritain.org/join?utm_source=myeu"
             onClick={trackClick('Join the Best for Britain Mailing List')}
             target="_blank"
             rel="noopener noreferrer"
