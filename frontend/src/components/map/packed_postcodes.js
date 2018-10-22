@@ -3,15 +3,22 @@
 import packedPostcodesPath from '../../data/map/output/packed_postcodes.data.json'
 import MarkerClusterer from './marker_clusterer'
 import euCircleGbpPath from '../../images/eu_circle_gbp.svg'
+import fundingPostcodePath from '../../images/funding_postcode.svg'
+import hospitalPostcodePath from '../../images/hospital_postcode.svg'
 
 const MIN_MARKERS = 5
 const MAX_ZOOM = 15
-const MARKER_SIZE = 26
+const MARKER_WIDTH = 29
+const MARKER_HEIGHT = 40
+
+const ICON_MASK_BITS = 1
+const ICON_MASK = 0x1
 
 class PostcodeData {
-  constructor(amount, position) {
+  constructor(amount, position, iconMask) {
     this.amount = amount
     this.position = position
+    this.iconMask = iconMask
   }
 }
 
@@ -27,12 +34,14 @@ function unpack(googleMaps, data) {
       const inwardCode = codeData[i]
       const deltaLongitude = codeData[i + 1]
       const deltaLatitude = codeData[i + 2]
-      const amount = codeData[i + 3]
+      const packedAmount = codeData[i + 3]
       const position = new googleMaps.LatLng(
         minLatitude + deltaLatitude,
         minLongitude + deltaLongitude
       )
-      inwardCodes[inwardCode] = new PostcodeData(amount, position)
+      const amount = packedAmount >> ICON_MASK_BITS
+      const iconMask = packedAmount & ICON_MASK
+      inwardCodes[inwardCode] = new PostcodeData(amount, position, iconMask)
     }
   }
   return outwardCodes
@@ -45,13 +54,14 @@ function unpackPostcodeMarkers(googleMaps, map, postcodes, handleClick) {
     if (!postcodes.hasOwnProperty(outwardCode)) continue
     const inwardCodes = postcodes[outwardCode]
     for (let inwardCode in inwardCodes) {
-      const { amount, position } = inwardCodes[inwardCode]
+      const { amount, position, iconMask } = inwardCodes[inwardCode]
       const postcode = `${outwardCode} ${inwardCode}`
       const myEu = { outwardCode, inwardCode, postcode, amount }
       const icon = {
-        size: new googleMaps.Size(MARKER_SIZE, MARKER_SIZE),
-        scaledSize: new googleMaps.Size(MARKER_SIZE, MARKER_SIZE),
-        url: euCircleGbpPath
+        size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
+        anchor: new googleMaps.Point(MARKER_WIDTH / 2, MARKER_HEIGHT),
+        scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
+        url: iconMask === 0 ? fundingPostcodePath : hospitalPostcodePath
       }
       const marker = new googleMaps.Marker({ position, icon, myEu })
       googleMaps.event.addListener(marker, 'click', function(event) {

@@ -173,9 +173,9 @@ class Map extends React.Component {
     }
     var icon = {
       url: logoPath,
-      size: new this.googleMaps.Size(50, 50),
-      anchor: new this.googleMaps.Point(25, 50),
-      scaledSize: new this.googleMaps.Size(50, 50)
+      size: new this.googleMaps.Size(24, 50),
+      anchor: new this.googleMaps.Point(12, 50),
+      scaledSize: new this.googleMaps.Size(24, 50)
     }
 
     // Create a marker for each place.

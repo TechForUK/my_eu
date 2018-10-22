@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="29"
+   height="40"
+   viewBox="0 0 29 40"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="funding_postcode.svg">
+  <metadata
+     id="metadata33">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Funding postcode</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="691"
+     inkscape:window-height="480"
+     id="namedview31"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="3.6875"
+     inkscape:cx="14"
+     inkscape:cy="20"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title4">Funding postcode</title>
+  <desc
+     id="desc6">Created with Sketch.</desc>
+  <defs
+     id="defs8" />
+  <g
+     id="Funding-postcode"
+     style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1"
+     transform="translate(-18,-12)">
+    <g
+       id="Group"
+       transform="translate(18,12)">
+      <g
+         id="baseline-room-24px"
+         style="fill:#003399;fill-rule:nonzero">
+        <path
+           d="M 14.5,0 C 6.4835714,0 0,6.26 0,14 0,24.5 14.5,40 14.5,40 14.5,40 29,24.5 29,14 29,6.26 22.516429,0 14.5,0 Z"
+           id="Shape"
+           inkscape:connector-curvature="0" />
+      </g>
+      <polygon
+         id="Star-3"
+         points="17.122359,4.7274575 18.765268,4.4887288 19.5,3 20.234732,4.4887288 21.877641,4.7274575 20.688821,5.8862712 20.969463,7.5225425 19.5,6.75 18.030537,7.5225425 18.311179,5.8862712 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon15"
+         points="22,11.90983 23.727457,11.645898 24.5,10 25.272543,11.645898 27,11.90983 25.75,13.190983 26.045085,15 24.5,14.145898 22.954915,15 23.25,13.190983 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon17"
+         points="8.1223587,3.7274575 9.7652684,3.4887288 10.5,2 11.234732,3.4887288 12.877641,3.7274575 11.688821,4.8862712 11.969463,6.5225425 10.5,5.75 9.0305369,6.5225425 9.3111793,4.8862712 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon19"
+         points="3.1223587,10.727457 4.7652684,10.488729 5.5,9 6.2347316,10.488729 7.8776413,10.727457 6.6888207,11.886271 6.9694631,13.522543 5.5,12.75 4.0305369,13.522543 4.3111793,11.886271 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon21"
+         points="19.122359,20.727457 20.765268,20.488729 21.5,19 22.234732,20.488729 23.877641,20.727457 22.688821,21.886271 22.969463,23.522543 21.5,22.75 20.030537,23.522543 20.311179,21.886271 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon23"
+         points="12.122359,22.727457 13.765268,22.488729 14.5,21 15.234732,22.488729 16.877641,22.727457 15.688821,23.886271 15.969463,25.522543 14.5,24.75 13.030537,25.522543 13.311179,23.886271 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon25"
+         points="4.1223587,19.727457 5.7652684,19.488729 6.5,18 7.2347316,19.488729 8.8776413,19.727457 7.6888207,20.886271 7.9694631,22.522543 6.5,21.75 5.0305369,22.522543 5.3111793,20.886271 "
+         style="fill:#ffcc00" />
+      <text
+         font-size="18"
+         font-weight="900"
+         letter-spacing="0"
+         id="text27"
+         style="font-weight:900;font-size:18px;font-family:'Source Sans Pro', sans-serif;letter-spacing:0;fill:#ffffff">
+        <tspan
+           x="9"
+           y="19"
+           id="tspan29">£</tspan>
+      </text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="29"
+   height="40"
+   viewBox="0 0 29 40"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="hospital_postcode.svg">
+  <metadata
+     id="metadata33">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Hospital postcode</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="691"
+     inkscape:window-height="480"
+     id="namedview31"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="3.6875"
+     inkscape:cx="14"
+     inkscape:cy="20"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title4">Hospital postcode</title>
+  <desc
+     id="desc6">Created with Sketch.</desc>
+  <defs
+     id="defs8" />
+  <g
+     id="Hospital-postcode"
+     style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1"
+     transform="translate(-18,-12)">
+    <g
+       id="baseline-room-24px"
+       transform="translate(18,12)"
+       style="fill:#a51567;fill-rule:nonzero">
+      <path
+         d="M 14.5,0 C 6.4835714,0 0,6.26 0,14 0,24.5 14.5,40 14.5,40 14.5,40 29,24.5 29,14 29,6.26 22.516429,0 14.5,0 Z"
+         id="Shape"
+         inkscape:connector-curvature="0" />
+    </g>
+    <polygon
+       id="Star-3"
+       points="35.122359,16.727457 36.765268,16.488729 37.5,15 38.234732,16.488729 39.877641,16.727457 38.688821,17.886271 38.969463,19.522543 37.5,18.75 36.030537,19.522543 36.311179,17.886271 "
+       style="fill:#ffcc00" />
+    <polygon
+       id="polygon14"
+       points="40,23.90983 41.727457,23.645898 42.5,22 43.272543,23.645898 45,23.90983 43.75,25.190983 44.045085,27 42.5,26.145898 40.954915,27 41.25,25.190983 "
+       style="fill:#ffcc00" />
+    <polygon
+       id="polygon16"
+       points="26.122359,15.727457 27.765268,15.488729 28.5,14 29.234732,15.488729 30.877641,15.727457 29.688821,16.886271 29.969463,18.522543 28.5,17.75 27.030537,18.522543 27.311179,16.886271 "
+       style="fill:#ffcc00" />
+    <polygon
+       id="polygon18"
+       points="21.122359,22.727457 22.765268,22.488729 23.5,21 24.234732,22.488729 25.877641,22.727457 24.688821,23.886271 24.969463,25.522543 23.5,24.75 22.030537,25.522543 22.311179,23.886271 "
+       style="fill:#ffcc00" />
+    <polygon
+       id="polygon20"
+       points="37.122359,32.727457 38.765268,32.488729 39.5,31 40.234732,32.488729 41.877641,32.727457 40.688821,33.886271 40.969463,35.522543 39.5,34.75 38.030537,35.522543 38.311179,33.886271 "
+       style="fill:#ffcc00" />
+    <polygon
+       id="polygon22"
+       points="30.122359,34.727457 31.765268,34.488729 32.5,33 33.234732,34.488729 34.877641,34.727457 33.688821,35.886271 33.969463,37.522543 32.5,36.75 31.030537,37.522543 31.311179,35.886271 "
+       style="fill:#ffcc00" />
+    <polygon
+       id="polygon24"
+       points="22.122359,31.727457 23.765268,31.488729 24.5,30 25.234732,31.488729 26.877641,31.727457 25.688821,32.886271 25.969463,34.522543 24.5,33.75 23.030537,34.522543 23.311179,32.886271 "
+       style="fill:#ffcc00" />
+    <g
+       id="Group-4"
+       transform="translate(27,21)">
+      <rect
+         id="Rectangle-2"
+         x="0"
+         y="0"
+         width="11"
+         height="10"
+         rx="1"
+         style="fill:#ffffff" />
+      <rect
+         id="Rectangle-3"
+         x="4.0399671"
+         y="1.0805922"
+         width="2.8856907"
+         height="7.8700657"
+         style="fill:#a51567" />
+      <polygon
+         id="polygon29"
+         points="1.1542763,3.7039474 9.8113487,3.7039474 9.8113487,6.3273026 1.1542763,6.3273026 "
+         style="fill:#a51567" />
+    </g>
+  </g>
+</svg>

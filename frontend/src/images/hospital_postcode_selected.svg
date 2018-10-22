@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Hospital  postcode  selected</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 16 0 16 7 0 7"></polygon>
+    </defs>
+    <g id="Hospital--postcode--selected" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="baseline-room-24px" transform="translate(13.000000, 6.000000)" fill="#DC3F98" fill-rule="nonzero">
+            <path d="M19,0 C8.49571429,0 0,8.138 0,18.2 C0,31.85 19,52 19,52 C19,52 38,31.85 38,18.2 C38,8.138 29.5042857,0 19,0 Z" id="Shape"></path>
+        </g>
+        <g id="NHS-logo-for-A4-10mm---RGB-White" transform="translate(25.000000, 22.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Clip-2"></g>
+        </g>
+        <polygon id="Star-3" fill="#FBBCE0" points="38.5 15.25 36.4427516 16.3315595 36.8356511 14.0407797 35.1713022 12.4184405 37.4713758 12.0842203 38.5 10 39.5286242 12.0842203 41.8286978 12.4184405 40.1643489 14.0407797 40.5572484 16.3315595"></polygon>
+        <polygon id="Star-3" fill="#FBBCE0" points="45 23.9750776 43.145898 25 43.5 22.8291796 42 21.2917961 44.072949 20.9750776 45 19 45.927051 20.9750776 48 21.2917961 46.5 22.8291796 46.854102 25"></polygon>
+        <polygon id="Star-3" fill="#FBBCE0" points="26.5 14.25 24.4427516 15.3315595 24.8356511 13.0407797 23.1713022 11.4184405 25.4713758 11.0842203 26.5 9 27.5286242 11.0842203 29.8286978 11.4184405 28.1643489 13.0407797 28.5572484 15.3315595"></polygon>
+        <polygon id="Star-3" fill="#FBBCE0" points="19.5 23.25 17.4427516 24.3315595 17.8356511 22.0407797 16.1713022 20.4184405 18.4713758 20.0842203 19.5 18 20.5286242 20.0842203 22.8286978 20.4184405 21.1643489 22.0407797 21.5572484 24.3315595"></polygon>
+        <polygon id="Star-3" fill="#FBBCE0" points="43.5 34.25 41.4427516 35.3315595 41.8356511 33.0407797 40.1713022 31.4184405 42.4713758 31.0842203 43.5 29 44.5286242 31.0842203 46.8286978 31.4184405 45.1643489 33.0407797 45.5572484 35.3315595"></polygon>
+        <polygon id="Star-3" fill="#FBBCE0" points="31.5 39.25 29.4427516 40.3315595 29.8356511 38.0407797 28.1713022 36.4184405 30.4713758 36.0842203 31.5 34 32.5286242 36.0842203 34.8286978 36.4184405 33.1643489 38.0407797 33.5572484 40.3315595"></polygon>
+        <polygon id="Star-3" fill="#FBBCE0" points="20.5 34.25 18.4427516 35.3315595 18.8356511 33.0407797 17.1713022 31.4184405 19.4713758 31.0842203 20.5 29 21.5286242 31.0842203 23.8286978 31.4184405 22.1643489 33.0407797 22.5572484 35.3315595"></polygon>
+        <g id="Group-4" transform="translate(25.000000, 18.000000)">
+            <rect id="Rectangle-2" fill="#FFFFFF" x="0" y="0" width="14" height="13" rx="1"></rect>
+            <rect id="Rectangle-3" fill="#CB4893" x="5.14177632" y="1.40476974" width="3.67269737" height="10.2310855"></rect>
+            <polygon id="Rectangle-3" fill="#CB4893" points="12.4871711 4.81513158 12.4871711 8.22549342 1.46907895 8.22549342 1.46907895 4.81513158"></polygon>
+        </g>
+    </g>
+</svg>
