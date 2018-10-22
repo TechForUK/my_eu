@@ -74,6 +74,18 @@ body {
   }
 }
 
+.my-eu-tell-your-mp-nav {
+  nav {
+    .navbar-nav {
+      display: none;
+    }
+  }
+}
+
+.my-eu-tell-your-mp {
+  text-align: center;
+}
+
 .my-eu-icon-number {
   text-align: center;
   white-space: nowrap;

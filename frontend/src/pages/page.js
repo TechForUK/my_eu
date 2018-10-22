@@ -6,6 +6,7 @@ import { Link, Meta } from 'react-head'
 import Home from './home'
 import About from './about'
 import Mockups from './mockups'
+import TellYourMp from './tell_your_mp'
 import iconPath from '../images/logo.png'
 import myEuPath from '../images/myeu.png'
 
@@ -58,6 +59,9 @@ const Page = ({ path, scripts, stylesheets }) => {
           </Route>
           <Route path="/mockups/">
             <Mockups />
+          </Route>
+          <Route path="/tell-your-mp/">
+            <TellYourMp />
           </Route>
         </Switch>
       </StaticRouter>

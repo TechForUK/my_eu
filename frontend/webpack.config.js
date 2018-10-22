@@ -105,7 +105,7 @@ const config = {
     }),
     new StaticSiteGeneratorWebpackPlugin({
       entry: 'static',
-      paths: ['/', '/about/', '/mockups/']
+      paths: ['/', '/about/', '/mockups/', '/tell-your-mp/']
     }),
     new CopyWebpackPlugin([{ from: 'src/public' }])
   ],
