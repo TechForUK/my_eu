@@ -57,16 +57,67 @@ const NhsInfo = ({ hospitalName, organisation, myEuId }) => {
   const beds = Math.round(bedsPerNurse * data.eu_nurses)
 
   let tweet
+  let icons
+  let details
   if (beds >= 10) {
     tweet = `${
       data.eu_nurses
     } NHS nurses from the EU staff ${beds} hospital beds in the ${
       data.organisation_name
     }.`
+    icons = (
+      <React.Fragment>
+        <div className="col-6">
+          <p className="display-4 my-eu-icon-number">
+            <i className="fas fa-user-md" />
+            &nbsp;
+            {data.eu_nurses}
+          </p>
+        </div>
+        <div className="col-6">
+          <p className="display-4 my-eu-icon-number">
+            <i className="fas fa-bed" />
+            &nbsp;
+            {beds}
+          </p>
+        </div>
+      </React.Fragment>
+    )
+    details = (
+      <React.Fragment>
+        <p>
+          {hospitalName} is part of the {data.organisation_name}. An NHS
+          hospital ward typically contains 24 beds and needs 29 nurses to keep
+          it running smoothly.
+        </p>
+        <p>
+          {formatRoundPercentage(percentNurses)} of the nurses in this trust are
+          from the EU.
+        </p>
+      </React.Fragment>
+    )
   } else {
     tweet = `${knownEuStaff} of ${knownStaff} staff at ${
       data.organisation_name
     } are from the EU.`
+
+    icons = (
+      <React.Fragment>
+        <div className="col-12">
+          <p className="display-4 my-eu-icon-number">
+            <i className="fas fa-user-md" />
+            &nbsp;
+            {knownEuStaff}
+          </p>
+        </div>
+      </React.Fragment>
+    )
+
+    details = (
+      <p>
+        {hospitalName} is part of the {data.organisation_name}.
+      </p>
+    )
   }
   return (
     <React.Fragment>
@@ -74,22 +125,7 @@ const NhsInfo = ({ hospitalName, organisation, myEuId }) => {
       <div className="my-eu-hospital-in-the text-muted">in the</div>
       <h4>{data.organisation_name}</h4>
       <div className="my-eu-hospital-icons container">
-        <div className="row">
-          <div className="col-6">
-            <p className="display-4 my-eu-icon-number">
-              <i className="fas fa-user-md" />
-              &nbsp;
-              {data.eu_nurses}
-            </p>
-          </div>
-          <div className="col-6">
-            <p className="display-4 my-eu-icon-number">
-              <i className="fas fa-bed" />
-              &nbsp;
-              {beds}
-            </p>
-          </div>
-        </div>
+        <div className="row">{icons}</div>
       </div>
       <p className="lead">{tweet}</p>
       <p>
@@ -104,15 +140,7 @@ const NhsInfo = ({ hospitalName, organisation, myEuId }) => {
         </button>
       </p>
       <div id={id} className="collapse">
-        <p>
-          {hospitalName} is part of the {data.organisation_name}. An NHS
-          hospital ward typically contains 24 beds and needs 29 nurses to keep
-          it running smoothly.
-        </p>
-        <p>
-          {formatRoundPercentage(percentNurses)} of the nurses in this trust are
-          from the EU.
-        </p>
+        {details}
         <h5>
           NHS Staff from the EU with known nationalities in the{' '}
           {data.organisation_name}
