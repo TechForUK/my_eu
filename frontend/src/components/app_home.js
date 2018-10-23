@@ -12,7 +12,7 @@ const AppHome = () => {
       <h1 className="mt-3">What has the EU done for your area?</h1>
       <SearchBox />
       <Share
-        message="See what the EU has funded in your area"
+        message="See what the EU has contributed in your area"
         url={SITE_URL}
         emailBody={SITE_EMAIL_BODY}
       />

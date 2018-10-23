@@ -37,7 +37,7 @@ class SearchBox extends React.Component {
               £5 billion
             </a>{' '}
             a year in the UK. Search by your address or postcode to see some of
-            the investments near you:
+            the investments and other contributions near you:
             <div className="input-group">
               <input
                 ref={this.inputRef}
