@@ -11,7 +11,7 @@ import {
   indefinitePluralise
 } from '../../utilities'
 
-import AddYourStory from '../add_your_story'
+import FinalSayAd from '../final_say_ad'
 import BfbAd from '../bfb_ad'
 import SearchAgain from '../search_again'
 
@@ -232,7 +232,7 @@ class PostcodeInfo extends React.Component {
             {makeProjectsInfo(projects)}
           </ul>
           <BfbAd />
-          <AddYourStory />
+          <FinalSayAd />
         </div>
       )
     } else {
