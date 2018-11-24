@@ -6,7 +6,8 @@ import queryString from 'query-string'
 const SIGNS_UPLOAD_URL =
   'https://europe-west1-my-eu-1532800860795.cloudfunctions.net/signs_upload'
 
-// const SIGNS_SUBMIT_URL = 'TODO'
+const SIGNS_SUBMIT_URL =
+  'https://europe-west1-my-eu-1532800860795.cloudfunctions.net/signs_submit'
 
 class Upload extends React.Component {
   constructor(props) {
@@ -32,7 +33,21 @@ class Upload extends React.Component {
       mode: 'cors',
       method: 'PUT',
       body: file
-    }).then(() => {})
+    }).then(() => {
+      fetch(SIGNS_SUBMIT_URL, {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          file_name: fileName,
+          latitude: 51.515454,
+          longitude: -0.132488
+        })
+      })
+    })
   }
 
   handleSubmit(event) {

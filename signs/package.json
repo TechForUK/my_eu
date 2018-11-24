@@ -8,6 +8,8 @@
     "stop": "functions stop",
     "test_deploy_signs_upload": "cd signs_upload && functions deploy signs_upload --trigger-http",
     "deploy_signs_upload": "cd signs_upload && gcloud functions deploy signs_upload --region europe-west1 --trigger-http",
+    "test_deploy_signs_submit": "cd signs_submit && functions deploy signs_submit --trigger-http",
+    "deploy_signs_submit": "cd signs_submit && gcloud functions deploy signs_submit --region europe-west1 --trigger-http",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
