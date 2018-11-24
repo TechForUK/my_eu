@@ -11,7 +11,6 @@
   "private": true,
   "dependencies": {
     "@google-cloud/datastore": "^2.0.0",
-    "@google-cloud/storage": "^2.3.1",
     "cors": "^2.8.5"
   }
 }

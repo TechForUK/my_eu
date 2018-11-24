@@ -34,7 +34,7 @@ class Upload extends React.Component {
       method: 'PUT',
       body: file
     }).then(() => {
-      fetch(SIGNS_SUBMIT_URL, {
+      return fetch(SIGNS_SUBMIT_URL, {
         mode: 'cors',
         method: 'POST',
         headers: {
