@@ -6,6 +6,8 @@ import BfbAd from './bfb_ad'
 import SearchBox from './search_box'
 import Share from './share'
 
+import Upload from './signs/upload'
+
 const AppHome = () => {
   return (
     <React.Fragment>
@@ -16,6 +18,7 @@ const AppHome = () => {
         url={SITE_URL}
         emailBody={SITE_EMAIL_BODY}
       />
+      <Upload />
       <div id="my-eu-home-extra">
         <BfbAd />
       </div>
