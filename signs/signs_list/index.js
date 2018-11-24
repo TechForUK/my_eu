@@ -45,8 +45,9 @@ function fillCache() {
     .then(results => {
       const signs = results[0]
       cachedSigns = signs.map(sign => ({
-        location: sign.location,
-        image_path: `${IMAGE_ROOT}/${sign[datastore.KEY].name}`
+        latitude: sign.latitude,
+        longitude: sign.longitude,
+        src: `${IMAGE_ROOT}/${sign[datastore.KEY].name}`
       }))
     })
     .catch(error => {

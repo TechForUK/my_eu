@@ -40,7 +40,8 @@ function submitSign(req, res) {
   const sign = {
     key: signKey,
     data: {
-      location: { latitude, longitude },
+      latitude,
+      longitude,
       approved: null
     }
   }

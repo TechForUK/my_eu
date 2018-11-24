@@ -14,6 +14,9 @@
     "deploy_signs_approve": "cd signs_approve && gcloud functions deploy signs_approve --region europe-west1 --trigger-http",
     "test_deploy_signs_list": "cd signs_list && functions deploy signs_list --trigger-http",
     "deploy_signs_list": "cd signs_list && gcloud functions deploy signs_list --region europe-west1 --trigger-http",
+    "test_deploy_signs_admin": "cd signs_admin && functions deploy signs_admin --trigger-http",
+    "deploy_signs_admin": "cd signs_admin && gcloud functions deploy signs_admin --region europe-west1 --trigger-http",
+    "deploy": "npm run deploy_signs_upload && npm run deploy_signs_submit && npm run deploy_signs_approve && npm run deploy_signs_list && npm run deploy_signs_admin",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

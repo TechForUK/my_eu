@@ -39,10 +39,9 @@ function handleApproveSignRequest(req, res) {
   fileName = fileName.toLowerCase()
 
   let approved = req.body.approve
-  if (approved !== 'true' && approved !== 'false') {
+  if (approved !== true && approved !== false) {
     return res.status(422).send({ message: 'bad approve' })
   }
-  approved = approved === 'true'
 
   let action
   if (approved) {
