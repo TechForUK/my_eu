@@ -91,23 +91,24 @@ function unpackPostcodeMarkers(googleMaps, map, postcodes, handleClick) {
       const marker = new googleMaps.Marker({ position, icon, myEu })
       googleMaps.event.addListener(marker, 'click', function(event) {
         handleClick(event, myEu)
+        let highlightIcon
         if (selectedMarker.length === 0) {
-          var highlightIcon =
-            marker.getIcon().url == fundingPostcodePath
+          highlightIcon =
+            marker.getIcon().url === fundingPostcodePath
               ? fundingPostcodeSelectedIcon
               : hospitalPostcodeSelectedIcon
           marker.setIcon(highlightIcon)
           selectedMarker.push(marker)
         } else {
           var defaultIcon =
-            selectedMarker[0].getIcon().url == fundingPostcodeSelectedPath
+            selectedMarker[0].getIcon().url === fundingPostcodeSelectedPath
               ? fundingPostcodeIcon
               : hospitalPostcodeIcon
           selectedMarker[0].setIcon(defaultIcon)
           selectedMarker.pop()
 
-          var highlightIcon =
-            marker.getIcon().url == fundingPostcodePath
+          highlightIcon =
+            marker.getIcon().url === fundingPostcodePath
               ? fundingPostcodeSelectedIcon
               : hospitalPostcodeSelectedIcon
           marker.setIcon(highlightIcon)
