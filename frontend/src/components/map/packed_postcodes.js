@@ -51,34 +51,20 @@ function unpack(googleMaps, data) {
 
 function unpackPostcodeMarkers(googleMaps, map, postcodes, handleClick) {
   const markers = []
-  const selectedMarker = []
-  const fundingPostcodeIcon = {
-    size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-    anchor: new googleMaps.Point(MARKER_WIDTH / 2, MARKER_HEIGHT),
-    scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-    url: fundingPostcodePath
-  }
+  let selectedMarker = null
 
-  const hospitalPostcodeIcon = {
-    size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-    anchor: new googleMaps.Point(MARKER_WIDTH / 2, MARKER_HEIGHT),
-    scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-    url: hospitalPostcodePath
+  function makeIcon(url) {
+    return {
+      size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
+      anchor: new googleMaps.Point(MARKER_WIDTH / 2, MARKER_HEIGHT),
+      scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
+      url
+    }
   }
-
-  const fundingPostcodeSelectedIcon = {
-    size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-    anchor: new googleMaps.Point(MARKER_WIDTH / 2, MARKER_HEIGHT),
-    scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-    url: fundingPostcodeSelectedPath
-  }
-
-  const hospitalPostcodeSelectedIcon = {
-    size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-    anchor: new googleMaps.Point(MARKER_WIDTH / 2, MARKER_HEIGHT),
-    scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-    url: hospitalPostcodeSelectedPath
-  }
+  const fundingPostcodeIcon = makeIcon(fundingPostcodePath)
+  const hospitalPostcodeIcon = makeIcon(hospitalPostcodePath)
+  const fundingPostcodeSelectedIcon = makeIcon(fundingPostcodeSelectedPath)
+  const hospitalPostcodeSelectedIcon = makeIcon(hospitalPostcodeSelectedPath)
 
   for (let outwardCode in postcodes) {
     if (!postcodes.hasOwnProperty(outwardCode)) continue
@@ -91,29 +77,21 @@ function unpackPostcodeMarkers(googleMaps, map, postcodes, handleClick) {
       const marker = new googleMaps.Marker({ position, icon, myEu })
       googleMaps.event.addListener(marker, 'click', function(event) {
         handleClick(event, myEu)
-        let highlightIcon
-        if (selectedMarker.length === 0) {
-          highlightIcon =
-            marker.getIcon().url === fundingPostcodePath
-              ? fundingPostcodeSelectedIcon
-              : hospitalPostcodeSelectedIcon
-          marker.setIcon(highlightIcon)
-          selectedMarker.push(marker)
-        } else {
-          var defaultIcon =
-            selectedMarker[0].getIcon().url === fundingPostcodeSelectedPath
+
+        if (selectedMarker) {
+          const defaultIcon =
+            selectedMarker.getIcon().url === fundingPostcodeSelectedPath
               ? fundingPostcodeIcon
               : hospitalPostcodeIcon
-          selectedMarker[0].setIcon(defaultIcon)
-          selectedMarker.pop()
-
-          highlightIcon =
-            marker.getIcon().url === fundingPostcodePath
-              ? fundingPostcodeSelectedIcon
-              : hospitalPostcodeSelectedIcon
-          marker.setIcon(highlightIcon)
-          selectedMarker.push(marker)
+          selectedMarker.setIcon(defaultIcon)
         }
+
+        const highlightIcon =
+          marker.getIcon().url === fundingPostcodePath
+            ? fundingPostcodeSelectedIcon
+            : hospitalPostcodeSelectedIcon
+        marker.setIcon(highlightIcon)
+        selectedMarker = marker
       })
       markers.push(marker)
     }
