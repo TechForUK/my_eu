@@ -41,7 +41,7 @@ function submitSign(req, res) {
     key: signKey,
     data: {
       location: { latitude, longitude },
-      approved: false
+      approved: null
     }
   }
   datastore
