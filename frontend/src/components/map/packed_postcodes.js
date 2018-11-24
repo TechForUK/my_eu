@@ -57,28 +57,28 @@ function unpackPostcodeMarkers(googleMaps, map, postcodes, handleClick) {
     anchor: new googleMaps.Point(MARKER_WIDTH / 2, MARKER_HEIGHT),
     scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
     url: fundingPostcodePath
-  };
+  }
 
   const hospitalPostcodeIcon = {
     size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
     anchor: new googleMaps.Point(MARKER_WIDTH / 2, MARKER_HEIGHT),
     scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
     url: hospitalPostcodePath
-  };
+  }
 
   const fundingPostcodeSelectedIcon = {
     size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
     anchor: new googleMaps.Point(MARKER_WIDTH / 2, MARKER_HEIGHT),
     scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
     url: fundingPostcodeSelectedPath
-  };
+  }
 
   const hospitalPostcodeSelectedIcon = {
     size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
     anchor: new googleMaps.Point(MARKER_WIDTH / 2, MARKER_HEIGHT),
     scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
     url: hospitalPostcodeSelectedPath
-  };
+  }
 
   for (let outwardCode in postcodes) {
     if (!postcodes.hasOwnProperty(outwardCode)) continue
@@ -91,17 +91,25 @@ function unpackPostcodeMarkers(googleMaps, map, postcodes, handleClick) {
       const marker = new googleMaps.Marker({ position, icon, myEu })
       googleMaps.event.addListener(marker, 'click', function(event) {
         handleClick(event, myEu)
-        if(selectedMarker.length === 0){
-          var highlightIcon = marker.getIcon().url == fundingPostcodePath ? fundingPostcodeSelectedIcon : hospitalPostcodeSelectedIcon
+        if (selectedMarker.length === 0) {
+          var highlightIcon =
+            marker.getIcon().url == fundingPostcodePath
+              ? fundingPostcodeSelectedIcon
+              : hospitalPostcodeSelectedIcon
           marker.setIcon(highlightIcon)
           selectedMarker.push(marker)
-        }
-        else{
-          var defaultIcon = selectedMarker[0].getIcon().url == fundingPostcodeSelectedPath ? fundingPostcodeIcon : hospitalPostcodeIcon
+        } else {
+          var defaultIcon =
+            selectedMarker[0].getIcon().url == fundingPostcodeSelectedPath
+              ? fundingPostcodeIcon
+              : hospitalPostcodeIcon
           selectedMarker[0].setIcon(defaultIcon)
           selectedMarker.pop()
 
-          var highlightIcon = marker.getIcon().url == fundingPostcodePath ? fundingPostcodeSelectedIcon : hospitalPostcodeSelectedIcon
+          var highlightIcon =
+            marker.getIcon().url == fundingPostcodePath
+              ? fundingPostcodeSelectedIcon
+              : hospitalPostcodeSelectedIcon
           marker.setIcon(highlightIcon)
           selectedMarker.push(marker)
         }
