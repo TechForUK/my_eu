@@ -44,7 +44,7 @@ const CordisInfo = ({
         &quot; research project.
       </p>
     )
-  } else if (contribution) {
+  } else if (contribution && contribution > 1000) {
     const displayEcContribution = formatRoundPounds(contribution)
     lead = (
       <p className="lead">
