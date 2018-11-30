@@ -21,6 +21,7 @@ import EsifInfo from './esif_info'
 import FtsInfo from './fts_info'
 import ErasmusInfo from './erasmus_info'
 import NhsInfo from './nhs_info'
+import NweuropeInfo from './nweurope_info'
 
 const projectStore = new ProjectStore()
 
@@ -30,7 +31,8 @@ const INFO_COMPONENT = {
   esif: EsifInfo,
   fts: FtsInfo,
   erasmus: ErasmusInfo,
-  nhs: NhsInfo
+  nhs: NhsInfo,
+  nweurope: NweuropeInfo
 }
 
 const CordisInfoFooter = ({ extra }) => {
@@ -171,7 +173,7 @@ const INFO_FOOTER = {
 }
 
 // Set the order of the sections
-const INFO = ['nhs', 'erasmus', 'esif', 'creative', 'cordis', 'fts']
+const INFO = ['nhs', 'erasmus', 'esif', 'creative', 'cordis', 'fts', 'nweurope']
 
 function countProjects(projects) {
   let count = 0
@@ -232,7 +234,7 @@ class PostcodeInfo extends React.Component {
             {makeProjectsInfo(projects)}
           </ul>
           <BfbAd />
-          <FinalSayAd />
+          <AddYourStory />
         </div>
       )
     } else {
