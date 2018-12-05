@@ -83,6 +83,17 @@ Files must be stored here:
 - `data/erasmus/input/Tempus_Projects_Overview_2018-09-10.xls`
 - `data/erasmus/input/YouthInAction_Projects_Overview_2018-09-10.xls`
 
+#### LIFE
+
+From this page:
+
+https://www.eea.europa.eu/data-and-maps/data/natura-9#tab-european-data
+
+csv file must be stored here:
+
+- `data/life/input/NATURA2000SITES.csv`
+
+
 ## App Development
 
 The latest application is in the `frontend` directory. It is a static website built with webpack.

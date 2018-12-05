@@ -21,6 +21,7 @@ import EsifInfo from './esif_info'
 import FtsInfo from './fts_info'
 import ErasmusInfo from './erasmus_info'
 import NhsInfo from './nhs_info'
+import LifeInfo from './life_info'
 
 const projectStore = new ProjectStore()
 
@@ -30,7 +31,8 @@ const INFO_COMPONENT = {
   esif: EsifInfo,
   fts: FtsInfo,
   erasmus: ErasmusInfo,
-  nhs: NhsInfo
+  nhs: NhsInfo,
+  life: LifeInfo
 }
 
 const CordisInfoFooter = ({ extra }) => {
@@ -161,17 +163,42 @@ const NhsInfoFooter = () => {
   return null
 }
 
+const LifeInfoFooter = ({ extra }) => {
+  return (
+    <React.Fragment>
+      <h4>Plus {definitePluralise(extra, 'More Environmental Project')}</h4>
+      <p>
+        Find out more about how the EU protects the environment through the {' '}
+        <a
+          href="http://ec.europa.eu/environment/life/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LIFE Programme
+        </a>
+        .
+      </p>
+    </React.Fragment>
+  )
+}
+
+LifeInfoFooter.propTypes = {
+  extra: PropTypes.number
+}
+
+
 const INFO_FOOTER = {
   cordis: CordisInfoFooter,
   creative: CreativeInfoFooter,
   erasmus: ErasmusInfoFooter,
   esif: EsifInfoFooter,
   fts: FtsInfoFooter,
-  nhs: NhsInfoFooter
+  nhs: NhsInfoFooter,
+  life: LifeInfoFooter
 }
 
 // Set the order of the sections
-const INFO = ['nhs', 'erasmus', 'esif', 'creative', 'cordis', 'fts']
+const INFO = ['nhs', 'erasmus', 'esif', 'creative', 'cordis', 'fts', 'life']
 
 function countProjects(projects) {
   let count = 0
