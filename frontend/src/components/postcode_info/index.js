@@ -22,6 +22,7 @@ import FtsInfo from './fts_info'
 import ErasmusInfo from './erasmus_info'
 import NhsInfo from './nhs_info'
 import LifeInfo from './life_info'
+import NweuropeInfo from './Nweurope_info'
 
 const projectStore = new ProjectStore()
 
@@ -32,7 +33,8 @@ const INFO_COMPONENT = {
   fts: FtsInfo,
   erasmus: ErasmusInfo,
   nhs: NhsInfo,
-  life: LifeInfo
+  life: LifeInfo,
+  nweurope: NweuropeInfo
 }
 
 const CordisInfoFooter = ({ extra }) => {
@@ -198,7 +200,7 @@ const INFO_FOOTER = {
 }
 
 // Set the order of the sections
-const INFO = ['nhs', 'erasmus', 'esif', 'creative', 'cordis', 'fts', 'life']
+const INFO = ['nhs', 'erasmus', 'esif', 'creative', 'cordis', 'fts', 'nweurope', 'life']
 
 function countProjects(projects) {
   let count = 0
