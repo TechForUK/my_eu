@@ -89,10 +89,9 @@ From this page:
 
 https://www.eea.europa.eu/data-and-maps/data/natura-9#tab-european-data
 
-csv file must be stored here:
+The `NATURA2000SITES` csv file must be stored here:
 
 - `data/life/input/NATURA2000SITES.csv`
-
 
 ## App Development
 

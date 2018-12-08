@@ -203,6 +203,22 @@ const About = () => (
             </a>{' '}
             dataset from June 2018, shared under the Open Government License.
           </li>
+          <li>
+            <a href="http://www.nweurope.eu/">
+              Interreg North-West Europe Programme
+            </a>{' '}
+            data are from the{' '}
+            <a href="http://www.nweurope.eu/projects/list-of-beneficiaries/">
+              Interreg NWE list of beneficiaries
+            </a>
+            , (c) NWE Secretariat.
+          </li>
+          <li>
+            <a href="http://ec.europa.eu/environment/life/index.htm">
+              LIFE Programme
+            </a>{' '}
+            data are (c) European Union, 1995&ndash;2018.
+          </li>
         </ul>
       </p>
 
