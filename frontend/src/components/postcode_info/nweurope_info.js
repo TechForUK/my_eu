@@ -20,14 +20,14 @@ const NweuropeInfo = ({
 
   const tweet =
     `Since 2014, the EU provided ${beneficiary} ${displayEuGrant}` +
-    ` as part of the ${project} programme.`
+    ` as part of the ${project} project in the NWEurope programme.`
 
   let lead
 
   lead = (
     <p className="lead">
       Since 2014, the EU provided {beneficiary} {displayEuGrant} as part of the{' '}
-      {project} programme.
+      {project} project in the NWEurope programme.
     </p>
   )
 
