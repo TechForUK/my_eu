@@ -1,42 +1,45 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Summary from './summary'
+import TruncatedTitle from './truncated_title'
+
 import DisplayAmount from '../info/display_amount'
+import SourceBadge from '../info/source_badge'
 
 import Share from '../share'
 
-import { formatRoundPounds } from '../../utilities'
+import { formatRoundPounds, formatYearRange } from '../../utilities'
 
 const NweuropeInfo = ({
   myEuId,
   beneficiary,
   project,
+  projectSummary,
   startDate,
   endDate,
-  funding,
-  unionCofinancing
+  contribution
 }) => {
-  const displayEuGrant = formatRoundPounds(funding)
+  const displayEuGrant = formatRoundPounds(contribution)
+  const yearRange = formatYearRange(startDate, endDate)
+
+  // Most have the form ACRONYM - Name.
+  const acronymMatch = project.match(/^(.+?) - /)
+  const acronym = acronymMatch ? acronymMatch[1] : project
 
   const tweet =
-    `Since 2014, the EU provided ${beneficiary} ${displayEuGrant}` +
-    ` as part of the ${project} project in the NWEurope programme.`
-
-  let lead
-
-  lead = (
-    <p className="lead">
-      Since 2014, the EU provided {beneficiary} {displayEuGrant} as part of the{' '}
-      {project} project in the NWEurope programme.
-    </p>
-  )
+    `The EU provided ${beneficiary} ${displayEuGrant} as part of the` +
+    ` ${acronym} project in the Interreg North West Europe programme.`
 
   return (
     <React.Fragment>
-      <h4>{beneficiary}</h4>
-      <DisplayAmount amount={funding} />
-      <p className="text-muted">2015-2020</p>
-      {lead}
+      <TruncatedTitle text={project}>
+        <SourceBadge source="nweurope" />
+      </TruncatedTitle>
+      <DisplayAmount amount={contribution} />
+      <p className="text-muted">{yearRange}</p>
+      <p className="lead">{tweet}</p>
+      <Summary text={projectSummary} />
       <Share message={tweet} />
     </React.Fragment>
   )
@@ -46,10 +49,10 @@ NweuropeInfo.propTypes = {
   myEuId: PropTypes.string,
   beneficiary: PropTypes.string,
   project: PropTypes.string,
+  projectSummary: PropTypes.string,
   startDate: PropTypes.instanceOf(Date),
   endDate: PropTypes.instanceOf(Date),
-  funding: PropTypes.number,
-  unionCofinancing: PropTypes.number
+  contribution: PropTypes.number
 }
 
 export default NweuropeInfo

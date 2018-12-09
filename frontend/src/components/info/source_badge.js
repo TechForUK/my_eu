@@ -5,7 +5,8 @@ const BADGE = {
   cordis: 'Research',
   creative: 'Arts & Culture',
   erasmus: 'Young People',
-  esif: 'Jobs & Growth'
+  esif: 'Jobs & Growth',
+  nweurope: 'Jobs & Growth'
 }
 
 const SourceBadge = ({ source }) => {

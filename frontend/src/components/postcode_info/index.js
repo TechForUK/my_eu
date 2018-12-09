@@ -170,7 +170,7 @@ const LifeInfoFooter = ({ extra }) => {
     <React.Fragment>
       <h4>Plus {definitePluralise(extra, 'More Environmental Project')}</h4>
       <p>
-        Find out more about how the EU protects the environment through the {' '}
+        Find out more about how the EU protects the environment through the{' '}
         <a
           href="http://ec.europa.eu/environment/life/"
           target="_blank"
@@ -188,7 +188,6 @@ LifeInfoFooter.propTypes = {
   extra: PropTypes.number
 }
 
-
 const INFO_FOOTER = {
   cordis: CordisInfoFooter,
   creative: CreativeInfoFooter,
@@ -200,7 +199,16 @@ const INFO_FOOTER = {
 }
 
 // Set the order of the sections
-const INFO = ['nhs', 'erasmus', 'esif', 'creative', 'cordis', 'fts', 'nweurope', 'life']
+const INFO = [
+  'nhs',
+  'erasmus',
+  'esif',
+  'nweurope',
+  'creative',
+  'cordis',
+  'life',
+  'fts'
+]
 
 function countProjects(projects) {
   let count = 0
