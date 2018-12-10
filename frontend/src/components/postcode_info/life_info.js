@@ -1,3 +1,4 @@
+/* eslint camelcase:0 */
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -6,10 +7,7 @@ import DisplayAmount from '../info/display_amount'
 
 import Share from '../share'
 
-import { 
-  formatRoundPounds, 
-  formatRoundPercentage
-} from '../../utilities'
+import { formatRoundPounds, formatRoundPercentage } from '../../utilities'
 
 const LifeInfo = ({
   myEuId,
@@ -26,16 +24,15 @@ const LifeInfo = ({
   const displayPercentage = formatRoundPercentage(euContribution / amount)
 
   const tweet =
-    `Since ${year}, the EU provided ${coordinator} ${displayEuGrant}` +
-    ` as part of the ${project_title} project under the LIFE programme.`
+    `Since ${year}, the EU's LIFE programme provided ${coordinator} with` +
+    ` ${displayEuGrant} as part of the "${project_title}" project.`
 
   let lead
 
   lead = (
     <p className="lead">
-      Since {year}, the EU provided {coordinator} {displayEuGrant} to fund{' '}
-        {displayPercentage} as part of the{' '}
-        {project_title} project within the LIFE programme.
+      The EU&apos;s LIFE programme provided {coordinator} with {displayEuGrant}{' '}
+      to fund {displayPercentage} of the <em>{project_title}</em> project.
     </p>
   )
 
@@ -49,6 +46,10 @@ const LifeInfo = ({
       <p className="text-muted">From {year}</p>
       {lead}
       {summaryComponent}
+      <p className="text-muted">
+        LIFE Programme data are in beta. Assumed exchange rate 0.81£/€. Stay
+        tuned for data updates soon.
+      </p>
       <Share message={tweet} />
     </React.Fragment>
   )
@@ -60,7 +61,7 @@ LifeInfo.propTypes = {
   project_title: PropTypes.string,
   coordinator: PropTypes.string,
   amount: PropTypes.number,
-  euContribtuion: PropTypes.number,
+  euContribution: PropTypes.number,
   background: PropTypes.string,
   project_url: PropTypes.string,
   website: PropTypes.string

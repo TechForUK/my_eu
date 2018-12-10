@@ -1547,7 +1547,6 @@ export default {
   PH34: require('./district/PH34.data.json'),
   PH36: require('./district/PH36.data.json'),
   PH38: require('./district/PH38.data.json'),
-  PH49: require('./district/PH49.data.json'),
   PH6: require('./district/PH6.data.json'),
   PH7: require('./district/PH7.data.json'),
   PH9: require('./district/PH9.data.json'),
