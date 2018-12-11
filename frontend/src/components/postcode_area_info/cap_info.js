@@ -12,6 +12,16 @@ import {
 const CapInfo = ({ postcodeArea, cap }) => {
   const maxCapYear = Math.max.apply(null, cap.map(row => row.year))
   const latestCap = cap.find(row => row.year === maxCapYear)
+  if (!latestCap) {
+    return (
+      <div className="card mt-3">
+        <div className="card-body text-center">
+          Sorry, this region isn&apos;t one of the regions on our map&hellip;
+          yet!
+        </div>
+      </div>
+    )
+  }
   const compactTotal = formatSemiCompactPounds(latestCap.total)
   const displayTotal = formatRoundPounds(latestCap.total)
   const displayCount = latestCap.count.toLocaleString()
