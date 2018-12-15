@@ -17,9 +17,10 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "standard",
-    "promise"
-  ]
+  "plugins": ["react", "standard", "promise"],
+  "settings": {
+    "react": {
+      "version": "16.4.1"
+    }
+  }
 }

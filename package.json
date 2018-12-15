@@ -4,31 +4,31 @@
   "description": "Find out what the EU has done for your area.",
   "main": "index.js",
   "scripts": {
-    "eslint": "eslint data/utilities/*.js frontend/src/**.js",
+    "eslint": "eslint data/utilities frontend/src",
     "prettier": "prettier --write data/utilities/*.js frontend/src/*.{js,scss} frontend/src/**/*.{js,scss}",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GreatBritishHackOff/my_eu.git"
+    "url": "git+https://github.com/TechForUK/my_eu.git"
   },
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/GreatBritishHackOff/my_eu/issues"
+    "url": "https://github.com/TechForUK/my_eu/issues"
   },
   "homepage": "https://www.myeu.uk",
   "private": true,
   "devDependencies": {
-    "eslint": "^5.3.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-react": "^7.10.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "prettier": "^1.14.2"
+    "eslint": "^5.10.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "prettier": "^1.15.3"
   },
   "prettier": {
     "semi": false,
