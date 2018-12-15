@@ -31,7 +31,7 @@ function removeDataAttrs(html) {
 // The static-site-generator-webpack-plugin calls this method once for each
 // page in its routes list (in webpack.config.js), at build time.
 //
-module.exports = function render(data) {
+export default function render(data) {
   const headTags = []
   const content = ReactDOMServer.renderToString(
     <HeadCollector headTags={headTags}>
