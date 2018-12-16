@@ -87,7 +87,7 @@ function renderSigns(signs) {
   <body>
     <div class="container">
       <h1>Unmoderated Signs</h1>
-      ${signs.map(renderSign)}
+      ${signs.map(renderSign).join('\n')}
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   </body>
@@ -96,11 +96,14 @@ function renderSigns(signs) {
 
 function renderSign(sign) {
   const fileName = sign[cloudDatastore.datastore.KEY].name
+  const latlng = `${sign.latitude},${sign.longitude}`
   return `
 <div id="my-eu-card-${fileName}" class="card">
-  <img src="${sign.url}" class="img-card-top">
+  <img src="${sign.url}" class="img-fluid">
   <div class="card-body text-center">
-    Longitude ${sign.longitude} / Latitude ${sign.latitude}
+    <a href="https://www.google.com/maps/search/?api=1&query=${latlng}">
+      Latitude, Longitude: ${latlng}
+    </a>
   </div>
   <div class="card-footer">
     <button class="btn btn-warning" onClick="myEuModerate('${fileName}', false)">Reject</button>
