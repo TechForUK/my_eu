@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import queryString from 'query-string'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
@@ -21,6 +22,7 @@ class App extends React.Component {
     super(props)
 
     this.bottomRef = React.createRef()
+    this.beta = false
     this.state = {
       isClient: false,
       infoOnBottom: false
@@ -28,6 +30,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.beta = 'beta' in queryString.parse(window.location.search)
+
     // Trick to avoid rehydration mismatch. The server always renders the home
     // page, but the user might be loading with a path in the anchor; rehydrate
     // with the home page first, then re-render with actual content. This
@@ -69,7 +73,7 @@ class App extends React.Component {
                     {!infoOnBottom && postcodeInfo}
                     {!infoOnBottom && areaInfo}
                   </Switch>
-                  {!infoOnBottom && <SignsAd />}
+                  {!infoOnBottom && this.beta && <SignsAd />}
                   {!infoOnBottom && <FinalSayAd />}
                   {!infoOnBottom && <BfbAd />}
                 </div>
@@ -94,7 +98,7 @@ class App extends React.Component {
                     {infoOnBottom && postcodeInfo}
                     {infoOnBottom && areaInfo}
                   </Switch>
-                  {infoOnBottom && <SignsAd />}
+                  {infoOnBottom && this.beta && <SignsAd />}
                   {infoOnBottom && <FinalSayAd />}
                   {infoOnBottom && <BfbAd />}
                 </div>
