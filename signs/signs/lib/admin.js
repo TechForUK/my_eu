@@ -1,37 +1,16 @@
-const basicAuth = require('express-basic-auth')
-const Datastore = require('@google-cloud/datastore')
-const { Storage } = require('@google-cloud/storage')
+const cloudDatastore = require('./cloud_datastore')
+const cloudStorage = require('./cloud_storage')
 
-const datastore = new Datastore()
-const storage = new Storage()
-
-const BUCKET_NAME = 'signs.myeu.uk'
-
-const KIND = 'sign'
 const LIMIT = 30
-
-exports.signs_admin = function(req, res) {
-  authHandler(req, res, function() {
-    handleAdminRequest(req, res)
-  })
-}
-
-const password = process.env.MY_EU_SIGNS_APPROVE_PASSWORD
-if (!password) throw new Error('MY_EU_SIGNS_APPROVE_PASSWORD not set')
-const authHandler = basicAuth({
-  users: { admin: password },
-  challenge: true,
-  realm: 'signs.myeu.uk'
-})
 
 const SIGNS_APPROVE_URL = `https://europe-west1-my-eu-1532800860795.cloudfunctions.net/signs_approve`
 
-function handleAdminRequest(req, res) {
-  const query = datastore
-    .createQuery(KIND)
+exports.admin = function signsAdmin(req, res) {
+  const query = cloudDatastore.datastore
+    .createQuery(cloudDatastore.SIGN_KIND)
     .filter('approved', '=', null)
     .limit(LIMIT)
-  return datastore
+  return cloudDatastore.datastore
     .runQuery(query)
     .then(getSignedUrls)
     .then(signs => {
@@ -44,10 +23,10 @@ function handleAdminRequest(req, res) {
 }
 
 function getSignedUrls(results) {
-  const bucket = storage.bucket(BUCKET_NAME)
+  const bucket = cloudStorage.storage.bucket(cloudStorage.SIGNS_BUCKET_NAME)
   return Promise.all(
     results[0].map(sign => {
-      const fileName = sign[datastore.KEY].name
+      const fileName = sign[cloudDatastore.datastore.KEY].name
       return bucket
         .file(fileName)
         .getSignedUrl({
@@ -63,6 +42,7 @@ function getSignedUrls(results) {
 }
 
 function renderSigns(signs) {
+  const password = process.env.MY_EU_SIGNS_APPROVE_PASSWORD
   const authorization =
     'Basic ' + Buffer.from('admin:' + password).toString('base64')
   return `
@@ -115,7 +95,7 @@ function renderSigns(signs) {
 }
 
 function renderSign(sign) {
-  const fileName = sign[datastore.KEY].name
+  const fileName = sign[cloudDatastore.datastore.KEY].name
   return `
 <div id="my-eu-card-${fileName}" class="card">
   <img src="${sign.url}" class="img-card-top">

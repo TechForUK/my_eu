@@ -1,24 +1,9 @@
-const cors = require('cors')
-const { Storage } = require('@google-cloud/storage')
 const uuidv4 = require('uuid/v4')
 
-const storage = new Storage()
+const cloudStorage = require('./cloud_storage')
 
-const BUCKET_NAME = 'signs.myeu.uk'
-
-exports.signs_upload = function(req, res) {
-  corsHandler(req, res, function() {
-    makeSignedUrl(req, res)
-  })
-}
-
-const corsHandler = cors({
-  origin: ['http://localhost:8080', 'https://www.myeu.uk'],
-  methods: ['GET']
-})
-
-function makeSignedUrl(req, res) {
-  const bucket = storage.bucket(BUCKET_NAME)
+exports.upload = function signsUpload(req, res) {
+  const bucket = cloudStorage.storage.bucket(cloudStorage.SIGNS_BUCKET_NAME)
   const fileName = uuidv4()
   const file = bucket.file(fileName)
 

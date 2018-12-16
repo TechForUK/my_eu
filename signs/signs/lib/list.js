@@ -1,28 +1,18 @@
-const cors = require('cors')
-const Datastore = require('@google-cloud/datastore')
-
-const datastore = new Datastore()
+const cloudDatastore = require('./cloud_datastore')
 
 const IMAGE_ROOT = 'https://www.myeu.uk/signs'
-
-const KIND = 'sign'
 
 const TTL = 60 * 1000
 const GRACE = 5 * 1000
 
-exports.signs_list = function(req, res) {
-  corsHandler(req, res, function() {
-    handleListRequest(req, res)
-  })
+exports.list = function signsList(req, res) {
+  if (isCacheStale()) {
+    fillCache().then(() => sendCachedSigns(res))
+  } else {
+    sendCachedSigns(res)
+  }
 }
 
-const corsHandler = cors({
-  contentType: 'application/json',
-  origin: ['http://localhost:8080', 'https://www.myeu.uk'],
-  methods: ['POST']
-})
-
-let cachedSigns = null
 let expiresAt = null
 function isCacheStale() {
   const now = new Date()
@@ -31,23 +21,20 @@ function isCacheStale() {
   return true
 }
 
-function handleListRequest(req, res) {
-  if (isCacheStale()) {
-    fillCache().then(() => sendCachedSigns(res))
-  } else {
-    sendCachedSigns(res)
-  }
-}
-
+let cachedSigns = null
 function fillCache() {
-  return datastore
-    .runQuery(datastore.createQuery(KIND).filter('approved', '=', true))
+  return cloudDatastore.datastore
+    .runQuery(
+      cloudDatastore.datastore
+        .createQuery(cloudDatastore.SIGN_KIND)
+        .filter('approved', '=', true)
+    )
     .then(results => {
       const signs = results[0]
       cachedSigns = signs.map(sign => ({
         latitude: sign.latitude,
         longitude: sign.longitude,
-        src: `${IMAGE_ROOT}/${sign[datastore.KEY].name}`
+        src: `${IMAGE_ROOT}/${sign[cloudDatastore.datastore.KEY].name}`
       }))
     })
     .catch(error => {
