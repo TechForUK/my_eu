@@ -38,6 +38,6 @@ function makeSignedUrl(req, res) {
     })
     .catch(function(error) {
       console.error(error)
-      res.status(500).send({ error })
+      res.status(500).send({ message: 'link generation failed' })
     })
 }
