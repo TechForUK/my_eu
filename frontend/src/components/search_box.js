@@ -32,12 +32,14 @@ class SearchBox extends React.Component {
       <form ref={this.formRef}>
         <div className="form-group">
           <label>
-            The EU invests around{' '}
-            <a href="https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/articles/theukcontributiontotheeubudget/2017-10-31">
-              £5 billion
-            </a>{' '}
-            a year in the UK. Search by your address or postcode to see some of
-            the investments and other contributions near you:
+            <p>
+              The EU invests around{' '}
+              <a href="https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/articles/theukcontributiontotheeubudget/2017-10-31">
+                £5 billion
+              </a>{' '}
+              a year in the UK. Search by your address or postcode to see some
+              of the investments and other contributions near you:
+            </p>
             <div className="input-group">
               <input
                 ref={this.inputRef}

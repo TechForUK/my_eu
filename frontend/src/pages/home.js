@@ -2,6 +2,7 @@ import React from 'react'
 import { Meta, Title } from 'react-head'
 
 import App from '../components/app'
+import SignsModal from '../components/signs/modal'
 import { SITE_DESCRIPTION } from '../strings'
 
 const TITLE = 'myeu.uk – see what the EU has done for you'
@@ -19,6 +20,7 @@ const Home = () => (
     <div id="my-eu-root">
       <App />
     </div>
+    <SignsModal />
   </React.Fragment>
 )
 

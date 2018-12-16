@@ -94,7 +94,7 @@ body {
 
 .my-eu-sidebar-ad {
   text-align: center;
-  margin-top: 3 * $spacer;
+  margin-top: $spacer;
   margin-bottom: $spacer;
 }
 
@@ -113,6 +113,22 @@ body {
   h2 {
     margin-bottom: 1rem;
   }
+}
+
+.my-eu-signs-upload {
+  input[type='file'] {
+    display: none;
+  }
+
+  cursor: pointer;
+  color: $link-color;
+  i {
+    font-size: 5rem;
+  }
+}
+
+.my-eu-signs-upload:hover {
+  color: $link-hover-color;
 }
 
 button.my-eu-details-toggle.collapsed:before {
@@ -150,12 +166,8 @@ button.my-eu-details-toggle:before {
 }
 
 @include media-breakpoint-down(sm) {
-  #my-eu-home-extra {
-    display: none;
-  }
-
   #my-eu-map {
-    height: 50vh;
+    height: 70vh;
     min-height: 300px;
   }
 }

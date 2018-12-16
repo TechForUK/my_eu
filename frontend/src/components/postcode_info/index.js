@@ -11,8 +11,6 @@ import {
   indefinitePluralise
 } from '../../utilities'
 
-import FinalSayAd from '../final_say_ad'
-import BfbAd from '../bfb_ad'
 import SearchAgain from '../search_again'
 
 import CordisInfo from './cordis_info'
@@ -268,8 +266,6 @@ class PostcodeInfo extends React.Component {
           <ul className="list-group list-group-flush">
             {makeProjectsInfo(projects)}
           </ul>
-          <BfbAd />
-          <FinalSayAd />
         </div>
       )
     } else {

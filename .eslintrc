@@ -10,6 +10,7 @@
     "prettier/react",
     "prettier/standard"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true

@@ -3,11 +3,14 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import AppHome from './app_home'
+import BfbAd from './bfb_ad'
+import FinalSayAd from './final_say_ad'
 import PostcodeAreaInfo from './postcode_area_info'
 import PostcodeInfo from './postcode_info'
 import Map from './map'
 import Nav from './nav'
 import PageviewTracker from './pageview_tracker'
+import SignsAd from './signs/ad'
 
 const SEARCH_PATH = '/search'
 const POSTCODE_PATH = '/postcode/:outwardCode/:inwardCode'
@@ -66,6 +69,9 @@ class App extends React.Component {
                     {!infoOnBottom && postcodeInfo}
                     {!infoOnBottom && areaInfo}
                   </Switch>
+                  {!infoOnBottom && <SignsAd />}
+                  {!infoOnBottom && <FinalSayAd />}
+                  {!infoOnBottom && <BfbAd />}
                 </div>
               </div>
             </div>
@@ -88,6 +94,9 @@ class App extends React.Component {
                     {infoOnBottom && postcodeInfo}
                     {infoOnBottom && areaInfo}
                   </Switch>
+                  {infoOnBottom && <SignsAd />}
+                  {infoOnBottom && <FinalSayAd />}
+                  {infoOnBottom && <BfbAd />}
                 </div>
               </div>
             </div>

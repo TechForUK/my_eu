@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import PostcodeAreaStore from '../../postcode_area_store'
-import FinalSayAd from '../final_say_ad'
-import BfbAd from '../bfb_ad'
 import SearchAgain from '../search_again'
 
 import CapInfo from './cap_info'
@@ -31,8 +29,6 @@ class PostcodeAreaInfo extends React.Component {
         <CreativeInfo {...data} />
         <ErasmusInfo {...data} />
         <EsifInfo {...data} />
-        <BfbAd />
-        <FinalSayAd />
       </div>
     )
   }
