@@ -19,7 +19,6 @@ class Capture extends React.Component {
   }
 
   render() {
-    // return <form ref={this.formRef} className="dropzone" />
     return (
       <React.Fragment>
         <p className="lead">Help us add more projects to the map!</p>
@@ -61,7 +60,7 @@ Capture.propTypes = {
 
 const Location = () => {
   return (
-    <div className="mt-5 mb-5">
+    <div className="mt-3 mb-3">
       <p className="lead text-center">Finding you on the map&hellip;</p>
       <p className="text-center">
         <i
@@ -153,13 +152,18 @@ class Confirmation extends React.Component {
       positionInfo = (
         <div className="card mb-3">
           <div className="card-body bg-light">
-            <i className="fas fa-exclamation-triangle text-warning" />
-            &nbsp; We could not find your location. We may be able to extract it
-            from the photo you uploaded, but if not we won&apos;t be able to
-            approve your submission.{' '}
-            <a href="#" onClick={this.handleRetryGeolocation}>
+            <p>
+              <i className="fas fa-exclamation-triangle text-warning" />
+              &nbsp; {this.props.positionErrorMessage}
+              &nbsp; We may be able to get a location from your photo, but if
+              not we won&apos;t be able to approve your submission.{' '}
+            </p>
+            <button
+              className="btn btn-secondary"
+              onClick={this.handleRetryGeolocation}
+            >
               Try to find my location again.
-            </a>
+            </button>
           </div>
         </div>
       )
@@ -233,6 +237,7 @@ class Confirmation extends React.Component {
 
 Confirmation.propTypes = {
   position: PropTypes.object,
+  positionErrorMessage: PropTypes.string,
   onRetryGeolocation: PropTypes.func,
   onConfirm: PropTypes.func
 }
@@ -302,6 +307,14 @@ FinishedMessage.propTypes = {
   success: PropTypes.bool
 }
 
+const GEOLOCATION_NOT_SUPPORTED = 'This device does not support geolocation.'
+// From https://developer.mozilla.org/en-US/docs/Web/API/PositionError
+const GEOLOCATION_ERRORS = {
+  1: "You haven't allowed myeu.uk to use your location.",
+  2: 'There was an error in getting your location. Please try again.',
+  3: 'It took too long to get your location, so we gave up. Please try again.'
+}
+
 class Signs extends React.Component {
   constructor(props) {
     super(props)
@@ -311,6 +324,7 @@ class Signs extends React.Component {
       haveFile: false,
       uploadInfo: null,
       position: null,
+      positionErrorMessage: null,
       confirmed: false,
       finished: false
     }
@@ -321,22 +335,26 @@ class Signs extends React.Component {
   }
 
   render() {
-    if (!this.state.haveFile) {
+    if (this.state.finished) {
+      return <FinishedMessage success={this.state.finished === 'success'} />
+    } else if (!this.state.haveFile) {
       return <Capture onUpload={this.handleUpload} />
-    } else if (!this.state.uploadInfo) {
+    } else if (
+      !(this.state.position || this.state.positionErrorMessage) ||
+      !this.state.uploadInfo
+    ) {
       return <Location />
     } else if (!this.state.confirmed) {
       return (
         <Confirmation
           position={this.state.position}
+          positionErrorMessage={this.state.positionErrorMessage}
           onRetryGeolocation={this.handleRetryGeolocation}
           onConfirm={this.handleConfirm}
         />
       )
-    } else if (!this.state.finished) {
-      return <Uploading />
     } else {
-      return <FinishedMessage success={this.state.finished === 'success'} />
+      return <Uploading />
     }
   }
 
@@ -347,7 +365,11 @@ class Signs extends React.Component {
   }
 
   handleRetryGeolocation() {
-    this.setState({ uploadInfo: null, position: null })
+    this.setState({
+      uploadInfo: null,
+      position: null,
+      positionErrorMessage: null
+    })
     this.prepareUploadAndGeolocate()
   }
 
@@ -364,18 +386,21 @@ class Signs extends React.Component {
   }
 
   prepareUploadAndGeolocate() {
-    return Promise.all([this.prepareUpload(), this.geolocate()]).then(
-      ([uploadInfo, position]) => {
-        this.setState({ uploadInfo, position })
-      }
-    )
+    return Promise.all([this.prepareUpload(), this.geolocate()]).catch(err => {
+      this.setState({ finished: 'error' })
+      throw err
+    })
   }
 
   prepareUpload() {
     const query = queryString.stringify({ content_type: this.file.type })
     return fetch(`${SIGNS_UPLOAD_URL}?${query}`)
       .then(response => {
-        return response.json()
+        if (response.status === 200) return response.json()
+        throw new Error('signs upload call failed: ' + response.status)
+      })
+      .then(uploadInfo => {
+        this.setState({ uploadInfo })
       })
       .catch(error => {
         throw error
@@ -385,16 +410,36 @@ class Signs extends React.Component {
   geolocate() {
     const TIMEOUT = 10 * 1000
 
-    // TODO handle errors
     return new Promise(function(resolve, reject) {
       if (!('geolocation' in navigator)) {
-        throw new Error('geolocation not supported')
+        resolve(null)
+        return
       }
       navigator.geolocation.getCurrentPosition(resolve, reject, {
         enableHighAccuracy: true,
         timeout: TIMEOUT
       })
     })
+      .then(position => {
+        if (position) {
+          this.setState({ position })
+        } else {
+          this.setState({
+            position: null,
+            positionErrorMessage: GEOLOCATION_NOT_SUPPORTED
+          })
+        }
+      })
+      .catch(err => {
+        if (err.code && err.code >= 1 && err.code <= 3) {
+          this.setState({
+            position: null,
+            positionErrorMessage: GEOLOCATION_ERRORS[err.code]
+          })
+        } else {
+          throw err
+        }
+      })
   }
 
   uploadFile() {
@@ -403,6 +448,10 @@ class Signs extends React.Component {
       method: 'PUT',
       body: this.file
     }).then(() => {
+      const { latitude, longitude } = this.state.position
+        ? this.state.position.coords
+        : {}
+
       return fetch(SIGNS_SUBMIT_URL, {
         mode: 'cors',
         method: 'POST',
@@ -413,9 +462,12 @@ class Signs extends React.Component {
         body: JSON.stringify({
           file_name: this.state.uploadInfo.fileName,
           name: this.state.name,
-          latitude: this.state.position.coords.latitude,
-          longitude: this.state.position.coords.longitude
+          latitude: latitude,
+          longitude: longitude
         })
+      }).then(response => {
+        if (response.status === 201) return
+        throw new Error('signs submit call failed: ' + response.status)
       })
     })
   }
