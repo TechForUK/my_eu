@@ -4,6 +4,7 @@ import ReactGA from 'react-ga'
 
 import AreaDataLayer from './area_data_layer'
 import { ZOOMED_IN_STYLE, ZOOMED_OUT_STYLE } from './map_styles'
+import MarkerManager from './marker_manager'
 import PackedPostcodes from './packed_postcodes'
 
 import { getGoogleMapsApi, registerGoogleMap } from '../../google_maps'
@@ -78,6 +79,8 @@ class Map extends React.Component {
       handleAreaClick
     )
 
+    this.markerManager = new MarkerManager(googleMaps, this.map)
+
     const handlePostcodeClick = (event, myEuData) => {
       const { outwardCode, inwardCode } = myEuData
       ReactGA.event({
@@ -90,9 +93,14 @@ class Map extends React.Component {
     this.packedPostcodes = new PackedPostcodes(
       googleMaps,
       this.map,
+      this.markerManager,
       handlePostcodeClick
     )
-    this.zoomToRouteParams()
+
+    this.packedPostcodes.loadData.then(() => {
+      this.markerManager.setUpClusterer()
+      this.zoomToRouteParams()
+    })
   }
 
   setUpMapStyles() {
