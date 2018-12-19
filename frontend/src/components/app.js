@@ -1,5 +1,4 @@
 import $ from 'jquery'
-import queryString from 'query-string'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
@@ -12,10 +11,14 @@ import Map from './map'
 import Nav from './nav'
 import PageviewTracker from './pageview_tracker'
 import SignsAd from './signs/ad'
+import SignInfo from './signs/info'
+
+import { isBeta } from '../utilities'
 
 const SEARCH_PATH = '/search'
 const POSTCODE_PATH = '/postcode/:outwardCode/:inwardCode'
 const POSTCODE_AREA_PATH = '/area/:postcodeArea'
+const SIGN_PATH = '/sign/:signId'
 
 class App extends React.Component {
   constructor(props) {
@@ -30,7 +33,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.beta = 'beta' in queryString.parse(window.location.search)
+    this.beta = isBeta()
 
     // Trick to avoid rehydration mismatch. The server always renders the home
     // page, but the user might be loading with a path in the anchor; rehydrate
@@ -57,6 +60,7 @@ class App extends React.Component {
     const areaInfo = (
       <Route path={POSTCODE_AREA_PATH} component={PostcodeAreaInfo} />
     )
+    const signInfo = <Route path={SIGN_PATH} component={SignInfo} />
 
     return (
       <React.Fragment>
@@ -72,6 +76,7 @@ class App extends React.Component {
                     <Route path={SEARCH_PATH} component={AppHome} />
                     {!infoOnBottom && postcodeInfo}
                     {!infoOnBottom && areaInfo}
+                    {!infoOnBottom && signInfo}
                   </Switch>
                   {!infoOnBottom && this.beta && <SignsAd />}
                   {!infoOnBottom && <FinalSayAd />}
@@ -86,6 +91,7 @@ class App extends React.Component {
               <Route path={SEARCH_PATH} component={Map} />
               <Route path={POSTCODE_PATH} component={Map} />
               <Route path={POSTCODE_AREA_PATH} component={Map} />
+              <Route path={SIGN_PATH} component={Map} />
             </Switch>
           </div>
         </div>
@@ -97,6 +103,7 @@ class App extends React.Component {
                   <Switch>
                     {infoOnBottom && postcodeInfo}
                     {infoOnBottom && areaInfo}
+                    {infoOnBottom && signInfo}
                   </Switch>
                   {infoOnBottom && this.beta && <SignsAd />}
                   {infoOnBottom && <FinalSayAd />}

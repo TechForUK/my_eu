@@ -1,4 +1,6 @@
 /* global fetch */
+import queryString from 'query-string'
+
 import postcodeAreaNames from './data/postcodes/output/postcode_area_names'
 
 export function formatRoundPercentage(fraction) {
@@ -134,4 +136,8 @@ export function formatYearRange(startDate, endDate) {
   const startYear = startDate.getFullYear()
   const endYear = endDate.getFullYear()
   return endYear > startYear ? `${startYear}–${endYear}` : `${startYear}`
+}
+
+export function isBeta() {
+  return 'beta' in queryString.parse(window.location.search)
 }

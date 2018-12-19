@@ -9,9 +9,8 @@ const ICON_MASK_BITS = 1
 const ICON_MASK = 0x1
 
 export default class PackedPostcodes {
-  constructor(googleMaps, map, markerManager, handleClick) {
+  constructor(googleMaps, markerManager, handleClick) {
     this.googleMaps = googleMaps
-    this.map = map
     this.markerManager = markerManager
 
     this.loadData = fetch(packedPostcodesPath, {

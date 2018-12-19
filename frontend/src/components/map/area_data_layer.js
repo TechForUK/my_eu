@@ -19,8 +19,8 @@ export default class AreaDataLayer {
     this.handleClick = handleClick
 
     this.layer = new googleMaps.Data({ map })
-    this._loadData = this._loadGeoJson()
-    this._loadData.then(this._createLayer.bind(this))
+    this.loadData = this._loadGeoJson()
+    this.loadData.then(this._createLayer.bind(this))
   }
 
   zoomMapToArea(postcodeArea) {
@@ -29,7 +29,7 @@ export default class AreaDataLayer {
       if (!feature) return
       this._zoomMapToFeature(feature)
     }
-    this._loadData.then(findAreaAndZoom)
+    this.loadData.then(findAreaAndZoom)
   }
 
   _loadGeoJson() {

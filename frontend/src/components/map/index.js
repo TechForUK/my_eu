@@ -1,3 +1,5 @@
+/* global alert */
+
 import PropTypes from 'prop-types'
 import React from 'react'
 import ReactGA from 'react-ga'
@@ -6,6 +8,7 @@ import AreaDataLayer from './area_data_layer'
 import { ZOOMED_IN_STYLE, ZOOMED_OUT_STYLE } from './map_styles'
 import MarkerManager from './marker_manager'
 import PackedPostcodes from './packed_postcodes'
+import SignsStore from './signs_store'
 
 import { getGoogleMapsApi, registerGoogleMap } from '../../google_maps'
 import getSearchStore, { PLACE_NOT_FOUND } from '../../search_store'
@@ -24,6 +27,18 @@ class Map extends React.Component {
     this.searchMarker = null
     this.areaDataLayer = null
     this.packedPostcodes = null
+    this.signsStore = null
+
+    this.loadData = new Promise((resolve, reject) => {
+      this.loadDataResolve = resolve.bind(this)
+      this.loadDataReject = reject.bind(this)
+    }).catch(err => {
+      alert(
+        'Sorry, some data failed to load.' +
+          ' Please reload the page and try again.'
+      )
+      throw err
+    })
 
     // If the user clicks a link outside the map, we want to show what they
     // clicked, but if the user has just clicked the map, don't change the view.
@@ -41,7 +56,9 @@ class Map extends React.Component {
       this.ignoreNextUpdate = false
       return
     }
-    this.zoomToRouteParams()
+    this.loadData.then(() => {
+      this.zoomToRouteParams()
+    })
   }
 
   render() {
@@ -92,12 +109,33 @@ class Map extends React.Component {
 
     this.packedPostcodes = new PackedPostcodes(
       googleMaps,
-      this.map,
       this.markerManager,
       handlePostcodeClick
     )
 
-    this.packedPostcodes.loadData.then(() => {
+    const handleSignClick = (event, markerData) => {
+      ReactGA.event({
+        category: 'Map',
+        action: 'Click Sign'
+      })
+      this.navigate(`/sign/${markerData.id}`)
+    }
+
+    this.signsStore = new SignsStore(
+      googleMaps,
+      this.markerManager,
+      handleSignClick
+    )
+
+    Promise.all([
+      this.areaDataLayer.loadData,
+      this.packedPostcodes.loadData,
+      this.signsStore.loadData
+    ])
+      .then(this.loadDataResolve)
+      .catch(this.loadDataReject)
+
+    this.loadData.then(() => {
       this.markerManager.setUpClusterer()
       this.zoomToRouteParams()
     })
@@ -142,7 +180,7 @@ class Map extends React.Component {
         .then(searchStore => searchStore.findPlaceByName(placeName))
         .then(place => {
           const bounds = this.findPlaceBounds(place)
-          this.packedPostcodes.zoomMapWithMinMarkers(bounds)
+          this.markerManager.zoomMapWithMinMarkers(bounds)
           this.showPlaceMarker(place)
         })
         .catch(err => {
@@ -154,11 +192,16 @@ class Map extends React.Component {
         })
       return
     }
-    const { outwardCode, inwardCode, postcodeArea } = this.props.match.params
-    if (outwardCode && inwardCode && this.packedPostcodes) {
-      this.packedPostcodes.zoomMapToPostcode(outwardCode, inwardCode)
-    } else if (postcodeArea && this.areaDataLayer) {
-      this.areaDataLayer.zoomMapToArea(postcodeArea)
+    const params = this.props.match.params
+    if ('outwardCode' in params) {
+      this.packedPostcodes.zoomMapToPostcode(
+        params.outwardCode,
+        params.inwardCode
+      )
+    } else if ('postcodeArea' in params) {
+      this.areaDataLayer.zoomMapToArea(params.postcodeArea)
+    } else if ('signId' in params) {
+      this.signsStore.zoomMapToSign(params.signId)
     }
   }
 

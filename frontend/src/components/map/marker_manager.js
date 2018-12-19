@@ -2,15 +2,19 @@ import MarkerClusterer from './marker_clusterer'
 
 import euCircleGbpPath from '../../images/eu_circle_gbp.svg'
 import fundingPostcodePath from '../../images/funding_postcode.svg'
-import hospitalPostcodePath from '../../images/hospital_postcode.svg'
 import fundingPostcodeSelectedPath from '../../images/funding_postcode_selected.svg'
+import hospitalPostcodePath from '../../images/hospital_postcode.svg'
 import hospitalPostcodeSelectedPath from '../../images/hospital_postcode_selected.svg'
+import signMarkerPath from '../../images/sign_marker.svg'
+import signMarkerSelectedPath from '../../images/sign_marker_selected.svg'
 
 const ICON_URLS = [
   fundingPostcodePath,
   fundingPostcodeSelectedPath,
   hospitalPostcodePath,
-  hospitalPostcodeSelectedPath
+  hospitalPostcodeSelectedPath,
+  signMarkerPath,
+  signMarkerSelectedPath
 ]
 
 const MIN_MARKERS = 5
