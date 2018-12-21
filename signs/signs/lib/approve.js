@@ -2,6 +2,8 @@ const cloudDatastore = require('./cloud_datastore')
 const cloudStorage = require('./cloud_storage')
 const validation = require('./validation')
 
+const SIGNS_DATA_KEY = `${cloudStorage.MAIN_BUCKET_SIGNS_PATH}.json`
+
 exports.approve = function signsApprove(req, res) {
   let fileName = req.body.file_name
   if (!validation.UUID_REGEXP.test(fileName)) {
@@ -16,9 +18,11 @@ exports.approve = function signsApprove(req, res) {
 
   let action
   if (approved) {
-    action = publishFile(fileName).then(() =>
-      updateApprovalState(fileName, true)
-    )
+    action = publishImage(fileName)
+      .then(() => updateApprovalState(fileName, true))
+      .then(() => {
+        publishSignsData()
+      })
   } else {
     action = updateApprovalState(fileName, false)
   }
@@ -32,7 +36,7 @@ exports.approve = function signsApprove(req, res) {
     })
 }
 
-function publishFile(fileName) {
+function publishImage(fileName) {
   return cloudStorage.storage
     .bucket(cloudStorage.SIGNS_BUCKET_NAME)
     .file(fileName)
@@ -65,5 +69,34 @@ function updateApprovalState(fileName, approved) {
     .catch(error => {
       transaction.rollback()
       throw error
+    })
+}
+
+function publishSignsData() {
+  return cloudDatastore.datastore
+    .runQuery(
+      cloudDatastore.datastore
+        .createQuery(cloudDatastore.SIGN_KIND)
+        .filter('approved', '=', true)
+    )
+    .then(results => {
+      const signs = results[0]
+      const signsData = {
+        columns: ['id', 'latitude', 'longitude'],
+        data: signs.map(sign => [
+          sign[cloudDatastore.datastore.KEY].name,
+          sign.latitude,
+          sign.longitude
+        ])
+      }
+      return cloudStorage.storage
+        .bucket(cloudStorage.MAIN_BUCKET_NAME)
+        .file(SIGNS_DATA_KEY)
+        .save(JSON.stringify(signsData), {
+          contentType: 'application/json',
+          metadata: {
+            cacheControl: 'public, max-age=60'
+          }
+        })
     })
 }
