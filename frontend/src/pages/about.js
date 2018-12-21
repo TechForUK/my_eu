@@ -197,7 +197,7 @@ const About = () => (
           </li>
           <li>
             NHS staffing data are from NHS Digital&apos;s{' '}
-            <a href="https://digital.nhs.uk/data-and-information/find-data-and-publications/supplementary-information/2018-supplementary-information-files/hchs-staff-by-staff-group-nationality-and-organisation-september-2017-and-june-2018">
+            <a href="https://digital.nhs.uk/data-and-information/find-data-and-publications/supplementary-information/2018-supplementary-information-files/staff-numbers/hchs-staff-by-staff-group-nationality-and-organisation-september-2017-and-june-2018">
               HCHS staff by staff group, nationality and organisation, September
               2017 and June 2018
             </a>{' '}
