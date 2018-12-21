@@ -222,6 +222,10 @@ const About = () => (
         </ul>
       </p>
 
+      <p>
+        We use icons from{' '}
+        <a href="https://fontawesome.com/license">Fontawesome</a> under CC-BY.
+      </p>
       <h2>What action can I take?</h2>
       <p>
         If you&apos;re interested in taking action off the back of this dataset,
