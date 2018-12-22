@@ -1,12 +1,18 @@
-const cloudDatastore = require('./cloud_datastore')
-const cloudStorage = require('./cloud_storage')
-const validation = require('./validation')
+const {
+  MAIN_BUCKET_NAME,
+  MAIN_BUCKET_SIGNS_PATH,
+  SIGN_KIND,
+  SIGNS_BUCKET_NAME,
+  UUID_REGEXP
+} = require('./common')
+const datastore = require('./datastore')
+const storage = require('./storage')
 
-const SIGNS_DATA_KEY = `${cloudStorage.MAIN_BUCKET_SIGNS_PATH}.json`
+const SIGNS_DATA_KEY = `${MAIN_BUCKET_SIGNS_PATH}.json`
 
 exports.approve = function signsApprove(req, res) {
   let fileName = req.body.file_name
-  if (!validation.UUID_REGEXP.test(fileName)) {
+  if (!UUID_REGEXP.test(fileName)) {
     return res.status(422).send({ message: 'bad file_name' })
   }
   fileName = fileName.toLowerCase()
@@ -37,22 +43,19 @@ exports.approve = function signsApprove(req, res) {
 }
 
 function publishImage(fileName) {
-  return cloudStorage.storage
-    .bucket(cloudStorage.SIGNS_BUCKET_NAME)
+  return storage
+    .bucket(SIGNS_BUCKET_NAME)
     .file(fileName)
     .copy(
-      cloudStorage.storage
-        .bucket(cloudStorage.MAIN_BUCKET_NAME)
-        .file(`${cloudStorage.MAIN_BUCKET_SIGNS_PATH}/${fileName}`)
+      storage
+        .bucket(MAIN_BUCKET_NAME)
+        .file(`${MAIN_BUCKET_SIGNS_PATH}/${fileName}`)
     )
 }
 
 function updateApprovalState(fileName, approved) {
-  const transaction = cloudDatastore.datastore.transaction()
-  const signKey = cloudDatastore.datastore.key([
-    cloudDatastore.SIGN_KIND,
-    fileName
-  ])
+  const transaction = datastore.transaction()
+  const signKey = datastore.key([SIGN_KIND, fileName])
 
   return transaction
     .run()
@@ -73,25 +76,21 @@ function updateApprovalState(fileName, approved) {
 }
 
 function publishSignsData() {
-  return cloudDatastore.datastore
-    .runQuery(
-      cloudDatastore.datastore
-        .createQuery(cloudDatastore.SIGN_KIND)
-        .filter('approved', '=', true)
-    )
+  return datastore
+    .runQuery(datastore.createQuery(SIGN_KIND).filter('approved', '=', true))
     .then(results => {
       const signs = results[0]
       const signsData = {
         columns: ['id', 'latitude', 'longitude', 'title'],
         data: signs.map(sign => [
-          sign[cloudDatastore.datastore.KEY].name,
+          sign[datastore.KEY].name,
           sign.latitude,
           sign.longitude,
           sign.title
         ])
       }
-      return cloudStorage.storage
-        .bucket(cloudStorage.MAIN_BUCKET_NAME)
+      return storage
+        .bucket(MAIN_BUCKET_NAME)
         .file(SIGNS_DATA_KEY)
         .save(JSON.stringify(signsData), {
           contentType: 'application/json',

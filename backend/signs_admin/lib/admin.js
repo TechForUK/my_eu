@@ -1,18 +1,19 @@
 const escapeHtml = require('escape-html')
 
-const cloudDatastore = require('./cloud_datastore')
-const cloudStorage = require('./cloud_storage')
+const { SIGN_KIND, SIGNS_BUCKET_NAME } = require('./common')
+const datastore = require('./datastore')
+const storage = require('./storage')
 
 const LIMIT = 30
 
 const SIGNS_APPROVE_URL = `https://europe-west1-my-eu-1532800860795.cloudfunctions.net/signs_approve`
 
 exports.admin = function signsAdmin(req, res) {
-  const query = cloudDatastore.datastore
-    .createQuery(cloudDatastore.SIGN_KIND)
+  const query = datastore
+    .createQuery(SIGN_KIND)
     .filter('approved', '=', null)
     .limit(LIMIT)
-  return cloudDatastore.datastore
+  return datastore
     .runQuery(query)
     .then(getSignedUrls)
     .then(signs => {
@@ -25,10 +26,10 @@ exports.admin = function signsAdmin(req, res) {
 }
 
 function getSignedUrls(results) {
-  const bucket = cloudStorage.storage.bucket(cloudStorage.SIGNS_BUCKET_NAME)
+  const bucket = storage.bucket(SIGNS_BUCKET_NAME)
   return Promise.all(
     results[0].map(sign => {
-      const fileName = sign[cloudDatastore.datastore.KEY].name
+      const fileName = sign[datastore.KEY].name
       return bucket
         .file(fileName)
         .getSignedUrl({
@@ -97,7 +98,7 @@ function renderSigns(signs) {
 }
 
 function renderSign(sign) {
-  const fileName = sign[cloudDatastore.datastore.KEY].name
+  const fileName = sign[datastore.KEY].name
   const latlng = `${sign.latitude},${sign.longitude}`
   return `
 <div id="my-eu-card-${fileName}" class="card">

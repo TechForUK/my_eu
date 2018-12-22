@@ -1,9 +1,10 @@
 const uuidv4 = require('uuid/v4')
 
-const cloudStorage = require('./cloud_storage')
+const { SIGNS_BUCKET_NAME } = require('./common')
+const storage = require('./storage')
 
 exports.upload = function signsUpload(req, res) {
-  const bucket = cloudStorage.storage.bucket(cloudStorage.SIGNS_BUCKET_NAME)
+  const bucket = storage.bucket(SIGNS_BUCKET_NAME)
   const fileName = uuidv4()
   const file = bucket.file(fileName)
 
