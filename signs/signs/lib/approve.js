@@ -82,11 +82,12 @@ function publishSignsData() {
     .then(results => {
       const signs = results[0]
       const signsData = {
-        columns: ['id', 'latitude', 'longitude'],
+        columns: ['id', 'latitude', 'longitude', 'title'],
         data: signs.map(sign => [
           sign[cloudDatastore.datastore.KEY].name,
           sign.latitude,
-          sign.longitude
+          sign.longitude,
+          sign.title
         ])
       }
       return cloudStorage.storage

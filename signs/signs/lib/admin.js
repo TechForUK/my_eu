@@ -1,3 +1,5 @@
+const escapeHtml = require('escape-html')
+
 const cloudDatastore = require('./cloud_datastore')
 const cloudStorage = require('./cloud_storage')
 
@@ -101,9 +103,14 @@ function renderSign(sign) {
 <div id="my-eu-card-${fileName}" class="card">
   <img src="${sign.url}" class="img-fluid">
   <div class="card-body text-center">
-    <a href="https://www.google.com/maps/search/?api=1&query=${latlng}">
-      Latitude, Longitude: ${latlng}
-    </a>
+    <p>
+      Title: &ldquo;${escapeHtml(sign.title)}&rdquo;
+    </p>
+    <p>
+      <a href="https://www.google.com/maps/search/?api=1&query=${latlng}">
+        Latitude, Longitude: ${escapeHtml(latlng)}
+      </a>
+    </p>
   </div>
   <div class="card-footer">
     <button class="btn btn-warning" onClick="myEuModerate('${fileName}', false)">Reject</button>

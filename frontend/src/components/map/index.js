@@ -8,7 +8,7 @@ import AreaDataLayer from './area_data_layer'
 import { ZOOMED_IN_STYLE, ZOOMED_OUT_STYLE } from './map_styles'
 import MarkerManager from './marker_manager'
 import PackedPostcodes from './packed_postcodes'
-import SignsStore from './signs_store'
+import SignsMarkerManager from './signs_marker_manager'
 
 import { getGoogleMapsApi, registerGoogleMap } from '../../google_maps'
 import getSearchStore, { PLACE_NOT_FOUND } from '../../search_store'
@@ -27,7 +27,7 @@ class Map extends React.Component {
     this.searchMarker = null
     this.areaDataLayer = null
     this.packedPostcodes = null
-    this.signsStore = null
+    this.signsMarkerManager = null
 
     this.loadData = new Promise((resolve, reject) => {
       this.loadDataResolve = resolve.bind(this)
@@ -121,7 +121,7 @@ class Map extends React.Component {
       this.navigate(`/sign/${markerData.id}`)
     }
 
-    this.signsStore = new SignsStore(
+    this.signsMarkerManager = new SignsMarkerManager(
       googleMaps,
       this.markerManager,
       handleSignClick
@@ -130,7 +130,7 @@ class Map extends React.Component {
     Promise.all([
       this.areaDataLayer.loadData,
       this.packedPostcodes.loadData,
-      this.signsStore.loadData
+      this.signsMarkerManager.loadData
     ])
       .then(this.loadDataResolve)
       .catch(this.loadDataReject)
@@ -201,7 +201,7 @@ class Map extends React.Component {
     } else if ('postcodeArea' in params) {
       this.areaDataLayer.zoomMapToArea(params.postcodeArea)
     } else if ('signId' in params) {
-      this.signsStore.zoomMapToSign(params.signId)
+      this.signsMarkerManager.zoomMapToSign(params.signId)
     }
   }
 

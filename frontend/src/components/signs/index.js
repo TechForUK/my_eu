@@ -174,15 +174,15 @@ class Confirmation extends React.Component {
         {positionInfo}
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label htmlFor="my-eu-signs-name">Your Name (Optional)</label>
+            <label htmlFor="my-eu-signs-title">Caption (Optional)</label>
             <input
               ref={this.nameRef}
               type="text"
               className="form-control"
-              id="my-eu-signs-name"
-              aria-describedby="my-eu-signs-name-help"
+              id="my-eu-signs-title"
+              aria-describedby="my-eu-signs-title-help"
             />
-            <small className="form-text text-muted" id="my-eu-signs-name-help">
+            <small className="form-text text-muted" id="my-eu-signs-title-help">
               We&apos;ll display this with your photo on the map.
             </small>
           </div>
@@ -373,8 +373,8 @@ class Signs extends React.Component {
     this.prepareUploadAndGeolocate()
   }
 
-  handleConfirm(name) {
-    this.setState({ confirmed: true, name })
+  handleConfirm(title) {
+    this.setState({ confirmed: true, title })
     this.uploadFile()
       .then(() => {
         this.setState({ finished: 'success' })
@@ -461,7 +461,7 @@ class Signs extends React.Component {
         },
         body: JSON.stringify({
           file_name: this.state.uploadInfo.fileName,
-          name: this.state.name,
+          title: this.state.title,
           latitude: latitude,
           longitude: longitude
         })

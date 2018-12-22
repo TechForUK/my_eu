@@ -18,6 +18,11 @@ exports.submit = function signsSubmit(req, res) {
     return res.status(422).send({ message: 'bad longitude' })
   }
 
+  const title = (req.body.title || '').trim() || null
+  if (title && /^.{0,255}$/.test(title)) {
+    return res.status(422).send({ message: 'bad title' })
+  }
+
   const signKey = cloudDatastore.datastore.key([
     cloudDatastore.SIGN_KIND,
     fileName
@@ -27,6 +32,7 @@ exports.submit = function signsSubmit(req, res) {
     data: {
       latitude,
       longitude,
+      title,
       approved: null
     }
   }
