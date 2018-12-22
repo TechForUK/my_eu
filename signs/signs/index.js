@@ -5,14 +5,6 @@ const cors = require('cors')
 // User-facing
 //
 
-var list
-exports.signs_list = function(req, res) {
-  if (!list) list = require('./lib/list').list
-  corsHandler(req, res, function() {
-    list(req, res)
-  })
-}
-
 var upload
 exports.signs_upload = function(req, res) {
   if (!upload) upload = require('./lib/upload').upload
