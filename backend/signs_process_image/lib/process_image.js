@@ -101,20 +101,25 @@ function extractExifGpsData(tmpPathname) {
       if (err) return reject(err)
       resolve(exifData)
     })
-  }).then(exifData => {
-    const gps = exifData.gps
-    if (!gps) return
-    const exifLatitude = convertExifGpsToDegrees(
-      gps.GPSLatitude,
-      gps.GPSLatitudeRef
-    )
-    const exifLongitude = convertExifGpsToDegrees(
-      gps.GPSLongitude,
-      gps.GPSLongitudeRef
-    )
-    if (!exifLatitude || !exifLongitude) return
-    return { exifLatitude, exifLongitude }
   })
+    .then(exifData => {
+      const gps = exifData.gps
+      if (!gps) return
+      const exifLatitude = convertExifGpsToDegrees(
+        gps.GPSLatitude,
+        gps.GPSLatitudeRef
+      )
+      const exifLongitude = convertExifGpsToDegrees(
+        gps.GPSLongitude,
+        gps.GPSLongitudeRef
+      )
+      if (!exifLatitude || !exifLongitude) return
+      return { exifLatitude, exifLongitude }
+    })
+    .catch(err => {
+      if (/No Exif segment/.test(err.message)) return null
+      throw err
+    })
 }
 exports._extractExifGpsData = extractExifGpsData
 
