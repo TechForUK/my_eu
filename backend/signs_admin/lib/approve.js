@@ -2,7 +2,7 @@ const {
   MAIN_BUCKET_NAME,
   MAIN_BUCKET_SIGNS_PATH,
   SIGN_KIND,
-  SIGNS_BUCKET_NAME,
+  SIGNS_PROCESSED_BUCKET_NAME,
   UUID_REGEXP
 } = require('./common')
 const datastore = require('./datastore')
@@ -44,7 +44,7 @@ exports.approve = function signsApprove(req, res) {
 
 function publishImage(fileName) {
   return storage
-    .bucket(SIGNS_BUCKET_NAME)
+    .bucket(SIGNS_PROCESSED_BUCKET_NAME)
     .file(fileName)
     .copy(
       storage

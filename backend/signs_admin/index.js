@@ -1,13 +1,10 @@
 const basicAuth = require('express-basic-auth')
-const cors = require('cors')
-
-const password = process.env.MY_EU_SIGNS_APPROVE_PASSWORD
-if (!password) throw new Error('MY_EU_SIGNS_APPROVE_PASSWORD not set')
 
 let admin
 exports.signs_admin = function(req, res) {
   if (!admin) admin = require('./lib/admin').admin
-  authHandler(req, res, function() {
+  authHandler(req, res, function(err) {
+    if (err) throw err
     admin(req, res)
   })
 }
@@ -15,23 +12,28 @@ exports.signs_admin = function(req, res) {
 let approve
 exports.signs_approve = function(req, res) {
   if (!approve) approve = require('./lib/approve').approve
-  corsHandler(req, res, function() {
-    authHandler(req, res, function() {
-      approve(req, res)
-    })
+  authHandler(req, res, function(err) {
+    if (err) throw err
+    approve(req, res)
   })
 }
 
-const authHandler =
-  password &&
-  basicAuth({
-    users: { admin: password },
-    challenge: true,
-    realm: 'signs.myeu.uk'
+let processSign
+exports.signs_process = function(req, res) {
+  if (!processSign) processSign = require('./lib/process_sign').processSign
+  authHandler(req, res, function(err) {
+    if (err) throw err
+    processSign(req, res)
   })
+}
 
-const corsHandler = cors({
-  contentType: 'application/json',
-  origin: ['http://localhost:8080', 'https://www.myeu.uk'],
-  methods: ['GET', 'POST']
-})
+const adminPassword = process.env.MY_EU_SIGNS_ADMIN_PASSWORD
+if (!adminPassword) throw new Error('MY_EU_SIGNS_ADMIN_PASSWORD not set')
+
+const authHandler =
+  adminPassword &&
+  basicAuth({
+    users: { admin: adminPassword },
+    challenge: true,
+    realm: 'signs_admin.myeu.uk'
+  })

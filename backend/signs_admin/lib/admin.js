@@ -1,12 +1,17 @@
 const escapeHtml = require('escape-html')
 
-const { SIGN_KIND, SIGNS_BUCKET_NAME } = require('./common')
+const {
+  SIGN_KIND,
+  SIGNS_PROCESSED_BUCKET_NAME,
+  buildAuthorizationHeader
+} = require('./common')
 const datastore = require('./datastore')
 const storage = require('./storage')
 
 const LIMIT = 30
 
 const SIGNS_APPROVE_URL = `https://europe-west1-my-eu-1532800860795.cloudfunctions.net/signs_approve`
+const SIGNS_PROCESS_URL = `https://europe-west1-my-eu-1532800860795.cloudfunctions.net/signs_process`
 
 exports.admin = function signsAdmin(req, res) {
   const query = datastore
@@ -26,7 +31,7 @@ exports.admin = function signsAdmin(req, res) {
 }
 
 function getSignedUrls(results) {
-  const bucket = storage.bucket(SIGNS_BUCKET_NAME)
+  const bucket = storage.bucket(SIGNS_PROCESSED_BUCKET_NAME)
   return Promise.all(
     results[0].map(sign => {
       const fileName = sign[datastore.KEY].name
@@ -45,9 +50,8 @@ function getSignedUrls(results) {
 }
 
 function renderSigns(signs) {
-  const password = process.env.MY_EU_SIGNS_APPROVE_PASSWORD
-  const authorization =
-    'Basic ' + Buffer.from('admin:' + password).toString('base64')
+  const password = process.env.MY_EU_SIGNS_ADMIN_PASSWORD
+  const authorization = buildAuthorizationHeader('admin', password)
   return `
 <!doctype html>
 <html lang="en">
@@ -85,6 +89,35 @@ function renderSigns(signs) {
           toggleButtons(false)
         })
       }
+
+      function myEuProcess(name) {
+        var $card = $('#my-eu-card-' + name)
+
+        function toggleButtons(disabled) {
+          $card.find('button').prop('disabled', disabled)
+        }
+        toggleButtons(true)
+
+        fetch('${SIGNS_PROCESS_URL}', {
+          mode: 'cors',
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': '${authorization}',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ file_name: name })
+        }).then((response) => {
+          if (response.status === 200) {
+            window.location.reload()
+            return
+          }
+          throw new Error('Unexpected response: ' + response.status)
+        }).catch((error) => {
+          alert(error)
+          toggleButtons(false)
+        })
+      }
     </script>
   </head>
   <body>
@@ -99,7 +132,8 @@ function renderSigns(signs) {
 
 function renderSign(sign) {
   const fileName = sign[datastore.KEY].name
-  const latlng = `${sign.latitude},${sign.longitude}`
+  const deviceLatlng = `${sign.deviceLatitude},${sign.deviceLongitude}`
+  const exifLatlng = `${sign.exifLatitude},${sign.exifLongitude}`
   return `
 <div id="my-eu-card-${fileName}" class="card">
   <img src="${sign.url}" class="img-fluid">
@@ -108,13 +142,19 @@ function renderSign(sign) {
       Title: &ldquo;${escapeHtml(sign.title)}&rdquo;
     </p>
     <p>
-      <a href="https://www.google.com/maps/search/?api=1&query=${latlng}">
-        Latitude, Longitude: ${escapeHtml(latlng)}
+      <a href="https://www.google.com/maps/search/?api=1&query=${deviceLatlng}">
+        Device Latitude, Longitude: ${escapeHtml(deviceLatlng)}
+      </a>
+    </p>
+    <p>
+      <a href="https://www.google.com/maps/search/?api=1&query=${exifLatlng}">
+        EXIF Latitude, Longitude: ${escapeHtml(exifLatlng)}
       </a>
     </p>
   </div>
   <div class="card-footer">
     <button class="btn btn-warning" onClick="myEuModerate('${fileName}', false)">Reject</button>
+    <button class="btn btn-secondary" onClick="myEuProcess('${fileName}')">Reprocess</button>
     <button class="btn btn-success float-right" onClick="myEuModerate('${fileName}', true)">Approve</button>
   </div>
 </div>`

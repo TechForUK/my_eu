@@ -14,9 +14,13 @@
     "deploy_signs_approve": "bin/prepare_deploy.sh && cd signs_admin && gcloud functions deploy signs_approve --region europe-west1 --trigger-http",
     "test_deploy_signs_admin": "bin/prepare_deploy.sh && cd signs_admin && functions deploy signs_admin --trigger-http",
     "deploy_signs_admin": "bin/prepare_deploy.sh && cd signs_admin && gcloud functions deploy signs_admin --region europe-west1 --trigger-http",
-    "deploy": "npm run deploy_signs_upload && npm run deploy_signs_submit && npm run deploy_signs_approve && npm run deploy_signs_admin",
-    "test_deploy": "npm run test_deploy_signs_upload && npm run test_deploy_signs_submit && npm run test_deploy_signs_approve && npm run test_deploy_signs_admin",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test_deploy_signs_process": "bin/prepare_deploy.sh && cd signs_admin && functions deploy signs_process --trigger-http",
+    "deploy_signs_process": "bin/prepare_deploy.sh && cd signs_admin && gcloud functions deploy signs_process --region europe-west1 --trigger-http",
+    "test_deploy_signs_process_image": "bin/prepare_deploy.sh && cd signs_process_image && functions deploy signs_process_image --trigger-http",
+    "deploy_signs_process_image": "bin/prepare_deploy.sh && cd signs_process_image && gcloud functions deploy signs_process_image --region europe-west1 --trigger-http",
+    "deploy": "npm run deploy_signs_upload && npm run deploy_signs_submit && npm run deploy_signs_approve && npm run deploy_signs_admin && npm run deploy_signs_process && npm run deploy_signs_process_image",
+    "test_deploy": "npm run test_deploy_signs_upload && npm run test_deploy_signs_submit && npm run test_deploy_signs_approve && npm run test_deploy_signs_admin && npm run test_deploy_signs_process && npm run test_deploy_signs_process_image",
+    "test": "cd signs_process_image && npm test"
   },
   "keywords": [],
   "author": "",

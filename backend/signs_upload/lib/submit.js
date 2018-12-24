@@ -1,4 +1,10 @@
-const { SIGN_KIND, NUMBER_REGEXP, UUID_REGEXP } = require('./common')
+const {
+  SIGN_KIND,
+  NUMBER_REGEXP,
+  UUID_REGEXP,
+  datastoreUpsertMerge,
+  datastoreWithRetries
+} = require('./common')
 const datastore = require('./datastore')
 
 exports.submit = function signsSubmit(req, res) {
@@ -23,18 +29,15 @@ exports.submit = function signsSubmit(req, res) {
     return res.status(422).send({ message: 'bad title' })
   }
 
-  const signKey = datastore.key([SIGN_KIND, fileName])
-  const sign = {
-    key: signKey,
-    data: {
-      latitude,
-      longitude,
+  datastoreWithRetries(function createOrUpdateSign() {
+    return datastoreUpsertMerge(datastore, SIGN_KIND, fileName, {
+      deviceLatitude: latitude,
+      deviceLongitude: longitude,
       title,
+      uploadedAt: new Date(),
       approved: null
-    }
-  }
-  datastore
-    .save(sign)
+    })
+  })
     .then(() => {
       res.status(201).send()
     })
