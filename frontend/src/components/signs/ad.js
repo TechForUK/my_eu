@@ -3,12 +3,14 @@
 import $ from 'jquery'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import ReactGA from 'react-ga'
 
 import signLogoPath from '../../images/inkscape/sign.svg'
 
 class SignsAd extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       progress: 'loading'
     }
@@ -49,6 +51,8 @@ class SignsAd extends React.Component {
   }
 
   loadModal() {
+    this.trackClick()
+
     const modalBody = document.getElementById('my-eu-signs-modal-body')
     ReactDOM.render(<p>Loading&hellip;</p>, modalBody)
 
@@ -65,6 +69,13 @@ class SignsAd extends React.Component {
     return import(/* webpackChunkName: "signs" */ '.').then(
       ({ default: Signs }) => Signs
     )
+  }
+
+  trackClick() {
+    ReactGA.event({
+      category: 'Ad',
+      action: 'Signs - Add a Project'
+    })
   }
 }
 

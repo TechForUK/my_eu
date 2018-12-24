@@ -4,6 +4,7 @@ import React from 'react'
 import $ from 'jquery'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
+import ReactGA from 'react-ga'
 
 const SIGNS_UPLOAD_URL =
   'https://europe-west1-my-eu-1532800860795.cloudfunctions.net/signs_upload'
@@ -359,12 +360,14 @@ class Signs extends React.Component {
   }
 
   handleUpload(file) {
+    this.track('Upload')
     this.file = file
     this.setState({ haveFile: true })
     this.prepareUploadAndGeolocate()
   }
 
   handleRetryGeolocation() {
+    this.track('Retried Geolocation')
     this.setState({
       uploadInfo: null,
       position: null,
@@ -374,12 +377,15 @@ class Signs extends React.Component {
   }
 
   handleConfirm(title) {
+    this.track('Confirm')
     this.setState({ confirmed: true, title })
     this.uploadFile()
       .then(() => {
+        this.track('Success')
         this.setState({ finished: 'success' })
       })
       .catch(error => {
+        this.track('Error')
         this.setState({ finished: 'error' })
         throw error
       })
@@ -469,6 +475,13 @@ class Signs extends React.Component {
         if (response.status === 201) return
         throw new Error('signs submit call failed: ' + response.status)
       })
+    })
+  }
+
+  track(action) {
+    ReactGA.event({
+      category: 'Signs',
+      action
     })
   }
 }
