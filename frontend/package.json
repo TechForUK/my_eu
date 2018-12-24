@@ -7,7 +7,7 @@
     "build": "NODE_ENV=production webpack",
     "dev": "webpack-serve",
     "serve": "serve dist",
-    "test": "mocha --require babel-core/register --require babel-polyfill"
+    "test": "mocha --require @babel/register --require babel-polyfill"
   },
   "private": true,
   "author": "",
@@ -17,6 +17,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "@pollyjs/adapter-fetch": "^1.0.5",
     "@pollyjs/core": "^1.1.4",
     "@pollyjs/persister-fs": "^1.0.5",
