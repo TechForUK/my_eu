@@ -13,8 +13,6 @@ import PageviewTracker from './pageview_tracker'
 import SignsAd from './signs/ad'
 import SignInfo from './signs/info'
 
-import { isBeta } from '../utilities'
-
 const SEARCH_PATH = '/search'
 const POSTCODE_PATH = '/postcode/:outwardCode/:inwardCode'
 const POSTCODE_AREA_PATH = '/area/:postcodeArea'
@@ -25,7 +23,6 @@ class App extends React.Component {
     super(props)
 
     this.bottomRef = React.createRef()
-    this.beta = false
     this.state = {
       isClient: false,
       infoOnBottom: false
@@ -33,8 +30,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.beta = isBeta()
-
     // Trick to avoid rehydration mismatch. The server always renders the home
     // page, but the user might be loading with a path in the anchor; rehydrate
     // with the home page first, then re-render with actual content. This
@@ -78,7 +73,7 @@ class App extends React.Component {
                     {!infoOnBottom && areaInfo}
                     {!infoOnBottom && signInfo}
                   </Switch>
-                  {!infoOnBottom && this.beta && <SignsAd />}
+                  {!infoOnBottom && <SignsAd />}
                   {!infoOnBottom && <FinalSayAd />}
                   {!infoOnBottom && <BfbAd />}
                 </div>
@@ -105,7 +100,7 @@ class App extends React.Component {
                     {infoOnBottom && areaInfo}
                     {infoOnBottom && signInfo}
                   </Switch>
-                  {infoOnBottom && this.beta && <SignsAd />}
+                  {infoOnBottom && <SignsAd />}
                   {infoOnBottom && <FinalSayAd />}
                   {infoOnBottom && <BfbAd />}
                 </div>

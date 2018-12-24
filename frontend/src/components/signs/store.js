@@ -1,6 +1,6 @@
 /* global fetch */
 
-import { convertSplitRowsToRecords, isBeta } from '../../utilities'
+import { convertSplitRowsToRecords } from '../../utilities'
 
 export default class SignsStore {
   constructor() {
@@ -12,12 +12,6 @@ export default class SignsStore {
   }
 
   _loadData() {
-    const columns = ['id', 'latitude', 'longitude', 'title']
-    if (!isBeta())
-      return new Promise((resolve, reject) => {
-        resolve({ columns, data: [] })
-      })
-
     if (process.env.NODE_ENV === 'production') {
       return this._loadProductionData()
     } else {
