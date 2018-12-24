@@ -22,15 +22,20 @@ exports.approve = function signsApprove(req, res) {
     return res.status(422).send({ message: 'bad approve' })
   }
 
+  let useExif = req.body.use_exif
+  if (useExif !== true && useExif !== false) {
+    return res.status(422).send({ message: 'bad useExif' })
+  }
+
   let action
   if (approved) {
     action = publishImage(fileName)
-      .then(() => updateApprovalState(fileName, true))
+      .then(() => updateAfterModeration(fileName, useExif, true))
       .then(() => {
         publishSignsData()
       })
   } else {
-    action = updateApprovalState(fileName, false)
+    action = updateAfterModeration(fileName, null, false)
   }
   action
     .then(() => {
@@ -53,7 +58,7 @@ function publishImage(fileName) {
     )
 }
 
-function updateApprovalState(fileName, approved) {
+function updateAfterModeration(fileName, useExif, approved) {
   const transaction = datastore.transaction()
   const signKey = datastore.key([SIGN_KIND, fileName])
 
@@ -62,6 +67,9 @@ function updateApprovalState(fileName, approved) {
     .then(() => transaction.get(signKey))
     .then(results => {
       const sign = results[0]
+      sign.useExif = useExif
+      if (useExif && !('exifLatitude' in sign))
+        throw new Error('Cannot use exif')
       sign.approved = approved
       transaction.save({
         key: signKey,
@@ -84,8 +92,8 @@ function publishSignsData() {
         columns: ['id', 'latitude', 'longitude', 'title'],
         data: signs.map(sign => [
           sign[datastore.KEY].name,
-          sign.latitude,
-          sign.longitude,
+          sign.useExif ? sign.exifLatitude : sign.deviceLatitude,
+          sign.useExif ? sign.exifLongitude : sign.deviceLongitude,
           sign.title
         ])
       }

@@ -69,6 +69,8 @@ function renderSigns(signs) {
         }
         toggleButtons(true)
 
+        var useExif = $card.find('input[type="radio"]:checked').val() === 'exif'
+
         fetch('${SIGNS_APPROVE_URL}', {
           mode: 'cors',
           method: 'POST',
@@ -77,7 +79,9 @@ function renderSigns(signs) {
             'Authorization': '${authorization}',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ file_name: name, approve: approve })
+          body: JSON.stringify({
+            file_name: name, use_exif: useExif, approve: approve
+          })
         }).then((response) => {
           if (response.status === 200) {
             $card.remove()
@@ -134,6 +138,7 @@ function renderSign(sign) {
   const fileName = sign[datastore.KEY].name
   const deviceLatlng = `${sign.deviceLatitude},${sign.deviceLongitude}`
   const exifLatlng = `${sign.exifLatitude},${sign.exifLongitude}`
+  const exifDisabled = 'exifLatitude' in sign ? '' : ' disabled'
   return `
 <div id="my-eu-card-${fileName}" class="card">
   <img src="${sign.url}" class="img-fluid">
@@ -142,14 +147,20 @@ function renderSign(sign) {
       Title: &ldquo;${escapeHtml(sign.title)}&rdquo;
     </p>
     <p>
-      <a href="https://www.google.com/maps/search/?api=1&query=${deviceLatlng}">
-        Device Latitude, Longitude: ${escapeHtml(deviceLatlng)}
-      </a>
+      <input type="radio" id="my-eu-location-device-${fileName}" name="location-${fileName}" value="device" checked>
+      <label for="my-eu-location-device-${fileName}">
+        <a href="https://www.google.com/maps/search/?api=1&query=${deviceLatlng}" target="_blank">
+          Device Latitude, Longitude: ${escapeHtml(deviceLatlng)}
+        </a>
+      </label>
     </p>
     <p>
-      <a href="https://www.google.com/maps/search/?api=1&query=${exifLatlng}">
-        EXIF Latitude, Longitude: ${escapeHtml(exifLatlng)}
-      </a>
+      <input type="radio" id="my-eu-location-exif-${fileName}" name="location-${fileName}" value="exif"${exifDisabled}>
+      <label for="my-eu-location-exif-${fileName}">
+        <a href="https://www.google.com/maps/search/?api=1&query=${exifLatlng}" target="_blank">
+          EXIF Latitude, Longitude: ${escapeHtml(exifLatlng)}
+        </a>
+      </label>
     </p>
   </div>
   <div class="card-footer">
