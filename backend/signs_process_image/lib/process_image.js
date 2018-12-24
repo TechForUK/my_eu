@@ -12,7 +12,6 @@ promisePrototypeFinally.shim()
 const { UUID_REGEXP } = require('./common')
 
 exports.processImage = function signsProcessImage(req, res) {
-  console.log(req.body)
   let fileName = req.body.file_name
   if (!UUID_REGEXP.test(fileName)) {
     return res.status(422).send({ message: 'bad file_name' })
