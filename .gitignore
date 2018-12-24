@@ -114,3 +114,5 @@ node_modules
 
 # Temporarily ignore CAP datafiles while collecting them.
 data/cap_ltd_company_beneficiaries
+
+notes.md
