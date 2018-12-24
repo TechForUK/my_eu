@@ -1,3 +1,5 @@
+const fetch = require('node-fetch')
+
 const {
   SIGN_KIND,
   NUMBER_REGEXP,
@@ -38,11 +40,37 @@ exports.submit = function signsSubmit(req, res) {
       approved: null
     })
   })
+    .then(() => notify(fileName))
     .then(() => {
       res.status(201).send()
     })
     .catch(error => {
       console.error(error)
       res.status(500).send({ message: 'failed to insert' })
+    })
+}
+
+const NOTIFY_TIMEOUT = 3 * 1000
+const SIGNS_ADMIN_URL = `https://europe-west1-my-eu-1532800860795.cloudfunctions.net/signs_admin`
+
+function notify(fileName) {
+  const webhook = process.env.MY_EU_SIGNS_NOTIFY_WEBHOOK
+  if (!webhook) return
+  return fetch(webhook, {
+    method: 'POST',
+    body: JSON.stringify({
+      text: `A new sign has been submitted: <${SIGNS_ADMIN_URL}#my-eu-card-${fileName}|moderate>.`
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    timeout: NOTIFY_TIMEOUT
+  })
+    .then(response => {
+      if (!response.ok)
+        throw new Error('Unexpected webhook response: ' + response.status)
+    })
+    .catch(err => {
+      console.error(err) // just log it; don't fail the request
     })
 }
