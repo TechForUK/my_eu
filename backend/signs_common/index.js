@@ -37,10 +37,12 @@ exports.datastoreUpsertMerge = function datastoreUpsertMerge(
 
 // Retry pattern from
 // https://cloud.google.com/datastore/docs/concepts/transactions#uses_for_transactions
-exports.datastoreWithRetries = function datastoreWithRetries(makeRequest) {
+exports.datastoreWithRetries = function datastoreWithRetries(
+  makeRequest,
+  delay = 100
+) {
   const maxTries = 5
   let currentAttempt = 1
-  let delay = 100
 
   function tryRequest() {
     return makeRequest().catch(err => {
