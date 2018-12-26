@@ -117,6 +117,7 @@ function extractExifGpsData(tmpPathname) {
     })
     .catch(err => {
       if (/No Exif segment/.test(err.message)) return null
+      if (/image is not a JPEG/.test(err.message)) return null
       throw err
     })
 }
