@@ -1,4 +1,4 @@
-/* global alert, fetch */
+/* global alert, fetch, Rollbar */
 
 import React from 'react'
 import $ from 'jquery'
@@ -11,6 +11,8 @@ const SIGNS_UPLOAD_URL =
 
 const SIGNS_SUBMIT_URL =
   'https://europe-west1-my-eu-1532800860795.cloudfunctions.net/signs_submit'
+
+const BAD_TITLE_MESSAGE = 'bad title'
 
 class Capture extends React.Component {
   constructor(props) {
@@ -289,7 +291,7 @@ const Uploading = () => {
   )
 }
 
-const FinishedMessage = ({ success }) => {
+const FinishedMessage = ({ success, submitErrorMessage }) => {
   function closeModal() {
     $('#my-eu-signs-modal').modal('hide')
   }
@@ -306,12 +308,21 @@ const FinishedMessage = ({ success }) => {
       </React.Fragment>
     )
   } else {
-    message = (
-      <p>
-        Sorry, something went wrong with the upload. Please try again, and if
-        this problem persists, contact us via the about page.
-      </p>
-    )
+    if (submitErrorMessage === BAD_TITLE_MESSAGE) {
+      message = (
+        <p>
+          Sorry, the caption must be at most 255 characters and all on one line.
+          Please try again.
+        </p>
+      )
+    } else {
+      message = (
+        <p>
+          Sorry, something went wrong with the upload. Please try again, and if
+          this problem persists, contact us via the about page.
+        </p>
+      )
+    }
   }
 
   return (
@@ -327,7 +338,8 @@ const FinishedMessage = ({ success }) => {
 }
 
 FinishedMessage.propTypes = {
-  success: PropTypes.bool
+  success: PropTypes.bool,
+  submitErrorMessage: PropTypes.string
 }
 
 const GEOLOCATION_NOT_SUPPORTED = 'This device does not support geolocation.'
@@ -349,7 +361,8 @@ class Signs extends React.Component {
       position: null,
       positionErrorMessage: null,
       confirmed: false,
-      finished: false
+      finished: false,
+      submitErrorMessage: null
     }
 
     this.handleUpload = this.handleUpload.bind(this)
@@ -359,7 +372,12 @@ class Signs extends React.Component {
 
   render() {
     if (this.state.finished) {
-      return <FinishedMessage success={this.state.finished === 'success'} />
+      return (
+        <FinishedMessage
+          success={this.state.finished === 'success'}
+          submitErrorMessage={this.state.submitErrorMessage}
+        />
+      )
     } else if (!this.state.haveFile) {
       return <Capture onUpload={this.handleUpload} />
     } else if (
@@ -407,6 +425,13 @@ class Signs extends React.Component {
         this.setState({ finished: 'success' })
       })
       .catch(error => {
+        if (error.message === BAD_TITLE_MESSAGE) {
+          this.setState({
+            finished: 'error',
+            submitErrorMessage: BAD_TITLE_MESSAGE
+          })
+          return
+        }
         this.track('Error')
         this.setState({ finished: 'error' })
         throw error
@@ -480,6 +505,13 @@ class Signs extends React.Component {
         ? this.state.position.coords
         : {}
 
+      const requestBody = {
+        file_name: this.state.uploadInfo.fileName,
+        title: this.state.title,
+        latitude: latitude,
+        longitude: longitude
+      }
+
       return fetch(SIGNS_SUBMIT_URL, {
         mode: 'cors',
         method: 'POST',
@@ -487,15 +519,24 @@ class Signs extends React.Component {
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          file_name: this.state.uploadInfo.fileName,
-          title: this.state.title,
-          latitude: latitude,
-          longitude: longitude
-        })
+        body: JSON.stringify(requestBody)
       }).then(response => {
         if (response.status === 201) return
-        throw new Error('signs submit call failed: ' + response.status)
+        if (response.status === 422) {
+          return response.json().then(responseBody => {
+            if (responseBody.message === BAD_TITLE_MESSAGE) {
+              throw new Error(BAD_TITLE_MESSAGE)
+            } else {
+              if (Rollbar) {
+                Rollbar.warning('signs submit call failed validation', {
+                  responseBody,
+                  requestBody
+                })
+              }
+              throw new Error('signs submit call failed validation')
+            }
+          })
+        } else throw new Error('signs submit call failed: ' + response.status)
       })
     })
   }
