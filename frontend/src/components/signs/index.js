@@ -527,13 +527,9 @@ class Signs extends React.Component {
             if (responseBody.message === BAD_TITLE_MESSAGE) {
               throw new Error(BAD_TITLE_MESSAGE)
             } else {
-              if (Rollbar) {
-                Rollbar.warning('signs submit call failed validation', {
-                  responseBody,
-                  requestBody
-                })
-              }
-              throw new Error('signs submit call failed validation')
+              throw new Error(
+                'signs submit call failed validation: ' + responseBody.message
+              )
             }
           })
         } else throw new Error('signs submit call failed: ' + response.status)

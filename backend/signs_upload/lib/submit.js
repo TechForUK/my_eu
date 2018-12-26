@@ -17,12 +17,12 @@ exports.submit = function signsSubmit(req, res) {
   fileName = fileName.toLowerCase()
 
   const latitude = req.body.latitude
-  if (!NUMBER_REGEXP.test(latitude)) {
+  if ('latitude' in req.body && !NUMBER_REGEXP.test(latitude)) {
     return res.status(422).send({ message: 'bad latitude' })
   }
 
   const longitude = req.body.longitude
-  if (!NUMBER_REGEXP.test(longitude)) {
+  if ('longitude' in req.body && !NUMBER_REGEXP.test(longitude)) {
     return res.status(422).send({ message: 'bad longitude' })
   }
 
