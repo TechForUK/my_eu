@@ -15,7 +15,8 @@ const SIGNS_SUBMIT_URL =
 class Capture extends React.Component {
   constructor(props) {
     super(props)
-    this.fileRef = React.createRef()
+    this.cameraFileRef = React.createRef()
+    this.existingFileRef = React.createRef()
     this.handleUpload = this.handleUpload.bind(this)
   }
 
@@ -29,29 +30,50 @@ class Capture extends React.Component {
           and we&apos;ll get it onto the map.
         </p>
         <form className="text-center pt-3">
-          <label
-            htmlFor="my-eu-signs-upload-file"
-            className="my-eu-signs-upload"
-          >
-            <i className="fas fa-camera" />
-            <input
-              ref={this.fileRef}
-              onChange={this.handleUpload}
-              id="my-eu-signs-upload-file"
-              name="file"
-              type="file"
-              accept="image/*"
-              capture="environment"
-            />
-            <p>Take a Picture of a Sign</p>
-          </label>
+          <div>
+            <label
+              htmlFor="my-eu-signs-upload-camera-file"
+              className="my-eu-signs-upload"
+            >
+              <i className="fas fa-camera" />
+              <input
+                ref={this.cameraFileRef}
+                onChange={this.handleUpload}
+                id="my-eu-signs-upload-camera-file"
+                name="file"
+                type="file"
+                accept="image/*"
+                capture="environment"
+              />
+              <p>Take a Picture of a Sign</p>
+            </label>
+          </div>
+          <div>
+            <label
+              htmlFor="my-eu-signs-upload-existing-file"
+              className="my-eu-signs-upload"
+            >
+              <input
+                ref={this.existingFileRef}
+                onChange={this.handleUpload}
+                id="my-eu-signs-upload-existing-file"
+                name="file"
+                type="file"
+                accept="image/*"
+              />
+              <p>Or Upload an Existing Photo</p>
+            </label>
+          </div>
         </form>
       </React.Fragment>
     )
   }
 
   handleUpload() {
-    this.props.onUpload(this.fileRef.current.files[0])
+    const file =
+      this.cameraFileRef.current.files[0] ||
+      this.existingFileRef.current.files[0]
+    this.props.onUpload(file)
   }
 }
 
