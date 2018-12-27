@@ -1,4 +1,4 @@
-/* global alert, fetch, Rollbar */
+/* global alert, fetch */
 
 import React from 'react'
 import $ from 'jquery'
