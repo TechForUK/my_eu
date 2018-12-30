@@ -1,6 +1,7 @@
 import React from 'react'
 import { Meta, Title } from 'react-head'
 
+import LegalLinks from '../components/legal_links'
 import Nav from '../components/nav'
 import Share from '../components/share'
 import { SITE_EMAIL_BODY, SITE_URL } from '../strings'
@@ -241,6 +242,8 @@ const About = () => (
         url={SITE_URL}
         emailBody={SITE_EMAIL_BODY}
       />
+      <hr />
+      <LegalLinks />
     </div>
   </React.Fragment>
 )

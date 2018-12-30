@@ -5,6 +5,7 @@ import { Link, Meta } from 'react-head'
 
 import Home from './home'
 import About from './about'
+import Legal from './legal'
 import Mockups from './mockups'
 import TellYourMp from './tell_your_mp'
 import iconPath from '../images/logo.png'
@@ -56,6 +57,9 @@ const Page = ({ path, scripts, stylesheets }) => {
           </Route>
           <Route path="/about/">
             <About />
+          </Route>
+          <Route path="/legal/">
+            <Legal />
           </Route>
           <Route path="/mockups/">
             <Mockups />

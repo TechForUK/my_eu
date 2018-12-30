@@ -6,6 +6,7 @@ import AppHome from './app_home'
 import BfbAd from './bfb_ad'
 import BfbPopupAd from './bfb_popup_ad'
 import FinalSayAd from './final_say_ad'
+import LegalLinks from './legal_links'
 import PostcodeAreaInfo from './postcode_area_info'
 import PostcodeInfo from './postcode_info'
 import Map from './map'
@@ -77,6 +78,7 @@ class App extends React.Component {
                   {!infoOnBottom && <SignsAd />}
                   {!infoOnBottom && <FinalSayAd />}
                   {!infoOnBottom && <BfbAd />}
+                  {!infoOnBottom && <LegalLinks />}
                 </div>
               </div>
             </div>
@@ -104,6 +106,7 @@ class App extends React.Component {
                   {infoOnBottom && <SignsAd />}
                   {infoOnBottom && <FinalSayAd />}
                   {infoOnBottom && <BfbAd />}
+                  {infoOnBottom && <LegalLinks />}
                 </div>
               </div>
             </div>
