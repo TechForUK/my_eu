@@ -56,6 +56,7 @@
     "cross-fetch": "^2.2.2",
     "d3-scale": "^2.1.0",
     "d3-scale-chromatic": "^1.3.0",
+    "exifreader": "^2.5.0",
     "jquery": "^3.3.1",
     "load-google-maps-api": "^1.3.2",
     "popper.js": "^1.14.3",

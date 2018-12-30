@@ -1,6 +1,7 @@
-/* global alert, fetch */
+/* global alert, fetch, FileReader, Rollbar */
 
 import React from 'react'
+import ExifReader from 'exifreader'
 import $ from 'jquery'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
@@ -174,15 +175,33 @@ class Confirmation extends React.Component {
   render() {
     let positionInfo
     if (!this.props.position) {
+      let positionMessage
+      if (this.props.exifPosition) {
+        positionMessage = (
+          <p>
+            <i className="fas fa-info-circle text-info" />
+            &nbsp; {this.props.positionErrorMessage}
+            &nbsp; We&apos;ll try to use the location information from your
+            photo instead, but it may be less accurate than the location
+            information from your device.
+          </p>
+        )
+      } else {
+        positionMessage = (
+          <p>
+            <i className="fas fa-exclamation-triangle text-warning" />
+            &nbsp; {this.props.positionErrorMessage}
+            &nbsp; We may be able to find a location manually, but if not we
+            won&apos;t be able to approve your submission. Please provide as
+            much information as possible in the caption field to help us work
+            out where your photo is from, or try again.{' '}
+          </p>
+        )
+      }
       positionInfo = (
         <div className="card mb-3">
           <div className="card-body bg-light">
-            <p>
-              <i className="fas fa-exclamation-triangle text-warning" />
-              &nbsp; {this.props.positionErrorMessage}
-              &nbsp; We may be able to get a location from your photo, but if
-              not we won&apos;t be able to approve your submission.{' '}
-            </p>
+            {positionMessage}
             <button
               className="btn btn-secondary"
               onClick={this.handleRetryGeolocation}
@@ -263,6 +282,7 @@ class Confirmation extends React.Component {
 Confirmation.propTypes = {
   position: PropTypes.object,
   positionErrorMessage: PropTypes.string,
+  exifPosition: PropTypes.object,
   onRetryGeolocation: PropTypes.func,
   onConfirm: PropTypes.func
 }
@@ -360,6 +380,7 @@ class Signs extends React.Component {
       uploadInfo: null,
       position: null,
       positionErrorMessage: null,
+      exifPosition: null,
       confirmed: false,
       finished: false,
       submitErrorMessage: null
@@ -390,6 +411,7 @@ class Signs extends React.Component {
         <Confirmation
           position={this.state.position}
           positionErrorMessage={this.state.positionErrorMessage}
+          exifPosition={this.state.exifPosition}
           onRetryGeolocation={this.handleRetryGeolocation}
           onConfirm={this.handleConfirm}
         />
@@ -411,7 +433,8 @@ class Signs extends React.Component {
     this.setState({
       uploadInfo: null,
       position: null,
-      positionErrorMessage: null
+      positionErrorMessage: null,
+      exifPosition: null
     })
     this.prepareUploadAndGeolocate()
   }
@@ -439,25 +462,33 @@ class Signs extends React.Component {
   }
 
   prepareUploadAndGeolocate() {
-    return Promise.all([this.prepareUpload(), this.geolocate()]).catch(err => {
-      this.setState({ finished: 'error' })
-      throw err
-    })
+    return Promise.all([
+      this.prepareUpload(),
+      this.geolocate(),
+      this.extractLocationFromFile()
+    ])
+      .then(
+        ([uploadInfo, { position, positionErrorMessage }, exifPosition]) => {
+          this.setState({
+            uploadInfo,
+            position,
+            positionErrorMessage,
+            exifPosition
+          })
+        }
+      )
+      .catch(err => {
+        this.setState({ finished: 'error' })
+        throw err
+      })
   }
 
   prepareUpload() {
     const query = queryString.stringify({ content_type: this.file.type })
-    return fetch(`${SIGNS_UPLOAD_URL}?${query}`)
-      .then(response => {
-        if (response.status === 200) return response.json()
-        throw new Error('signs upload call failed: ' + response.status)
-      })
-      .then(uploadInfo => {
-        this.setState({ uploadInfo })
-      })
-      .catch(error => {
-        throw error
-      })
+    return fetch(`${SIGNS_UPLOAD_URL}?${query}`).then(response => {
+      if (response.status === 200) return response.json()
+      throw new Error('signs upload call failed: ' + response.status)
+    })
   }
 
   geolocate() {
@@ -475,23 +506,77 @@ class Signs extends React.Component {
     })
       .then(position => {
         if (position) {
-          this.setState({ position })
+          return { position, positionErrorMessage: null }
         } else {
-          this.setState({
+          return {
             position: null,
             positionErrorMessage: GEOLOCATION_NOT_SUPPORTED
-          })
+          }
         }
       })
       .catch(err => {
         if (err.code && err.code >= 1 && err.code <= 3) {
-          this.setState({
+          return {
             position: null,
             positionErrorMessage: GEOLOCATION_ERRORS[err.code]
-          })
+          }
         } else {
           throw err
         }
+      })
+  }
+
+  extractLocationFromFile() {
+    function convertExifGpsToDegrees(value, reference) {
+      // This is based on ExifTool's ToDegrees function.
+      if (!value || !value.length || !reference) return null
+      const [d, m, s] = value
+      let degrees = d + ((m || 0) + (s || 0) / 60) / 60
+      if (/(S|W)$/i.test(reference)) degrees = -degrees
+      return degrees
+    }
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = function handleFileReaderOnload(readerEvent) {
+        try {
+          const tags = ExifReader.load(readerEvent.target.result)
+          resolve(tags)
+        } catch (error) {
+          if (
+            error.name === 'MetadataMissingError' ||
+            /Invalid image format/.test(error.message) // non-JPEG
+          ) {
+            resolve(null)
+          } else {
+            reject(error)
+          }
+        }
+      }
+      reader.readAsArrayBuffer(this.file)
+    })
+      .then(tags => {
+        if (!tags) return null
+        if (!tags.GPSLatitude || !tags.GPSLatitudeRef) return null
+        if (!tags.GPSLongitude || !tags.GPSLongitudeRef) return null
+        const latitude = convertExifGpsToDegrees(
+          tags.GPSLatitude.value,
+          tags.GPSLatitudeRef.value
+        )
+        const longitude = convertExifGpsToDegrees(
+          tags.GPSLongitude.value,
+          tags.GPSLongitudeRef.value
+        )
+        if (!latitude || !longitude) return null
+        return { latitude, longitude }
+      })
+      .catch(error => {
+        // For the moment, we only use this information to improve the
+        // messaging, so just log the error.
+        if (Rollbar) {
+          Rollbar.error('Failed to extract location from file', error)
+        }
+        return null
       })
   }
 
