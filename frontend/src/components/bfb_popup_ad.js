@@ -22,6 +22,10 @@ class BfbPopupAd extends React.Component {
   componentDidMount() {
     if (!this.userHasClosed()) {
       setTimeout(() => {
+        ReactGA.event({
+          category: 'Ad',
+          action: 'Show Best for Britain Popup'
+        })
         this.setState({ shown: true })
       }, TIMEOUT)
     }
