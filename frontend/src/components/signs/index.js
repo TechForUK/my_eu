@@ -1,7 +1,7 @@
 /* global alert, fetch, FileReader, Rollbar */
 
 import React from 'react'
-import ExifReader from 'exifreader'
+import ExifReader from 'exifreader/dist/exif-reader' // has ES6 in source
 import $ from 'jquery'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
