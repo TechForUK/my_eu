@@ -27,7 +27,7 @@ class SignsAd extends React.Component {
     return (
       <div
         className="card bg-light my-eu-sidebar-ad mx-auto"
-        style={{ maxWidth: '20em' }}
+        style={{ maxWidth: '22em' }}
       >
         <div className="card-body">
           <h5 className="card-title">Something not on the map?</h5>

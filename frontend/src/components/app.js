@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 
 import AppHome from './app_home'
 import BfbAd from './bfb_ad'
+import BfbPopupAd from './bfb_popup_ad'
 import FinalSayAd from './final_say_ad'
 import PostcodeAreaInfo from './postcode_area_info'
 import PostcodeInfo from './postcode_info'
@@ -108,6 +109,7 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        <BfbPopupAd />
       </React.Fragment>
     )
   }

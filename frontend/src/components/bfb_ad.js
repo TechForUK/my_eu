@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactGA from 'react-ga'
 
-import bestForBritainLogoPath from '../images/best_for_britain_logo.png'
-import techForUkLogoPath from '../images/tech_for_uk_logo.png'
+import BfbSupport from './bfb_support'
 
 const BfbAd = () => {
   const trackClick = action => {
@@ -17,7 +16,7 @@ const BfbAd = () => {
   return (
     <div
       className="card bg-light my-eu-sidebar-ad mx-auto"
-      style={{ maxWidth: '20em' }}
+      style={{ maxWidth: '22em' }}
     >
       <div className="card-body">
         <h5 className="card-title">Demand a #FinalSay on Brexit</h5>
@@ -31,25 +30,8 @@ const BfbAd = () => {
             Join the Best for Britain Mailing List
           </a>
         </p>
-        <p className="card-text">
-          Sponsored by{' '}
-          <a
-            href="https://techforuk.com/"
-            onClick={trackClick('Tech for UK')}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img style={{ height: '1.7em' }} src={techForUkLogoPath} />
-          </a>{' '}
-          and{' '}
-          <a
-            href="https://www.bestforbritain.org/"
-            onClick={trackClick('Best for Britain')}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img style={{ height: '1.5em' }} src={bestForBritainLogoPath} />
-          </a>
+        <p className="card-text text-center text-muted">
+          <BfbSupport />
         </p>
       </div>
     </div>

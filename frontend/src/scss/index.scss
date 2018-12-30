@@ -139,6 +139,25 @@ button.my-eu-details-toggle:before {
   content: 'Hide ';
 }
 
+aside.bestforbritain-popup {
+  background-color: theme-color('light');
+  box-shadow: 0 0 4pt 0 rgba(0, 0, 0, 0.33);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+
+  transform: translateY(100%);
+  animation: slide-up 0.5s forwards;
+}
+
+@keyframes slide-up {
+  100% {
+    transform: translateY(0%);
+  }
+}
+
 @include media-breakpoint-up(md) {
   html,
   body {

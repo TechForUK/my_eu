@@ -16,7 +16,7 @@ const FinalSayAd = () => {
   return (
     <div
       className="card bg-light my-eu-sidebar-ad mx-auto"
-      style={{ maxWidth: '20em' }}
+      style={{ maxWidth: '22em' }}
     >
       <div className="card-body">
         <p className="card-text lead">

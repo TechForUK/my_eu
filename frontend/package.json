@@ -58,6 +58,7 @@
     "d3-scale-chromatic": "^1.3.0",
     "exifreader": "^2.5.0",
     "jquery": "^3.3.1",
+    "js-cookie": "^2.2.0",
     "load-google-maps-api": "^1.3.2",
     "popper.js": "^1.14.3",
     "prop-types": "^15.6.2",
