@@ -4,7 +4,7 @@ import ReactGA from 'react-ga'
 
 import BfbSupport from './bfb_support'
 
-const TIMEOUT = 20 * 1000 // ms to wait before showing popup
+const TIMEOUT = 60 * 1000 // ms to wait before showing popup
 const COOKIE_NAME = 'bestforbritain-popup'
 const COOKIE_EXPIRES = 14 // days
 
