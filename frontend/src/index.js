@@ -1,6 +1,10 @@
 import 'bootstrap'
 import 'cross-fetch/polyfill'
 
+// preset-env does not think we need this, but we get sporadic reports in
+// rollbar without it.
+import 'core-js/modules/es6.set'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter } from 'react-router-dom'
