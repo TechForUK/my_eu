@@ -1,6 +1,6 @@
 import MarkerClusterer from './marker_clusterer'
 
-import euCircleGbpPath from '../../images/eu_circle_gbp.svg'
+import zoomPath from '../../images/zoom.svg'
 import fundingPostcodePath from '../../images/funding_postcode.svg'
 import fundingPostcodeSelectedPath from '../../images/funding_postcode_selected.svg'
 import hospitalPostcodePath from '../../images/hospital_postcode.svg'
@@ -78,7 +78,7 @@ export default class MarkerManager {
   setUpClusterer() {
     const styles = [30, 34, 38, 42, 46, 50].map(function(size) {
       return {
-        url: euCircleGbpPath,
+        url: zoomPath,
         textSize: 12,
         textColor: '#fc0',
         width: size,

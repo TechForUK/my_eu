@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="46"
+   height="46"
+   viewBox="0 0 46 46"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="zoom.svg">
+  <metadata
+     id="metadata35">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Zoom</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1424"
+     inkscape:window-height="808"
+     id="namedview33"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="3.6875"
+     inkscape:cx="23"
+     inkscape:cy="23"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title4">Zoom</title>
+  <desc
+     id="desc6">Created with Sketch.</desc>
+  <defs
+     id="defs8" />
+  <g
+     id="Zoom"
+     style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1"
+     transform="translate(-9,-9)">
+    <g
+       id="Group-3"
+       transform="translate(9,9)">
+      <circle
+         id="Oval-3"
+         cx="23"
+         cy="23"
+         r="23"
+         style="fill:#003399" />
+      <g
+         id="Group-2"
+         transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,8.0000002,19.020815)"
+         style="fill:#ffffff">
+        <path
+           d="M 8.1855593,16.371119 C 3.6647997,16.371119 0,12.706319 0,8.1855593 0,3.6647997 3.6647997,0 8.1855593,0 c 4.5207597,0 8.1855597,3.6647997 8.1855597,8.1855593 0,4.5207597 -3.6648,8.1855597 -8.1855597,8.1855597 z m 0,-2.112403 c 3.3541117,0 6.0731567,-2.719045 6.0731567,-6.0731567 0,-3.354112 -2.719045,-6.0731569 -6.0731567,-6.0731569 -3.354112,0 -6.0731569,2.7190449 -6.0731569,6.0731569 0,3.3541117 2.7190449,6.0731567 6.0731569,6.0731567 z"
+           id="Combined-Shape"
+           inkscape:connector-curvature="0" />
+        <rect
+           id="Rectangle"
+           x="5.8091063"
+           y="14.258716"
+           width="4.7529054"
+           height="11.618213"
+           rx="2.3764527" />
+      </g>
+      <polygon
+         id="Star-3"
+         points="18.122359,2.7274575 19.765268,2.4887288 20.5,1 21.234732,2.4887288 22.877641,2.7274575 21.688821,3.8862712 21.969463,5.5225425 20.5,4.75 19.030537,5.5225425 19.311179,3.8862712 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon17"
+         points="6.1223587,9.7274575 7.7652684,9.4887288 8.5,8 9.2347316,9.4887288 10.877641,9.7274575 9.6888207,10.886271 9.9694631,12.522543 8.5,11.75 7.0305369,12.522543 7.3111793,10.886271 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon19"
+         points="1,21.90983 2.7274575,21.645898 3.5,20 4.2725425,21.645898 6,21.90983 4.75,23.190983 5.045085,25 3.5,24.145898 1.954915,25 2.25,23.190983 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon21"
+         points="30.122359,5.7274575 31.765268,5.4887288 32.5,4 33.234732,5.4887288 34.877641,5.7274575 33.688821,6.8862712 33.969463,8.5225425 32.5,7.75 31.030537,8.5225425 31.311179,6.8862712 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon23"
+         points="39.122359,14.727457 40.765268,14.488729 41.5,13 42.234732,14.488729 43.877641,14.727457 42.688821,15.886271 42.969463,17.522543 41.5,16.75 40.030537,17.522543 40.311179,15.886271 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon25"
+         points="39,27.90983 40.727457,27.645898 41.5,26 42.272543,27.645898 44,27.90983 42.75,29.190983 43.045085,31 41.5,30.145898 39.954915,31 40.25,29.190983 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon27"
+         points="5.1223587,33.727457 6.7652684,33.488729 7.5,32 8.2347316,33.488729 9.8776413,33.727457 8.6888207,34.886271 8.9694631,36.522543 7.5,35.75 6.0305369,36.522543 6.3111793,34.886271 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon29"
+         points="17,40.727457 18.64291,40.488729 19.377641,39 20.112373,40.488729 21.755283,40.727457 20.566462,41.886271 20.847104,43.522543 19.377641,42.75 17.908178,43.522543 18.188821,41.886271 "
+         style="fill:#ffcc00" />
+      <polygon
+         id="polygon31"
+         points="31,37.90983 32.727457,37.645898 33.5,36 34.272543,37.645898 36,37.90983 34.75,39.190983 35.045085,41 33.5,40.145898 31.954915,41 32.25,39.190983 "
+         style="fill:#ffcc00" />
+    </g>
+  </g>
+</svg>
