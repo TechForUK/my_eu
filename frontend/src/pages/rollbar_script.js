@@ -12,6 +12,7 @@ var _rollbarConfig = {
   captureUncaught: true,
   captureUnhandledRejections: true,
   payload: {
+    code_version: '${process.env.ROLLBAR_CODE_VERSION}',
     environment: '${process.env.NODE_ENV}'
   }
 }

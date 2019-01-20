@@ -16,12 +16,15 @@ else
   exit
 fi
 
+# This is picked up in the rollbar config.
+export ROLLBAR_CODE_VERSION=`git rev-parse --verify HEAD`
+
 npm run build
 
 # Copy assets and hashed files with long-term caching headers.
 gsutil -m -h "Cache-Control:public,max-age=31536000" \
   rsync -c -r -j js,css \
-    -x 'static\..+\.js$|.+\.html$|.+\.txt$|signs/|signs.json$' \
+    -x 'static\..+\.js(\.map)?$|.+\.html$|.+\.txt$|signs/|signs.json$' \
   dist gs://$SUBDOMAIN.myeu.uk
 
 # Copy unhashed html files with the default caching headers.
@@ -33,11 +36,10 @@ gsutil -m \
 if [ "$ENVIRONMENT" = "production" ]; then
   if [ -n "$ROLLBAR_DEPLOY_ACCESS_TOKEN" ]; then
     LOCAL_USERNAME=`whoami`
-    REVISION=`git rev-parse --verify HEAD`
     curl https://api.rollbar.com/api/1/deploy/ \
       -F access_token=$ROLLBAR_DEPLOY_ACCESS_TOKEN \
       -F environment=$ENVIRONMENT \
-      -F revision=$REVISION \
+      -F revision=$ROLLBAR_CODE_VERSION \
       -F local_username=$LOCAL_USERNAME
   fi
 fi

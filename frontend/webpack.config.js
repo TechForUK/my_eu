@@ -12,6 +12,7 @@ const devMode = process.env.NODE_ENV !== 'production'
 
 const config = {
   mode: process.env.NODE_ENV || 'development',
+  devtool: 'source-map',
   entry: {
     main: './src/index.js',
     static: './src/pages/index.js'
@@ -97,7 +98,8 @@ const config = {
     new webpack.EnvironmentPlugin([
       'DEVELOPMENT_MY_EU_API_KEY',
       'PRODUCTION_MY_EU_API_KEY',
-      'ROLLBAR_ACCESS_TOKEN'
+      'ROLLBAR_ACCESS_TOKEN',
+      'ROLLBAR_CODE_VERSION'
     ]),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
