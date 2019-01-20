@@ -48,6 +48,6 @@ function mungeOgUrl(body, url) {
 function mungeSignOgImage(body, url, signUuid) {
   return body.replace(
     /<meta property="(og|twitter):image" content=".+?">/g,
-    `<meta property="$1:url" content="${url.origin}/signs/${signUuid}">`
+    `<meta property="$1:image" content="${url.origin}/signs/${signUuid}">`
   )
 }
