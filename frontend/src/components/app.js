@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 
 import AppHome from './app_home'
 import BfbAd from './bfb_ad'
@@ -51,6 +51,10 @@ class App extends React.Component {
 
   render() {
     const { isClient, infoOnBottom } = this.state
+
+    const legacyHashRouterRedirect =
+      isClient && this.detectLegacyHashRouterHash()
+    if (legacyHashRouterRedirect) return legacyHashRouterRedirect
 
     const pageviewTracker = isClient && <PageviewTracker />
     const postcodeInfo = <Route path={POSTCODE_PATH} component={PostcodeInfo} />
@@ -115,6 +119,13 @@ class App extends React.Component {
         <BfbPopupAd />
       </React.Fragment>
     )
+  }
+
+  // We used to use HashRouter. If we get a hash router path, redirect to that
+  // path without the hash.
+  detectLegacyHashRouterHash() {
+    if (!window.location.hash.startsWith('#/')) return null
+    return <Redirect to={window.location.hash.slice(1)} />
   }
 }
 export default App

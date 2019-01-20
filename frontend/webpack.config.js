@@ -125,6 +125,7 @@ const config = {
     globalObject: 'this' // for StaticSiteGeneratorPlugin
   },
   devServer: {
+    historyApiFallback: true,
     // Does not play well with static-site-generator-webpack-plugin.
     inline: false
   }
