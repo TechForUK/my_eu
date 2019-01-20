@@ -26,7 +26,7 @@ export default class SignsStore {
   }
 
   _loadProductionData() {
-    return fetch('https://www.myeu.uk/signs.json', {
+    return fetch('/signs.json', {
       credentials: 'same-origin'
     }).then(response => response.json())
   }
