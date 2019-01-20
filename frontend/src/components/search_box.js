@@ -28,6 +28,10 @@ class SearchBox extends React.Component {
   }
 
   render() {
+    let defaultValue = ''
+    if (this.props.location.pathname === '/search') {
+      defaultValue = getSearchQuery(this.props.location)
+    }
     return (
       <form ref={this.formRef}>
         <div className="form-group">
@@ -45,7 +49,7 @@ class SearchBox extends React.Component {
                 ref={this.inputRef}
                 className="form-control"
                 placeholder="e.g. SW1A 1AA"
-                defaultValue={getSearchQuery(this.props.location)}
+                defaultValue={defaultValue}
               />
               <div className="input-group-append">
                 <input
@@ -128,6 +132,7 @@ class SearchBox extends React.Component {
 
 SearchBox.propTypes = {
   location: PropTypes.shape({
+    pathname: PropTypes.string,
     search: PropTypes.string
   }),
   history: PropTypes.shape({
