@@ -10,6 +10,7 @@ const TITLE = 'myeu.uk – see what the EU has done for you'
 const Home = () => (
   <React.Fragment>
     <Title>{TITLE}</Title>
+    <Meta property="og:title" content={TITLE} />
     <Meta property="og:type" content="website" />
     <Meta property="og:description" content={SITE_DESCRIPTION} />
     <Meta name="description" content={SITE_DESCRIPTION} />
