@@ -123,6 +123,10 @@ const config = {
     filename: devMode ? '[name].[hash].js' : '[name].[contenthash].js',
     libraryTarget: 'umd', // for StaticSiteGeneratorPlugin
     globalObject: 'this' // for StaticSiteGeneratorPlugin
+  },
+  devServer: {
+    // Does not play well with static-site-generator-webpack-plugin.
+    inline: false
   }
 }
 

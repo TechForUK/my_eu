@@ -125,7 +125,7 @@ npm install
 npm run dev
 ```
 
-This will start the application using the `webpack-serve` development server on `http://localhost:8080`. Changes to the application's source files in `frontend/src` will in most cases automatically reload the page.
+This will start the application using the `webpack-serve` development server on `http://localhost:8080/webpack-dev-server/`. Changes to the application's source files in `frontend/src` will in most cases automatically reload the page.
 
 You can also preview the as it will be built in production (but with a development Google Maps API key, so the map will load) with
 
