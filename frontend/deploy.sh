@@ -29,7 +29,7 @@ gsutil -m -h "Cache-Control:public,max-age=31536000" \
 
 # Copy unhashed html files with the default caching headers.
 gsutil -m \
-  rsync -c -r -j js,css -x 'static\..+\.js$' \
+  rsync -c -r -j js,css -x 'static\..+\.js(\.map)?$' \
   dist gs://$SUBDOMAIN.myeu.uk
 
 # Update rollbar for error tracking across deploys.
