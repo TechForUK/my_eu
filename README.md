@@ -93,6 +93,12 @@ The `NATURA2000SITES` csv file must be stored here:
 
 - `data/life/input/NATURA2000SITES.csv`
 
+#### Postcodes
+
+For postcode-constituency lookup, download the data from https://opendata.camden.gov.uk/Maps/National-Statistics-Postcode-Lookup-UK/tr8t-gqz7, gzip and store here:
+
+- `data/postcodes/input/National_Statistics_Postcode_Lookup_UK.csv.gz`
+
 ## App Development
 
 The latest application is in the `frontend` directory. It is a static website built with webpack.
