@@ -95,12 +95,12 @@ const config = {
     ]
   },
   plugins: [
-    new webpack.EnvironmentPlugin([
-      'DEVELOPMENT_MY_EU_API_KEY',
-      'PRODUCTION_MY_EU_API_KEY',
-      'ROLLBAR_ACCESS_TOKEN',
-      'ROLLBAR_CODE_VERSION'
-    ]),
+    new webpack.EnvironmentPlugin({
+      'DEVELOPMENT_MY_EU_API_KEY': null,
+      'PRODUCTION_MY_EU_API_KEY': null,
+      'ROLLBAR_ACCESS_TOKEN': null,
+      'ROLLBAR_CODE_VERSION': 'development'
+    }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
