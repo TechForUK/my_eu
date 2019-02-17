@@ -31,7 +31,7 @@ From these sources:
 
 - http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/e153b560-7538-442b-b3ab-a40bf4adf576 (2014)
 - http://data.nicva.org/dataset/common-agricultural-policy-cap-payments/resource/06307dc0-4dcb-4305-a3e2-a8fdeb2a2a25 (2015)
-- http://cap-payments.defra.gov.uk/Download.aspx (2016, 2017)
+- http://cap-payments.defra.gov.uk/Download.aspx (2016, 2017) (Note: the links are subtle: look for "Click here for the _2016_ and _2017_ spreadsheets.")
 
 Files must be stored here:
 
