@@ -55,8 +55,8 @@ const About = () => (
         myeu.uk{' '}
         <a href="https://github.com/GreatBritishHackOff/my_eu">
           is open source <i className="fab fa-github" />
-        </a>
-        .
+        </a>{' '}
+        and powered by open data. Here is a <a href="https://docs.google.com/spreadsheets/d/1doQnfcwxIBdTM1mecBevEt_4Vgih06fy_lWSZl0Hwac/edit?usp=sharing">table of all the project funding on the map</a>.
       </p>
       <p>We used data from the following datasets to create myeu.uk:</p>
       <p>
