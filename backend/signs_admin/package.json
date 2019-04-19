@@ -17,6 +17,9 @@
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
+    "@pollyjs/adapter-node-http": "^2.3.0",
+    "@pollyjs/core": "^2.3.0",
+    "@pollyjs/persister-fs": "^2.1.0",
     "mocha": "^5.2.0"
   }
 }

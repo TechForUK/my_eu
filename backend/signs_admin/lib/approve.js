@@ -6,6 +6,7 @@ const {
   UUID_REGEXP
 } = require('./common')
 const datastore = require('./datastore')
+const { geocode } = require('./geocode')
 const storage = require('./storage')
 
 const SIGNS_DATA_KEY = `${MAIN_BUCKET_SIGNS_PATH}.json`
@@ -31,9 +32,7 @@ exports.approve = function signsApprove(req, res) {
   if (approved) {
     action = publishImage(fileName)
       .then(() => updateAfterModeration(fileName, useExif, true))
-      .then(() => {
-        publishSignsData()
-      })
+      .then(() => publishSignsData())
   } else {
     action = updateAfterModeration(fileName, null, false)
   }
@@ -42,8 +41,14 @@ exports.approve = function signsApprove(req, res) {
       res.status(200).send()
     })
     .catch(error => {
-      console.error(error)
-      res.status(500).send({ message: 'failed to approve' })
+      if (error.message === 'sign not found') {
+        res.status(404).send()
+      } else if (error.message === 'geolocation failed') {
+        res.status(500).send({ message: error.message })
+      } else {
+        console.error(error)
+        res.status(500).send({ message: 'failed to approve' })
+      }
     })
 }
 
@@ -61,20 +66,37 @@ function publishImage(fileName) {
 function updateAfterModeration(fileName, useExif, approved) {
   const transaction = datastore.transaction()
   const signKey = datastore.key([SIGN_KIND, fileName])
+  let sign
 
   return transaction
     .run()
     .then(() => transaction.get(signKey))
     .then(results => {
-      const sign = results[0]
+      sign = results[0]
+      if (!sign) throw new Error('sign not found')
+
       sign.useExif = useExif
       if (useExif && !('exifLatitude' in sign))
         throw new Error('Cannot use exif')
       sign.approved = approved
+
+      if (approved) {
+        const latitude = useExif ? sign.exifLatitude : sign.deviceLatitude
+        const longitude = useExif ? sign.exifLongitude : sign.deviceLongitude
+        return geocode(latitude, longitude)
+      }
+    })
+    .then(geocoding => {
+      if (geocoding) {
+        sign.postcode = geocoding.postcode
+        sign.parliamentaryConstituency = geocoding.parliamentaryConstituency
+      }
+
       transaction.save({
         key: signKey,
         data: sign
       })
+
       return transaction.commit()
     })
     .catch(error => {
@@ -89,12 +111,21 @@ function publishSignsData() {
     .then(results => {
       const signs = results[0]
       const signsData = {
-        columns: ['id', 'latitude', 'longitude', 'title'],
+        columns: [
+          'id',
+          'latitude',
+          'longitude',
+          'title',
+          'postcode',
+          'parliamentaryConstituency'
+        ],
         data: signs.map(sign => [
           sign[datastore.KEY].name,
           sign.useExif ? sign.exifLatitude : sign.deviceLatitude,
           sign.useExif ? sign.exifLongitude : sign.deviceLongitude,
-          sign.title
+          sign.title,
+          sign.postcode,
+          sign.parliamentaryConstituency
         ])
       }
       return storage
