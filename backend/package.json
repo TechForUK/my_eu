@@ -27,6 +27,6 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "@google-cloud/functions-emulator": "^1.0.0-beta.5"
+    "@google-cloud/functions-emulator": "^1.0.0-beta.6"
   }
 }
