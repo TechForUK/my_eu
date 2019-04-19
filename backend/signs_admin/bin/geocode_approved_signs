@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+const { SIGN_KIND } = require('../lib/common')
+const datastore = require('../lib/datastore')
+const { geocodeSign } = require('../lib/geocode')
+const { publishSignsData } = require('../lib/publish')
+
+// For backfilling / recoding.
+function geocodeApprovedSigns() {
+  return datastore
+    .runQuery(datastore.createQuery(SIGN_KIND).filter('approved', '=', true))
+    .then(results => {
+      const signs = results[0]
+      return geocodeSignAndSave(0, signs)
+    })
+    .then(() => publishSignsData())
+
+  function geocodeSignAndSave(index, signs) {
+    if (index >= signs.length) return
+
+    const signKey = signs[index][datastore.KEY]
+    const transaction = datastore.transaction()
+    return transaction
+      .run()
+      .then(() => transaction.get(signKey))
+      .then(results => {
+        const sign = results[0]
+        if (sign.postcode) {
+          console.log('skipping:', signKey.name)
+        } else {
+          return geocodeSign(sign)
+        }
+      })
+      .then(sign => {
+        if (sign) {
+          transaction.save({
+            key: signKey,
+            data: sign
+          })
+          console.log(sign)
+
+          return transaction.commit()
+        } else {
+          transaction.rollback()
+        }
+      })
+      .catch(error => {
+        transaction.rollback()
+        throw error
+      })
+      .then(() => {
+        return geocodeSignAndSave(index + 1, signs)
+      })
+  }
+}
+
+geocodeApprovedSigns().then(() => {
+  console.log('done')
+}).catch((e) => {
+  console.error(e)
+})

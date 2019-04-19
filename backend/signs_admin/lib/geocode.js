@@ -9,12 +9,23 @@ function geocode(latitude, longitude) {
       return response.json()
     })
     .then(data => {
-      const result = data.result[0]
+      console.log(url, data)
+      const result = data.result && data.result[0]
       return {
         postcode: result && result.postcode,
         parliamentaryConstituency: result && result.parliamentary_constituency
       }
     })
 }
-
 exports.geocode = geocode
+
+function geocodeSign(sign) {
+  const latitude = sign.useExif ? sign.exifLatitude : sign.deviceLatitude
+  const longitude = sign.useExif ? sign.exifLongitude : sign.deviceLongitude
+  return geocode(latitude, longitude).then(geocoding => {
+    sign.postcode = geocoding.postcode
+    sign.parliamentaryConstituency = geocoding.parliamentaryConstituency
+    return sign
+  })
+}
+exports.geocodeSign = geocodeSign
