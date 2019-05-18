@@ -10,6 +10,10 @@ const { geocodeSign } = require('./geocode')
 const { publishSignsData } = require('./publish')
 const storage = require('./storage')
 
+function delay(ms) {
+  return new Promise((resolve, reject) => setTimeout(resolve, ms))
+}
+
 exports.approve = function signsApprove(req, res) {
   let fileName = req.body.file_name
   if (!UUID_REGEXP.test(fileName)) {
@@ -31,6 +35,8 @@ exports.approve = function signsApprove(req, res) {
   if (approved) {
     action = publishImage(fileName)
       .then(() => updateAfterModeration(fileName, useExif, true))
+      // datastore is eventually consistent for the sign listing query
+      .then(() => delay(2000))
       .then(() => publishSignsData())
   } else {
     action = updateAfterModeration(fileName, null, false)
