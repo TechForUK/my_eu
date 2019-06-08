@@ -6,27 +6,18 @@
   "scripts": {
     "start": "functions start",
     "stop": "functions stop",
-    "test_deploy_signs_upload": "bin/prepare_deploy.sh && cd signs_upload && functions deploy signs_upload --trigger-http",
     "deploy_signs_upload": "bin/prepare_deploy.sh && cd signs_upload && gcloud functions deploy signs_upload --region europe-west1 --trigger-http --runtime=nodejs8",
-    "test_deploy_signs_submit": "bin/prepare_deploy.sh && cd signs_upload && functions deploy signs_submit --trigger-http",
     "deploy_signs_submit": "bin/prepare_deploy.sh && cd signs_upload && gcloud functions deploy signs_submit --region europe-west1 --trigger-http --runtime=nodejs8",
-    "test_deploy_signs_approve": "bin/prepare_deploy.sh && cd signs_admin && functions deploy signs_approve --trigger-http",
     "deploy_signs_approve": "bin/prepare_deploy.sh && cd signs_admin && gcloud functions deploy signs_approve --region europe-west1 --trigger-http --runtime=nodejs8",
-    "test_deploy_signs_admin": "bin/prepare_deploy.sh && cd signs_admin && functions deploy signs_admin --trigger-http",
     "deploy_signs_admin": "bin/prepare_deploy.sh && cd signs_admin && gcloud functions deploy signs_admin --region europe-west1 --trigger-http --runtime=nodejs8",
-    "test_deploy_signs_process": "bin/prepare_deploy.sh && cd signs_admin && functions deploy signs_process --trigger-http",
     "deploy_signs_process": "bin/prepare_deploy.sh && cd signs_admin && gcloud functions deploy signs_process --region europe-west1 --trigger-http --runtime=nodejs8",
-    "test_deploy_signs_process_image": "bin/prepare_deploy.sh && cd signs_process_image && functions deploy signs_process_image --trigger-http",
     "deploy_signs_process_image": "bin/prepare_deploy.sh && cd signs_process_image && gcloud functions deploy signs_process_image --region europe-west1 --trigger-http --runtime=nodejs8",
     "deploy": "npm run deploy_signs_upload && npm run deploy_signs_submit && npm run deploy_signs_approve && npm run deploy_signs_admin && npm run deploy_signs_process && npm run deploy_signs_process_image",
-    "test_deploy": "npm run test_deploy_signs_upload && npm run test_deploy_signs_submit && npm run test_deploy_signs_approve && npm run test_deploy_signs_admin && npm run test_deploy_signs_process && npm run test_deploy_signs_process_image",
     "test": "cd signs_admin && npm test && cd ../signs_process_image && npm test"
   },
   "keywords": [],
   "author": "",
   "private": true,
   "dependencies": {},
-  "devDependencies": {
-    "@google-cloud/functions-emulator": "^1.0.0-beta.6"
-  }
+  "devDependencies": {}
 }
