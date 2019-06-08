@@ -11,10 +11,10 @@
   "private": true,
   "dependencies": {
     "exif": "^0.6.0",
-    "express-basic-auth": "^1.1.6",
+    "express-basic-auth": "^1.2.0",
     "node-fetch": "^2.3.0",
     "promise.prototype.finally": "^3.1.0",
-    "sharp": "^0.21.1"
+    "sharp": "^0.22.1"
   },
   "devDependencies": {
     "mocha": "^5.2.0"
