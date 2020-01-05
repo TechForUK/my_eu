@@ -159,6 +159,7 @@ function MarkerClusterer(map, opt_markers, opt_options) {
 
   // Add the map event listeners
   var that = this
+  var resetViewportOnIdle = false
   google.maps.event.addListener(this.map_, 'zoom_changed', function() {
     // Determines map type and prevent illegal zoom levels
     var zoom = that.map_.getZoom()
@@ -171,11 +172,19 @@ function MarkerClusterer(map, opt_markers, opt_options) {
 
     if (that.prevZoom_ != zoom) {
       that.prevZoom_ = zoom
-      that.resetViewport()
+      resetViewportOnIdle = true
     }
   })
 
   google.maps.event.addListener(this.map_, 'idle', function() {
+    // The original clusterer reset the viewport upon receiving the zoom_changed
+    // event, but particularly during page load, this meant that we might
+    // cluster based on bounds while the map was still zooming. This waits
+    // until after it's finished zooming to do the clustering.
+    if (resetViewportOnIdle) {
+      that.resetViewport()
+      resetViewportOnIdle = false
+    }
     that.redraw()
   })
 

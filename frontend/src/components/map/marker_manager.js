@@ -85,7 +85,7 @@ export default class MarkerManager {
         height: size
       }
     })
-    const markerClusterer = new MarkerClusterer(this.map, this.markers, {
+    const markerClusterer = new MarkerClusterer(this.map, null, {
       minimumClusterSize: MIN_MARKERS,
       maxZoom: MAX_ZOOM,
       styles
@@ -97,6 +97,7 @@ export default class MarkerManager {
       const index = Math.round(Math.log10(total) - 3)
       return { text, index }
     })
+    markerClusterer.addMarkers(this.markers, true)
     return markerClusterer
   }
 
