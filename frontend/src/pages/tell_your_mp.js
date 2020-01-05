@@ -1,12 +1,9 @@
 import React from 'react'
 import { Meta, Title } from 'react-head'
 
-import BfbAd from '../components/bfb_ad'
 import Nav from '../components/nav'
 
 const TellYourMp = () => {
-  // React does not like "allowtransparency".
-  /* eslint "react/no-unknown-property": "off" */
   return (
     <React.Fragment>
       <Title>tell your mp - myeu.uk - see what the EU has done for you</Title>
@@ -15,36 +12,8 @@ const TellYourMp = () => {
         <Nav path="/tell-your-mp/" />
       </div>
       <div className="container my-eu-tell-your-mp">
-        <iframe
-          id="dogooder"
-          allowtransparency="true"
-          style={{
-            boxSizing: 'border-box',
-            minWidth: 300,
-            width: 550,
-            maxWidth: '100%'
-          }}
-          src="https://best-for-britain.good.do/DemandYourVote/Contact_Your_MP/?embedded="
-          scrolling="no"
-          frameBorder="0"
-        >
-          <p>
-            Your browser does not support iframes. Please visit{' '}
-            <a href="https://best-for-britain.good.do/DemandYourVote/Contact_Your_MP/">
-              https://best-for-britain.good.do/DemandYourVote/Contact_Your_MP/
-            </a>
-          </p>
-        </iframe>
-        <script
-          type="text/javascript"
-          src="//code.jquery.com/jquery-1.11.0.min.js"
-        />
-        <script
-          type="text/javascript"
-          src="//static.good.do/static/js/jquery.iframeResizer.7d04fe8f6f93.js"
-        />
-        <script type="text/javascript" src="//static.good.do/embed.js" />
-        <BfbAd />
+        <h1>Let your MP know what you think</h1>
+        <p>The best way to get your MP&apos;s attention <a href="https://www.parliament.uk/get-involved/contact-your-mp/">is to write them a good old fashioned letter</a>.</p>
       </div>
     </React.Fragment>
   )

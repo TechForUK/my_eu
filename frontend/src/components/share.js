@@ -59,8 +59,8 @@ const Share = ({
       />
       <a
         className="btn btn-contact"
-        href="/tell-your-mp/"
-        onClick={trackShare('Tell your MP (on myeu.uk)')}
+        href="https://www.parliament.uk/get-involved/contact-your-mp/"
+        onClick={trackShare('Tell your MP (parliament.uk)')}
         role="button"
         target="_blank"
         rel="noopener noreferrer"

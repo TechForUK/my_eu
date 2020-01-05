@@ -19,7 +19,7 @@ const BfbAd = () => {
       style={{ maxWidth: '22em' }}
     >
       <div className="card-body">
-        <h5 className="card-title">Demand a #FinalSay on Brexit</h5>
+        <h5 className="card-title">Europe Stands with Us</h5>
         <p className="card-text">
           <a
             href="https://www.bestforbritain.org/join?utm_source=myeu"
