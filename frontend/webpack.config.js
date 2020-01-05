@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const StaticSiteGeneratorWebpackPlugin = require('static-site-generator-webpack-plugin')
-const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 
 const webpack = require('webpack')
 
@@ -113,7 +113,7 @@ const config = {
   ],
   optimization: {
     minimizer: [
-      new UglifyJsWebpackPlugin({
+      new TerserWebpackPlugin({
         cache: true,
         parallel: true,
         sourceMap: true
