@@ -32,3 +32,13 @@ UK Open Government Licence V3.0
 OS License: OS OpenData. Data derived from OS products which is free to use under the Open Government Licence. The following statement MUST be included when using this data: Contains OS data © Crown copyright and database right [year]
 
 https://www.ordnancesurvey.co.uk/business-and-government/licensing/using-creating-data-with-os-products/os-opendata.html
+
+### `pc2018_uk_NUTS-2016_v3.0.csv.gz`
+
+Download from https://ec.europa.eu/eurostat/web/nuts/correspondence-tables/postcodes-and-nuts and gzip.
+
+License:
+
+> The download and usage of these data is subject to the acceptance of the following clauses: The Commission agrees to grant the non-exclusive and not transferable right to use and process the Eurostat data downloaded from this page (the "data"). The permission to use the data is granted on condition that:
+> 1) the data will not be used for commercial purposes;
+> 2) the source will be acknowledged. A notice, as specified in the help text, will have to be visible on any printed or electronic publication using the data downloaded from this page.
