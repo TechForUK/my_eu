@@ -17,6 +17,6 @@
     "sharp": "^0.22.1"
   },
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "mocha": "^7.1.2"
   }
 }
