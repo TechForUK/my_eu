@@ -12,6 +12,6 @@
   "dependencies": {
     "@mapbox/togeojson": "^0.16.0",
     "mapshaper": "^0.4.89",
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.5.0"
   }
 }
