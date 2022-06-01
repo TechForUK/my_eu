@@ -14,7 +14,7 @@
     "express-basic-auth": "^1.2.0",
     "node-fetch": "^2.6.1",
     "promise.prototype.finally": "^3.1.0",
-    "sharp": "^0.22.1"
+    "sharp": "^0.30.5"
   },
   "devDependencies": {
     "mocha": "^7.1.2"
