@@ -29,7 +29,7 @@
     "css-loader": "^1.0.0",
     "file-loader": "^1.1.11",
     "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^0.4.1",
     "mocha": "^7.1.2",
     "node-sass": "^4.14.0",
@@ -46,7 +46,7 @@
     "url-loader": "^1.1.1",
     "webpack": "^4.43.0",
     "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
