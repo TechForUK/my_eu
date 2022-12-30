@@ -20,6 +20,6 @@
     "@pollyjs/adapter-node-http": "^2.4.0",
     "@pollyjs/core": "^2.4.0",
     "@pollyjs/persister-fs": "^2.1.0",
-    "mocha": "^7.1.2"
+    "mocha": "^10.2.0"
   }
 }
