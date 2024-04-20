@@ -10,16 +10,16 @@
   "author": "",
   "private": true,
   "dependencies": {
-    "@google-cloud/datastore": "^5.1.0",
-    "@google-cloud/storage": "^2.5.0",
+    "@google-cloud/datastore": "^8.7.0",
+    "@google-cloud/storage": "^7.10.0",
     "escape-html": "^1.0.3",
     "express-basic-auth": "^1.2.0",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
-    "@pollyjs/adapter-node-http": "^2.4.0",
-    "@pollyjs/core": "^2.4.0",
-    "@pollyjs/persister-fs": "^2.1.0",
-    "mocha": "^7.1.2"
+    "@pollyjs/adapter-node-http": "^6.0.6",
+    "@pollyjs/core": "^6.0.6",
+    "@pollyjs/persister-fs": "^6.0.6",
+    "mocha": "^10.4.0"
   }
 }

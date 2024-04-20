@@ -71,8 +71,9 @@ function autoRotateImageAndUpload(inputPathname, outputUrl) {
 }
 
 function autoRotateImage(inputPathname, outputPathname) {
-  return sharp(inputPathname)
-    .limitInputPixels(0x2fff * 0x2fff) // About 12k x 12k pixels
+  return sharp(inputPathname, {
+    limitInputPixels: 0x2fff * 0x2fff // About 12k x 12k pixels
+  })
     .rotate()
     .jpeg({ force: true })
     .toFile(outputPathname)

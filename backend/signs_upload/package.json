@@ -10,8 +10,8 @@
   "author": "",
   "private": true,
   "dependencies": {
-    "@google-cloud/datastore": "^5.1.0",
-    "@google-cloud/storage": "^2.5.0",
+    "@google-cloud/datastore": "^8.7.0",
+    "@google-cloud/storage": "^7.10.0",
     "cors": "^2.8.5",
     "node-fetch": "^2.6.1",
     "uuid": "^3.3.2"
