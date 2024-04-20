@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@mapbox/togeojson": "^0.16.0",
-    "mapshaper": "^0.4.89",
-    "xmldom": "^0.5.0"
+    "@xmldom/xmldom": "^0.8.10",
+    "mapshaper": "^0.6.91"
   }
 }
