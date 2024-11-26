@@ -53,7 +53,7 @@
     "@babel/polyfill": "^7.0.0",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
-    "cross-fetch": "^2.2.2",
+    "cross-fetch": "^3.1.5",
     "d3-scale": "^2.1.0",
     "d3-scale-chromatic": "^1.3.0",
     "exifreader": "^2.5.0",
